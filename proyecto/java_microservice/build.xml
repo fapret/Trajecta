@@ -11,10 +11,12 @@
     <property name="target" value="17"/>
     <property name="source" value="17"/>
     <path id="Web App Libraries.libraryclasspath">
+        <pathelement location="src/main/webapp/WEB-INF/lib/jakarta.json-api-2.1.3.jar"/>
         <pathelement location="src/main/webapp/WEB-INF/lib/org.eclipse.emf.common_2.28.0.v20230315-1321.jar"/>
         <pathelement location="src/main/webapp/WEB-INF/lib/org.eclipse.emf.ecore.change_2.15.0.v20230211-1150.jar"/>
         <pathelement location="src/main/webapp/WEB-INF/lib/org.eclipse.emf.ecore.xmi_2.18.0.v20230211-1150.jar"/>
         <pathelement location="src/main/webapp/WEB-INF/lib/org.eclipse.emf.ecore_2.34.0.v20230406-1203.jar"/>
+        <pathelement location="src/main/webapp/WEB-INF/lib/parsson-1.1.7.jar"/>
         <pathelement location="src/main/webapp/WEB-INF/lib/servlet-api.jar"/>
     </path>
     <path id="EAR Libraries.libraryclasspath"/>
@@ -27,6 +29,8 @@
         <pathelement location="src/main/webapp/WEB-INF/lib/org.eclipse.emf.ecore.change_2.15.0.v20230211-1150.jar"/>
         <pathelement location="src/main/webapp/WEB-INF/lib/org.eclipse.emf.ecore.xmi_2.18.0.v20230211-1150.jar"/>
         <pathelement location="${proyecto.location}/java_microservice/src/main/webapp/WEB-INF/lib/servlet-api.jar"/>
+        <pathelement location="src/main/webapp/WEB-INF/lib/parsson-1.1.7.jar"/>
+        <pathelement location="src/main/webapp/WEB-INF/lib/jakarta.json-api-2.1.3.jar"/>
     </path>
     <target name="init">
         <mkdir dir="build/classes"/>
@@ -64,13 +68,13 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="build-war" depends="build-project">
-    <war destfile="dist/curricula_microservice.war" webxml="src/main/webapp/WEB-INF/web.xml">
-        <fileset dir="src/main/webapp">
-            <exclude name="WEB-INF/web.xml"/>
-        </fileset>
-        <lib dir="src/main/webapp/WEB-INF/lib"/>
-        <classes dir="build/classes"/>
-    </war>
-    </target>
+  	<target name="build-war" depends="build-project">
+        <war destfile="dist/curricula_microservice.war" webxml="src/main/webapp/WEB-INF/web.xml">
+  	        <fileset dir="src/main/webapp">
+  	            <exclude name="WEB-INF/web.xml"/>
+  	        </fileset>
+  	        <lib dir="src/main/webapp/WEB-INF/lib"/>
+  	        <classes dir="build/classes"/>
+  	    </war>
+  	</target>
 </project>
