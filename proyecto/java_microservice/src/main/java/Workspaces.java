@@ -75,8 +75,23 @@ public class Workspaces extends HttpServlet {
         EPackage.Registry.INSTANCE.put(WorkspacePackage.eNS_URI, WorkspacePackage.eINSTANCE);
         
         URI workspaceURI = URI.createFileURI(baseDir.resolve("workspaces.xmi").toString());
-        Resource resource = resourceSet.getResource(workspaceURI, true);
-        Workspace.RootWorkspaces rootElement = (Workspace.RootWorkspaces) resource.getContents().get(0);
+        File workspaceFile = new File(workspaceURI.toFileString());
+        Resource resource;
+        Workspace.RootWorkspaces rootElement;
+        if(workspaceFile.exists()) {
+        	resource = resourceSet.getResource(workspaceURI, true);
+        	rootElement = (Workspace.RootWorkspaces) resource.getContents().get(0);
+        } else {
+        	resource = resourceSet.createResource(workspaceURI);
+        	rootElement = Workspace.WorkspaceFactory.eINSTANCE.createRootWorkspaces();
+        	resource.getContents().add(rootElement);
+        	
+            // Save the new empty file
+            Map<String, Object> saveOptions = new HashMap<>();
+            saveOptions.put(XMLResource.OPTION_SCHEMA_LOCATION, true);
+            resource.save(saveOptions);
+        }
+        
         String responseText = "[";
         Boolean auxBool = false;
         for(Workspace.WorkspaceElem w : rootElement.getWorkspace()) {
