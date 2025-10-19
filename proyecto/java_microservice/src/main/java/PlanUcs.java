@@ -1,8 +1,9 @@
 /*
-    tmde-app-curricula is a software that helps students build their curricula and
+    Trajecta is a software that helps students build their curricula and
     see what curricular units they can register to, and track how their career was
-    or will be.
+    or will be. And helps academic managers do different researches.
     Copyright (C) 2023  Santiago Nicolás Díaz Conde, Santiago Freire López
+    Copyright (C) 2025  Santiago Nicolás Díaz Conde
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
+    Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 
 import jakarta.servlet.ServletException;
@@ -26,7 +27,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import Estudiantes.EstudiantesPackage;
+import asignaturas.AsignaturasPackage;
 import asignaturas.Career;
 import asignaturas.Faculty;
 import asignaturas.Root;
@@ -43,7 +55,6 @@ public class PlanUcs extends HttpServlet {
      */
     public PlanUcs() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     private String getSubjectUCs(asignaturas.Subject g, Boolean withName) {
@@ -82,8 +93,27 @@ public class PlanUcs extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// devuelve todas las unidades curriculares de un plan de carrera
-		modelSingleton model = modelSingleton.getInstance();
-		Root rootElement = model.getRootElement();
+		Path baseDir = Utils.getBasePath();
+		String uuid = request.getParameter("uuid");
+	    if (uuid == null || uuid.isBlank()) {
+	        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing uuid parameter");
+	        return;
+	    }
+		Path workspaceDir = baseDir.resolve(uuid);
+	    if (!Files.exists(workspaceDir)) {
+	        response.sendError(HttpServletResponse.SC_NOT_FOUND, "Workspace not found");
+	        return;
+	    }
+		ResourceSet resourceSet = new ResourceSetImpl();
+        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+                .put("xmi", new XMIResourceFactoryImpl());
+        EPackage.Registry.INSTANCE.put(AsignaturasPackage.eNS_URI, AsignaturasPackage.eINSTANCE);
+        EPackage.Registry.INSTANCE.put(EstudiantesPackage.eNS_URI, EstudiantesPackage.eINSTANCE);
+        
+        URI modelURI = URI.createFileURI(workspaceDir.resolve("model.xmi").toString());
+        Resource resource = resourceSet.getResource(modelURI, true);
+        asignaturas.Root rootElement = (asignaturas.Root) resource.getContents().get(0);
+        
 		String faculty = request.getParameter("faculty");
 		String career = request.getParameter("career");
 		String plan = request.getParameter("plan");

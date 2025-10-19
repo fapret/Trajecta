@@ -6,6 +6,10 @@ import Estudiantes.EstudiantesPackage;
 
 import Estudiantes.impl.EstudiantesPackageImpl;
 
+import Workspace.WorkspacePackage;
+
+import Workspace.impl.WorkspacePackageImpl;
+
 import asignaturas.AsignaturasFactory;
 import asignaturas.AsignaturasPackage;
 import asignaturas.Career;
@@ -216,7 +220,6 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	private AsignaturasPackageImpl() {
 		super(eNS_URI, AsignaturasFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -237,30 +240,29 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * @generated
 	 */
 	public static AsignaturasPackage init() {
-		if (isInited)
-			return (AsignaturasPackage) EPackage.Registry.INSTANCE.getEPackage(AsignaturasPackage.eNS_URI);
+		if (isInited) return (AsignaturasPackage)EPackage.Registry.INSTANCE.getEPackage(AsignaturasPackage.eNS_URI);
 
 		// Obtain or create and register package
 		Object registeredAsignaturasPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		AsignaturasPackageImpl theAsignaturasPackage = registeredAsignaturasPackage instanceof AsignaturasPackageImpl
-				? (AsignaturasPackageImpl) registeredAsignaturasPackage
-				: new AsignaturasPackageImpl();
+		AsignaturasPackageImpl theAsignaturasPackage = registeredAsignaturasPackage instanceof AsignaturasPackageImpl ? (AsignaturasPackageImpl)registeredAsignaturasPackage : new AsignaturasPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
 		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(EstudiantesPackage.eNS_URI);
-		EstudiantesPackageImpl theEstudiantesPackage = (EstudiantesPackageImpl) (registeredPackage instanceof EstudiantesPackageImpl
-				? registeredPackage
-				: EstudiantesPackage.eINSTANCE);
+		EstudiantesPackageImpl theEstudiantesPackage = (EstudiantesPackageImpl)(registeredPackage instanceof EstudiantesPackageImpl ? registeredPackage : EstudiantesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(WorkspacePackage.eNS_URI);
+		WorkspacePackageImpl theWorkspacePackage = (WorkspacePackageImpl)(registeredPackage instanceof WorkspacePackageImpl ? registeredPackage : WorkspacePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theAsignaturasPackage.createPackageContents();
 		theEstudiantesPackage.createPackageContents();
+		theWorkspacePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theAsignaturasPackage.initializePackageContents();
 		theEstudiantesPackage.initializePackageContents();
+		theWorkspacePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theAsignaturasPackage.freeze();
@@ -275,6 +277,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRoot() {
 		return rootEClass;
 	}
@@ -284,8 +287,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_Faculty() {
-		return (EReference) rootEClass.getEStructuralFeatures().get(0);
+		return (EReference)rootEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -293,6 +297,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCareer() {
 		return careerEClass;
 	}
@@ -302,8 +307,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCareer_Name() {
-		return (EAttribute) careerEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)careerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -311,8 +317,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCareer_Plan() {
-		return (EReference) careerEClass.getEStructuralFeatures().get(1);
+		return (EReference)careerEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -320,6 +327,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCreditsPlan() {
 		return creditsPlanEClass;
 	}
@@ -329,8 +337,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCreditsPlan_MinCredits() {
-		return (EAttribute) creditsPlanEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)creditsPlanEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -338,8 +347,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCreditsPlan_GroupOfSubjects() {
-		return (EReference) creditsPlanEClass.getEStructuralFeatures().get(1);
+		return (EReference)creditsPlanEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -347,6 +357,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFaculty() {
 		return facultyEClass;
 	}
@@ -356,8 +367,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFaculty_Name() {
-		return (EAttribute) facultyEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)facultyEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -365,8 +377,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFaculty_Careers() {
-		return (EReference) facultyEClass.getEStructuralFeatures().get(1);
+		return (EReference)facultyEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -374,8 +387,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFaculty_FacultyCU() {
-		return (EReference) facultyEClass.getEStructuralFeatures().get(2);
+		return (EReference)facultyEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -383,6 +397,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPlan() {
 		return planEClass;
 	}
@@ -392,8 +407,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPlan_Year() {
-		return (EAttribute) planEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)planEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -401,8 +417,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPlan_Valid() {
-		return (EAttribute) planEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)planEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -410,8 +427,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPlan_Career_parent() {
-		return (EReference) planEClass.getEStructuralFeatures().get(2);
+		return (EReference)planEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -419,6 +437,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSubject() {
 		return subjectEClass;
 	}
@@ -428,8 +447,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSubject_Id() {
-		return (EAttribute) subjectEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)subjectEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -437,8 +457,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSubject_Name() {
-		return (EAttribute) subjectEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)subjectEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -446,8 +467,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSubject_MinCredits() {
-		return (EAttribute) subjectEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)subjectEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -455,8 +477,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSubject_GroupOfSubjects() {
-		return (EReference) subjectEClass.getEStructuralFeatures().get(3);
+		return (EReference)subjectEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -464,8 +487,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSubject_GroupOfSubjectsOpposite() {
-		return (EReference) subjectEClass.getEStructuralFeatures().get(4);
+		return (EReference)subjectEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -473,8 +497,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSubject_SubjectCurricularUnit() {
-		return (EReference) subjectEClass.getEStructuralFeatures().get(5);
+		return (EReference)subjectEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -482,6 +507,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCurricularUnit() {
 		return curricularUnitEClass;
 	}
@@ -491,8 +517,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCurricularUnit_Id() {
-		return (EAttribute) curricularUnitEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)curricularUnitEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -500,8 +527,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCurricularUnit_Name() {
-		return (EAttribute) curricularUnitEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)curricularUnitEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -509,8 +537,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCurricularUnit_Cred() {
-		return (EAttribute) curricularUnitEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)curricularUnitEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -518,8 +547,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCurricularUnit_Valid() {
-		return (EAttribute) curricularUnitEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)curricularUnitEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -527,8 +557,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCurricularUnit_Requirement() {
-		return (EReference) curricularUnitEClass.getEStructuralFeatures().get(4);
+		return (EReference)curricularUnitEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -536,8 +567,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCurricularUnit_Course() {
-		return (EReference) curricularUnitEClass.getEStructuralFeatures().get(5);
+		return (EReference)curricularUnitEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -545,8 +577,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCurricularUnit_ExamEvaluation() {
-		return (EReference) curricularUnitEClass.getEStructuralFeatures().get(6);
+		return (EReference)curricularUnitEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -554,6 +587,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSomeOf() {
 		return someOfEClass;
 	}
@@ -563,8 +597,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSomeOf_N() {
-		return (EAttribute) someOfEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)someOfEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -572,8 +607,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSomeOf_Requirement() {
-		return (EReference) someOfEClass.getEStructuralFeatures().get(1);
+		return (EReference)someOfEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -581,6 +617,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRequirement() {
 		return requirementEClass;
 	}
@@ -590,6 +627,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNOT() {
 		return notEClass;
 	}
@@ -599,8 +637,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNOT_Requirement() {
-		return (EReference) notEClass.getEStructuralFeatures().get(0);
+		return (EReference)notEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -608,6 +647,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCoursed() {
 		return coursedEClass;
 	}
@@ -617,8 +657,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCoursed_CurricularUnit() {
-		return (EReference) coursedEClass.getEStructuralFeatures().get(0);
+		return (EReference)coursedEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -626,6 +667,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExam() {
 		return examEClass;
 	}
@@ -635,8 +677,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExam_CurricularUnit() {
-		return (EReference) examEClass.getEStructuralFeatures().get(0);
+		return (EReference)examEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -644,6 +687,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCreditsOnPlan() {
 		return creditsOnPlanEClass;
 	}
@@ -653,8 +697,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCreditsOnPlan_Cred() {
-		return (EAttribute) creditsOnPlanEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)creditsOnPlanEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -662,8 +707,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCreditsOnPlan_CreditsPlan() {
-		return (EReference) creditsOnPlanEClass.getEStructuralFeatures().get(1);
+		return (EReference)creditsOnPlanEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -671,6 +717,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCreditsOnSubject() {
 		return creditsOnSubjectEClass;
 	}
@@ -680,8 +727,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCreditsOnSubject_Cred() {
-		return (EAttribute) creditsOnSubjectEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)creditsOnSubjectEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -689,8 +737,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCreditsOnSubject_GroupOfSubjects() {
-		return (EReference) creditsOnSubjectEClass.getEStructuralFeatures().get(1);
+		return (EReference)creditsOnSubjectEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -698,6 +747,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSubjectPlan() {
 		return subjectPlanEClass;
 	}
@@ -707,8 +757,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSubjectPlan_CurricularUnit() {
-		return (EReference) subjectPlanEClass.getEStructuralFeatures().get(0);
+		return (EReference)subjectPlanEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -716,6 +767,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRegisteredTo() {
 		return registeredToEClass;
 	}
@@ -725,8 +777,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRegisteredTo_CurricularUnit() {
-		return (EReference) registeredToEClass.getEStructuralFeatures().get(0);
+		return (EReference)registeredToEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -734,6 +787,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCourse() {
 		return courseEClass;
 	}
@@ -743,8 +797,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCourse_Year() {
-		return (EAttribute) courseEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)courseEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -752,8 +807,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCourse_Edition() {
-		return (EAttribute) courseEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)courseEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -761,8 +817,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCourse_CourseEvaluation() {
-		return (EReference) courseEClass.getEStructuralFeatures().get(2);
+		return (EReference)courseEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -770,8 +827,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCourse_Curricularunit() {
-		return (EReference) courseEClass.getEStructuralFeatures().get(3);
+		return (EReference)courseEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -779,8 +837,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCourse_Partialevaluation() {
-		return (EReference) courseEClass.getEStructuralFeatures().get(4);
+		return (EReference)courseEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -788,6 +847,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEvaluation() {
 		return evaluationEClass;
 	}
@@ -797,8 +857,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEvaluation_Date() {
-		return (EAttribute) evaluationEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)evaluationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -806,6 +867,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExamEvaluation() {
 		return examEvaluationEClass;
 	}
@@ -815,8 +877,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExamEvaluation_Curricularunit() {
-		return (EReference) examEvaluationEClass.getEStructuralFeatures().get(0);
+		return (EReference)examEvaluationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -824,6 +887,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEvaluacionExamen() {
 		return evaluacionExamenEClass;
 	}
@@ -833,6 +897,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCourseEvaluation() {
 		return courseEvaluationEClass;
 	}
@@ -842,8 +907,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCourseEvaluation_Course() {
-		return (EReference) courseEvaluationEClass.getEStructuralFeatures().get(0);
+		return (EReference)courseEvaluationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -851,6 +917,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialEvaluation() {
 		return partialEvaluationEClass;
 	}
@@ -860,8 +927,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialEvaluation_Course() {
-		return (EReference) partialEvaluationEClass.getEStructuralFeatures().get(0);
+		return (EReference)partialEvaluationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -869,8 +937,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AsignaturasFactory getAsignaturasFactory() {
-		return (AsignaturasFactory) getEFactoryInstance();
+		return (AsignaturasFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -888,8 +957,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated)
-			return;
+		if (isCreated) return;
 		isCreated = true;
 
 		// Create classes and their features
@@ -997,8 +1065,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized)
-			return;
+		if (isInitialized) return;
 		isInitialized = true;
 
 		// Initialize package
@@ -1027,176 +1094,92 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRoot_Faculty(), this.getFaculty(), null, "Faculty", null, 0, -1, Root.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEReference(getRoot_Faculty(), this.getFaculty(), null, "Faculty", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(careerEClass, Career.class, "Career", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCareer_Name(), ecorePackage.getEString(), "Name", null, 1, 1, Career.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCareer_Plan(), this.getPlan(), this.getPlan_Career_parent(), "plan", null, 0, -1,
-				Career.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCareer_Name(), ecorePackage.getEString(), "Name", null, 1, 1, Career.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCareer_Plan(), this.getPlan(), this.getPlan_Career_parent(), "plan", null, 0, -1, Career.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(creditsPlanEClass, CreditsPlan.class, "CreditsPlan", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCreditsPlan_MinCredits(), ecorePackage.getEInt(), "MinCredits", null, 0, 1, CreditsPlan.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCreditsPlan_GroupOfSubjects(), this.getSubject(), null, "GroupOfSubjects", null, 0, -1,
-				CreditsPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(creditsPlanEClass, CreditsPlan.class, "CreditsPlan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCreditsPlan_MinCredits(), ecorePackage.getEInt(), "MinCredits", null, 0, 1, CreditsPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCreditsPlan_GroupOfSubjects(), this.getSubject(), null, "GroupOfSubjects", null, 0, -1, CreditsPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(facultyEClass, Faculty.class, "Faculty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFaculty_Name(), ecorePackage.getEString(), "Name", null, 1, 1, Faculty.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFaculty_Careers(), this.getCareer(), null, "Careers", null, 0, -1, Faculty.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFaculty_FacultyCU(), this.getCurricularUnit(), null, "FacultyCU", null, 0, -1, Faculty.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFaculty_Name(), ecorePackage.getEString(), "Name", null, 1, 1, Faculty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFaculty_Careers(), this.getCareer(), null, "Careers", null, 0, -1, Faculty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFaculty_FacultyCU(), this.getCurricularUnit(), null, "FacultyCU", null, 0, -1, Faculty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(planEClass, Plan.class, "Plan", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPlan_Year(), ecorePackage.getEInt(), "Year", null, 0, 1, Plan.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPlan_Valid(), ecorePackage.getEBoolean(), "Valid", null, 0, 1, Plan.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPlan_Career_parent(), this.getCareer(), this.getCareer_Plan(), "career_parent", null, 1, 1,
-				Plan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPlan_Year(), ecorePackage.getEInt(), "Year", null, 0, 1, Plan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPlan_Valid(), ecorePackage.getEBoolean(), "Valid", null, 0, 1, Plan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPlan_Career_parent(), this.getCareer(), this.getCareer_Plan(), "career_parent", null, 1, 1, Plan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subjectEClass, Subject.class, "Subject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSubject_Id(), ecorePackage.getEInt(), "Id", null, 1, 1, Subject.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSubject_Name(), ecorePackage.getEString(), "Name", null, 1, 1, Subject.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSubject_MinCredits(), ecorePackage.getEInt(), "MinCredits", null, 0, 1, Subject.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSubject_GroupOfSubjects(), this.getSubject(), this.getSubject_GroupOfSubjectsOpposite(),
-				"GroupOfSubjects", null, 0, -1, Subject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSubject_GroupOfSubjectsOpposite(), this.getSubject(), this.getSubject_GroupOfSubjects(),
-				"GroupOfSubjectsOpposite", null, 0, 1, Subject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSubject_SubjectCurricularUnit(), this.getCurricularUnit(), null, "SubjectCurricularUnit",
-				null, 0, -1, Subject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSubject_Id(), ecorePackage.getEInt(), "Id", null, 1, 1, Subject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSubject_Name(), ecorePackage.getEString(), "Name", null, 1, 1, Subject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSubject_MinCredits(), ecorePackage.getEInt(), "MinCredits", null, 0, 1, Subject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSubject_GroupOfSubjects(), this.getSubject(), this.getSubject_GroupOfSubjectsOpposite(), "GroupOfSubjects", null, 0, -1, Subject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSubject_GroupOfSubjectsOpposite(), this.getSubject(), this.getSubject_GroupOfSubjects(), "GroupOfSubjectsOpposite", null, 0, 1, Subject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSubject_SubjectCurricularUnit(), this.getCurricularUnit(), null, "SubjectCurricularUnit", null, 0, -1, Subject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(curricularUnitEClass, CurricularUnit.class, "CurricularUnit", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCurricularUnit_Id(), ecorePackage.getEString(), "Id", null, 1, 1, CurricularUnit.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCurricularUnit_Name(), ecorePackage.getEString(), "Name", null, 1, 1, CurricularUnit.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCurricularUnit_Cred(), ecorePackage.getEInt(), "Cred", null, 0, 1, CurricularUnit.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCurricularUnit_Valid(), ecorePackage.getEBoolean(), "Valid", null, 0, 1, CurricularUnit.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCurricularUnit_Requirement(), this.getRequirement(), null, "Requirement", null, 0, 1,
-				CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCurricularUnit_Course(), this.getCourse(), this.getCourse_Curricularunit(), "Course", null, 0,
-				-1, CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCurricularUnit_ExamEvaluation(), this.getExamEvaluation(),
-				this.getExamEvaluation_Curricularunit(), "ExamEvaluation", null, 0, -1, CurricularUnit.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(curricularUnitEClass, CurricularUnit.class, "CurricularUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCurricularUnit_Id(), ecorePackage.getEString(), "Id", null, 1, 1, CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCurricularUnit_Name(), ecorePackage.getEString(), "Name", null, 1, 1, CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCurricularUnit_Cred(), ecorePackage.getEInt(), "Cred", null, 0, 1, CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCurricularUnit_Valid(), ecorePackage.getEBoolean(), "Valid", null, 0, 1, CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCurricularUnit_Requirement(), this.getRequirement(), null, "Requirement", null, 0, 1, CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCurricularUnit_Course(), this.getCourse(), this.getCourse_Curricularunit(), "Course", null, 0, -1, CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCurricularUnit_ExamEvaluation(), this.getExamEvaluation(), this.getExamEvaluation_Curricularunit(), "ExamEvaluation", null, 0, -1, CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(someOfEClass, SomeOf.class, "SomeOf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSomeOf_N(), ecorePackage.getEInt(), "N", null, 1, 1, SomeOf.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSomeOf_Requirement(), this.getRequirement(), null, "Requirement", null, 1, -1, SomeOf.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSomeOf_N(), ecorePackage.getEInt(), "N", null, 1, 1, SomeOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSomeOf_Requirement(), this.getRequirement(), null, "Requirement", null, 1, -1, SomeOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(requirementEClass, Requirement.class, "Requirement", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(requirementEClass, Requirement.class, "Requirement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(notEClass, asignaturas.NOT.class, "NOT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNOT_Requirement(), this.getRequirement(), null, "Requirement", null, 1, 1,
-				asignaturas.NOT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNOT_Requirement(), this.getRequirement(), null, "Requirement", null, 1, 1, asignaturas.NOT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(coursedEClass, Coursed.class, "Coursed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCoursed_CurricularUnit(), this.getCurricularUnit(), null, "CurricularUnit", null, 1, 1,
-				Coursed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCoursed_CurricularUnit(), this.getCurricularUnit(), null, "CurricularUnit", null, 1, 1, Coursed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(examEClass, Exam.class, "Exam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExam_CurricularUnit(), this.getCurricularUnit(), null, "CurricularUnit", null, 1, 1,
-				Exam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExam_CurricularUnit(), this.getCurricularUnit(), null, "CurricularUnit", null, 1, 1, Exam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(creditsOnPlanEClass, CreditsOnPlan.class, "CreditsOnPlan", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCreditsOnPlan_Cred(), ecorePackage.getEInt(), "cred", null, 1, 1, CreditsOnPlan.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCreditsOnPlan_CreditsPlan(), this.getCreditsPlan(), null, "CreditsPlan", null, 1, 1,
-				CreditsOnPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(creditsOnPlanEClass, CreditsOnPlan.class, "CreditsOnPlan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCreditsOnPlan_Cred(), ecorePackage.getEInt(), "cred", null, 1, 1, CreditsOnPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCreditsOnPlan_CreditsPlan(), this.getCreditsPlan(), null, "CreditsPlan", null, 1, 1, CreditsOnPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(creditsOnSubjectEClass, CreditsOnSubject.class, "CreditsOnSubject", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCreditsOnSubject_Cred(), ecorePackage.getEInt(), "cred", null, 1, 1, CreditsOnSubject.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCreditsOnSubject_GroupOfSubjects(), this.getSubject(), null, "GroupOfSubjects", null, 1, 1,
-				CreditsOnSubject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(creditsOnSubjectEClass, CreditsOnSubject.class, "CreditsOnSubject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCreditsOnSubject_Cred(), ecorePackage.getEInt(), "cred", null, 1, 1, CreditsOnSubject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCreditsOnSubject_GroupOfSubjects(), this.getSubject(), null, "GroupOfSubjects", null, 1, 1, CreditsOnSubject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(subjectPlanEClass, SubjectPlan.class, "SubjectPlan", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSubjectPlan_CurricularUnit(), this.getCurricularUnit(), null, "CurricularUnit", null, 0, -1,
-				SubjectPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(subjectPlanEClass, SubjectPlan.class, "SubjectPlan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSubjectPlan_CurricularUnit(), this.getCurricularUnit(), null, "CurricularUnit", null, 0, -1, SubjectPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(registeredToEClass, RegisteredTo.class, "RegisteredTo", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRegisteredTo_CurricularUnit(), this.getCurricularUnit(), null, "CurricularUnit", null, 1, 1,
-				RegisteredTo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(registeredToEClass, RegisteredTo.class, "RegisteredTo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRegisteredTo_CurricularUnit(), this.getCurricularUnit(), null, "CurricularUnit", null, 1, 1, RegisteredTo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(courseEClass, Course.class, "Course", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCourse_Year(), ecorePackage.getEInt(), "Year", null, 0, 1, Course.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCourse_Edition(), ecorePackage.getEInt(), "Edition", null, 0, 1, Course.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCourse_CourseEvaluation(), this.getCourseEvaluation(), this.getCourseEvaluation_Course(),
-				"CourseEvaluation", null, 0, -1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCourse_Curricularunit(), this.getCurricularUnit(), this.getCurricularUnit_Course(),
-				"curricularunit", null, 1, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCourse_Partialevaluation(), this.getPartialEvaluation(), this.getPartialEvaluation_Course(),
-				"partialevaluation", null, 0, -1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCourse_Year(), ecorePackage.getEInt(), "Year", null, 0, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCourse_Edition(), ecorePackage.getEInt(), "Edition", null, 0, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCourse_CourseEvaluation(), this.getCourseEvaluation(), this.getCourseEvaluation_Course(), "CourseEvaluation", null, 0, -1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCourse_Curricularunit(), this.getCurricularUnit(), this.getCurricularUnit_Course(), "curricularunit", null, 1, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCourse_Partialevaluation(), this.getPartialEvaluation(), this.getPartialEvaluation_Course(), "partialevaluation", null, 0, -1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(evaluationEClass, Evaluation.class, "Evaluation", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEvaluation_Date(), ecorePackage.getEDate(), "date", null, 0, 1, Evaluation.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(evaluationEClass, Evaluation.class, "Evaluation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEvaluation_Date(), ecorePackage.getEDate(), "date", null, 0, 1, Evaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(examEvaluationEClass, ExamEvaluation.class, "ExamEvaluation", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExamEvaluation_Curricularunit(), this.getCurricularUnit(),
-				this.getCurricularUnit_ExamEvaluation(), "curricularunit", null, 1, 1, ExamEvaluation.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(examEvaluationEClass, ExamEvaluation.class, "ExamEvaluation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExamEvaluation_Curricularunit(), this.getCurricularUnit(), this.getCurricularUnit_ExamEvaluation(), "curricularunit", null, 1, 1, ExamEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(evaluacionExamenEClass, EvaluacionExamen.class, "EvaluacionExamen", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(evaluacionExamenEClass, EvaluacionExamen.class, "EvaluacionExamen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(courseEvaluationEClass, CourseEvaluation.class, "CourseEvaluation", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCourseEvaluation_Course(), this.getCourse(), this.getCourse_CourseEvaluation(), "course",
-				null, 1, 1, CourseEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(courseEvaluationEClass, CourseEvaluation.class, "CourseEvaluation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCourseEvaluation_Course(), this.getCourse(), this.getCourse_CourseEvaluation(), "course", null, 1, 1, CourseEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(partialEvaluationEClass, PartialEvaluation.class, "PartialEvaluation", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPartialEvaluation_Course(), this.getCourse(), this.getCourse_Partialevaluation(), "course",
-				null, 1, 1, PartialEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(partialEvaluationEClass, PartialEvaluation.class, "PartialEvaluation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPartialEvaluation_Course(), this.getCourse(), this.getCourse_Partialevaluation(), "course", null, 1, 1, PartialEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

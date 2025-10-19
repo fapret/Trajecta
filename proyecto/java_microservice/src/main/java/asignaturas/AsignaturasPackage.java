@@ -1158,6 +1158,7 @@ public interface AsignaturasPackage extends EPackage {
 	 */
 	int PARTIAL_EVALUATION_OPERATION_COUNT = EVALUATION_OPERATION_COUNT + 0;
 
+
 	/**
 	 * Returns the meta object for class '{@link asignaturas.Root <em>Root</em>}'.
 	 * <!-- begin-user-doc -->

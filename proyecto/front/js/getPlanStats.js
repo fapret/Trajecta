@@ -1,7 +1,7 @@
 /*
-    tmde-app-curricula is a software that helps students build their curricula and
+    Trajecta is a software that helps students build their curricula and
     see what curricular units they can register to, and track how their career was
-    or will be.
+    or will be. And helps academic managers do different researches.
     Copyright (C) 2025  Santiago Nicolás Díaz Conde
 
     This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
-*/
+    Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
+ */
 function displayPlanStats(){
     const allDiscoveriesSelect = document.getElementById("discoveries");
     const uuid = allDiscoveriesSelect.value;

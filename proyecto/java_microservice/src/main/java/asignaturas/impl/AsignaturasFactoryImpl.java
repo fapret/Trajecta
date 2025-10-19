@@ -27,12 +27,12 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 */
 	public static AsignaturasFactory init() {
 		try {
-			AsignaturasFactory theAsignaturasFactory = (AsignaturasFactory) EPackage.Registry.INSTANCE
-					.getEFactory(AsignaturasPackage.eNS_URI);
+			AsignaturasFactory theAsignaturasFactory = (AsignaturasFactory)EPackage.Registry.INSTANCE.getEFactory(AsignaturasPackage.eNS_URI);
 			if (theAsignaturasFactory != null) {
 				return theAsignaturasFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new AsignaturasFactoryImpl();
@@ -56,46 +56,27 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case AsignaturasPackage.ROOT:
-			return createRoot();
-		case AsignaturasPackage.CAREER:
-			return createCareer();
-		case AsignaturasPackage.CREDITS_PLAN:
-			return createCreditsPlan();
-		case AsignaturasPackage.FACULTY:
-			return createFaculty();
-		case AsignaturasPackage.SUBJECT:
-			return createSubject();
-		case AsignaturasPackage.CURRICULAR_UNIT:
-			return createCurricularUnit();
-		case AsignaturasPackage.SOME_OF:
-			return createSomeOf();
-		case AsignaturasPackage.NOT:
-			return createNOT();
-		case AsignaturasPackage.COURSED:
-			return createCoursed();
-		case AsignaturasPackage.EXAM:
-			return createExam();
-		case AsignaturasPackage.CREDITS_ON_PLAN:
-			return createCreditsOnPlan();
-		case AsignaturasPackage.CREDITS_ON_SUBJECT:
-			return createCreditsOnSubject();
-		case AsignaturasPackage.SUBJECT_PLAN:
-			return createSubjectPlan();
-		case AsignaturasPackage.REGISTERED_TO:
-			return createRegisteredTo();
-		case AsignaturasPackage.COURSE:
-			return createCourse();
-		case AsignaturasPackage.EXAM_EVALUATION:
-			return createExamEvaluation();
-		case AsignaturasPackage.EVALUACION_EXAMEN:
-			return createEvaluacionExamen();
-		case AsignaturasPackage.COURSE_EVALUATION:
-			return createCourseEvaluation();
-		case AsignaturasPackage.PARTIAL_EVALUATION:
-			return createPartialEvaluation();
-		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			case AsignaturasPackage.ROOT: return createRoot();
+			case AsignaturasPackage.CAREER: return createCareer();
+			case AsignaturasPackage.CREDITS_PLAN: return createCreditsPlan();
+			case AsignaturasPackage.FACULTY: return createFaculty();
+			case AsignaturasPackage.SUBJECT: return createSubject();
+			case AsignaturasPackage.CURRICULAR_UNIT: return createCurricularUnit();
+			case AsignaturasPackage.SOME_OF: return createSomeOf();
+			case AsignaturasPackage.NOT: return createNOT();
+			case AsignaturasPackage.COURSED: return createCoursed();
+			case AsignaturasPackage.EXAM: return createExam();
+			case AsignaturasPackage.CREDITS_ON_PLAN: return createCreditsOnPlan();
+			case AsignaturasPackage.CREDITS_ON_SUBJECT: return createCreditsOnSubject();
+			case AsignaturasPackage.SUBJECT_PLAN: return createSubjectPlan();
+			case AsignaturasPackage.REGISTERED_TO: return createRegisteredTo();
+			case AsignaturasPackage.COURSE: return createCourse();
+			case AsignaturasPackage.EXAM_EVALUATION: return createExamEvaluation();
+			case AsignaturasPackage.EVALUACION_EXAMEN: return createEvaluacionExamen();
+			case AsignaturasPackage.COURSE_EVALUATION: return createCourseEvaluation();
+			case AsignaturasPackage.PARTIAL_EVALUATION: return createPartialEvaluation();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -104,6 +85,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
@@ -114,6 +96,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Career createCareer() {
 		CareerImpl career = new CareerImpl();
 		return career;
@@ -124,6 +107,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CreditsPlan createCreditsPlan() {
 		CreditsPlanImpl creditsPlan = new CreditsPlanImpl();
 		return creditsPlan;
@@ -134,6 +118,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Faculty createFaculty() {
 		FacultyImpl faculty = new FacultyImpl();
 		return faculty;
@@ -144,6 +129,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Subject createSubject() {
 		SubjectImpl subject = new SubjectImpl();
 		return subject;
@@ -154,6 +140,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CurricularUnit createCurricularUnit() {
 		CurricularUnitImpl curricularUnit = new CurricularUnitImpl();
 		return curricularUnit;
@@ -164,6 +151,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SomeOf createSomeOf() {
 		SomeOfImpl someOf = new SomeOfImpl();
 		return someOf;
@@ -174,6 +162,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NOT createNOT() {
 		NOTImpl not = new NOTImpl();
 		return not;
@@ -184,6 +173,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Coursed createCoursed() {
 		CoursedImpl coursed = new CoursedImpl();
 		return coursed;
@@ -194,6 +184,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Exam createExam() {
 		ExamImpl exam = new ExamImpl();
 		return exam;
@@ -204,6 +195,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CreditsOnPlan createCreditsOnPlan() {
 		CreditsOnPlanImpl creditsOnPlan = new CreditsOnPlanImpl();
 		return creditsOnPlan;
@@ -214,6 +206,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CreditsOnSubject createCreditsOnSubject() {
 		CreditsOnSubjectImpl creditsOnSubject = new CreditsOnSubjectImpl();
 		return creditsOnSubject;
@@ -224,6 +217,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SubjectPlan createSubjectPlan() {
 		SubjectPlanImpl subjectPlan = new SubjectPlanImpl();
 		return subjectPlan;
@@ -234,6 +228,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RegisteredTo createRegisteredTo() {
 		RegisteredToImpl registeredTo = new RegisteredToImpl();
 		return registeredTo;
@@ -244,6 +239,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Course createCourse() {
 		CourseImpl course = new CourseImpl();
 		return course;
@@ -254,6 +250,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExamEvaluation createExamEvaluation() {
 		ExamEvaluationImpl examEvaluation = new ExamEvaluationImpl();
 		return examEvaluation;
@@ -264,6 +261,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EvaluacionExamen createEvaluacionExamen() {
 		EvaluacionExamenImpl evaluacionExamen = new EvaluacionExamenImpl();
 		return evaluacionExamen;
@@ -274,6 +272,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CourseEvaluation createCourseEvaluation() {
 		CourseEvaluationImpl courseEvaluation = new CourseEvaluationImpl();
 		return courseEvaluation;
@@ -284,6 +283,7 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialEvaluation createPartialEvaluation() {
 		PartialEvaluationImpl partialEvaluation = new PartialEvaluationImpl();
 		return partialEvaluation;
@@ -294,8 +294,9 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AsignaturasPackage getAsignaturasPackage() {
-		return (AsignaturasPackage) getEPackage();
+		return (AsignaturasPackage)getEPackage();
 	}
 
 	/**

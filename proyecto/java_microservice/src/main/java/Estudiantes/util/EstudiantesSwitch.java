@@ -66,50 +66,43 @@ public class EstudiantesSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case EstudiantesPackage.ROOT: {
-			Root root = (Root) theEObject;
-			T result = caseRoot(root);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EstudiantesPackage.STUDENT: {
-			Student student = (Student) theEObject;
-			T result = caseStudent(student);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EstudiantesPackage.COURSE_INSCRIPTION: {
-			CourseInscription courseInscription = (CourseInscription) theEObject;
-			T result = caseCourseInscription(courseInscription);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EstudiantesPackage.STUDENT_EVALUATION: {
-			StudentEvaluation studentEvaluation = (StudentEvaluation) theEObject;
-			T result = caseStudentEvaluation(studentEvaluation);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EstudiantesPackage.PLAN_INSCRIPTION: {
-			PlanInscription planInscription = (PlanInscription) theEObject;
-			T result = casePlanInscription(planInscription);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EstudiantesPackage.DEGREE: {
-			Degree degree = (Degree) theEObject;
-			T result = caseDegree(degree);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		default:
-			return defaultCase(theEObject);
+			case EstudiantesPackage.ROOT: {
+				Root root = (Root)theEObject;
+				T result = caseRoot(root);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EstudiantesPackage.STUDENT: {
+				Student student = (Student)theEObject;
+				T result = caseStudent(student);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EstudiantesPackage.COURSE_INSCRIPTION: {
+				CourseInscription courseInscription = (CourseInscription)theEObject;
+				T result = caseCourseInscription(courseInscription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EstudiantesPackage.STUDENT_EVALUATION: {
+				StudentEvaluation studentEvaluation = (StudentEvaluation)theEObject;
+				T result = caseStudentEvaluation(studentEvaluation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EstudiantesPackage.PLAN_INSCRIPTION: {
+				PlanInscription planInscription = (PlanInscription)theEObject;
+				T result = casePlanInscription(planInscription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EstudiantesPackage.DEGREE: {
+				Degree degree = (Degree)theEObject;
+				T result = caseDegree(degree);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			default: return defaultCase(theEObject);
 		}
 	}
 

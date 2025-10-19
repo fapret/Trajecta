@@ -54,10 +54,10 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Course getCourse() {
-		if (eContainerFeatureID() != AsignaturasPackage.COURSE_EVALUATION__COURSE)
-			return null;
-		return (Course) eInternalContainer();
+		if (eContainerFeatureID() != AsignaturasPackage.COURSE_EVALUATION__COURSE) return null;
+		return (Course)eInternalContainer();
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	 * @generated
 	 */
 	public NotificationChain basicSetCourse(Course newCourse, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newCourse, AsignaturasPackage.COURSE_EVALUATION__COURSE, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newCourse, AsignaturasPackage.COURSE_EVALUATION__COURSE, msgs);
 		return msgs;
 	}
 
@@ -75,23 +75,21 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCourse(Course newCourse) {
-		if (newCourse != eInternalContainer()
-				|| (eContainerFeatureID() != AsignaturasPackage.COURSE_EVALUATION__COURSE && newCourse != null)) {
+		if (newCourse != eInternalContainer() || (eContainerFeatureID() != AsignaturasPackage.COURSE_EVALUATION__COURSE && newCourse != null)) {
 			if (EcoreUtil.isAncestor(this, newCourse))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newCourse != null)
-				msgs = ((InternalEObject) newCourse).eInverseAdd(this, AsignaturasPackage.COURSE__COURSE_EVALUATION,
-						Course.class, msgs);
+				msgs = ((InternalEObject)newCourse).eInverseAdd(this, AsignaturasPackage.COURSE__COURSE_EVALUATION, Course.class, msgs);
 			msgs = basicSetCourse(newCourse, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.COURSE_EVALUATION__COURSE,
-					newCourse, newCourse));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.COURSE_EVALUATION__COURSE, newCourse, newCourse));
 	}
 
 	/**
@@ -102,10 +100,10 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSE_EVALUATION__COURSE:
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetCourse((Course) otherEnd, msgs);
+			case AsignaturasPackage.COURSE_EVALUATION__COURSE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetCourse((Course)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -118,8 +116,8 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSE_EVALUATION__COURSE:
-			return basicSetCourse(null, msgs);
+			case AsignaturasPackage.COURSE_EVALUATION__COURSE:
+				return basicSetCourse(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -132,9 +130,8 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-		case AsignaturasPackage.COURSE_EVALUATION__COURSE:
-			return eInternalContainer().eInverseRemove(this, AsignaturasPackage.COURSE__COURSE_EVALUATION, Course.class,
-					msgs);
+			case AsignaturasPackage.COURSE_EVALUATION__COURSE:
+				return eInternalContainer().eInverseRemove(this, AsignaturasPackage.COURSE__COURSE_EVALUATION, Course.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -147,8 +144,8 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSE_EVALUATION__COURSE:
-			return getCourse();
+			case AsignaturasPackage.COURSE_EVALUATION__COURSE:
+				return getCourse();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -161,9 +158,9 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSE_EVALUATION__COURSE:
-			setCourse((Course) newValue);
-			return;
+			case AsignaturasPackage.COURSE_EVALUATION__COURSE:
+				setCourse((Course)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -176,9 +173,9 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSE_EVALUATION__COURSE:
-			setCourse((Course) null);
-			return;
+			case AsignaturasPackage.COURSE_EVALUATION__COURSE:
+				setCourse((Course)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -191,8 +188,8 @@ public class CourseEvaluationImpl extends EvaluationImpl implements CourseEvalua
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSE_EVALUATION__COURSE:
-			return getCourse() != null;
+			case AsignaturasPackage.COURSE_EVALUATION__COURSE:
+				return getCourse() != null;
 		}
 		return super.eIsSet(featureID);
 	}

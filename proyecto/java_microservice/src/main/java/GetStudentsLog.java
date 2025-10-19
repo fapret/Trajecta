@@ -30,6 +30,8 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 
@@ -56,38 +58,33 @@ public class GetStudentsLog extends HttpServlet {
      */
     public GetStudentsLog() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Carga modelo
-		ResourceSet resourceSet;
-		resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-		EPackage.Registry.INSTANCE.put(asignaturas.AsignaturasPackage.eNS_URI, asignaturas.AsignaturasPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(Estudiantes.EstudiantesPackage.eNS_URI, Estudiantes.EstudiantesPackage.eINSTANCE);
-		URI modelURI = URI.createFileURI("model.xmi");
-		Resource resource = resourceSet.getResource(modelURI, true);
-		
-		Estudiantes.Root rootStudent;
-		Part filePart;
-		InputStream inputStream;
-		
-		try {
-			filePart = request.getPart("file");
-			inputStream = filePart.getInputStream();
-			Resource resourceStudent = resourceSet.createResource(URI.createURI(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()));
-		
-			resourceStudent.load(inputStream, null);
-			
-			rootStudent = (Estudiantes.Root) resourceStudent.getContents().get(0);
-		} catch (IOException e) {
-			response.getWriter().write(e.toString());
-			return;
-		}
+		Path baseDir = Utils.getBasePath();
+		String uuid = request.getParameter("uuid");
+	    if (uuid == null || uuid.isBlank()) {
+	        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing uuid parameter");
+	        return;
+	    }
+		Path workspaceDir = baseDir.resolve(uuid);
+	    if (!Files.exists(workspaceDir)) {
+	        response.sendError(HttpServletResponse.SC_NOT_FOUND, "Workspace not found");
+	        return;
+	    }
+		ResourceSet resourceSet = new ResourceSetImpl();
+        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+                .put("xmi", new XMIResourceFactoryImpl());
+        EPackage.Registry.INSTANCE.put(AsignaturasPackage.eNS_URI, AsignaturasPackage.eINSTANCE);
+        EPackage.Registry.INSTANCE.put(EstudiantesPackage.eNS_URI, EstudiantesPackage.eINSTANCE);
+        
+        URI modelURI = URI.createFileURI(workspaceDir.resolve("students.xmi").toString());
+        Resource resource = resourceSet.getResource(modelURI, true);
+        Estudiantes.Root rootStudent = (Estudiantes.Root) resource.getContents().get(0);
+        
 		
 		//Append header of CSV (ID, Activity, Timestamp, Career, Plan, Curricular Unit, Course Edition, Course Year, Grade)
 		StringBuilder csvBuilder = new StringBuilder();

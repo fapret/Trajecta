@@ -8,6 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
   <script src="lang/lang.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <title>TMDE Project</title>
   <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>    <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -30,6 +32,9 @@
     </a>
   </div>
   <div class="center" id="center">
+    <div id="workspace-container">
+      <select id="workspaceSelector" placeholder="Select a workspace..."></select>
+    </div>
   </div>
   <div class="end" id="end">
     <div class="lang-switcher">
@@ -372,10 +377,6 @@
 
       <!-- AGREGAR ACA CONTENIDO-->
       <div class="centeredDiv">
-      	<label data-lang="baseModel">Modelo Base (Opcional):</label>
-      	<input id="file" name="file" type="file" accept=".xmi"/>
-      </div>
-      <div class="centeredDiv">
       	<label data-lang="name">Nombre:</label>
       	<input type="text" id="name" name="name" required/>
       </div>
@@ -385,7 +386,7 @@
       </div>
       <div class="buttons-div">
         <button type="button" id="markEstudiante" data-lang="downloadStudent" onclick="crear_estudiante()">
-          Descargar Modelo Estudiante
+          Crear Estudiante
         </button>
       </div>
       
@@ -418,4 +419,5 @@
 
   <script src="./js/loadStudentExec.js"></script>
   <script src="./js/leftnav.js"></script>
+  <script src="./js/workspaceSelector.js"></script>
 </body>

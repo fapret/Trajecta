@@ -6,6 +6,7 @@ package Estudiantes.provider;
 import Estudiantes.CourseInscription;
 import Estudiantes.EstudiantesPackage;
 
+import asignaturas.provider.ModelgeneratorEditPlugin;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -177,7 +178,7 @@ public class CourseInscriptionItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return EstudianteEditPlugin.INSTANCE;
+		return ModelgeneratorEditPlugin.INSTANCE;
 	}
 
 }

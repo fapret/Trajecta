@@ -3,6 +3,7 @@
     see what curricular units they can register to, and track how their career was
     or will be.
     Copyright (C) 2023  Santiago Nicolás Díaz Conde, Santiago Freire López
+    Copyright (C) 2025  Santiago Nicolás Díaz Conde
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,13 +25,21 @@ function evaluar_uc() {
     const allUCSelect = document.getElementById("ucs");
     const facultyName = allFacultiesSelect.value;
     const uc_id = allUCSelect.value;
-    const model_file = document.getElementById("file").files[0];
+    const workspaceID = localStorage.getItem('selectedWorkspace');
+    if (workspaceID == null) {
+        alert("Please select a workspace");
+        return;
+    }
 
     const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs/eval`;
     var formData = new FormData();
     formData.append('faculty', facultyName);
     formData.append('curricularUnit', uc_id);
-    formData.append('file', model_file);
+    formData.append('uuid', workspaceID);
+
+    if(document.getElementById("ci").value != undefined){
+        formData.append('id', document.getElementById("ci").value);
+    }
 
     // Configurar las opciones de la solicitud
     var options = {

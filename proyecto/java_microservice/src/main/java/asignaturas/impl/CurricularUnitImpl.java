@@ -178,6 +178,7 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -187,6 +188,7 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -199,6 +201,7 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -208,12 +211,12 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__NAME, oldName,
-					name));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__NAME, oldName, name));
 	}
 
 	/**
@@ -221,6 +224,7 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getCred() {
 		return cred;
 	}
@@ -230,12 +234,12 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCred(int newCred) {
 		int oldCred = cred;
 		cred = newCred;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__CRED, oldCred,
-					cred));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__CRED, oldCred, cred));
 	}
 
 	/**
@@ -243,6 +247,7 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isValid() {
 		return valid;
 	}
@@ -252,12 +257,12 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValid(boolean newValid) {
 		boolean oldValid = valid;
 		valid = newValid;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__VALID, oldValid,
-					valid));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__VALID, oldValid, valid));
 	}
 
 	/**
@@ -265,6 +270,7 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Requirement getRequirement() {
 		return requirement;
 	}
@@ -278,12 +284,8 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 		Requirement oldRequirement = requirement;
 		requirement = newRequirement;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT, oldRequirement, newRequirement);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT, oldRequirement, newRequirement);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -293,21 +295,19 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRequirement(Requirement newRequirement) {
 		if (newRequirement != requirement) {
 			NotificationChain msgs = null;
 			if (requirement != null)
-				msgs = ((InternalEObject) requirement).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT, null, msgs);
+				msgs = ((InternalEObject)requirement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT, null, msgs);
 			if (newRequirement != null)
-				msgs = ((InternalEObject) newRequirement).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT, null, msgs);
+				msgs = ((InternalEObject)newRequirement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT, null, msgs);
 			msgs = basicSetRequirement(newRequirement, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT,
-					newRequirement, newRequirement));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT, newRequirement, newRequirement));
 	}
 
 	/**
@@ -315,10 +315,10 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Course> getCourse() {
 		if (course == null) {
-			course = new EObjectContainmentWithInverseEList<Course>(Course.class, this,
-					AsignaturasPackage.CURRICULAR_UNIT__COURSE, AsignaturasPackage.COURSE__CURRICULARUNIT);
+			course = new EObjectContainmentWithInverseEList<Course>(Course.class, this, AsignaturasPackage.CURRICULAR_UNIT__COURSE, AsignaturasPackage.COURSE__CURRICULARUNIT);
 		}
 		return course;
 	}
@@ -328,11 +328,10 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ExamEvaluation> getExamEvaluation() {
 		if (examEvaluation == null) {
-			examEvaluation = new EObjectContainmentWithInverseEList<ExamEvaluation>(ExamEvaluation.class, this,
-					AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION,
-					AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT);
+			examEvaluation = new EObjectContainmentWithInverseEList<ExamEvaluation>(ExamEvaluation.class, this, AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION, AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT);
 		}
 		return examEvaluation;
 	}
@@ -346,10 +345,10 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getCourse()).basicAdd(otherEnd, msgs);
-		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getExamEvaluation()).basicAdd(otherEnd, msgs);
+			case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getCourse()).basicAdd(otherEnd, msgs);
+			case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExamEvaluation()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -362,12 +361,12 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
-			return basicSetRequirement(null, msgs);
-		case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
-			return ((InternalEList<?>) getCourse()).basicRemove(otherEnd, msgs);
-		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
-			return ((InternalEList<?>) getExamEvaluation()).basicRemove(otherEnd, msgs);
+			case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
+				return basicSetRequirement(null, msgs);
+			case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
+				return ((InternalEList<?>)getCourse()).basicRemove(otherEnd, msgs);
+			case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
+				return ((InternalEList<?>)getExamEvaluation()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -380,20 +379,20 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.CURRICULAR_UNIT__ID:
-			return getId();
-		case AsignaturasPackage.CURRICULAR_UNIT__NAME:
-			return getName();
-		case AsignaturasPackage.CURRICULAR_UNIT__CRED:
-			return getCred();
-		case AsignaturasPackage.CURRICULAR_UNIT__VALID:
-			return isValid();
-		case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
-			return getRequirement();
-		case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
-			return getCourse();
-		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
-			return getExamEvaluation();
+			case AsignaturasPackage.CURRICULAR_UNIT__ID:
+				return getId();
+			case AsignaturasPackage.CURRICULAR_UNIT__NAME:
+				return getName();
+			case AsignaturasPackage.CURRICULAR_UNIT__CRED:
+				return getCred();
+			case AsignaturasPackage.CURRICULAR_UNIT__VALID:
+				return isValid();
+			case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
+				return getRequirement();
+			case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
+				return getCourse();
+			case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
+				return getExamEvaluation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -407,29 +406,29 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.CURRICULAR_UNIT__ID:
-			setId((String) newValue);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__NAME:
-			setName((String) newValue);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__CRED:
-			setCred((Integer) newValue);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__VALID:
-			setValid((Boolean) newValue);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
-			setRequirement((Requirement) newValue);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
-			getCourse().clear();
-			getCourse().addAll((Collection<? extends Course>) newValue);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
-			getExamEvaluation().clear();
-			getExamEvaluation().addAll((Collection<? extends ExamEvaluation>) newValue);
-			return;
+			case AsignaturasPackage.CURRICULAR_UNIT__ID:
+				setId((String)newValue);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__NAME:
+				setName((String)newValue);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__CRED:
+				setCred((Integer)newValue);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__VALID:
+				setValid((Boolean)newValue);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
+				setRequirement((Requirement)newValue);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
+				getCourse().clear();
+				getCourse().addAll((Collection<? extends Course>)newValue);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
+				getExamEvaluation().clear();
+				getExamEvaluation().addAll((Collection<? extends ExamEvaluation>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -442,27 +441,27 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.CURRICULAR_UNIT__ID:
-			setId(ID_EDEFAULT);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__NAME:
-			setName(NAME_EDEFAULT);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__CRED:
-			setCred(CRED_EDEFAULT);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__VALID:
-			setValid(VALID_EDEFAULT);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
-			setRequirement((Requirement) null);
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
-			getCourse().clear();
-			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
-			getExamEvaluation().clear();
-			return;
+			case AsignaturasPackage.CURRICULAR_UNIT__ID:
+				setId(ID_EDEFAULT);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__CRED:
+				setCred(CRED_EDEFAULT);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__VALID:
+				setValid(VALID_EDEFAULT);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
+				setRequirement((Requirement)null);
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
+				getCourse().clear();
+				return;
+			case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
+				getExamEvaluation().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -475,20 +474,20 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.CURRICULAR_UNIT__ID:
-			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-		case AsignaturasPackage.CURRICULAR_UNIT__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-		case AsignaturasPackage.CURRICULAR_UNIT__CRED:
-			return cred != CRED_EDEFAULT;
-		case AsignaturasPackage.CURRICULAR_UNIT__VALID:
-			return valid != VALID_EDEFAULT;
-		case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
-			return requirement != null;
-		case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
-			return course != null && !course.isEmpty();
-		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
-			return examEvaluation != null && !examEvaluation.isEmpty();
+			case AsignaturasPackage.CURRICULAR_UNIT__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case AsignaturasPackage.CURRICULAR_UNIT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case AsignaturasPackage.CURRICULAR_UNIT__CRED:
+				return cred != CRED_EDEFAULT;
+			case AsignaturasPackage.CURRICULAR_UNIT__VALID:
+				return valid != VALID_EDEFAULT;
+			case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
+				return requirement != null;
+			case AsignaturasPackage.CURRICULAR_UNIT__COURSE:
+				return course != null && !course.isEmpty();
+			case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
+				return examEvaluation != null && !examEvaluation.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -500,8 +499,7 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (Id: ");

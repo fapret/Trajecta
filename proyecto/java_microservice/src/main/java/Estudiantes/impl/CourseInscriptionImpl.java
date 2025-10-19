@@ -86,14 +86,14 @@ public class CourseInscriptionImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Course getCUCourse() {
 		if (cuCourse != null && cuCourse.eIsProxy()) {
-			InternalEObject oldCUCourse = (InternalEObject) cuCourse;
-			cuCourse = (Course) eResolveProxy(oldCUCourse);
+			InternalEObject oldCUCourse = (InternalEObject)cuCourse;
+			cuCourse = (Course)eResolveProxy(oldCUCourse);
 			if (cuCourse != oldCUCourse) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE, oldCUCourse, cuCourse));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE, oldCUCourse, cuCourse));
 			}
 		}
 		return cuCourse;
@@ -113,12 +113,12 @@ public class CourseInscriptionImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCUCourse(Course newCUCourse) {
 		Course oldCUCourse = cuCourse;
 		cuCourse = newCUCourse;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE,
-					oldCUCourse, cuCourse));
+			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE, oldCUCourse, cuCourse));
 	}
 
 	/**
@@ -126,6 +126,7 @@ public class CourseInscriptionImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDate() {
 		return date;
 	}
@@ -135,12 +136,12 @@ public class CourseInscriptionImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDate(Date newDate) {
 		Date oldDate = date;
 		date = newDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.COURSE_INSCRIPTION__DATE, oldDate,
-					date));
+			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.COURSE_INSCRIPTION__DATE, oldDate, date));
 	}
 
 	/**
@@ -151,12 +152,11 @@ public class CourseInscriptionImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE:
-			if (resolve)
-				return getCUCourse();
-			return basicGetCUCourse();
-		case EstudiantesPackage.COURSE_INSCRIPTION__DATE:
-			return getDate();
+			case EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE:
+				if (resolve) return getCUCourse();
+				return basicGetCUCourse();
+			case EstudiantesPackage.COURSE_INSCRIPTION__DATE:
+				return getDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -169,12 +169,12 @@ public class CourseInscriptionImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE:
-			setCUCourse((Course) newValue);
-			return;
-		case EstudiantesPackage.COURSE_INSCRIPTION__DATE:
-			setDate((Date) newValue);
-			return;
+			case EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE:
+				setCUCourse((Course)newValue);
+				return;
+			case EstudiantesPackage.COURSE_INSCRIPTION__DATE:
+				setDate((Date)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -187,12 +187,12 @@ public class CourseInscriptionImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE:
-			setCUCourse((Course) null);
-			return;
-		case EstudiantesPackage.COURSE_INSCRIPTION__DATE:
-			setDate(DATE_EDEFAULT);
-			return;
+			case EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE:
+				setCUCourse((Course)null);
+				return;
+			case EstudiantesPackage.COURSE_INSCRIPTION__DATE:
+				setDate(DATE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -205,10 +205,10 @@ public class CourseInscriptionImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE:
-			return cuCourse != null;
-		case EstudiantesPackage.COURSE_INSCRIPTION__DATE:
-			return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
+			case EstudiantesPackage.COURSE_INSCRIPTION__CU_COURSE:
+				return cuCourse != null;
+			case EstudiantesPackage.COURSE_INSCRIPTION__DATE:
+				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -220,8 +220,7 @@ public class CourseInscriptionImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (date: ");

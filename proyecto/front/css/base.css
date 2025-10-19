@@ -336,3 +336,26 @@ div{
   font-size: 1rem;
   border-radius: 4px;
 }
+
+#workspace-container {
+  position: fixed;
+  width: 300px;
+  font-family: 'Teko', sans-serif;
+}
+
+#workspaceSelector, .choices {
+  width: 250px;
+  height: 3rem;
+}
+
+#workspaceSelector, .choices__inner {
+  font-size: 1.2rem !important; /* main selected item text */
+}
+
+#workspaceSelector, .choices__list--dropdown .choices__item {
+  font-size: 0.9rem !important; /* dropdown list items */
+}
+
+.workspace-label{
+  color:#646161;
+}

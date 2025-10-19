@@ -103,7 +103,7 @@ public class RequirementItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return AsignaturasEditPlugin.INSTANCE;
+		return ModelgeneratorEditPlugin.INSTANCE;
 	}
 
 }

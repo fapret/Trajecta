@@ -10,14 +10,23 @@
       <!-- @generated asignaturas -->
       <package
             uri="asignaturasURI"
-            class="asignaturas.AsignaturasPackage"/>
+            class="asignaturas.AsignaturasPackage"
+            genModel="model/asignaturas.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated asignaturas -->
       <package
             uri="EstudiantesURI"
-            class="Estudiantes.EstudiantesPackage"/>
+            class="Estudiantes.EstudiantesPackage"
+            genModel="model/asignaturas.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated asignaturas2 -->
+      <package
+            uri="WorkspaceURI"
+            class="Workspace.WorkspacePackage"/>
    </extension>
 
 </plugin>

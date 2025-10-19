@@ -162,7 +162,7 @@ public class RootItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return AsignaturasEditPlugin.INSTANCE;
+		return ModelgeneratorEditPlugin.INSTANCE;
 	}
 
 }

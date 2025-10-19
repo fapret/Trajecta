@@ -82,6 +82,7 @@ public class CreditsOnSubjectImpl extends RequirementImpl implements CreditsOnSu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getCred() {
 		return cred;
 	}
@@ -91,12 +92,12 @@ public class CreditsOnSubjectImpl extends RequirementImpl implements CreditsOnSu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCred(int newCred) {
 		int oldCred = cred;
 		cred = newCred;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CREDITS_ON_SUBJECT__CRED, oldCred,
-					cred));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CREDITS_ON_SUBJECT__CRED, oldCred, cred));
 	}
 
 	/**
@@ -104,15 +105,14 @@ public class CreditsOnSubjectImpl extends RequirementImpl implements CreditsOnSu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Subject getGroupOfSubjects() {
 		if (groupOfSubjects != null && groupOfSubjects.eIsProxy()) {
-			InternalEObject oldGroupOfSubjects = (InternalEObject) groupOfSubjects;
-			groupOfSubjects = (Subject) eResolveProxy(oldGroupOfSubjects);
+			InternalEObject oldGroupOfSubjects = (InternalEObject)groupOfSubjects;
+			groupOfSubjects = (Subject)eResolveProxy(oldGroupOfSubjects);
 			if (groupOfSubjects != oldGroupOfSubjects) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS, oldGroupOfSubjects,
-							groupOfSubjects));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS, oldGroupOfSubjects, groupOfSubjects));
 			}
 		}
 		return groupOfSubjects;
@@ -132,12 +132,12 @@ public class CreditsOnSubjectImpl extends RequirementImpl implements CreditsOnSu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGroupOfSubjects(Subject newGroupOfSubjects) {
 		Subject oldGroupOfSubjects = groupOfSubjects;
 		groupOfSubjects = newGroupOfSubjects;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS, oldGroupOfSubjects, groupOfSubjects));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS, oldGroupOfSubjects, groupOfSubjects));
 	}
 
 	/**
@@ -148,12 +148,11 @@ public class CreditsOnSubjectImpl extends RequirementImpl implements CreditsOnSu
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.CREDITS_ON_SUBJECT__CRED:
-			return getCred();
-		case AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS:
-			if (resolve)
-				return getGroupOfSubjects();
-			return basicGetGroupOfSubjects();
+			case AsignaturasPackage.CREDITS_ON_SUBJECT__CRED:
+				return getCred();
+			case AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS:
+				if (resolve) return getGroupOfSubjects();
+				return basicGetGroupOfSubjects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,12 +165,12 @@ public class CreditsOnSubjectImpl extends RequirementImpl implements CreditsOnSu
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.CREDITS_ON_SUBJECT__CRED:
-			setCred((Integer) newValue);
-			return;
-		case AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS:
-			setGroupOfSubjects((Subject) newValue);
-			return;
+			case AsignaturasPackage.CREDITS_ON_SUBJECT__CRED:
+				setCred((Integer)newValue);
+				return;
+			case AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS:
+				setGroupOfSubjects((Subject)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -184,12 +183,12 @@ public class CreditsOnSubjectImpl extends RequirementImpl implements CreditsOnSu
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.CREDITS_ON_SUBJECT__CRED:
-			setCred(CRED_EDEFAULT);
-			return;
-		case AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS:
-			setGroupOfSubjects((Subject) null);
-			return;
+			case AsignaturasPackage.CREDITS_ON_SUBJECT__CRED:
+				setCred(CRED_EDEFAULT);
+				return;
+			case AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS:
+				setGroupOfSubjects((Subject)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -202,10 +201,10 @@ public class CreditsOnSubjectImpl extends RequirementImpl implements CreditsOnSu
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.CREDITS_ON_SUBJECT__CRED:
-			return cred != CRED_EDEFAULT;
-		case AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS:
-			return groupOfSubjects != null;
+			case AsignaturasPackage.CREDITS_ON_SUBJECT__CRED:
+				return cred != CRED_EDEFAULT;
+			case AsignaturasPackage.CREDITS_ON_SUBJECT__GROUP_OF_SUBJECTS:
+				return groupOfSubjects != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -217,8 +216,7 @@ public class CreditsOnSubjectImpl extends RequirementImpl implements CreditsOnSu
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (cred: ");

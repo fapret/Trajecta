@@ -61,4 +61,32 @@
             contributorClass="Estudiantes.presentation.EstudiantesActionBarContributor">
       </editor>
    </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated modelgenerator -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="Workspace.presentation.WorkspaceModelWizardID"
+            name="%_UI_WorkspaceModelWizard_label"
+            class="Workspace.presentation.WorkspaceModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/WorkspaceModelFile.gif">
+         <description>%_UI_WorkspaceModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated modelgenerator -->
+      <editor
+            id="Workspace.presentation.WorkspaceEditorID"
+            name="%_UI_WorkspaceEditor_label"
+            icon="icons/full/obj16/WorkspaceModelFile.gif"
+            extensions="workspace"
+            class="Workspace.presentation.WorkspaceEditor"
+            contributorClass="Workspace.presentation.WorkspaceActionBarContributor">
+      </editor>
+   </extension>
 </plugin>

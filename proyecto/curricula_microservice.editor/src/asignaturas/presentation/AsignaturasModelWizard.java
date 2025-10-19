@@ -71,7 +71,7 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 
 import asignaturas.AsignaturasFactory;
 import asignaturas.AsignaturasPackage;
-import asignaturas.provider.AsignaturasEditPlugin;
+import asignaturas.provider.ModelgeneratorEditPlugin;
 import org.eclipse.core.runtime.Path;
 
 import org.eclipse.jface.viewers.ISelection;
@@ -97,7 +97,7 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final List<String> FILE_EXTENSIONS =
-		Collections.unmodifiableList(Arrays.asList(AsignaturasEditorPlugin.INSTANCE.getString("_UI_AsignaturasEditorFilenameExtensions").split("\\s*,\\s*")));
+		Collections.unmodifiableList(Arrays.asList(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_AsignaturasEditorFilenameExtensions").split("\\s*,\\s*")));
 
 	/**
 	 * A formatted list of supported file extensions, suitable for display.
@@ -106,7 +106,7 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final String FORMATTED_FILE_EXTENSIONS =
-		AsignaturasEditorPlugin.INSTANCE.getString("_UI_AsignaturasEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
+		ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_AsignaturasEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
 
 	/**
 	 * This caches an instance of the model package.
@@ -174,8 +174,8 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;
-		setWindowTitle(AsignaturasEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
-		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(AsignaturasEditorPlugin.INSTANCE.getImage("full/wizban/NewAsignaturas")));
+		setWindowTitle(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
+		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(ModelgeneratorEditorPlugin.INSTANCE.getImage("full/wizban/NewAsignaturas")));
 	}
 
 	/**
@@ -258,7 +258,7 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 							resource.save(options);
 						}
 						catch (Exception exception) {
-							AsignaturasEditorPlugin.INSTANCE.log(exception);
+							ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 						}
 						finally {
 							progressMonitor.done();
@@ -292,14 +292,14 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 					 workbench.getEditorRegistry().getDefaultEditor(modelFile.getFullPath().toString()).getId());					 	 
 			}
 			catch (PartInitException exception) {
-				MessageDialog.openError(workbenchWindow.getShell(), AsignaturasEditorPlugin.INSTANCE.getString("_UI_OpenEditorError_label"), exception.getMessage());
+				MessageDialog.openError(workbenchWindow.getShell(), ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_OpenEditorError_label"), exception.getMessage());
 				return false;
 			}
 
 			return true;
 		}
 		catch (Exception exception) {
-			AsignaturasEditorPlugin.INSTANCE.log(exception);
+			ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 			return false;
 		}
 	}
@@ -333,7 +333,7 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 				String extension = new Path(getFileName()).getFileExtension();
 				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
 					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
-					setErrorMessage(AsignaturasEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
+					setErrorMessage(ModelgeneratorEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
 				}
 				return true;
@@ -411,7 +411,7 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 
 			Label containerLabel = new Label(composite, SWT.LEFT);
 			{
-				containerLabel.setText(AsignaturasEditorPlugin.INSTANCE.getString("_UI_ModelObject"));
+				containerLabel.setText(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_ModelObject"));
 
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
@@ -437,7 +437,7 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 
 			Label encodingLabel = new Label(composite, SWT.LEFT);
 			{
-				encodingLabel.setText(AsignaturasEditorPlugin.INSTANCE.getString("_UI_XMLEncoding"));
+				encodingLabel.setText(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_XMLEncoding"));
 
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
@@ -537,10 +537,10 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 		 */
 		protected String getLabel(String typeName) {
 			try {
-				return AsignaturasEditPlugin.INSTANCE.getString("_UI_" + typeName + "_type");
+				return ModelgeneratorEditPlugin.INSTANCE.getString("_UI_" + typeName + "_type");
 			}
 			catch(MissingResourceException mre) {
-				AsignaturasEditorPlugin.INSTANCE.log(mre);
+				ModelgeneratorEditorPlugin.INSTANCE.log(mre);
 			}
 			return typeName;
 		}
@@ -553,7 +553,7 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 		protected Collection<String> getEncodings() {
 			if (encodings == null) {
 				encodings = new ArrayList<String>();
-				for (StringTokenizer stringTokenizer = new StringTokenizer(AsignaturasEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
+				for (StringTokenizer stringTokenizer = new StringTokenizer(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
 					encodings.add(stringTokenizer.nextToken());
 				}
 			}
@@ -572,9 +572,9 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 		// Create a page, set the title, and the initial model file name.
 		//
 		newFileCreationPage = new AsignaturasModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(AsignaturasEditorPlugin.INSTANCE.getString("_UI_AsignaturasModelWizard_label"));
-		newFileCreationPage.setDescription(AsignaturasEditorPlugin.INSTANCE.getString("_UI_AsignaturasModelWizard_description"));
-		newFileCreationPage.setFileName(AsignaturasEditorPlugin.INSTANCE.getString("_UI_AsignaturasEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
+		newFileCreationPage.setTitle(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_AsignaturasModelWizard_label"));
+		newFileCreationPage.setDescription(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_AsignaturasModelWizard_description"));
+		newFileCreationPage.setFileName(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_AsignaturasEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -600,7 +600,7 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = AsignaturasEditorPlugin.INSTANCE.getString("_UI_AsignaturasEditorFilenameDefaultBase");
+					String defaultModelBaseFilename = ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_AsignaturasEditorFilenameDefaultBase");
 					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
@@ -611,8 +611,8 @@ public class AsignaturasModelWizard extends Wizard implements INewWizard {
 			}
 		}
 		initialObjectCreationPage = new AsignaturasModelWizardInitialObjectCreationPage("Whatever2");
-		initialObjectCreationPage.setTitle(AsignaturasEditorPlugin.INSTANCE.getString("_UI_AsignaturasModelWizard_label"));
-		initialObjectCreationPage.setDescription(AsignaturasEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
+		initialObjectCreationPage.setTitle(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_AsignaturasModelWizard_label"));
+		initialObjectCreationPage.setDescription(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
 		addPage(initialObjectCreationPage);
 	}
 

@@ -157,6 +157,8 @@ import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import asignaturas.provider.AsignaturasItemProviderAdapterFactory;
 
+import Estudiantes.provider.EstudiantesItemProviderAdapterFactory;
+import Workspace.provider.WorkspaceItemProviderAdapterFactory;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 
@@ -541,7 +543,7 @@ public class AsignaturasEditor
 					}
 				}
 				catch (CoreException exception) {
-					AsignaturasEditorPlugin.INSTANCE.log(exception);
+					ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		};
@@ -658,7 +660,7 @@ public class AsignaturasEditor
 					showTabs();
 				}
 				catch (PartInitException exception) {
-					AsignaturasEditorPlugin.INSTANCE.log(exception);
+					ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 
@@ -667,7 +669,7 @@ public class AsignaturasEditor
 					markerHelper.updateMarkers(diagnostic);
 				}
 				catch (CoreException exception) {
-					AsignaturasEditorPlugin.INSTANCE.log(exception);
+					ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		}
@@ -711,6 +713,8 @@ public class AsignaturasEditor
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new AsignaturasItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new EstudiantesItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new WorkspaceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.
@@ -1546,7 +1550,7 @@ public class AsignaturasEditor
 		catch (Exception exception) {
 			// Something went wrong that shouldn't.
 			//
-			AsignaturasEditorPlugin.INSTANCE.log(exception);
+			ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 		}
 		updateProblemIndication = true;
 		updateProblemIndication();
@@ -1755,7 +1759,7 @@ public class AsignaturasEditor
 	 * @generated
 	 */
 	private static String getString(String key) {
-		return AsignaturasEditorPlugin.INSTANCE.getString(key);
+		return ModelgeneratorEditorPlugin.INSTANCE.getString(key);
 	}
 
 	/**
@@ -1765,7 +1769,7 @@ public class AsignaturasEditor
 	 * @generated
 	 */
 	private static String getString(String key, Object s1) {
-		return AsignaturasEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
+		return ModelgeneratorEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
 	}
 
 	/**

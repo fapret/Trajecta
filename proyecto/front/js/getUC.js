@@ -1,8 +1,9 @@
 /*
-    tmde-app-curricula is a software that helps students build their curricula and
+    Trajecta is a software that helps students build their curricula and
     see what curricular units they can register to, and track how their career was
-    or will be.
+    or will be. And helps academic managers do different researches.
     Copyright (C) 2023  Santiago Nicolás Díaz Conde, Santiago Freire López
+    Copyright (C) 2025  Santiago Nicolás Díaz Conde
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
+    Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 function printRequirements(data) {
     let res = "";
@@ -46,7 +47,12 @@ const allFacultiesSelect = document.getElementById("facultades");
 const facultyName = allFacultiesSelect.value;
 const allUCSelect = document.getElementById("ucs");
 const uc = allUCSelect.value;
-const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${uc}`;
+const workspaceID = localStorage.getItem('selectedWorkspace');
+if (workspaceID == null) {
+    alert("Please select a workspace");
+    return;
+}
+const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${uc}&uuid=${workspaceID}`;
 fetch(url)
 .then(response => response.json())
 .then(data => {

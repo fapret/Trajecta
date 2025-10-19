@@ -61,14 +61,14 @@ public class CoursedImpl extends RequirementImpl implements Coursed {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CurricularUnit getCurricularUnit() {
 		if (curricularUnit != null && curricularUnit.eIsProxy()) {
-			InternalEObject oldCurricularUnit = (InternalEObject) curricularUnit;
-			curricularUnit = (CurricularUnit) eResolveProxy(oldCurricularUnit);
+			InternalEObject oldCurricularUnit = (InternalEObject)curricularUnit;
+			curricularUnit = (CurricularUnit)eResolveProxy(oldCurricularUnit);
 			if (curricularUnit != oldCurricularUnit) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							AsignaturasPackage.COURSED__CURRICULAR_UNIT, oldCurricularUnit, curricularUnit));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AsignaturasPackage.COURSED__CURRICULAR_UNIT, oldCurricularUnit, curricularUnit));
 			}
 		}
 		return curricularUnit;
@@ -88,12 +88,12 @@ public class CoursedImpl extends RequirementImpl implements Coursed {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCurricularUnit(CurricularUnit newCurricularUnit) {
 		CurricularUnit oldCurricularUnit = curricularUnit;
 		curricularUnit = newCurricularUnit;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.COURSED__CURRICULAR_UNIT,
-					oldCurricularUnit, curricularUnit));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.COURSED__CURRICULAR_UNIT, oldCurricularUnit, curricularUnit));
 	}
 
 	/**
@@ -104,10 +104,9 @@ public class CoursedImpl extends RequirementImpl implements Coursed {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSED__CURRICULAR_UNIT:
-			if (resolve)
-				return getCurricularUnit();
-			return basicGetCurricularUnit();
+			case AsignaturasPackage.COURSED__CURRICULAR_UNIT:
+				if (resolve) return getCurricularUnit();
+				return basicGetCurricularUnit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,9 +119,9 @@ public class CoursedImpl extends RequirementImpl implements Coursed {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSED__CURRICULAR_UNIT:
-			setCurricularUnit((CurricularUnit) newValue);
-			return;
+			case AsignaturasPackage.COURSED__CURRICULAR_UNIT:
+				setCurricularUnit((CurricularUnit)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -135,9 +134,9 @@ public class CoursedImpl extends RequirementImpl implements Coursed {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSED__CURRICULAR_UNIT:
-			setCurricularUnit((CurricularUnit) null);
-			return;
+			case AsignaturasPackage.COURSED__CURRICULAR_UNIT:
+				setCurricularUnit((CurricularUnit)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -150,8 +149,8 @@ public class CoursedImpl extends RequirementImpl implements Coursed {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.COURSED__CURRICULAR_UNIT:
-			return curricularUnit != null;
+			case AsignaturasPackage.COURSED__CURRICULAR_UNIT:
+				return curricularUnit != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
   <script src="lang/lang.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <link rel="stylesheet" href="./css/consulta.css">
   <title>TMDE Project</title>
   <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -31,6 +33,9 @@
     </a>
   </div>
   <div class="center" id="center">
+    <div id="workspace-container">
+      <select id="workspaceSelector" placeholder="Select a workspace..."></select>
+    </div>
   </div>
   <div class="end" id="end">
     <div class="lang-switcher">
@@ -384,5 +389,6 @@
   </div>
 
   <script src="./js/leftnav.js"></script>
+  <script src="./js/workspaceSelector.js"></script>
   <script src="./js/discoverLogExec.js"></script>
 </body>

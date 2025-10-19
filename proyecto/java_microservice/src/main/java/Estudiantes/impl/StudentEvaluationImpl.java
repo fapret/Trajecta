@@ -84,6 +84,7 @@ public class StudentEvaluationImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getGrade() {
 		return grade;
 	}
@@ -93,12 +94,12 @@ public class StudentEvaluationImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGrade(int newGrade) {
 		int oldGrade = grade;
 		grade = newGrade;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.STUDENT_EVALUATION__GRADE,
-					oldGrade, grade));
+			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.STUDENT_EVALUATION__GRADE, oldGrade, grade));
 	}
 
 	/**
@@ -106,14 +107,14 @@ public class StudentEvaluationImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Evaluation getEvaluation() {
 		if (evaluation != null && evaluation.eIsProxy()) {
-			InternalEObject oldEvaluation = (InternalEObject) evaluation;
-			evaluation = (Evaluation) eResolveProxy(oldEvaluation);
+			InternalEObject oldEvaluation = (InternalEObject)evaluation;
+			evaluation = (Evaluation)eResolveProxy(oldEvaluation);
 			if (evaluation != oldEvaluation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							EstudiantesPackage.STUDENT_EVALUATION__EVALUATION, oldEvaluation, evaluation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EstudiantesPackage.STUDENT_EVALUATION__EVALUATION, oldEvaluation, evaluation));
 			}
 		}
 		return evaluation;
@@ -133,12 +134,12 @@ public class StudentEvaluationImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEvaluation(Evaluation newEvaluation) {
 		Evaluation oldEvaluation = evaluation;
 		evaluation = newEvaluation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.STUDENT_EVALUATION__EVALUATION,
-					oldEvaluation, evaluation));
+			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.STUDENT_EVALUATION__EVALUATION, oldEvaluation, evaluation));
 	}
 
 	/**
@@ -149,12 +150,11 @@ public class StudentEvaluationImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EstudiantesPackage.STUDENT_EVALUATION__GRADE:
-			return getGrade();
-		case EstudiantesPackage.STUDENT_EVALUATION__EVALUATION:
-			if (resolve)
-				return getEvaluation();
-			return basicGetEvaluation();
+			case EstudiantesPackage.STUDENT_EVALUATION__GRADE:
+				return getGrade();
+			case EstudiantesPackage.STUDENT_EVALUATION__EVALUATION:
+				if (resolve) return getEvaluation();
+				return basicGetEvaluation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -167,12 +167,12 @@ public class StudentEvaluationImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EstudiantesPackage.STUDENT_EVALUATION__GRADE:
-			setGrade((Integer) newValue);
-			return;
-		case EstudiantesPackage.STUDENT_EVALUATION__EVALUATION:
-			setEvaluation((Evaluation) newValue);
-			return;
+			case EstudiantesPackage.STUDENT_EVALUATION__GRADE:
+				setGrade((Integer)newValue);
+				return;
+			case EstudiantesPackage.STUDENT_EVALUATION__EVALUATION:
+				setEvaluation((Evaluation)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -185,12 +185,12 @@ public class StudentEvaluationImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.STUDENT_EVALUATION__GRADE:
-			setGrade(GRADE_EDEFAULT);
-			return;
-		case EstudiantesPackage.STUDENT_EVALUATION__EVALUATION:
-			setEvaluation((Evaluation) null);
-			return;
+			case EstudiantesPackage.STUDENT_EVALUATION__GRADE:
+				setGrade(GRADE_EDEFAULT);
+				return;
+			case EstudiantesPackage.STUDENT_EVALUATION__EVALUATION:
+				setEvaluation((Evaluation)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -203,10 +203,10 @@ public class StudentEvaluationImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.STUDENT_EVALUATION__GRADE:
-			return grade != GRADE_EDEFAULT;
-		case EstudiantesPackage.STUDENT_EVALUATION__EVALUATION:
-			return evaluation != null;
+			case EstudiantesPackage.STUDENT_EVALUATION__GRADE:
+				return grade != GRADE_EDEFAULT;
+			case EstudiantesPackage.STUDENT_EVALUATION__EVALUATION:
+				return evaluation != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -218,8 +218,7 @@ public class StudentEvaluationImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (grade: ");

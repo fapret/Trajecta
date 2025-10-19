@@ -2,6 +2,7 @@
  */
 package Estudiantes.presentation;
 
+import asignaturas.presentation.ModelgeneratorEditorPlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -71,14 +72,14 @@ public class EstudiantesActionBarContributor
 	 * @generated
 	 */
 	protected IAction showPropertiesViewAction =
-		new Action(EstudianteEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
+		new Action(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
 			@Override
 			public void run() {
 				try {
 					getPage().showView("org.eclipse.ui.views.PropertySheet");
 				}
 				catch (PartInitException exception) {
-					EstudianteEditorPlugin.INSTANCE.log(exception);
+					ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		};
@@ -91,7 +92,7 @@ public class EstudiantesActionBarContributor
 	 * @generated
 	 */
 	protected IAction refreshViewerAction =
-		new Action(EstudianteEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
+		new Action(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
 			@Override
 			public boolean isEnabled() {
 				return activeEditorPart instanceof IViewerProvider;
@@ -179,7 +180,7 @@ public class EstudiantesActionBarContributor
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(EstudianteEditorPlugin.INSTANCE.getString("_UI_EstudiantesEditor_menu"), "EstudiantesMenuID");
+		IMenuManager submenuManager = new MenuManager(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_EstudiantesEditor_menu"), "EstudiantesMenuID");
 		menuManager.insertAfter("additions", submenuManager);
 		submenuManager.add(new Separator("settings"));
 		submenuManager.add(new Separator("actions"));
@@ -188,12 +189,12 @@ public class EstudiantesActionBarContributor
 
 		// Prepare for CreateChild item addition or removal.
 		//
-		createChildMenuManager = new MenuManager(EstudianteEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
+		createChildMenuManager = new MenuManager(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
 		submenuManager.insertBefore("additions", createChildMenuManager);
 
 		// Prepare for CreateSibling item addition or removal.
 		//
-		createSiblingMenuManager = new MenuManager(EstudianteEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
+		createSiblingMenuManager = new MenuManager(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
 		submenuManager.insertBefore("additions", createSiblingMenuManager);
 
 		// Force an update because Eclipse hides empty menus now.
@@ -386,11 +387,11 @@ public class EstudiantesActionBarContributor
 		super.menuAboutToShow(menuManager);
 		MenuManager submenuManager = null;
 
-		submenuManager = new MenuManager(EstudianteEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
+		submenuManager = new MenuManager(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
 		populateManager(submenuManager, createChildActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 
-		submenuManager = new MenuManager(EstudianteEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
+		submenuManager = new MenuManager(ModelgeneratorEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
 		populateManager(submenuManager, createSiblingActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 	}

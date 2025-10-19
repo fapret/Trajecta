@@ -91,6 +91,7 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -100,6 +101,7 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -112,10 +114,10 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Plan> getPlan() {
 		if (plan == null) {
-			plan = new EObjectContainmentWithInverseEList<Plan>(Plan.class, this, AsignaturasPackage.CAREER__PLAN,
-					AsignaturasPackage.PLAN__CAREER_PARENT);
+			plan = new EObjectContainmentWithInverseEList<Plan>(Plan.class, this, AsignaturasPackage.CAREER__PLAN, AsignaturasPackage.PLAN__CAREER_PARENT);
 		}
 		return plan;
 	}
@@ -129,8 +131,8 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.CAREER__PLAN:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getPlan()).basicAdd(otherEnd, msgs);
+			case AsignaturasPackage.CAREER__PLAN:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPlan()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -143,8 +145,8 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.CAREER__PLAN:
-			return ((InternalEList<?>) getPlan()).basicRemove(otherEnd, msgs);
+			case AsignaturasPackage.CAREER__PLAN:
+				return ((InternalEList<?>)getPlan()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -157,10 +159,10 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.CAREER__NAME:
-			return getName();
-		case AsignaturasPackage.CAREER__PLAN:
-			return getPlan();
+			case AsignaturasPackage.CAREER__NAME:
+				return getName();
+			case AsignaturasPackage.CAREER__PLAN:
+				return getPlan();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -174,13 +176,13 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.CAREER__NAME:
-			setName((String) newValue);
-			return;
-		case AsignaturasPackage.CAREER__PLAN:
-			getPlan().clear();
-			getPlan().addAll((Collection<? extends Plan>) newValue);
-			return;
+			case AsignaturasPackage.CAREER__NAME:
+				setName((String)newValue);
+				return;
+			case AsignaturasPackage.CAREER__PLAN:
+				getPlan().clear();
+				getPlan().addAll((Collection<? extends Plan>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -193,12 +195,12 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.CAREER__NAME:
-			setName(NAME_EDEFAULT);
-			return;
-		case AsignaturasPackage.CAREER__PLAN:
-			getPlan().clear();
-			return;
+			case AsignaturasPackage.CAREER__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case AsignaturasPackage.CAREER__PLAN:
+				getPlan().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -211,10 +213,10 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.CAREER__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-		case AsignaturasPackage.CAREER__PLAN:
-			return plan != null && !plan.isEmpty();
+			case AsignaturasPackage.CAREER__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case AsignaturasPackage.CAREER__PLAN:
+				return plan != null && !plan.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -226,8 +228,7 @@ public class CareerImpl extends MinimalEObjectImpl.Container implements Career {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (Name: ");

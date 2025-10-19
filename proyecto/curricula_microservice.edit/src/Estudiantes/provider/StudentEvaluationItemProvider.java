@@ -6,6 +6,7 @@ package Estudiantes.provider;
 import Estudiantes.EstudiantesPackage;
 import Estudiantes.StudentEvaluation;
 
+import asignaturas.provider.ModelgeneratorEditPlugin;
 import java.util.Collection;
 import java.util.List;
 
@@ -173,7 +174,7 @@ public class StudentEvaluationItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return EstudianteEditPlugin.INSTANCE;
+		return ModelgeneratorEditPlugin.INSTANCE;
 	}
 
 }

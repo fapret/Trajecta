@@ -22,4 +22,12 @@
             genModel="src/estudiantes.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated modelgenerator -->
+      <package
+            uri="WorkspaceURI"
+            class="Workspace.WorkspacePackage"
+            genModel="src/modelgenerator.genmodel"/>
+   </extension>
+
 </plugin>

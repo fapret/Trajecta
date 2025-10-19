@@ -54,7 +54,7 @@ public class AsignaturasAdapterFactory extends AdapterFactoryImpl {
 			return true;
 		}
 		if (object instanceof EObject) {
-			return ((EObject) object).eClass().getEPackage() == modelPackage;
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
@@ -65,122 +65,101 @@ public class AsignaturasAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AsignaturasSwitch<Adapter> modelSwitch = new AsignaturasSwitch<Adapter>() {
-		@Override
-		public Adapter caseRoot(Root object) {
-			return createRootAdapter();
-		}
-
-		@Override
-		public Adapter caseCareer(Career object) {
-			return createCareerAdapter();
-		}
-
-		@Override
-		public Adapter caseCreditsPlan(CreditsPlan object) {
-			return createCreditsPlanAdapter();
-		}
-
-		@Override
-		public Adapter caseFaculty(Faculty object) {
-			return createFacultyAdapter();
-		}
-
-		@Override
-		public Adapter casePlan(Plan object) {
-			return createPlanAdapter();
-		}
-
-		@Override
-		public Adapter caseSubject(Subject object) {
-			return createSubjectAdapter();
-		}
-
-		@Override
-		public Adapter caseCurricularUnit(CurricularUnit object) {
-			return createCurricularUnitAdapter();
-		}
-
-		@Override
-		public Adapter caseSomeOf(SomeOf object) {
-			return createSomeOfAdapter();
-		}
-
-		@Override
-		public Adapter caseRequirement(Requirement object) {
-			return createRequirementAdapter();
-		}
-
-		@Override
-		public Adapter caseNOT(NOT object) {
-			return createNOTAdapter();
-		}
-
-		@Override
-		public Adapter caseCoursed(Coursed object) {
-			return createCoursedAdapter();
-		}
-
-		@Override
-		public Adapter caseExam(Exam object) {
-			return createExamAdapter();
-		}
-
-		@Override
-		public Adapter caseCreditsOnPlan(CreditsOnPlan object) {
-			return createCreditsOnPlanAdapter();
-		}
-
-		@Override
-		public Adapter caseCreditsOnSubject(CreditsOnSubject object) {
-			return createCreditsOnSubjectAdapter();
-		}
-
-		@Override
-		public Adapter caseSubjectPlan(SubjectPlan object) {
-			return createSubjectPlanAdapter();
-		}
-
-		@Override
-		public Adapter caseRegisteredTo(RegisteredTo object) {
-			return createRegisteredToAdapter();
-		}
-
-		@Override
-		public Adapter caseCourse(Course object) {
-			return createCourseAdapter();
-		}
-
-		@Override
-		public Adapter caseEvaluation(Evaluation object) {
-			return createEvaluationAdapter();
-		}
-
-		@Override
-		public Adapter caseExamEvaluation(ExamEvaluation object) {
-			return createExamEvaluationAdapter();
-		}
-
-		@Override
-		public Adapter caseEvaluacionExamen(EvaluacionExamen object) {
-			return createEvaluacionExamenAdapter();
-		}
-
-		@Override
-		public Adapter caseCourseEvaluation(CourseEvaluation object) {
-			return createCourseEvaluationAdapter();
-		}
-
-		@Override
-		public Adapter casePartialEvaluation(PartialEvaluation object) {
-			return createPartialEvaluationAdapter();
-		}
-
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+	protected AsignaturasSwitch<Adapter> modelSwitch =
+		new AsignaturasSwitch<Adapter>() {
+			@Override
+			public Adapter caseRoot(Root object) {
+				return createRootAdapter();
+			}
+			@Override
+			public Adapter caseCareer(Career object) {
+				return createCareerAdapter();
+			}
+			@Override
+			public Adapter caseCreditsPlan(CreditsPlan object) {
+				return createCreditsPlanAdapter();
+			}
+			@Override
+			public Adapter caseFaculty(Faculty object) {
+				return createFacultyAdapter();
+			}
+			@Override
+			public Adapter casePlan(Plan object) {
+				return createPlanAdapter();
+			}
+			@Override
+			public Adapter caseSubject(Subject object) {
+				return createSubjectAdapter();
+			}
+			@Override
+			public Adapter caseCurricularUnit(CurricularUnit object) {
+				return createCurricularUnitAdapter();
+			}
+			@Override
+			public Adapter caseSomeOf(SomeOf object) {
+				return createSomeOfAdapter();
+			}
+			@Override
+			public Adapter caseRequirement(Requirement object) {
+				return createRequirementAdapter();
+			}
+			@Override
+			public Adapter caseNOT(NOT object) {
+				return createNOTAdapter();
+			}
+			@Override
+			public Adapter caseCoursed(Coursed object) {
+				return createCoursedAdapter();
+			}
+			@Override
+			public Adapter caseExam(Exam object) {
+				return createExamAdapter();
+			}
+			@Override
+			public Adapter caseCreditsOnPlan(CreditsOnPlan object) {
+				return createCreditsOnPlanAdapter();
+			}
+			@Override
+			public Adapter caseCreditsOnSubject(CreditsOnSubject object) {
+				return createCreditsOnSubjectAdapter();
+			}
+			@Override
+			public Adapter caseSubjectPlan(SubjectPlan object) {
+				return createSubjectPlanAdapter();
+			}
+			@Override
+			public Adapter caseRegisteredTo(RegisteredTo object) {
+				return createRegisteredToAdapter();
+			}
+			@Override
+			public Adapter caseCourse(Course object) {
+				return createCourseAdapter();
+			}
+			@Override
+			public Adapter caseEvaluation(Evaluation object) {
+				return createEvaluationAdapter();
+			}
+			@Override
+			public Adapter caseExamEvaluation(ExamEvaluation object) {
+				return createExamEvaluationAdapter();
+			}
+			@Override
+			public Adapter caseEvaluacionExamen(EvaluacionExamen object) {
+				return createEvaluacionExamenAdapter();
+			}
+			@Override
+			public Adapter caseCourseEvaluation(CourseEvaluation object) {
+				return createCourseEvaluationAdapter();
+			}
+			@Override
+			public Adapter casePartialEvaluation(PartialEvaluation object) {
+				return createPartialEvaluationAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -192,8 +171,9 @@ public class AsignaturasAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject) target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
+
 
 	/**
 	 * Creates a new adapter for an object of class '{@link asignaturas.Root <em>Root</em>}'.

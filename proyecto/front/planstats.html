@@ -10,6 +10,8 @@
   <script type="text/javascript" src="js/selectLib.js"></script>
   <script type="text/javascript" src="js/getPlanStats.js"></script>
   <script src="lang/lang.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <!-- Charts -->
   <script src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -35,6 +37,9 @@
     </a>
   </div>
   <div class="center" id="center">
+    <div id="workspace-container">
+      <select id="workspaceSelector" placeholder="Select a workspace..."></select>
+    </div>
   </div>
   <div class="end" id="end">
     <div class="lang-switcher">
@@ -413,4 +418,5 @@
 
   <script src="./js/getPlanStatsExec.js"></script>
   <script src="./js/leftnav.js"></script>
+  <script src="./js/workspaceSelector.js"></script>
 </body>

@@ -7,6 +7,7 @@ import Estudiantes.EstudiantesFactory;
 import Estudiantes.EstudiantesPackage;
 import Estudiantes.Root;
 
+import asignaturas.provider.ModelgeneratorEditPlugin;
 import java.util.Collection;
 import java.util.List;
 
@@ -162,7 +163,7 @@ public class RootItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return EstudianteEditPlugin.INSTANCE;
+		return ModelgeneratorEditPlugin.INSTANCE;
 	}
 
 }

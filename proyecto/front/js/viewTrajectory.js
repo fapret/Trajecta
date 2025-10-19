@@ -3,6 +3,7 @@
     see what curricular units they can register to, and track how their career was
     or will be.
     Copyright (C) 2023  Santiago Nicolás Díaz Conde, Santiago Freire López
+    Copyright (C) 2025  Santiago Nicolás Díaz Conde
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +28,11 @@ function mostrar_trayectoria() {
     const facultyName = allFacultiesSelect.value;
     const career = allCareersSelect.value;
     const plan = allPlansSelect.value;
-    const model_file = document.getElementById("file").files[0];
+    const workspaceID = localStorage.getItem('selectedWorkspace');
+    if (workspaceID == null) {
+        alert("Please select a workspace");
+        return;
+    }
 
     var nodos = [];
     var nodos_0 = [];
@@ -40,8 +45,11 @@ function mostrar_trayectoria() {
     formData.append('faculty', facultyName);
     formData.append('career', career);
     formData.append('plan', plan);
-    formData.append('file', model_file, 'student.xmi');
+    formData.append('uuid', workspaceID);
     formData.append('valid_flag', 'true');
+    if(document.getElementById("ci").value != undefined){
+        formData.append('id', document.getElementById("ci").value);
+    }
 
     // Configurar las opciones de la solicitud
     var options = {
@@ -92,7 +100,7 @@ function mostrar_trayectoria() {
             }
 
             for (let i = 0; i < materias.length; i++) {
-                let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=` + materias[i];
+                let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&uuid=${workspaceID}&curricularUnit=` + materias[i];
                 fetch(apiUrl)
                     .then(response => {
                         if (!response.ok) {
@@ -143,7 +151,7 @@ function mostrar_trayectoria() {
                         if (i === materias.length-1) {
                             // Realiza la segunda solicitud AJAX con formDataCopy
                             var xhr2 = new XMLHttpRequest();
-                            xhr2.open('POST', 'https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/evaluations', true);
+                            xhr2.open('POST', `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/evaluations?uuid=${workspaceID}`, true);
                             xhr2.onload = async function () {
                                 if (xhr2.status >= 200 && xhr2.status < 300) {
                                     // Procesa la respuesta de la segunda solicitud aquí
@@ -272,7 +280,12 @@ async function getMaxRequirementLevel(facultyName, cu_id) {
       if (fetchCacheUC.has(cacheKey)) {
         data = fetchCacheUC.get(cacheKey);
       } else {
-        let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}`;
+        const workspaceID = localStorage.getItem('selectedWorkspace');
+        if (workspaceID == null) {
+            alert("Invalid workspace");
+            return 0;
+        }
+        let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}&uuid=${workspaceID}`;
         const response = await fetch(apiUrl);
   
         if (!response.ok) {

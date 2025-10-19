@@ -143,7 +143,7 @@ public class EvaluationItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return AsignaturasEditPlugin.INSTANCE;
+		return ModelgeneratorEditPlugin.INSTANCE;
 	}
 
 }

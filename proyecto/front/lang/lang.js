@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const translations = {
   es: {
+    //Warning: Default language is spanish, due to this, some translations in spanish arent here, as are shown as default, a TO DO work, is add them here
     welcome: "¡Bienvenido a Trajecta!",
     selectOption: "Seleccione una opción del menú de la izquierda para comenzar.",
     createModel: "Crear/Expandir Modelo",
@@ -68,7 +69,7 @@ const translations = {
     baseModel: "Modelo Base (Opcional):",
     name: "Nombre:",
     ID: "CI:",
-    downloadStudent: "Descargar Modelo Estudiante",
+    downloadStudent: "Crear Estudiante",
     evalPrev: "Evaluar previas",
     selectSubject: "Consultar Materia",
     seeCurricula: "Ver currícula",
@@ -132,6 +133,11 @@ const translations = {
     course: "Course:",
     eval: "Evaluation:",
     uc: "Curricular Unit:",
+    ucs: "Curricular Units:",
+    subject: "Subject:",
+    subjects: "Subjects:",
+    type: "Type:",
+    neededCredits: "Credits need:",
     evalType: "Evaluation Type:",
     courseOpt: "Course",
     examOpt: "Exam",
@@ -143,7 +149,8 @@ const translations = {
     baseModel: "Base Model (Optional):",
     name: "Name:",
     ID: "ID:",
-    downloadStudent: "Download Student Model",
+    note: "Note:",
+    downloadStudent: "Create Student",
     evalPrev: "Evaluate previatures",
     selectSubject: "Select Subject",
     seeCurricula: "See Curriculum",

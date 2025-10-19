@@ -20,11 +20,14 @@
 	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 function get_log() {
-    const model_file = document.getElementById("file").files[0];
-
     const url = `https://tmde-api.fapret.com:8443/curricula_microservice/GetStudentsLog`;
     var formData = new FormData();
-    formData.append('file', model_file);
+    const workspaceID = localStorage.getItem('selectedWorkspace');
+    if (workspaceID == null) {
+        alert("Please select a workspace");
+        return;
+    }
+    formData.append('uuid', workspaceID);
 
     // Configurar las opciones de la solicitud
     var options = {
@@ -40,25 +43,6 @@ function get_log() {
             resultadoDiv.style.display = "block";
 
             resultadoDiv.innerHTML = "Log obtenido.";
-
-            var blob = new Blob([data], { type: 'text/plain' });
-
-            // Create a link element
-            var link = document.createElement('a');
-
-            // Set the download attribute and href for the link
-            link.download = 'StudentsLog.csv';
-            link.href = window.URL.createObjectURL(blob);
-
-            // Append the link to the body
-            document.body.appendChild(link);
-
-            // Trigger a click on the link to start the download
-            link.click();
-
-            // Remove the link from the DOM
-            document.body.removeChild(link);
-
         })
         .catch(error => {
             console.error("Error al consultar la API:", error);

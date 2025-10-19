@@ -29,7 +29,11 @@ function inscribir_plan() {
     const career = allCareersSelect.value;
     const plan = allPlansSelect.value;
     const date = document.getElementById("date").value;
-    const model_file = document.getElementById("file").files[0];
+    const workspaceID = localStorage.getItem('selectedWorkspace');
+	if(workspaceID == null){
+		alert("Please select a workspace");
+		return;
+	}
 
     const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Estudiante/AddPlan`;
     var formData = new FormData();
@@ -37,7 +41,7 @@ function inscribir_plan() {
     formData.append('career', career);
     formData.append('plan', plan);
     formData.append('date', date);
-    formData.append('file', model_file);
+    formData.append('uuid', workspaceID);
 
     if(document.getElementById("ci").value != undefined){
         formData.append('id', document.getElementById("ci").value);
@@ -61,25 +65,6 @@ function inscribir_plan() {
             }
 
             resultadoDiv.innerHTML = "Inscripto exitosamente.";
-
-            var blob = new Blob([data], { type: 'text/plain' });
-
-            // Create a link element
-            var link = document.createElement('a');
-
-            // Set the download attribute and href for the link
-            link.download = 'model.xmi';
-            link.href = window.URL.createObjectURL(blob);
-
-            // Append the link to the body
-            document.body.appendChild(link);
-
-            // Trigger a click on the link to start the download
-            link.click();
-
-            // Remove the link from the DOM
-            document.body.removeChild(link);
-
         })
         .catch(error => {
             console.error("Error al consultar la API:", error);

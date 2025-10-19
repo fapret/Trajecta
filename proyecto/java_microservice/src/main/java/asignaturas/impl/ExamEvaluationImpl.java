@@ -54,10 +54,10 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CurricularUnit getCurricularunit() {
-		if (eContainerFeatureID() != AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT)
-			return null;
-		return (CurricularUnit) eInternalContainer();
+		if (eContainerFeatureID() != AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT) return null;
+		return (CurricularUnit)eInternalContainer();
 	}
 
 	/**
@@ -66,8 +66,7 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	 * @generated
 	 */
 	public NotificationChain basicSetCurricularunit(CurricularUnit newCurricularunit, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newCurricularunit,
-				AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newCurricularunit, AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT, msgs);
 		return msgs;
 	}
 
@@ -76,24 +75,21 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCurricularunit(CurricularUnit newCurricularunit) {
-		if (newCurricularunit != eInternalContainer()
-				|| (eContainerFeatureID() != AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT
-						&& newCurricularunit != null)) {
+		if (newCurricularunit != eInternalContainer() || (eContainerFeatureID() != AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT && newCurricularunit != null)) {
 			if (EcoreUtil.isAncestor(this, newCurricularunit))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newCurricularunit != null)
-				msgs = ((InternalEObject) newCurricularunit).eInverseAdd(this,
-						AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION, CurricularUnit.class, msgs);
+				msgs = ((InternalEObject)newCurricularunit).eInverseAdd(this, AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION, CurricularUnit.class, msgs);
 			msgs = basicSetCurricularunit(newCurricularunit, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT,
-					newCurricularunit, newCurricularunit));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT, newCurricularunit, newCurricularunit));
 	}
 
 	/**
@@ -104,10 +100,10 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetCurricularunit((CurricularUnit) otherEnd, msgs);
+			case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetCurricularunit((CurricularUnit)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -120,8 +116,8 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			return basicSetCurricularunit(null, msgs);
+			case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
+				return basicSetCurricularunit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -134,9 +130,8 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			return eInternalContainer().eInverseRemove(this, AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION,
-					CurricularUnit.class, msgs);
+			case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
+				return eInternalContainer().eInverseRemove(this, AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION, CurricularUnit.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -149,8 +144,8 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			return getCurricularunit();
+			case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
+				return getCurricularunit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -163,9 +158,9 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			setCurricularunit((CurricularUnit) newValue);
-			return;
+			case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
+				setCurricularunit((CurricularUnit)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -178,9 +173,9 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			setCurricularunit((CurricularUnit) null);
-			return;
+			case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
+				setCurricularunit((CurricularUnit)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -193,8 +188,8 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			return getCurricularunit() != null;
+			case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
+				return getCurricularunit() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -163,7 +163,7 @@ public class PlanItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return AsignaturasEditPlugin.INSTANCE;
+		return ModelgeneratorEditPlugin.INSTANCE;
 	}
 
 }

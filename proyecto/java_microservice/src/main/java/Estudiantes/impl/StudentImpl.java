@@ -112,6 +112,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -121,6 +122,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -133,6 +135,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -142,6 +145,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -154,10 +158,10 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PlanInscription> getStudentPlanInscription() {
 		if (studentPlanInscription == null) {
-			studentPlanInscription = new EObjectContainmentEList<PlanInscription>(PlanInscription.class, this,
-					EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION);
+			studentPlanInscription = new EObjectContainmentEList<PlanInscription>(PlanInscription.class, this, EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION);
 		}
 		return studentPlanInscription;
 	}
@@ -170,8 +174,8 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
-			return ((InternalEList<?>) getStudentPlanInscription()).basicRemove(otherEnd, msgs);
+			case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
+				return ((InternalEList<?>)getStudentPlanInscription()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -184,12 +188,12 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EstudiantesPackage.STUDENT__ID:
-			return getId();
-		case EstudiantesPackage.STUDENT__NAME:
-			return getName();
-		case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
-			return getStudentPlanInscription();
+			case EstudiantesPackage.STUDENT__ID:
+				return getId();
+			case EstudiantesPackage.STUDENT__NAME:
+				return getName();
+			case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
+				return getStudentPlanInscription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -203,16 +207,16 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EstudiantesPackage.STUDENT__ID:
-			setId((String) newValue);
-			return;
-		case EstudiantesPackage.STUDENT__NAME:
-			setName((String) newValue);
-			return;
-		case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
-			getStudentPlanInscription().clear();
-			getStudentPlanInscription().addAll((Collection<? extends PlanInscription>) newValue);
-			return;
+			case EstudiantesPackage.STUDENT__ID:
+				setId((String)newValue);
+				return;
+			case EstudiantesPackage.STUDENT__NAME:
+				setName((String)newValue);
+				return;
+			case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
+				getStudentPlanInscription().clear();
+				getStudentPlanInscription().addAll((Collection<? extends PlanInscription>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -225,15 +229,15 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.STUDENT__ID:
-			setId(ID_EDEFAULT);
-			return;
-		case EstudiantesPackage.STUDENT__NAME:
-			setName(NAME_EDEFAULT);
-			return;
-		case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
-			getStudentPlanInscription().clear();
-			return;
+			case EstudiantesPackage.STUDENT__ID:
+				setId(ID_EDEFAULT);
+				return;
+			case EstudiantesPackage.STUDENT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
+				getStudentPlanInscription().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -246,12 +250,12 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.STUDENT__ID:
-			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-		case EstudiantesPackage.STUDENT__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-		case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
-			return studentPlanInscription != null && !studentPlanInscription.isEmpty();
+			case EstudiantesPackage.STUDENT__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case EstudiantesPackage.STUDENT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case EstudiantesPackage.STUDENT__STUDENT_PLAN_INSCRIPTION:
+				return studentPlanInscription != null && !studentPlanInscription.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -263,8 +267,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (Id: ");

@@ -1,23 +1,29 @@
 ## Change readme language
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/fapret/tmde-app-curricula/blob/main/README.md)
-[![es](https://img.shields.io/badge/lang-es-orange.svg)](https://github.com/fapret/tmde-app-curricula/blob/main/README.es.md)
 # About the Project
-The **Trajecta** project originated from the Model-Driven Engineering Workshop course, developed using tools like Eclipse, Java, and Ecore. The project was initially created by [@fapret](https://github.com/fapret) and [@sfreirelp](https://github.com/sfreirelp) under the name tmde curricula app, and is licensed under the GPL-3.0 license for public use.
+The **Trajecta** project originated from the Model-Driven Engineering Workshop course from the University of the Republic in Uruguay initially created by [@fapret](https://github.com/fapret) and [@sfreirelp](https://github.com/sfreirelp) under the name tmde curricula app using only Model-Based Systems Engineering (MBSE), and licensed under the GPL-3.0 license for public use. And then continued by Santiago Diaz [@fapret](https://github.com/fapret) as research for the COAL group of the Institute of Computer Engineering from the same University adding its Process Mining (PM) capabilities, extending the app with new functionalities and ehnancing its usability. Developed using tools like Eclipse, Java, Python, Pm4py and Ecore.
 
-The goal of the project is to create an application utilizing Model-Based Systems Engineering (MBSE) to assist students throughout their academic journey, especially by helping them understand which courses they can take, thus providing better guidance and offering a retrospective view of their academic career.
+The goal of the project is to create an application utilizing Model-Based Systems Engineering (MBSE) and Process Mining (PM) to assist students throughout their academic journey, especially by helping them understand which courses they can take, thus providing better guidance and offering a retrospective view of their academic career. And for academic managers, helping them understand, improve and enhance different aspects of the curriculas they work with.
 
-During development, the project focused on how the University of the Republic (UdelaR) operates, specifically the Computer Engineering program, though it is expected to work for other degree programs as well.
+During development, the project focused on how the University of the Republic (UdelaR) operates, specifically the Computer Engineering program, though it is expected to work for other degree programs as well due to the generalization aimed.
 
-You can read the original project report [here](https://github.com/fapret/tmde-app-curricula/blob/main/proyecto/informe_gr04.pdf), and view the presentation with images of the metamodel [here](https://github.com/fapret/tmde-app-curricula/blob/main/proyecto/presentacion_gr04.pdf).
-
-The project is running and can be used at: [https://tmde.fapret.com](https://tmde.fapret.com)
+The project is currently running and can be used at: [https://Trajecta.fapret.com](https://Trajecta.fapret.com)
 
 Execution requirements:
 
-- Eclipse
-- Tomcat
-- Ecore Library
+- Tomcat (Recommended to run WAR files)
 - Java
+- Ecore Library (Only for development, dependencies included in project buildpath)
+- Python
+- Graphviz (Optional, Required to make diagrams for Process Mining Modules)
+
+The next libraries of Python are Required:
+- Pm4Py
+- Flask
+- Flask cors
+
+# International Process Mining Conference
+This application was presented in ICPM 2025, and its corresponding Demo paper its available at documents folder.
 
 # Project Images
 Complete curriculum view  
@@ -31,3 +37,7 @@ Course data query
 
 Check if a course is available to take  
 ![image](https://github.com/user-attachments/assets/185f65b2-75b7-4c29-ba32-d59c3685ec5c)
+
+# Credits
+- Santiago Nicolás Díaz Conde <santiago.nicolas.diaz.conde [at] fing.edu.uy>
+- Santiago Freire López <santiago.freire [at] fing.edu.uy>

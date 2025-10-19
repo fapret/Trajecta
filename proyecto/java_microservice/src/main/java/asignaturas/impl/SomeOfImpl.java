@@ -90,6 +90,7 @@ public class SomeOfImpl extends RequirementImpl implements SomeOf {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getN() {
 		return n;
 	}
@@ -99,6 +100,7 @@ public class SomeOfImpl extends RequirementImpl implements SomeOf {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setN(int newN) {
 		int oldN = n;
 		n = newN;
@@ -111,10 +113,10 @@ public class SomeOfImpl extends RequirementImpl implements SomeOf {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Requirement> getRequirement() {
 		if (requirement == null) {
-			requirement = new EObjectContainmentEList<Requirement>(Requirement.class, this,
-					AsignaturasPackage.SOME_OF__REQUIREMENT);
+			requirement = new EObjectContainmentEList<Requirement>(Requirement.class, this, AsignaturasPackage.SOME_OF__REQUIREMENT);
 		}
 		return requirement;
 	}
@@ -127,8 +129,8 @@ public class SomeOfImpl extends RequirementImpl implements SomeOf {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.SOME_OF__REQUIREMENT:
-			return ((InternalEList<?>) getRequirement()).basicRemove(otherEnd, msgs);
+			case AsignaturasPackage.SOME_OF__REQUIREMENT:
+				return ((InternalEList<?>)getRequirement()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -141,10 +143,10 @@ public class SomeOfImpl extends RequirementImpl implements SomeOf {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.SOME_OF__N:
-			return getN();
-		case AsignaturasPackage.SOME_OF__REQUIREMENT:
-			return getRequirement();
+			case AsignaturasPackage.SOME_OF__N:
+				return getN();
+			case AsignaturasPackage.SOME_OF__REQUIREMENT:
+				return getRequirement();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,13 +160,13 @@ public class SomeOfImpl extends RequirementImpl implements SomeOf {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.SOME_OF__N:
-			setN((Integer) newValue);
-			return;
-		case AsignaturasPackage.SOME_OF__REQUIREMENT:
-			getRequirement().clear();
-			getRequirement().addAll((Collection<? extends Requirement>) newValue);
-			return;
+			case AsignaturasPackage.SOME_OF__N:
+				setN((Integer)newValue);
+				return;
+			case AsignaturasPackage.SOME_OF__REQUIREMENT:
+				getRequirement().clear();
+				getRequirement().addAll((Collection<? extends Requirement>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -177,12 +179,12 @@ public class SomeOfImpl extends RequirementImpl implements SomeOf {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.SOME_OF__N:
-			setN(N_EDEFAULT);
-			return;
-		case AsignaturasPackage.SOME_OF__REQUIREMENT:
-			getRequirement().clear();
-			return;
+			case AsignaturasPackage.SOME_OF__N:
+				setN(N_EDEFAULT);
+				return;
+			case AsignaturasPackage.SOME_OF__REQUIREMENT:
+				getRequirement().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -195,10 +197,10 @@ public class SomeOfImpl extends RequirementImpl implements SomeOf {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.SOME_OF__N:
-			return n != N_EDEFAULT;
-		case AsignaturasPackage.SOME_OF__REQUIREMENT:
-			return requirement != null && !requirement.isEmpty();
+			case AsignaturasPackage.SOME_OF__N:
+				return n != N_EDEFAULT;
+			case AsignaturasPackage.SOME_OF__REQUIREMENT:
+				return requirement != null && !requirement.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -210,8 +212,7 @@ public class SomeOfImpl extends RequirementImpl implements SomeOf {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (N: ");

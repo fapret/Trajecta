@@ -62,10 +62,10 @@ public class SubjectPlanImpl extends PlanImpl implements SubjectPlan {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<CurricularUnit> getCurricularUnit() {
 		if (curricularUnit == null) {
-			curricularUnit = new EObjectResolvingEList<CurricularUnit>(CurricularUnit.class, this,
-					AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT);
+			curricularUnit = new EObjectResolvingEList<CurricularUnit>(CurricularUnit.class, this, AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT);
 		}
 		return curricularUnit;
 	}
@@ -78,8 +78,8 @@ public class SubjectPlanImpl extends PlanImpl implements SubjectPlan {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT:
-			return getCurricularUnit();
+			case AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT:
+				return getCurricularUnit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -93,10 +93,10 @@ public class SubjectPlanImpl extends PlanImpl implements SubjectPlan {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT:
-			getCurricularUnit().clear();
-			getCurricularUnit().addAll((Collection<? extends CurricularUnit>) newValue);
-			return;
+			case AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT:
+				getCurricularUnit().clear();
+				getCurricularUnit().addAll((Collection<? extends CurricularUnit>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -109,9 +109,9 @@ public class SubjectPlanImpl extends PlanImpl implements SubjectPlan {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT:
-			getCurricularUnit().clear();
-			return;
+			case AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT:
+				getCurricularUnit().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -124,8 +124,8 @@ public class SubjectPlanImpl extends PlanImpl implements SubjectPlan {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT:
-			return curricularUnit != null && !curricularUnit.isEmpty();
+			case AsignaturasPackage.SUBJECT_PLAN__CURRICULAR_UNIT:
+				return curricularUnit != null && !curricularUnit.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

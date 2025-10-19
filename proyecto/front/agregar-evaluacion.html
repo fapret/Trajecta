@@ -10,6 +10,8 @@
   <script type="text/javascript" src="js/selectLib.js"></script>
   <script type="text/javascript" src="js/addEvaluation.js"></script>
   <script src="lang/lang.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <title>TMDE Project</title>
   <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>    <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -36,6 +38,9 @@
     </a>
   </div>
   <div class="center" id="center">
+    <div id="workspace-container">
+      <select id="workspaceSelector" placeholder="Select a workspace..."></select>
+    </div>
   </div>
   <div class="end" id="end">
     <div class="lang-switcher">
@@ -378,9 +383,7 @@
 
 
       <!-- AGREGAR ACA CONTENIDO-->
-      <br>
-      <label data-lang="studentModel">Modelo de Estudiantes:</label>
-      <input id="file" name="file" type="file" accept=".xmi" required/>
+
       <br><br>
       <label data-lang="ci">Cedula (Opcional):</label>
       <input type="text" id="ci" name="ci"/>
@@ -425,7 +428,7 @@
       
       <label data-lang="eval">Evaluacion:</label>
       <select name="evaluations" id="evaluations" size="10"></select>
-      <label>Nota:</label>
+      <label data-lang="note">Nota:</label>
       <input type="number" id="nota" name="nota" min="0" max="12" required>
       <div class="buttons-div">
         <button type="button" id="markEvaluation" data-lang="addEval">
@@ -440,5 +443,6 @@
   </div>
 
   <script src="./js/leftnav.js"></script>
+  <script src="./js/workspaceSelector.js"></script>
   <script src="./js/addEvaluationExec.js"></script>
 </body>

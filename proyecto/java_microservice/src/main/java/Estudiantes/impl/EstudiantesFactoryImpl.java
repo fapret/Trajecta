@@ -27,12 +27,12 @@ public class EstudiantesFactoryImpl extends EFactoryImpl implements EstudiantesF
 	 */
 	public static EstudiantesFactory init() {
 		try {
-			EstudiantesFactory theEstudiantesFactory = (EstudiantesFactory) EPackage.Registry.INSTANCE
-					.getEFactory(EstudiantesPackage.eNS_URI);
+			EstudiantesFactory theEstudiantesFactory = (EstudiantesFactory)EPackage.Registry.INSTANCE.getEFactory(EstudiantesPackage.eNS_URI);
 			if (theEstudiantesFactory != null) {
 				return theEstudiantesFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new EstudiantesFactoryImpl();
@@ -56,20 +56,14 @@ public class EstudiantesFactoryImpl extends EFactoryImpl implements EstudiantesF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case EstudiantesPackage.ROOT:
-			return createRoot();
-		case EstudiantesPackage.STUDENT:
-			return createStudent();
-		case EstudiantesPackage.COURSE_INSCRIPTION:
-			return createCourseInscription();
-		case EstudiantesPackage.STUDENT_EVALUATION:
-			return createStudentEvaluation();
-		case EstudiantesPackage.PLAN_INSCRIPTION:
-			return createPlanInscription();
-		case EstudiantesPackage.DEGREE:
-			return createDegree();
-		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			case EstudiantesPackage.ROOT: return createRoot();
+			case EstudiantesPackage.STUDENT: return createStudent();
+			case EstudiantesPackage.COURSE_INSCRIPTION: return createCourseInscription();
+			case EstudiantesPackage.STUDENT_EVALUATION: return createStudentEvaluation();
+			case EstudiantesPackage.PLAN_INSCRIPTION: return createPlanInscription();
+			case EstudiantesPackage.DEGREE: return createDegree();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -78,6 +72,7 @@ public class EstudiantesFactoryImpl extends EFactoryImpl implements EstudiantesF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
@@ -88,6 +83,7 @@ public class EstudiantesFactoryImpl extends EFactoryImpl implements EstudiantesF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Student createStudent() {
 		StudentImpl student = new StudentImpl();
 		return student;
@@ -98,6 +94,7 @@ public class EstudiantesFactoryImpl extends EFactoryImpl implements EstudiantesF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CourseInscription createCourseInscription() {
 		CourseInscriptionImpl courseInscription = new CourseInscriptionImpl();
 		return courseInscription;
@@ -108,6 +105,7 @@ public class EstudiantesFactoryImpl extends EFactoryImpl implements EstudiantesF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StudentEvaluation createStudentEvaluation() {
 		StudentEvaluationImpl studentEvaluation = new StudentEvaluationImpl();
 		return studentEvaluation;
@@ -118,6 +116,7 @@ public class EstudiantesFactoryImpl extends EFactoryImpl implements EstudiantesF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PlanInscription createPlanInscription() {
 		PlanInscriptionImpl planInscription = new PlanInscriptionImpl();
 		return planInscription;
@@ -128,6 +127,7 @@ public class EstudiantesFactoryImpl extends EFactoryImpl implements EstudiantesF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Degree createDegree() {
 		DegreeImpl degree = new DegreeImpl();
 		return degree;
@@ -138,8 +138,9 @@ public class EstudiantesFactoryImpl extends EFactoryImpl implements EstudiantesF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EstudiantesPackage getEstudiantesPackage() {
-		return (EstudiantesPackage) getEPackage();
+		return (EstudiantesPackage)getEPackage();
 	}
 
 	/**

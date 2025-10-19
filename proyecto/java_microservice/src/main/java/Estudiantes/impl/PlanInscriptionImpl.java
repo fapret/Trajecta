@@ -129,6 +129,7 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDate() {
 		return date;
 	}
@@ -138,12 +139,12 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDate(Date newDate) {
 		Date oldDate = date;
 		date = newDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.PLAN_INSCRIPTION__DATE, oldDate,
-					date));
+			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.PLAN_INSCRIPTION__DATE, oldDate, date));
 	}
 
 	/**
@@ -151,14 +152,14 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Plan getPlan() {
 		if (plan != null && plan.eIsProxy()) {
-			InternalEObject oldPlan = (InternalEObject) plan;
-			plan = (Plan) eResolveProxy(oldPlan);
+			InternalEObject oldPlan = (InternalEObject)plan;
+			plan = (Plan)eResolveProxy(oldPlan);
 			if (plan != oldPlan) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EstudiantesPackage.PLAN_INSCRIPTION__PLAN,
-							oldPlan, plan));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EstudiantesPackage.PLAN_INSCRIPTION__PLAN, oldPlan, plan));
 			}
 		}
 		return plan;
@@ -178,12 +179,12 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPlan(Plan newPlan) {
 		Plan oldPlan = plan;
 		plan = newPlan;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.PLAN_INSCRIPTION__PLAN, oldPlan,
-					plan));
+			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.PLAN_INSCRIPTION__PLAN, oldPlan, plan));
 	}
 
 	/**
@@ -191,10 +192,10 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<CourseInscription> getPlanCourseInscription() {
 		if (planCourseInscription == null) {
-			planCourseInscription = new EObjectContainmentEList<CourseInscription>(CourseInscription.class, this,
-					EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION);
+			planCourseInscription = new EObjectContainmentEList<CourseInscription>(CourseInscription.class, this, EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION);
 		}
 		return planCourseInscription;
 	}
@@ -204,10 +205,10 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<StudentEvaluation> getPlanStudentEvaluation() {
 		if (planStudentEvaluation == null) {
-			planStudentEvaluation = new EObjectContainmentEList<StudentEvaluation>(StudentEvaluation.class, this,
-					EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION);
+			planStudentEvaluation = new EObjectContainmentEList<StudentEvaluation>(StudentEvaluation.class, this, EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION);
 		}
 		return planStudentEvaluation;
 	}
@@ -217,6 +218,7 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Degree getDegree() {
 		return degree;
 	}
@@ -230,12 +232,8 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 		Degree oldDegree = degree;
 		degree = newDegree;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					EstudiantesPackage.PLAN_INSCRIPTION__DEGREE, oldDegree, newDegree);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EstudiantesPackage.PLAN_INSCRIPTION__DEGREE, oldDegree, newDegree);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -245,21 +243,19 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDegree(Degree newDegree) {
 		if (newDegree != degree) {
 			NotificationChain msgs = null;
 			if (degree != null)
-				msgs = ((InternalEObject) degree).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - EstudiantesPackage.PLAN_INSCRIPTION__DEGREE, null, msgs);
+				msgs = ((InternalEObject)degree).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EstudiantesPackage.PLAN_INSCRIPTION__DEGREE, null, msgs);
 			if (newDegree != null)
-				msgs = ((InternalEObject) newDegree).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - EstudiantesPackage.PLAN_INSCRIPTION__DEGREE, null, msgs);
+				msgs = ((InternalEObject)newDegree).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EstudiantesPackage.PLAN_INSCRIPTION__DEGREE, null, msgs);
 			msgs = basicSetDegree(newDegree, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.PLAN_INSCRIPTION__DEGREE,
-					newDegree, newDegree));
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EstudiantesPackage.PLAN_INSCRIPTION__DEGREE, newDegree, newDegree));
 	}
 
 	/**
@@ -270,12 +266,12 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
-			return ((InternalEList<?>) getPlanCourseInscription()).basicRemove(otherEnd, msgs);
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
-			return ((InternalEList<?>) getPlanStudentEvaluation()).basicRemove(otherEnd, msgs);
-		case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
-			return basicSetDegree(null, msgs);
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
+				return ((InternalEList<?>)getPlanCourseInscription()).basicRemove(otherEnd, msgs);
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
+				return ((InternalEList<?>)getPlanStudentEvaluation()).basicRemove(otherEnd, msgs);
+			case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
+				return basicSetDegree(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -288,18 +284,17 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EstudiantesPackage.PLAN_INSCRIPTION__DATE:
-			return getDate();
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN:
-			if (resolve)
-				return getPlan();
-			return basicGetPlan();
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
-			return getPlanCourseInscription();
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
-			return getPlanStudentEvaluation();
-		case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
-			return getDegree();
+			case EstudiantesPackage.PLAN_INSCRIPTION__DATE:
+				return getDate();
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN:
+				if (resolve) return getPlan();
+				return basicGetPlan();
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
+				return getPlanCourseInscription();
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
+				return getPlanStudentEvaluation();
+			case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
+				return getDegree();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -313,23 +308,23 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EstudiantesPackage.PLAN_INSCRIPTION__DATE:
-			setDate((Date) newValue);
-			return;
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN:
-			setPlan((Plan) newValue);
-			return;
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
-			getPlanCourseInscription().clear();
-			getPlanCourseInscription().addAll((Collection<? extends CourseInscription>) newValue);
-			return;
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
-			getPlanStudentEvaluation().clear();
-			getPlanStudentEvaluation().addAll((Collection<? extends StudentEvaluation>) newValue);
-			return;
-		case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
-			setDegree((Degree) newValue);
-			return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__DATE:
+				setDate((Date)newValue);
+				return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN:
+				setPlan((Plan)newValue);
+				return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
+				getPlanCourseInscription().clear();
+				getPlanCourseInscription().addAll((Collection<? extends CourseInscription>)newValue);
+				return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
+				getPlanStudentEvaluation().clear();
+				getPlanStudentEvaluation().addAll((Collection<? extends StudentEvaluation>)newValue);
+				return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
+				setDegree((Degree)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -342,21 +337,21 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.PLAN_INSCRIPTION__DATE:
-			setDate(DATE_EDEFAULT);
-			return;
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN:
-			setPlan((Plan) null);
-			return;
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
-			getPlanCourseInscription().clear();
-			return;
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
-			getPlanStudentEvaluation().clear();
-			return;
-		case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
-			setDegree((Degree) null);
-			return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__DATE:
+				setDate(DATE_EDEFAULT);
+				return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN:
+				setPlan((Plan)null);
+				return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
+				getPlanCourseInscription().clear();
+				return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
+				getPlanStudentEvaluation().clear();
+				return;
+			case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
+				setDegree((Degree)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -369,16 +364,16 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.PLAN_INSCRIPTION__DATE:
-			return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN:
-			return plan != null;
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
-			return planCourseInscription != null && !planCourseInscription.isEmpty();
-		case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
-			return planStudentEvaluation != null && !planStudentEvaluation.isEmpty();
-		case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
-			return degree != null;
+			case EstudiantesPackage.PLAN_INSCRIPTION__DATE:
+				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN:
+				return plan != null;
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
+				return planCourseInscription != null && !planCourseInscription.isEmpty();
+			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
+				return planStudentEvaluation != null && !planStudentEvaluation.isEmpty();
+			case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
+				return degree != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -390,8 +385,7 @@ public class PlanInscriptionImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (date: ");

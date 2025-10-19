@@ -486,6 +486,29 @@ public class AsignaturasItemProviderAdapterFactory extends AsignaturasAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link asignaturas.PartialEvaluation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PartialEvaluationItemProvider partialEvaluationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link asignaturas.PartialEvaluation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPartialEvaluationAdapter() {
+		if (partialEvaluationItemProvider == null) {
+			partialEvaluationItemProvider = new PartialEvaluationItemProvider(this);
+		}
+
+		return partialEvaluationItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -608,6 +631,7 @@ public class AsignaturasItemProviderAdapterFactory extends AsignaturasAdapterFac
 		if (examEvaluationItemProvider != null) examEvaluationItemProvider.dispose();
 		if (evaluacionExamenItemProvider != null) evaluacionExamenItemProvider.dispose();
 		if (courseEvaluationItemProvider != null) courseEvaluationItemProvider.dispose();
+		if (partialEvaluationItemProvider != null) partialEvaluationItemProvider.dispose();
 	}
 
 }

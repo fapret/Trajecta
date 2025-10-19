@@ -9,7 +9,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: asignaturas.tests,
- Estudiantes.tests
+ Estudiantes.tests,
+ Workspace.tests
 Require-Bundle: org.eclipse.core.runtime,
  curricula_microservice;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,

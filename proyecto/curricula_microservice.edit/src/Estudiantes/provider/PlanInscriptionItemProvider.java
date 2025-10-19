@@ -7,6 +7,7 @@ import Estudiantes.EstudiantesFactory;
 import Estudiantes.EstudiantesPackage;
 import Estudiantes.PlanInscription;
 
+import asignaturas.provider.ModelgeneratorEditPlugin;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -128,6 +129,7 @@ public class PlanInscriptionItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(EstudiantesPackage.Literals.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION);
 			childrenFeatures.add(EstudiantesPackage.Literals.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION);
+			childrenFeatures.add(EstudiantesPackage.Literals.PLAN_INSCRIPTION__DEGREE);
 		}
 		return childrenFeatures;
 	}
@@ -189,6 +191,7 @@ public class PlanInscriptionItemProvider
 				return;
 			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_COURSE_INSCRIPTION:
 			case EstudiantesPackage.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION:
+			case EstudiantesPackage.PLAN_INSCRIPTION__DEGREE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -215,6 +218,11 @@ public class PlanInscriptionItemProvider
 			(createChildParameter
 				(EstudiantesPackage.Literals.PLAN_INSCRIPTION__PLAN_STUDENT_EVALUATION,
 				 EstudiantesFactory.eINSTANCE.createStudentEvaluation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(EstudiantesPackage.Literals.PLAN_INSCRIPTION__DEGREE,
+				 EstudiantesFactory.eINSTANCE.createDegree()));
 	}
 
 	/**
@@ -225,7 +233,7 @@ public class PlanInscriptionItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return EstudianteEditPlugin.INSTANCE;
+		return ModelgeneratorEditPlugin.INSTANCE;
 	}
 
 }

@@ -13,7 +13,10 @@ Export-Package: asignaturas,
  asignaturas.util,
  Estudiantes,
  Estudiantes.impl,
- Estudiantes.util
+ Estudiantes.util,
+ Workspace,
+ Workspace.impl,
+ Workspace.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  curricula_microservice;visibility:=reexport

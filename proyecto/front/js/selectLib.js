@@ -1,8 +1,9 @@
 /*
-    tmde-app-curricula is a software that helps students build their curricula and
+    Trajecta is a software that helps students build their curricula and
     see what curricular units they can register to, and track how their career was
-    or will be.
+    or will be. And helps academic managers do different researches.
     Copyright (C) 2023  Santiago Nicolás Díaz Conde, Santiago Freire López
+    Copyright (C) 2025  Santiago Nicolás Díaz Conde
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
+    Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 const fetchCacheUC = new Map();
 
@@ -36,7 +37,12 @@ function addToSelectWithIdName(select, idelement){
 }
 
 function getFaculties(select) {
-  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty`;
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null) {
+    alert("Please select a workspace");
+    return;
+  }
+  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty?uuid=${workspaceID}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -50,7 +56,12 @@ function getFaculties(select) {
 }
 
 function getUCS(select, faculty){
-	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&withName=True`;
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null) {
+    alert("Please select a workspace");
+    return;
+  }
+	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&withName=True&uuid=${workspaceID}`;
 	fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -72,7 +83,12 @@ function getUCS(select, faculty){
 }
 
 function getCareers(select, faculty){
-  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty?faculty=${faculty}`;
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null) {
+    alert("Please select a workspace");
+    return;
+  }
+  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty?faculty=${faculty}&uuid=${workspaceID}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -86,7 +102,12 @@ function getCareers(select, faculty){
 }
 
 function getPlans(select, faculty, career){
-  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera?faculty=${faculty}&career=${career}`;
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null) {
+    alert("Please select a workspace");
+    return;
+  }
+  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera?faculty=${faculty}&career=${career}&uuid=${workspaceID}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -100,7 +121,12 @@ function getPlans(select, faculty, career){
 }
 
 function getPlanUCS(select, faculty, career, plan){
-	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=${faculty}&career=${career}&plan=${plan}&withName=True`;
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null) {
+    alert("Please select a workspace");
+    return;
+  }
+	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=${faculty}&career=${career}&plan=${plan}&withName=True&uuid=${workspaceID}`;
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -122,7 +148,12 @@ function getPlanUCS(select, faculty, career, plan){
 }
 
 function getEvaluations(select, typeBoolean, UC, faculty){
-	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}`;
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null) {
+    alert("Please select a workspace");
+    return;
+  }
+	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -151,7 +182,12 @@ function getEvaluations(select, typeBoolean, UC, faculty){
 }
 
 function getCourses(select, UC, faculty){
-  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}`;
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null) {
+    alert("Please select a workspace");
+    return;
+  }
+  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
   fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -166,7 +202,12 @@ function getCourses(select, UC, faculty){
 }
 
 function getMaterias(select, faculty, career, plan){
-	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}`;
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null) {
+    alert("Please select a workspace");
+    return;
+  }
+	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}&uuid=${workspaceID}`;
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -224,7 +265,12 @@ async function getMaxRequirementLevel(facultyName, cu_id) {
     if (fetchCacheUC.has(cacheKey)) {
       data = fetchCacheUC.get(cacheKey);
     } else {
-      let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}`;
+      const workspaceID = localStorage.getItem('selectedWorkspace');
+      if (workspaceID == null) {
+        alert("Please select a workspace");
+        return;
+      }
+      let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}&uuid=${workspaceID}`;
       const response = await fetch(apiUrl);
 
       if (!response.ok) {

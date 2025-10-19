@@ -2,6 +2,7 @@
  */
 package asignaturas;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Credits On Subject</b></em>'.

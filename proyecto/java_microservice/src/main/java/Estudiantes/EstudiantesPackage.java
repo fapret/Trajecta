@@ -350,6 +350,7 @@ public interface EstudiantesPackage extends EPackage {
 	 */
 	int DEGREE_OPERATION_COUNT = 0;
 
+
 	/**
 	 * Returns the meta object for class '{@link Estudiantes.Root <em>Root</em>}'.
 	 * <!-- begin-user-doc -->

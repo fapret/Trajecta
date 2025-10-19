@@ -157,6 +157,8 @@ import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import Estudiantes.provider.EstudiantesItemProviderAdapterFactory;
 
+import Workspace.provider.WorkspaceItemProviderAdapterFactory;
+import asignaturas.presentation.ModelgeneratorEditorPlugin;
 import asignaturas.provider.AsignaturasItemProviderAdapterFactory;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -543,7 +545,7 @@ public class EstudiantesEditor
 					}
 				}
 				catch (CoreException exception) {
-					EstudianteEditorPlugin.INSTANCE.log(exception);
+					ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		};
@@ -660,7 +662,7 @@ public class EstudiantesEditor
 					showTabs();
 				}
 				catch (PartInitException exception) {
-					EstudianteEditorPlugin.INSTANCE.log(exception);
+					ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 
@@ -669,7 +671,7 @@ public class EstudiantesEditor
 					markerHelper.updateMarkers(diagnostic);
 				}
 				catch (CoreException exception) {
-					EstudianteEditorPlugin.INSTANCE.log(exception);
+					ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		}
@@ -712,8 +714,9 @@ public class EstudiantesEditor
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new EstudiantesItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new AsignaturasItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new EstudiantesItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new WorkspaceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.
@@ -1549,7 +1552,7 @@ public class EstudiantesEditor
 		catch (Exception exception) {
 			// Something went wrong that shouldn't.
 			//
-			EstudianteEditorPlugin.INSTANCE.log(exception);
+			ModelgeneratorEditorPlugin.INSTANCE.log(exception);
 		}
 		updateProblemIndication = true;
 		updateProblemIndication();
@@ -1758,7 +1761,7 @@ public class EstudiantesEditor
 	 * @generated
 	 */
 	private static String getString(String key) {
-		return EstudianteEditorPlugin.INSTANCE.getString(key);
+		return ModelgeneratorEditorPlugin.INSTANCE.getString(key);
 	}
 
 	/**
@@ -1768,7 +1771,7 @@ public class EstudiantesEditor
 	 * @generated
 	 */
 	private static String getString(String key, Object s1) {
-		return EstudianteEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
+		return ModelgeneratorEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
 	}
 
 	/**

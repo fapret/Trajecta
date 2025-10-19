@@ -1,9 +1,9 @@
 /*
-    tmde-app-curricula is a software that helps students build their curricula and
+    Trajecta is a software that helps students build their curricula and
     see what curricular units they can register to, and track how their career was
-    or will be.
+    or will be. And helps academic managers do different researches.
     Copyright (C) 2023  Santiago Nicolás Díaz Conde, Santiago Freire López
-	Copyright (C) 2025  Santiago Nicolás Díaz Conde
+    Copyright (C) 2025  Santiago Nicolás Díaz Conde
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
+    Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 
 import jakarta.servlet.ServletException;
@@ -31,6 +31,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,45 +58,38 @@ public class Evaluations extends HttpServlet {
      */
     public Evaluations() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
         
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Carga modelo
-		asignaturas.Root asignaturasRoot;
-		ResourceSet resourceSet;
-		resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-		EPackage.Registry.INSTANCE.put(asignaturas.AsignaturasPackage.eNS_URI, asignaturas.AsignaturasPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(Estudiantes.EstudiantesPackage.eNS_URI, Estudiantes.EstudiantesPackage.eINSTANCE);
-		URI modelURI = URI.createFileURI("model.xmi");
-		Resource resource = resourceSet.getResource(modelURI, true);
-		asignaturasRoot = (asignaturas.Root) resource.getContents().get(0);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	asignaturas.Root asignaturasRoot;
+    	
+    	Path baseDir = Utils.getBasePath();
+		
+		String uuid = request.getParameter("uuid");
+		Path workspaceDir = baseDir.resolve(uuid);
+		
+		ResourceSet resourceSet = new ResourceSetImpl();
+        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+                .put("xmi", new XMIResourceFactoryImpl());
+        EPackage.Registry.INSTANCE.put(AsignaturasPackage.eNS_URI, AsignaturasPackage.eINSTANCE);
+        EPackage.Registry.INSTANCE.put(EstudiantesPackage.eNS_URI, EstudiantesPackage.eINSTANCE);
+        
+        URI modelURI = URI.createFileURI(workspaceDir.resolve("model.xmi").toString());
+        Resource resource = resourceSet.getResource(modelURI, true);
+        asignaturasRoot = (asignaturas.Root) resource.getContents().get(0);
+        
+        URI model2URI = URI.createFileURI(workspaceDir.resolve("students.xmi").toString());
+        Resource resource2 = resourceSet.getResource(model2URI, true);
+        Estudiantes.Root rootStudent = (Estudiantes.Root) resource2.getContents().get(0);
 		
 		String faculty = request.getParameter("faculty");
 		String career = request.getParameter("career");
 		String plan = request.getParameter("plan");
 		String ID = request.getParameter("id");
-		Estudiantes.Root rootStudent;
-		Part filePart;
-		InputStream inputStream;
-		
-		try {
-			filePart = request.getPart("file");
-			inputStream = filePart.getInputStream();
-			Resource resourceStudent = resourceSet.createResource(URI.createURI(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()));
-		
-			resourceStudent.load(inputStream, null);
-			
-			rootStudent = (Estudiantes.Root) resourceStudent.getContents().get(0);
-		} catch (IOException e) {
-			response.getWriter().write(e.toString());
-			return;
-		}
 		
 		//de un estudiante, devuelve las evaluaciones que tiene aprobadas, distinguiendo si es CourseEvaluation o ExamEvaluation y su nota
 		

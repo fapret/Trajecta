@@ -1,0 +1,1 @@
+Here is present different documents that where made during the process of development of the application.

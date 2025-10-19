@@ -68,6 +68,7 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Student> getStudent() {
 		if (student == null) {
 			student = new EObjectContainmentEList<Student>(Student.class, this, EstudiantesPackage.ROOT__STUDENT);
@@ -83,8 +84,8 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case EstudiantesPackage.ROOT__STUDENT:
-			return ((InternalEList<?>) getStudent()).basicRemove(otherEnd, msgs);
+			case EstudiantesPackage.ROOT__STUDENT:
+				return ((InternalEList<?>)getStudent()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -97,8 +98,8 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EstudiantesPackage.ROOT__STUDENT:
-			return getStudent();
+			case EstudiantesPackage.ROOT__STUDENT:
+				return getStudent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,10 +113,10 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EstudiantesPackage.ROOT__STUDENT:
-			getStudent().clear();
-			getStudent().addAll((Collection<? extends Student>) newValue);
-			return;
+			case EstudiantesPackage.ROOT__STUDENT:
+				getStudent().clear();
+				getStudent().addAll((Collection<? extends Student>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -128,9 +129,9 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.ROOT__STUDENT:
-			getStudent().clear();
-			return;
+			case EstudiantesPackage.ROOT__STUDENT:
+				getStudent().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -143,8 +144,8 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EstudiantesPackage.ROOT__STUDENT:
-			return student != null && !student.isEmpty();
+			case EstudiantesPackage.ROOT__STUDENT:
+				return student != null && !student.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

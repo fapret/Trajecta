@@ -1,8 +1,9 @@
 /*
-    tmde-app-curricula is a software that helps students build their curricula and
+    Trajecta is a software that helps students build their curricula and
     see what curricular units they can register to, and track how their career was
-    or will be.
+    or will be. And helps academic managers do different researches.
     Copyright (C) 2023  Santiago Nicolás Díaz Conde, Santiago Freire López
+    Copyright (C) 2025  Santiago Nicolás Díaz Conde
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
+    Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 function consultarMateria() {
 	const allFacultiesSelect = document.getElementById("facultades");
@@ -28,22 +29,27 @@ function consultarMateria() {
     const career = allCareersSelect.value;
     const plan = allPlansSelect.value;
     const materia = allMateriasSelect.value;
+    const workspaceID = localStorage.getItem('selectedWorkspace');
+    if (workspaceID == null) {
+        alert("Please select a workspace");
+        return;
+    }
     
-    const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}&subject=${materia}`;
+    const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}&subject=${materia}&uuid=${workspaceID}`;
     fetch(url)
 	.then(response => response.json())
 	.then(data => {
 		const resultadoDiv = document.getElementById("resultado");
 		 resultadoDiv.style.display = "block";
 		 resultadoDiv.innerHTML = "";
-		 resultadoDiv.innerHTML += `<p><strong>Id:</strong> ${data.Id}</p>`;
-		 resultadoDiv.innerHTML += `<p><strong>Nombre:</strong> ${data.Name}</p>`;
-		 resultadoDiv.innerHTML += `<p><strong>MinCredits:</strong> ${data.MinCredits}</p>`;
-		 resultadoDiv.innerHTML += `<p><strong>Materias:</strong></p>`;
+		 resultadoDiv.innerHTML += `<p><strong data-lang="ID">Id:</strong> ${data.Id}</p>`;
+		 resultadoDiv.innerHTML += `<p><strong data-lang="name">Nombre:</strong> ${data.Name}</p>`;
+		 resultadoDiv.innerHTML += `<p><strong data-lang="mincredits">MinCredits:</strong> ${data.MinCredits}</p>`;
+		 resultadoDiv.innerHTML += `<p><strong data-lang="subjects">Materias:</strong></p>`;
 		 data.Subjects.forEach(subject => {
          	resultadoDiv.innerHTML += `<p>- ${subject}</p>`;
          });
-         resultadoDiv.innerHTML += `<p><strong>Unidades Curriculares:</strong></p>`;
+         resultadoDiv.innerHTML += `<p><strong data-lang="ucs">Unidades Curriculares:</strong></p>`;
          data.CurricularUnits.forEach(cu => {
          	resultadoDiv.innerHTML += `<p>- ${cu}</p>`;
          });

@@ -90,6 +90,7 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMinCredits() {
 		return minCredits;
 	}
@@ -99,12 +100,12 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMinCredits(int newMinCredits) {
 		int oldMinCredits = minCredits;
 		minCredits = newMinCredits;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS,
-					oldMinCredits, minCredits));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS, oldMinCredits, minCredits));
 	}
 
 	/**
@@ -112,10 +113,10 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Subject> getGroupOfSubjects() {
 		if (groupOfSubjects == null) {
-			groupOfSubjects = new EObjectContainmentEList<Subject>(Subject.class, this,
-					AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS);
+			groupOfSubjects = new EObjectContainmentEList<Subject>(Subject.class, this, AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS);
 		}
 		return groupOfSubjects;
 	}
@@ -128,8 +129,8 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
-			return ((InternalEList<?>) getGroupOfSubjects()).basicRemove(otherEnd, msgs);
+			case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
+				return ((InternalEList<?>)getGroupOfSubjects()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -142,10 +143,10 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS:
-			return getMinCredits();
-		case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
-			return getGroupOfSubjects();
+			case AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS:
+				return getMinCredits();
+			case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
+				return getGroupOfSubjects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,13 +160,13 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS:
-			setMinCredits((Integer) newValue);
-			return;
-		case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
-			getGroupOfSubjects().clear();
-			getGroupOfSubjects().addAll((Collection<? extends Subject>) newValue);
-			return;
+			case AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS:
+				setMinCredits((Integer)newValue);
+				return;
+			case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
+				getGroupOfSubjects().clear();
+				getGroupOfSubjects().addAll((Collection<? extends Subject>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -178,12 +179,12 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS:
-			setMinCredits(MIN_CREDITS_EDEFAULT);
-			return;
-		case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
-			getGroupOfSubjects().clear();
-			return;
+			case AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS:
+				setMinCredits(MIN_CREDITS_EDEFAULT);
+				return;
+			case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
+				getGroupOfSubjects().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -196,10 +197,10 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS:
-			return minCredits != MIN_CREDITS_EDEFAULT;
-		case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
-			return groupOfSubjects != null && !groupOfSubjects.isEmpty();
+			case AsignaturasPackage.CREDITS_PLAN__MIN_CREDITS:
+				return minCredits != MIN_CREDITS_EDEFAULT;
+			case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
+				return groupOfSubjects != null && !groupOfSubjects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -211,8 +212,7 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (MinCredits: ");

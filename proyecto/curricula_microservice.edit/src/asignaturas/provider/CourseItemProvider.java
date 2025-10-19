@@ -126,6 +126,7 @@ public class CourseItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(AsignaturasPackage.Literals.COURSE__COURSE_EVALUATION);
+			childrenFeatures.add(AsignaturasPackage.Literals.COURSE__PARTIALEVALUATION);
 		}
 		return childrenFeatures;
 	}
@@ -184,6 +185,7 @@ public class CourseItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case AsignaturasPackage.COURSE__COURSE_EVALUATION:
+			case AsignaturasPackage.COURSE__PARTIALEVALUATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -205,6 +207,11 @@ public class CourseItemProvider
 			(createChildParameter
 				(AsignaturasPackage.Literals.COURSE__COURSE_EVALUATION,
 				 AsignaturasFactory.eINSTANCE.createCourseEvaluation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(AsignaturasPackage.Literals.COURSE__PARTIALEVALUATION,
+				 AsignaturasFactory.eINSTANCE.createPartialEvaluation()));
 	}
 
 	/**
@@ -215,7 +222,7 @@ public class CourseItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return AsignaturasEditPlugin.INSTANCE;
+		return ModelgeneratorEditPlugin.INSTANCE;
 	}
 
 }

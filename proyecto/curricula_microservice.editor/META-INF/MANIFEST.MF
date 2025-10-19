@@ -5,12 +5,13 @@ Bundle-SymbolicName: curricula_microservice.editor;singleton:=true
 Automatic-Module-Name: curricula_microservice.editor
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: Estudiantes.presentation.EstudianteEditorPlugin$Implementation
+Bundle-Activator: asignaturas.presentation.ModelgeneratorEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: asignaturas.presentation,
- Estudiantes.presentation
+ Estudiantes.presentation,
+ Workspace.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
  curricula_microservice.edit;visibility:=reexport,
