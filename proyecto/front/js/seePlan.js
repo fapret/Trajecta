@@ -83,7 +83,7 @@ function consultarPlan() {
               }
 
               for (let i = 0; i < materias.length; i++) {
-                let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=` + materias[i];
+                let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&uuid=${workspaceID}&curricularUnit=` + materias[i];
                 fetch(apiUrl)
                         .then(async response => {
                           if (!response.ok) {
