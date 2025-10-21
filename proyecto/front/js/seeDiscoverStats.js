@@ -22,7 +22,7 @@
 function seeDiscoverStats(mode=2) {
     const allDiscoveriesSelect = document.getElementById("discoveries");
     const uuid = allDiscoveriesSelect.value;
-    const url = `http://127.0.0.1:9009/${mode}/${uuid}`;
+    const url = `http://127.0.0.1:9002/${uuid}/${mode}`;
     fetch(url)
     .then(response => response.json())
     .then(data => {
