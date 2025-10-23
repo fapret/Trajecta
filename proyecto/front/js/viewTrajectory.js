@@ -151,7 +151,11 @@ function mostrar_trayectoria() {
                         if (i === materias.length-1) {
                             // Realiza la segunda solicitud AJAX con formDataCopy
                             var xhr2 = new XMLHttpRequest();
-                            xhr2.open('GET', `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/evaluations?uuid=${workspaceID}`, true);
+                            if(document.getElementById("ci").value != undefined){
+                                xhr2.open('GET', `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/evaluations?uuid=${workspaceID}&faculty=${facultyName}&career=${career}&plan=${plan}&id=${document.getElementById("ci").value}`, true);
+                            } else {
+                                xhr2.open('GET', `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/evaluations?uuid=${workspaceID}&faculty=${facultyName}&career=${career}&plan=${plan}`, true);
+                            }
                             xhr2.onload = async function () {
                                 if (xhr2.status >= 200 && xhr2.status < 300) {
                                     // Procesa la respuesta de la segunda solicitud aquí
