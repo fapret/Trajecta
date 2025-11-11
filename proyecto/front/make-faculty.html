@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/consulta.css">
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="js/selectLib.js"></script>
   <script src="lang/lang.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
@@ -332,7 +334,7 @@
     </div>
 
     <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-faculty.html">
+      <a class="left-nav-a" href="">
         <button id="button" class="levtnav-button">
           <img class="" src="./images/add-company-svgrepo-com.svg">
           </img>
@@ -342,7 +344,7 @@
     </div>
 
     <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-career.html">
+      <a class="left-nav-a" href="">
         <button id="button" class="levtnav-button">
           <img class="" src="./images/add-document-note-svgrepo-com.svg">
           </img>
@@ -352,7 +354,7 @@
     </div>
 
     <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-plan.html">
+      <a class="left-nav-a" href="">
         <button id="button" class="levtnav-button">
           <img class="" src="./images/file-multiple-svgrepo-com.svg">
           </img>
@@ -362,7 +364,7 @@
     </div>
 
     <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-subject.html">
+      <a class="left-nav-a" href="">
         <button id="button" class="levtnav-button">
           <img class="" src="./images/add-file-svgrepo-com.svg">
           </img>
@@ -372,7 +374,7 @@
     </div>
 
     <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-subject.html">
+      <a class="left-nav-a" href="">
         <button id="button" class="levtnav-button">
           <img class="" src="./images/add-file-svgrepo-com_2.svg">
           </img>
@@ -382,17 +384,7 @@
     </div>
 
     <div class="left-nav-div">
-      <a class="left-nav-a" href="./add-course-uc.html">
-        <button id="button" class="levtnav-button">
-          <img class="" src="./images/add-file-svgrepo-com_2.svg">
-          </img>
-        </button>
-        <p data-lang="createUC">Agregar Curso a Unidad Curricular</p>
-      </a>
-    </div>
-
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="./edit-uc.html">
+      <a class="left-nav-a" href="">
         <button id="button" class="levtnav-button">
           <img class="" src="./images/file-error-svgrepo-com.svg">
           </img>
@@ -401,7 +393,6 @@
       </a>
     </div>
 
-    <!--
     <div class="left-nav-div">
       <a class="left-nav-a" href="">
         <button id="button" class="levtnav-button">
@@ -411,11 +402,9 @@
         <p data-lang="addEvaluation">Crear Evaluación</p>
       </a>
     </div>
-    -->
 
     <!-- END TO DO -->
 
-    <!-- TO DO DOCUMENTATION
     <div class="left-nav-cat">
       <p> API </p>
     </div>
@@ -428,7 +417,7 @@
         <p data-lang="viewDocsEM">Ver Documentación (EM)</p>
       </a>
     </div>
-    
+    <!-- TO DO DOCUMENTATION
     <div class="left-nav-div">
       <a class="left-nav-a" href="./docs2.html">
         <button id="button" class="levtnav-button">
@@ -467,6 +456,21 @@
     <div class="content">
 
       <!-- AGREGAR ACA CONTENIDO-->
+
+      <div class="centeredDiv">
+        <h1 data-lang="makeFaculty"></h1>
+        <h2 data-lang="makeFacultyDesc"></h2>
+      </div>
+
+      <div class="centeredDiv">
+      	<label data-lang="name">Nombre:</label>
+      	<input type="text" id="name" name="name" required/>
+      </div>
+      <div class="buttons-div">
+        <button type="button" id="markFaculty" data-lang="createFaculty" onclick="crear_facultad()">
+          Crear Facultad
+        </button>
+      </div>
 
     </div>
   </div>

@@ -31,6 +31,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>Course</display-name>
+    <servlet-name>Course</servlet-name>
+    <servlet-class>Course</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Course</servlet-name>
+    <url-pattern>/Faculty/ucs/course</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>Plan</display-name>
     <servlet-name>Plan</servlet-name>
     <servlet-class>Plan</servlet-class>

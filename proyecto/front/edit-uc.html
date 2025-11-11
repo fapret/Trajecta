@@ -4,8 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/consulta.css">
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="js/selectLib.js"></script>
+  <script type="text/javascript" src="js/addPlan.js"></script>
   <script src="lang/lang.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
@@ -47,6 +50,8 @@
 
 <div class="main" id="main">
   <div class="left-nav" id="leftnav">
+
+
 
     <div class="left-nav-cat">
       <p data-lang="student"> ESTUDIANTE </p>
@@ -310,113 +315,17 @@
       </a>
     </div>
 
-    <!-- START TO DO PM -->
-    <!--
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="">
+    <!--<div class="left-nav-div">
+      <a class="left-nav-a" href="./deviation-analysis.html">
         <button id="button" class="levtnav-button">
-          <img class="" src="./images/ranking-svgrepo-com.svg">
+          <img class="" src="./images/arrow-separate-svgrepo-com.svg">
           </img>
         </button>
-        <p data-lang="seeRankings">Ver Rankings</p>
+        <p data-lang="deviationTable">Ver Tabla de desviacion</p>
       </a>
-    </div>
-    -->
+    </div>-->
 
-    <!-- END TO DO PM -->
-
-    <!-- TO DO -->
-
-    <div class="left-nav-cat">
-      <p data-lang="administration"> ADMINISTRACIÓN </p>
-    </div>
-
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-faculty.html">
-        <button id="button" class="levtnav-button">
-          <img class="" src="./images/add-company-svgrepo-com.svg">
-          </img>
-        </button>
-        <p data-lang="createFaculty">Crear Facultad</p>
-      </a>
-    </div>
-
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-career.html">
-        <button id="button" class="levtnav-button">
-          <img class="" src="./images/add-document-note-svgrepo-com.svg">
-          </img>
-        </button>
-        <p data-lang="createCareer">Crear Carrera</p>
-      </a>
-    </div>
-
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-plan.html">
-        <button id="button" class="levtnav-button">
-          <img class="" src="./images/file-multiple-svgrepo-com.svg">
-          </img>
-        </button>
-        <p data-lang="createPlan">Crear Plan</p>
-      </a>
-    </div>
-
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-subject.html">
-        <button id="button" class="levtnav-button">
-          <img class="" src="./images/add-file-svgrepo-com.svg">
-          </img>
-        </button>
-        <p data-lang="createMateria">Crear Materia</p>
-      </a>
-    </div>
-
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="./make-subject.html">
-        <button id="button" class="levtnav-button">
-          <img class="" src="./images/add-file-svgrepo-com_2.svg">
-          </img>
-        </button>
-        <p data-lang="createUC">Crear Unidad Curricular</p>
-      </a>
-    </div>
-
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="./add-course-uc.html">
-        <button id="button" class="levtnav-button">
-          <img class="" src="./images/add-file-svgrepo-com_2.svg">
-          </img>
-        </button>
-        <p data-lang="createUC">Agregar Curso a Unidad Curricular</p>
-      </a>
-    </div>
-
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="./edit-uc.html">
-        <button id="button" class="levtnav-button">
-          <img class="" src="./images/file-error-svgrepo-com.svg">
-          </img>
-        </button>
-        <p data-lang="editRequirementsUC">Editar requisitos de UC</p>
-      </a>
-    </div>
-
-    <!--
-    <div class="left-nav-div">
-      <a class="left-nav-a" href="">
-        <button id="button" class="levtnav-button">
-          <img class="" src="./images/file-signed-svgrepo-com.svg">
-          </img>
-        </button>
-        <p data-lang="addEvaluation">Crear Evaluación</p>
-      </a>
-    </div>
-    -->
-
-    <!-- END TO DO -->
-
-    <!-- TO DO DOCUMENTATION
-    <div class="left-nav-cat">
+    <!--<div class="left-nav-cat">
       <p> API </p>
     </div>
     <div class="left-nav-div">
@@ -428,7 +337,6 @@
         <p data-lang="viewDocsEM">Ver Documentación (EM)</p>
       </a>
     </div>
-    
     <div class="left-nav-div">
       <a class="left-nav-a" href="./docs2.html">
         <button id="button" class="levtnav-button">
@@ -437,36 +345,57 @@
         </button>
         <p data-lang="viewDocsPM">Ver Documentación (PM)</p>
       </a>
-    </div>
-    -->
+    </div>-->
 
 
     <p style="text-align: center; margin-top: auto; margin-bottom: 0;min-width: 20rem;">
       Copyright 2023 Santiago Nicolas Diaz Conde - Santiago Freire López <br> Copyright 2025 Santiago Nicolas Diaz Conde
     </p>
-    </div>
-    <div class="loadingcontent" id="loadingcontent">
-      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-    </div>
-    <div class="loadingcontent" id="dialog">
-      <div class="dialog">
-        <p>Dialog</p>
-        <div>
-          Contenido a preguntar
-        </div>
-        <div>
-          <button id="dialogbtnyes" class="dialog-button-recommended">
-            Aceptar
-          </button>
-          <button id="dialogbtnno" class="dialog-button-default">
-            Cancelar
-          </button>
-        </div>
+  </div>
+  <div class="loadingcontent" id="loadingcontent">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+  <div class="loadingcontent" id="dialog">
+    <div class="dialog">
+      <p>Dialog</p>
+      <div>
+        Contenido a preguntar
+      </div>
+      <div>
+        <button id="dialogbtnyes" class="dialog-button-recommended">
+          Aceptar
+        </button>
+        <button id="dialogbtnno" class="dialog-button-default">
+          Cancelar
+        </button>
       </div>
     </div>
+  </div>
     <div class="content">
 
       <!-- AGREGAR ACA CONTENIDO-->
+      <div class="centeredDiv">
+        <h1 data-lang="editUC"></h1>
+        <h2 data-lang="editUCDesc"></h2>
+      </div>
+
+      <label data-lang="faculty">Facultad:</label>
+      <select name="facultades" id="facultades" size="10"></select>
+
+      <label data-lang="uc">Unidad Curricular:</label>
+      <select name="ucs" id="ucs" size="10"></select>
+
+      <div class="centeredDiv">
+        <label data-lang="credits">Credits (optional):</label>
+      	<input type="text" id="credits" name="credits"/>
+        <label data-lang="RequirementJson">RequirementsJson (optional):</label>
+      	<input type="text" id="RequirementJson" name="RequirementJson"/>
+      </div>
+      <div class="buttons-div">
+        <button type="button" id="markUC" data-lang="editUC" onclick="editar_uc()">
+          Editar Unidad Curricular
+        </button>
+      </div>
 
     </div>
   </div>

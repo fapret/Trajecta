@@ -125,7 +125,7 @@ public class Evaluations extends HttpServlet {
 											if (se.getEvaluation() instanceof CourseEvaluation && se.getGrade() >= 3) {
 												//encuentro a qué CU corresponde la evaluación
 												for (CurricularUnit cu : facultad.getFacultyCU())
-													for (Course cur : cu.getCourse())
+													for (asignaturas.Course cur : cu.getCourse())
 														for (CourseEvaluation coe : cur.getCourseEvaluation())
 															if (coe == se.getEvaluation())
 																evals.add("{\""+"id\": \""+cu.getId()+"\", \"type\": \"CourseEvaluation\", \"grade\": "+String.valueOf(se.getGrade())+"}");

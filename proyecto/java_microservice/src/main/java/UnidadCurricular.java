@@ -274,7 +274,7 @@ public class UnidadCurricular extends HttpServlet {
 			response.getWriter().append("Error: name is empty");
 			return;
 		}
-		int cred = Integer.parseInt(request.getParameter("name"));
+		int cred = Integer.parseInt(request.getParameter("cred"), 0);
 
         // Read JSON body
         StringBuilder jsonBuffer = new StringBuilder();
@@ -376,7 +376,7 @@ public class UnidadCurricular extends HttpServlet {
 						}
 						responseText += "], \"Course\": [";
 						auxBool = false;
-						for(Course curso : cu.getCourse()) {
+						for(asignaturas.Course curso : cu.getCourse()) {
 							auxBool = true;
 							responseText += "{ \"Year\": " + curso.getYear() + ", \"Edition\": " + curso.getEdition() + ", \"CourseEvaluation\": [";
 							Boolean auxBool2 = false;
