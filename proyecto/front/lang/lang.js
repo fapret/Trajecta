@@ -185,6 +185,14 @@ const translations = {
     seePerformanceDiagramDFG: "See Performance Diagram",
     viewPerformanceGraph: "See Log Performance",
     viewRefPerformanceGraph: "See Reference Performance",
-    logUUID: "Log UUID:"
+    logUUID: "Log UUID:",
+    createFaculty: "Create Faculty",
+    createCareer: "Create Career",
+    createPlan: "Create Plan",
+    createSubject: "Create Subject",
+    createUC: "Create Curricular Unit",
+    addCourseUC: "Add Course to Curricular Unit",
+    editUC: "Edit Curricular Unit",
+    createCourse: "Create Course"
   }
 };
