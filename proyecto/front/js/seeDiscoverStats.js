@@ -32,29 +32,29 @@ function seeDiscoverStats(mode=2) {
 
         resultadoDiv.innerHTML = `
             <br>
-            <label class="info-value">${data.num_variants}</label>
+            <label class="info-value">${data?.num_variants}</label>
             <label class="info-label" data-lang="NumVariants">Variants</label>
             <br>
-            <label class="info-value">${data.num_traces}</label>
+            <label class="info-value">${data?.num_traces}</label>
             <label class="info-label" data-lang="NumTraces">Students/Traces</label>
             <br>
             <label class="info-label" data-lang="StartActivities">Start activities:</label>
         `;
-        for (const activity in data.start_activities) {
+        for (const activity in data?.start_activities) {
             resultadoDiv.innerHTML += `<p>${activity}</p>`;
         };
         resultadoDiv.innerHTML += `
             <br>
             <label class="info-label" data-lang="EndActivities">End activities:</label>
         `;
-        for (const activity in data.end_activities) {
+        for (const activity in data?.end_activities) {
             resultadoDiv.innerHTML += `<p>${activity}</p>`;
         };
         resultadoDiv.innerHTML += `
             <br>
             <label class="info-label" data-lang="AllActivities">All activities:</label>
         `;
-        data.all_activities.forEach(activity => {
+        data.all_activities?.forEach(activity => {
             resultadoDiv.innerHTML += `<p>${activity}</p>`;
         });
         const savedLang = localStorage.getItem("lang") || "es";
