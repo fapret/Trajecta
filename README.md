@@ -25,6 +25,20 @@ The next libraries of Python are Required:
 # International Process Mining Conference
 This application was presented in ICPM 2025, and its corresponding Demo paper its available at documents folder.
 
+# Building
+We provide Github actions workflow that builds the .WAR for you and gets uploaded as artifact to your github repository so you can upload it to your tomcat server.
+For the Front-End Website, it works as a static website, and we provide both github actions workflow to make a github pages, as an gitlab CI/CD to make a gitlab pages to run it.
+
+# Running
+As mentioned early, you must upload the .WAR file to a tomcat server, this will provide the MDE functionalities.
+On the other side, to run the Process Mining functionalities, you can run them using `python start_scripts.py` located at PM_microservice folder.
+The next pip installs are required to run the Python code:
+`pip install pm4py`
+`pip install flask`
+`pip install flask_cors`
+
+For the graphs functionalities, Graphviz must be installed on the system.
+
 # Project Demo Video
 https://github.com/fapret/Trajecta/blob/main/demo.mp4
 
