@@ -96,7 +96,9 @@ const translations = {
     obtainedDate: "Fecha de obtención:",
     inscriptionDate: "Fecha de inscripción:",
     deviationTable: "Tabla de desviación",
-    referenceLog: "Log de Referencia:"
+    referenceLog: "Log de Referencia:",
+    Activitieslbl: "Actividades:",
+    Pathslbl: "Caminos:"
   },
   en: {
     welcome: "Welcome to Trajecta!",
@@ -193,6 +195,8 @@ const translations = {
     createUC: "Create Curricular Unit",
     addCourseUC: "Add Course to Curricular Unit",
     editUC: "Edit Curricular Unit",
-    createCourse: "Create Course"
+    createCourse: "Create Course",
+    Activitieslbl: "Activities:",
+    Pathslbl: "Paths:"
   }
 };

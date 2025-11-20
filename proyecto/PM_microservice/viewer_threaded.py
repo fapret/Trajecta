@@ -22,14 +22,114 @@ for folder in ['./imports', './dfg/png', './bpmn/png', './pnml/png', './ptml/png
     
 render_status = {}
 
-def run_viewer(view, caseid, mode):
+def run_viewer(view, caseid, mode, activity, path, filtermode):
     try:
-        render_status[(view, caseid)] = "rendering"
+        render_status[(view, caseid, activity, path)] = "rendering"
         match view:
             case 'dfg':
                 filepath = './dfg/png/' + caseid + '.png'
+
+                dfg, dfg_start_activities, dfg_end_activities = pm4py.read_dfg('./dfg/' + caseid + '.dfg') #eliminar luego
                 
-                dfg, dfg_start_activities, dfg_end_activities = pm4py.read_dfg('./dfg/' + caseid + '.dfg')
+                if (filtermode == 1):
+                    filepath = './dfg/png/' + caseid + '_a' + str(activity) + '_p' + str(path) + '.png'
+                
+                    ########## Test 1
+                    # FILTER PATHS (edges)
+                    if len(dfg) > 0:
+                        max_edge_freq = max(dfg.values())
+                        path_threshold = max_edge_freq * (float(path) / 100.0)
+                    else:
+                        path_threshold = 0
+                    
+                    dfg = {
+                        (a, b): f for (a, b), f in dfg.items()
+                        if f >= path_threshold
+                    }
+                    
+                    # FILTER ACTIVITIES (nodes)
+                    # compute node frequencies
+                    node_freq = {}
+                    
+                    for (a, b), f in dfg.items():
+                        node_freq[a] = node_freq.get(a, 0) + f
+                        node_freq[b] = node_freq.get(b, 0) + f
+                    
+                    if len(node_freq) > 0:
+                        max_node_freq = max(node_freq.values())
+                        activity_threshold = max_node_freq * (float(activity) / 100.0)
+                    else:
+                        activity_threshold = 0
+                    
+                    allowed_nodes = {
+                        act for act, f in node_freq.items()
+                        if f >= activity_threshold
+                    }
+                    
+                    # remove arcs touching filtered nodes
+                    dfg = {
+                        (a, b): f for (a, b), f in dfg.items()
+                        if a in allowed_nodes and b in allowed_nodes
+                    }
+                    
+                    dfg_start_activities = {
+                        act: cnt for act, cnt in dfg_start_activities.items()
+                        if act in allowed_nodes
+                    }
+                    
+                    dfg_end_activities = {
+                        act: cnt for act, cnt in dfg_end_activities.items()
+                        if act in allowed_nodes
+                    }
+                elif (filtermode == 2):
+                    filepath = './dfg/png/' + caseid + '_2_a' + str(activity) + '_p' + str(path) + '.png'
+                    
+                    sorted_paths = sorted(dfg.items(), key=lambda x: x[1], reverse=True)
+                    
+                    k_paths = int(len(sorted_paths) * (path / 100.0))
+                    k_paths = max(k_paths, 1) if len(sorted_paths) > 0 else 0
+                    
+                    # keep top-k paths (as dict)
+                    filtered_paths = dict(sorted_paths[:k_paths]) if k_paths > 0 else {}
+                    
+                    dfg = dict(filtered_paths)
+                    
+                    # BUILD NODE FREQUENCIES FROM FILTERED PATHS (incoming + outgoing)
+                    node_freq = {}
+                    for (a, b), f in dfg.items():
+                        node_freq[a] = node_freq.get(a, 0) + f
+                        node_freq[b] = node_freq.get(b, 0) + f
+                    
+                    sorted_acts = sorted(node_freq.items(), key=lambda x: x[1], reverse=True)
+                
+                    k_acts = int(len(sorted_acts) * (activity / 100.0))
+                    k_acts = max(k_acts, 1) if len(sorted_acts) > 0 else 0
+                
+                    filtered_activities = dict(sorted_acts[:k_acts]) if k_acts > 0 else {}
+                    allowed_nodes = set(filtered_activities.keys())
+                    
+                    dfg = {
+                        (a, b): f for (a, b), f in dfg.items()
+                        if a in allowed_nodes and b in allowed_nodes
+                    }
+                    
+                    # FILTER start/end activity maps to allowed nodes
+                    # final list of nodes: any activity appearing in filtered_dfg + those kept by filtering
+                    final_nodes = set()
+                    for (a, b) in dfg.keys():
+                        final_nodes.add(a)
+                        final_nodes.add(b)
+                    
+                    dfg_start_activities = {
+                        act: cnt for act, cnt in dfg_start_activities.items()
+                        if act in final_nodes
+                    }
+                    
+                    dfg_end_activities = {
+                        act: cnt for act, cnt in dfg_end_activities.items()
+                        if act in final_nodes
+                    }
+            
                 pm4py.save_vis_dfg(dfg, dfg_start_activities, dfg_end_activities, filepath, 'white', 9223372036854775807, 'TB', engine="neato")
                 #return send_file(filepath, mimetype='image/png')
             
@@ -85,22 +185,31 @@ def run_viewer(view, caseid, mode):
             case _:
                 return "Unknown view"
             
-        render_status[(view, caseid)] = "completed"
+        render_status[(view, caseid, activity, path)] = "completed"
     
     except Exception as e:
         tb = traceback.format_exc()
-        return jsonify({'error': str(e), 'trace': tb}), 500
+        print(tb)
     
 @app.route('/<view>/<caseid>/<mode>', methods=['GET'])
 @app.route('/<view>/<caseid>', methods=['GET'])
 def viewer(view, caseid, mode=0):
     try:
+        activity = float(request.args.get("activity", 100))
+        path = float(request.args.get("path", 100))
+        filtermode = int(request.args.get("filtermode", 1))
+        
         # If rendering is ongoing, report status
-        if render_status.get((view, caseid)) == "rendering":
+        if render_status.get((view, caseid, activity, path)) == "rendering":
             return jsonify({'status': 'rendering'}), 202
         match view:
             case 'dfg':
-                filepath = './dfg/png/' + caseid + '.png'
+                if filtermode == 1:
+                    filepath = './dfg/png/' + caseid + '_a' + str(activity) + '_p' + str(path) + '.png'
+                elif filtermode == 2:
+                    filepath = './dfg/png/' + caseid + '_2_a' + str(activity) + '_p' + str(path) + '.png'
+                else:
+                    filepath = './dfg/png/' + caseid + '.png'
                 if os.path.exists(filepath):
                     return send_file(filepath, mimetype='image/png')
                 
@@ -137,7 +246,7 @@ def viewer(view, caseid, mode=0):
             case _:
                 return "Unknown view"
             
-        thread = threading.Thread(target=run_viewer, args=(view, caseid, mode))
+        thread = threading.Thread(target=run_viewer, args=(view, caseid, mode, activity, path, filtermode))
         thread.start()
         return jsonify({'status': 'rendering started'}), 200
                     

@@ -1,7 +1,7 @@
 ## Change readme language
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/fapret/tmde-app-curricula/blob/main/README.md)
 # About the Project
-The **Trajecta** project originated from the Model-Driven Engineering Workshop course from the University of the Republic in Uruguay initially created by [@fapret](https://github.com/fapret) and [@sfreirelp](https://github.com/sfreirelp) under the name tmde curricula app using only Model-Based Systems Engineering (MBSE), and licensed under the GPL-3.0 license for public use. And then continued by Santiago Diaz [@fapret](https://github.com/fapret) as research for the COAL group of the Institute of Computer Engineering from the same University adding its Process Mining (PM) capabilities, extending the app with new functionalities and ehnancing its usability. Developed using tools like Eclipse, Java, Python, Pm4py and Ecore.
+The **Trajecta** project originated from the Model-Driven Engineering Workshop course from the University of the Republic in Uruguay initially created by [@fapret](https://github.com/fapret) and [@sfreirelp](https://github.com/sfreirelp) using only Model-Based Systems Engineering (MBSE). And then continued by Santiago Diaz [@fapret](https://github.com/fapret) as research for the COAL group of the Institute of Computer Engineering from the same University adding its Process Mining (PM) capabilities, extending the app with new functionalities and ehnancing its usability. Developed using tools like Eclipse, Java, Python, Pm4py and Ecore. And licensed under GNU GPL v3.
 
 The goal of the project is to create an application utilizing Model-Based Systems Engineering (MBSE) and Process Mining (PM) to assist students throughout their academic journey, especially by helping them understand which courses they can take, thus providing better guidance and offering a retrospective view of their academic career. And for academic managers, helping them understand, improve and enhance different aspects of the curriculas they work with.
 
@@ -24,6 +24,9 @@ The next libraries of Python are Required:
 
 # International Process Mining Conference
 This application was presented in ICPM 2025, and its corresponding Demo paper its available at documents folder.
+
+# Project Demo Video
+https://github.com/fapret/Trajecta/blob/main/demo.mp4
 
 # Project Images
 Complete curriculum view  
