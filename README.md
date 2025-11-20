@@ -39,6 +39,9 @@ The next pip installs are required to run the Python code:
 
 For the graphs functionalities, Graphviz must be installed on the system.
 
+You must change the front-end addresses to your server address, you can do that searching for `tmde-api.fapret.com` and `127.0.0.1`.
+We plan on a future to have those addresses centraliced, so you only need to change them once.
+
 # Project Demo Video
 https://github.com/fapret/Trajecta/blob/main/demo.mp4
 
