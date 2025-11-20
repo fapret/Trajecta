@@ -197,7 +197,7 @@ def viewer(view, caseid, mode=0):
     try:
         activity = float(request.args.get("activity", 100))
         path = float(request.args.get("path", 100))
-        filtermode = int(request.args.get("filtermode", 1))
+        filtermode = int(request.args.get("filtermode", 2))
         
         # If rendering is ongoing, report status
         if render_status.get((view, caseid, activity, path)) == "rendering":

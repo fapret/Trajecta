@@ -197,6 +197,7 @@ const translations = {
     editUC: "Edit Curricular Unit",
     createCourse: "Create Course",
     Activitieslbl: "Activities:",
-    Pathslbl: "Paths:"
+    Pathslbl: "Paths:",
+    administration: "ADMINISTRATION"
   }
 };
