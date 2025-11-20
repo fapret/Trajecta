@@ -27,11 +27,11 @@ This application was presented in ICPM 2025, and its corresponding Demo paper it
 
 # Building
 We provide Github actions workflow that builds the .WAR for you and gets uploaded as artifact to your github repository so you can upload it to your tomcat server.
-For the Front-End Website, it works as a static website, and we provide both github actions workflow to make a github pages, as an gitlab CI/CD to make a gitlab pages to run it.
+For the Front-End Website, it works as a static website, and we provide both github actions workflow to make a github pages, as an gitlab CI/CD to make a gitlab pages to run it. The website is located at `front` folder inside `proyecto` folder.
 
 # Running
 As mentioned early, you must upload the .WAR file to a tomcat server, this will provide the MDE functionalities.
-On the other side, to run the Process Mining functionalities, you can run them using `python start_scripts.py` located at PM_microservice folder.
+On the other side, to run the Process Mining functionalities, you can run them using `python start_scripts.py` located at `PM_microservice` folder inside `proyecto` folder.
 The next pip installs are required to run the Python code:
 `pip install pm4py`
 `pip install flask`
