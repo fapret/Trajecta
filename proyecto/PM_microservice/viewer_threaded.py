@@ -136,6 +136,11 @@ def run_viewer(view, caseid, mode, activity, path, filtermode):
             case 'perf_dfg':
                 filepath = './dfg/png/' + caseid + '_performance.png'
                 
+                # Load the SAME frequency DFG used in normal DFG diagram
+                freq_dfg_file = './dfg/' + caseid + '.dfg'
+
+                dfg_freq, start_acts_freq, end_acts_freq = pm4py.read_dfg(freq_dfg_file)
+                
                 if mode == "1":
                     filepathLog = './reference/' + caseid + '.xes'
                 else:
@@ -145,19 +150,56 @@ def run_viewer(view, caseid, mode, activity, path, filtermode):
                     event_log = pm4py.format_dataframe(event_log, case_id="ID", activity_key="Activity", timestamp_key="Timestamp", timest_format='%a %b %d %H:%M:%S %Z %Y')
                     event_log = pm4py.convert_to_event_log(event_log)
                     dfg, dfg_start_activities, dfg_end_activities = pm4py.discover_performance_dfg(event_log);
+                    
+                    if filtermode == 2:
+                        filepath = './dfg/png/' + caseid + '_performance_2_a' + str(activity) + '_p' + str(path) + '.png'
+    
+                        # STEP 1 — Filter paths by frequency
+                        sorted_paths = sorted(dfg_freq.items(), key=lambda x: x[1], reverse=True)
+                        k_paths = int(len(sorted_paths) * (path / 100.0))
+                        k_paths = max(k_paths, 1) if len(sorted_paths) > 0 else 0
+                        kept_paths = dict(sorted_paths[:k_paths])
+    
+                        # STEP 2 — Filter nodes by frequency
+                        node_freq = {}
+                        for (a, b), f in kept_paths.items():
+                            node_freq[a] = node_freq.get(a, 0) + f
+                            node_freq[b] = node_freq.get(b, 0) + f
+    
+                        sorted_acts = sorted(node_freq.items(), key=lambda x: x[1], reverse=True)
+                        k_acts = int(len(sorted_acts) * (activity / 100.0))
+                        k_acts = max(k_acts, 1) if len(sorted_acts) > 0 else 0
+                        kept_acts = set(dict(sorted_acts[:k_acts]).keys())
+    
+                        # Keep only surviving edges
+                        final_edges = {
+                            (a, b): f for (a, b), f in kept_paths.items()
+                            if a in kept_acts and b in kept_acts
+                        }
+    
+                        start_acts_freq = {a: c for a, c in start_acts_freq.items() if a in kept_acts}
+                        end_acts_freq = {a: c for a, c in end_acts_freq.items() if a in kept_acts}
+    
+                        # Now filter the performance metrics to match final_edges
+                        dfg = {
+                            (a, b): v for (a, b), v in dfg.items()
+                            if (a, b) in final_edges
+                        }
+                        dfg_start_activities = {a: c for a, c in dfg_start_activities.items() if a in kept_acts}
+                        dfg_end_activities = {a: c for a, c in dfg_end_activities.items() if a in kept_acts}
+                    
                     pm4py.save_vis_performance_dfg(dfg, dfg_start_activities, dfg_end_activities, filepath, rankdir='TB', engine="neato")
                     #return send_file(filepath, mimetype='image/png')
                 
             case 'bpmn':
                 filepath = './bpmn/png/' + caseid + '.png'
                 
-                bpmn_graph = pm4py.read_bpmn('./bpmn/' + caseid + '.bpmn')
+                bpmn_graph = pm4py.read_bpmn('./bpmn/' + caseid + '.bpmn')                
                 pm4py.save_vis_bpmn(bpmn_graph, filepath, 'white', 'TB', engine="neato")
                 #return send_file(filepath, mimetype='image/png')
             
             case 'pnml_alpha':
                 filepath = './pnml/png/' + caseid + '_alpha.png'
-
                 net, im, fm = pm4py.read_pnml('./pnml/' + caseid + '_alpha.pnml')
                 pm4py.save_vis_petri_net(net, im, fm, filepath, rankdir='TB', engine="neato")
                 #return send_file(filepath, mimetype='image/png')
@@ -171,10 +213,9 @@ def run_viewer(view, caseid, mode, activity, path, filtermode):
                 
             case 'pnml_inductive':
                 filepath = './pnml/png/' + caseid + '_inductive.png'
-
                 net, im, fm = pm4py.read_pnml('./pnml/' + caseid + '_inductive.pnml')
                 pm4py.save_vis_petri_net(net, im, fm, filepath, rankdir='TB', engine="neato")
-                #return send_file(filepath, mimetype='image/png')   
+                #return send_file(filepath, mimetype='image/png')
                 
             case 'ptml':
                 filepath = './ptml/png/' + caseid + '.png'
@@ -215,11 +256,15 @@ def viewer(view, caseid, mode=0):
                 
             case 'perf_dfg':
                 filepath = './dfg/png/' + caseid + '_performance.png'
+                if filtermode == 2:
+                    filepath = './dfg/png/' + caseid + '_performance_2_a' + str(activity) + '_p' + str(path) + '.png'
                 if os.path.exists(filepath):
                     return send_file(filepath, mimetype='image/png')
     
             case 'bpmn':
                 filepath = './bpmn/png/' + caseid + '.png'
+                #if filtermode == 2:
+                #    filepath = f'./bpmn/png/{caseid}_2_a{activity}_p{path}.png'
                 if os.path.exists(filepath):
                     return send_file(filepath, mimetype='image/png')
     

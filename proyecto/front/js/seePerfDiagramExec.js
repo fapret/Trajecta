@@ -24,6 +24,9 @@ const result = document.getElementById("resultado");
 
 const seeDiagramPerf = document.getElementById("seePerformanceDiagramDFG");
 
+const acts = document.getElementById("activities");
+const pths = document.getElementById("paths");
+
 const zoomIN = document.getElementById("zoomIN");
 const zoomOUT = document.getElementById("zoomOUT");
 const ResetBtn = document.getElementById("ResetBtn");
@@ -33,7 +36,7 @@ seeDiagramPerf.addEventListener("click", () => {
     result.style.display = "block";
     const loader = document.getElementById("loadingcontent");
     loader.style.display = "flex";
-    seeDiagram(6, 2);
+    seeDiagram(6, 2, acts.value, pths.value);
 });
 /////////////////////////////
 const img = document.getElementById('diagram');
