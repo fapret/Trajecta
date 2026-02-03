@@ -21,25 +21,21 @@
     Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 const allFacultiesSelect = document.getElementById("facultades");
-const selectFacultyBtn = document.getElementById("markFaculty");
 const allCareersSelect = document.getElementById("carreras");
-const selectCareerBtn = document.getElementById("markCarrera");
 const allPlansSelect = document.getElementById("planes");
 const selectPlanBtn = document.getElementById("markPlan");
 
-selectCareerBtn.disabled = true;
 selectPlanBtn.disabled = true;
 
 getFaculties(allFacultiesSelect);
-selectFacultyBtn.addEventListener("click", () => {
+allFacultiesSelect.addEventListener("change", () => {
     allCareersSelect.innerHTML ="";
     allPlansSelect.innerHTML ="";
     getCareers(allCareersSelect, allFacultiesSelect.value);
-    selectCareerBtn.disabled = false;
     selectPlanBtn.disabled = true;
 
 });
-selectCareerBtn.addEventListener("click", () => {
+allCareersSelect.addEventListener("change", () => {
     allPlansSelect.innerHTML ="";
     getPlans(allPlansSelect, allFacultiesSelect.value, allCareersSelect.value);
     selectPlanBtn.disabled = false;

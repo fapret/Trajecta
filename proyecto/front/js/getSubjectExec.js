@@ -24,33 +24,25 @@ const allFacultiesSelect = document.getElementById("facultades");
 const allCareersSelect = document.getElementById("carreras");
 const allPlansSelect = document.getElementById("planes");
 const allMateriasSelect = document.getElementById("materias");
-const selectFacultyBtn = document.getElementById("markFaculty");
-const selectCareerBtn = document.getElementById("markCarrera");
-const selectPlanBtn = document.getElementById("markPlan");
 const selectMateriaBtn = document.getElementById("markMateria");
 
-selectCareerBtn.disabled = true;
-selectPlanBtn.disabled = true;
 selectMateriaBtn.disabled = true;
 
 getFaculties(allFacultiesSelect);
-selectFacultyBtn.addEventListener("click", () => {
+allFacultiesSelect.addEventListener("change", () => {
     allCareersSelect.innerHTML ="";
     allPlansSelect.innerHTML ="";
     allMateriasSelect.innerHTML ="";
     getCareers(allCareersSelect, allFacultiesSelect.value);
-    selectCareerBtn.disabled = false;
-    selectPlanBtn.disabled = true;
 	selectMateriaBtn.disabled = true;
 });
-selectCareerBtn.addEventListener("click", () => {
+allCareersSelect.addEventListener("change", () => {
     allPlansSelect.innerHTML ="";
     allMateriasSelect.innerHTML ="";
     getPlans(allPlansSelect, allFacultiesSelect.value, allCareersSelect.value);
-    selectPlanBtn.disabled = false;
     selectMateriaBtn.disabled = true;
 });
-selectPlanBtn.addEventListener("click", () => {
+allPlansSelect.addEventListener("change", () => {
     allMateriasSelect.innerHTML ="";
     getMaterias(allMateriasSelect, allFacultiesSelect.value, allCareersSelect.value, allPlansSelect.value);
     selectMateriaBtn.disabled = false;
