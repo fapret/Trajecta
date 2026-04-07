@@ -5,13 +5,12 @@ Created on 23 jul. 2025
 '''
 import pm4py
 import os
-import uuid
-import pandas as pd
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify
 from collections import Counter, defaultdict
 from flask_cors import CORS
 
 import traceback #for debugging
+from discovery_access import validate_workspace_access
 
 app = Flask(__name__)
 CORS(app) #Without cors it gets blocked
@@ -19,7 +18,15 @@ CORS(app) #Without cors it gets blocked
 @app.route('/<caseid>/<cu>', methods=['GET'])
 def stats(caseid, cu):
     try:
-        filepath = './imports/' + caseid + '.xes'
+        workspace_uuid = request.args.get('workspace_uuid')
+        if not workspace_uuid:
+            return jsonify({'error': 'Missing workspace_uuid'}), 400
+
+        metadata, error_response = validate_workspace_access(caseid, workspace_uuid)
+        if error_response:
+            return error_response
+
+        filepath = './imports/' + metadata['discovery_id'] + '.xes'
         if os.path.exists(filepath):
             event_log = pm4py.read_xes(filepath)
             event_log = pm4py.format_dataframe(event_log, case_id="ID", activity_key="Activity", timestamp_key="Timestamp", timest_format='%a %b %d %H:%M:%S %Z %Y')

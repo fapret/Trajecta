@@ -122,3 +122,52 @@ def update_discovery_status(discovery_id: str, status: str) -> None:
             conn.commit()
         finally:
             conn.close()
+
+
+def get_discovery_metadata(discovery_id: str) -> dict | None:
+    with _DB_LOCK:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        try:
+            row = conn.execute(
+                """
+                SELECT discovery_id, workspace_uuid, mode, display_name, status, created_at
+                FROM discovery_metadata
+                WHERE discovery_id = ?
+                LIMIT 1
+                """,
+                (discovery_id,),
+            ).fetchone()
+            return dict(row) if row is not None else None
+        finally:
+            conn.close()
+
+
+def list_discoveries(workspace_uuid: str, mode: str | None = None) -> list[dict]:
+    with _DB_LOCK:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        try:
+            if mode:
+                rows = conn.execute(
+                    """
+                    SELECT discovery_id, display_name, status, created_at
+                    FROM discovery_metadata
+                    WHERE workspace_uuid = ? AND mode = ?
+                    ORDER BY created_at DESC
+                    """,
+                    (workspace_uuid, mode),
+                ).fetchall()
+            else:
+                rows = conn.execute(
+                    """
+                    SELECT discovery_id, display_name, status, created_at
+                    FROM discovery_metadata
+                    WHERE workspace_uuid = ?
+                    ORDER BY created_at DESC
+                    """,
+                    (workspace_uuid,),
+                ).fetchall()
+            return [dict(row) for row in rows]
+        finally:
+            conn.close()

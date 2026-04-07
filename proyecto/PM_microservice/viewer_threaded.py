@@ -12,6 +12,7 @@ from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 
 import traceback #for debugging
+from discovery_access import resolve_discovery_xes_path, validate_workspace_access
 
 app = Flask(__name__)
 CORS(app) #Without cors it gets blocked
@@ -22,7 +23,7 @@ for folder in ['./imports', './dfg/png', './bpmn/png', './pnml/png', './ptml/png
     
 render_status = {}
 
-def run_viewer(view, caseid, mode, activity, path, filtermode):
+def run_viewer(view, caseid, mode, activity, path, filtermode, metadata_path):
     try:
         render_status[(view, caseid, activity, path)] = "rendering"
         match view:
@@ -141,10 +142,7 @@ def run_viewer(view, caseid, mode, activity, path, filtermode):
 
                 dfg_freq, start_acts_freq, end_acts_freq = pm4py.read_dfg(freq_dfg_file)
                 
-                if mode == "1":
-                    filepathLog = './reference/' + caseid + '.xes'
-                else:
-                    filepathLog = './imports2/' + caseid + '.xes'
+                filepathLog = metadata_path
                 if os.path.exists(filepathLog):
                     event_log = pm4py.read_xes(filepathLog)
                     event_log = pm4py.format_dataframe(event_log, case_id="ID", activity_key="Activity", timestamp_key="Timestamp", timest_format='%a %b %d %H:%M:%S %Z %Y')
@@ -239,6 +237,19 @@ def viewer(view, caseid, mode=0):
         activity = float(request.args.get("activity", 100))
         path = float(request.args.get("path", 100))
         filtermode = int(request.args.get("filtermode", 2))
+
+        workspace_uuid = request.args.get("workspace_uuid")
+        if not workspace_uuid:
+            return jsonify({'error': 'Missing workspace_uuid'}), 400
+
+        allowed_modes = {'1': {'reference'}, '2': {'log'}}
+        metadata, error_response = validate_workspace_access(caseid, workspace_uuid, allowed_modes.get(mode))
+        if error_response:
+            return error_response
+
+        metadata_path = resolve_discovery_xes_path(metadata)
+        if not metadata_path or not os.path.exists(metadata_path):
+            return jsonify({'error': 'Unknown discovery id'}), 404
         
         # If rendering is ongoing, report status
         if render_status.get((view, caseid, activity, path)) == "rendering":
@@ -291,7 +302,7 @@ def viewer(view, caseid, mode=0):
             case _:
                 return "Unknown view"
             
-        thread = threading.Thread(target=run_viewer, args=(view, caseid, mode, activity, path, filtermode))
+        thread = threading.Thread(target=run_viewer, args=(view, caseid, mode, activity, path, filtermode, metadata_path))
         thread.start()
         return jsonify({'status': 'rendering started'}), 200
                     
