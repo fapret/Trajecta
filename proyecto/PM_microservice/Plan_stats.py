@@ -5,14 +5,13 @@ Created on 10 ago. 2025
 '''
 import pm4py
 import os
-import uuid
-import pandas as pd
 import json
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify
 from collections import Counter, defaultdict
 from flask_cors import CORS
 
 import traceback #for debugging
+from discovery_access import validate_workspace_access
 
 app = Flask(__name__)
 CORS(app) #Without cors it gets blocked
@@ -24,7 +23,15 @@ for folder in ['./stats']:
 @app.route('/<caseid>/<career>/<plan>', methods=['GET'])
 def stats(caseid, career, plan):
     try:
-        filepath = './imports/' + caseid + '.xes'
+        workspace_uuid = request.args.get('workspace_uuid')
+        if not workspace_uuid:
+            return jsonify({'error': 'Missing workspace_uuid'}), 400
+
+        metadata, error_response = validate_workspace_access(caseid, workspace_uuid)
+        if error_response:
+            return error_response
+
+        filepath = './imports/' + metadata['discovery_id'] + '.xes'
         if os.path.exists(filepath):
             filepath2 = './stats/' + caseid + '_plan.json'
             if os.path.exists(filepath2):
