@@ -374,7 +374,24 @@
         <h2 data-lang="discoverReferenceDesc"></h2>
       </div>
         <label data-lang="referenceLog">Log de Referencia:</label>
-        <input id="file" name="file" type="file" accept=".csv" required/>
+
+        <div id="discoverSourceSelector" style="margin-bottom: 1rem;">
+          <label style="margin-right: 1rem;">
+            <input type="radio" name="discoverSource" value="manual_csv" checked>
+            manual_csv
+          </label>
+          <label>
+            <input type="radio" name="discoverSource" value="workspace_log">
+            workspace_log
+          </label>
+        </div>
+
+        <div id="fileInputWrapper">
+          <input id="file" name="file" type="file" accept=".csv" required/>
+        </div>
+
+        <label for="discoverName">Nombre (opcional):</label>
+        <input id="discoverName" name="discoverName" type="text" placeholder="Custom discovery name" />
 
         <div class="buttons-div">
             <button type="button" id="discoverLog" data-lang="discover">
