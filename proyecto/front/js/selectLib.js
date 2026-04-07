@@ -221,7 +221,12 @@ function getMaterias(select, faculty, career, plan){
 }
 
 function getDiscoveries(select, mode = 0){
-  const url = `http://127.0.0.1:9004/${mode}`;
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null || workspaceID === "") {
+    alert("Please select a workspace");
+    return;
+  }
+  const url = `http://127.0.0.1:9004/${mode}?workspace_uuid=${encodeURIComponent(workspaceID)}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
