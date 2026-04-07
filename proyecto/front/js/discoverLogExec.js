@@ -19,8 +19,9 @@
 
 	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
-const discoverLogBtn = document.getElementById("discoverLog");
+const discoverLogBtn = document.getElementById('discoverLog');
 
-discoverLogBtn.addEventListener("click", (event) => {
-    discover_log();
+discoverLogBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    discover_log(0);
 });
