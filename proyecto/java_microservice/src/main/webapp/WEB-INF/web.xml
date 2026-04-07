@@ -110,6 +110,42 @@
     <url-pattern>/Faculty</url-pattern>
   </servlet-mapping>
   <filter>
+    <filter-name>WorkspaceAuthFilter</filter-name>
+    <filter-class>WorkspaceAuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>WorkspaceAuthFilter</filter-name>
+    <url-pattern>/Faculty/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>WorkspaceAuthFilter</filter-name>
+    <url-pattern>/Faculty</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>WorkspaceAuthFilter</filter-name>
+    <url-pattern>/Estudiante</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>WorkspaceAuthFilter</filter-name>
+    <url-pattern>/Estudiante/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>WorkspaceAuthFilter</filter-name>
+    <url-pattern>/EstudianteAddDegree</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>WorkspaceAuthFilter</filter-name>
+    <url-pattern>/GetStudentsLog</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>WorkspaceAuthFilter</filter-name>
+    <url-pattern>/Workspaces</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>WorkspaceAuthFilter</filter-name>
+    <url-pattern>/Workspaces/Unlock</url-pattern>
+  </filter-mapping>
+  <filter>
     <filter-name>CorsFilter</filter-name>
     <filter-class>CorsFilter</filter-class>
   </filter>
