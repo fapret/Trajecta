@@ -1,0 +1,387 @@
+openapi: 3.0.3
+info:
+  title: PM Microservice API
+  version: 1.0.0
+  description: |
+    API de Process Mining (PM) separada por servicios (puertos) para discovery, listados,
+    estadísticas, viewer y conformance.
+
+    ## Scoping por workspace
+    PM usa `workspace_uuid` para segmentar acceso a descubrimientos.
+    Los endpoints validan que `discovery_id` pertenezca al `workspace_uuid` enviado.
+
+    ## Deprecaciones
+    - `GET /{mode}` en servicio de lista está deprecado: era el listado global legado por modo.
+      Use `GET /?workspace_uuid=...&mode=...`.
+    - `POST /{mode}` en servicio de discovery se mantiene por compatibilidad, pero el flujo legado
+      "upload-only" (solo archivo sin `workspace_uuid`) está deprecado. Use `POST /` con
+      `multipart/form-data` incluyendo `workspace_uuid`, `mode` y opcionalmente `name`.
+servers:
+  - url: http://127.0.0.1:9000
+    description: Discovery service
+  - url: http://127.0.0.1:9004
+    description: Discovery list service
+  - url: http://127.0.0.1:9001
+    description: Viewer service
+  - url: http://127.0.0.1:9002
+    description: Basic stats service
+  - url: http://127.0.0.1:9003
+    description: CU stats service
+  - url: http://127.0.0.1:9006
+    description: Plan stats service
+  - url: http://127.0.0.1:9009
+    description: Discovery stats service
+  - url: http://127.0.0.1:9007
+    description: Conformance metrics service
+  - url: http://127.0.0.1:9008
+    description: Conformance alignment viewer service
+paths:
+  /:
+    post:
+      summary: Crear discovery (recomendado)
+      description: |
+        Crea un descubrimiento asincrónico desde CSV.
+        Requiere `workspace_uuid`; `name` y `mode` son opcionales en esta ruta.
+      servers:
+        - url: http://127.0.0.1:9000
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, workspace_uuid]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                workspace_uuid:
+                  type: string
+                  format: uuid
+                mode:
+                  type: string
+                  description: Origen/etiqueta lógica del discovery (ej. manual_csv, workspace_log).
+                name:
+                  type: string
+                  description: Nombre amigable para mostrar.
+      responses:
+        '200':
+          description: Discovery iniciado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryStartResponse'
+
+    get:
+      summary: Listar discoveries por workspace (recomendado)
+      description: Lista discoveries filtrados por workspace y modo opcional.
+      servers:
+        - url: http://127.0.0.1:9004
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+        - name: mode
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: ['1', '2', reference, log]
+      responses:
+        '200':
+          description: Lista de discoveries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiscoveryListItem'
+
+  /{mode}:
+    post:
+      summary: Crear discovery por modo en path (legacy)
+      deprecated: true
+      description: Deprecated; usar `POST /` con `workspace_uuid` y `mode` en form-data.
+      servers:
+        - url: http://127.0.0.1:9000
+      parameters:
+        - $ref: '#/components/parameters/ModePath'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, workspace_uuid]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                workspace_uuid:
+                  type: string
+                  format: uuid
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Discovery iniciado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryStartResponse'
+
+    get:
+      summary: Listar discoveries por modo (legacy)
+      deprecated: true
+      description: Deprecated; devuelve solo IDs. Usar `GET /`.
+      servers:
+        - url: http://127.0.0.1:9004
+      parameters:
+        - $ref: '#/components/parameters/ModePath'
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+      responses:
+        '200':
+          description: IDs de discoveries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+
+  /{caseid}:
+    get:
+      summary: Stats básicas
+      servers:
+        - url: http://127.0.0.1:9002
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+      responses:
+        '200':
+          description: Estadísticas básicas
+
+  /{caseid}/{mode}:
+    get:
+      summary: Stats básicas con modo
+      servers:
+        - url: http://127.0.0.1:9002
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+        - $ref: '#/components/parameters/ModePath'
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+      responses:
+        '200':
+          description: Estadísticas básicas
+
+  /stats/{mode}/{caseid}:
+    get:
+      summary: Stats de discovery detalladas
+      servers:
+        - url: http://127.0.0.1:9009
+      parameters:
+        - $ref: '#/components/parameters/ModePath'
+        - $ref: '#/components/parameters/CaseId'
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+      responses:
+        '200':
+          description: Estadísticas de discovery
+
+  /cu/{caseid}/{cu}:
+    get:
+      summary: Stats por unidad curricular
+      servers:
+        - url: http://127.0.0.1:9003
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+        - name: cu
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+      responses:
+        '200':
+          description: Estadísticas por UC
+
+  /plan/{caseid}/{career}/{plan}:
+    get:
+      summary: Stats de plan
+      servers:
+        - url: http://127.0.0.1:9006
+      parameters:
+        - $ref: '#/components/parameters/CaseId'
+        - name: career
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: plan
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+      responses:
+        '200':
+          description: Estadísticas por plan
+
+  /viewer/{view}/{caseid}:
+    get:
+      summary: Viewer (auto modo log por defecto)
+      servers:
+        - url: http://127.0.0.1:9001
+      parameters:
+        - $ref: '#/components/parameters/ViewPath'
+        - $ref: '#/components/parameters/CaseId'
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+        - $ref: '#/components/parameters/ViewerActivity'
+        - $ref: '#/components/parameters/ViewerPath'
+        - $ref: '#/components/parameters/ViewerFilterMode'
+      responses:
+        '200':
+          description: Imagen o estado de render
+
+  /viewer/{view}/{caseid}/{mode}:
+    get:
+      summary: Viewer con modo explícito
+      servers:
+        - url: http://127.0.0.1:9001
+      parameters:
+        - $ref: '#/components/parameters/ViewPath'
+        - $ref: '#/components/parameters/CaseId'
+        - $ref: '#/components/parameters/ModePath'
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+        - $ref: '#/components/parameters/ViewerActivity'
+        - $ref: '#/components/parameters/ViewerPath'
+        - $ref: '#/components/parameters/ViewerFilterMode'
+      responses:
+        '200':
+          description: Imagen o estado de render
+
+  /conformance/{mode}/{reference}/{caseid}:
+    get:
+      summary: Conformance metrics (TBR/fitness/precision)
+      servers:
+        - url: http://127.0.0.1:9007
+      parameters:
+        - $ref: '#/components/parameters/ModePath'
+        - name: reference
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/CaseId'
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+      responses:
+        '200':
+          description: Métricas de conformance
+
+  /conformance/alignment/{mode}/{reference}/{caseid}:
+    get:
+      summary: Conformance alignment viewer
+      servers:
+        - url: http://127.0.0.1:9008
+      parameters:
+        - $ref: '#/components/parameters/ModePath'
+        - name: reference
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/CaseId'
+        - $ref: '#/components/parameters/WorkspaceUuidQuery'
+      responses:
+        '200':
+          description: SVG de alignments o estado de render
+
+components:
+  securitySchemes:
+    NoAuthWorkspaceScoped:
+      type: apiKey
+      in: query
+      name: workspace_uuid
+      description: |
+        PM actualmente no usa bearer/JWT propio.
+        El control de acceso se realiza por scoping de `workspace_uuid` + validación de propiedad
+        del `discovery_id` en metadata.
+
+  parameters:
+    WorkspaceUuidQuery:
+      name: workspace_uuid
+      in: query
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: Workspace scope obligatorio.
+    CaseId:
+      name: caseid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    ModePath:
+      name: mode
+      in: path
+      required: true
+      schema:
+        type: string
+        description: Normalmente `1` (reference) o `2` (log).
+    ViewPath:
+      name: view
+      in: path
+      required: true
+      schema:
+        type: string
+        enum: [dfg, perf_dfg, bpmn, pnml_alpha, pnml_heuristics, pnml_inductive, ptml]
+    ViewerActivity:
+      name: activity
+      in: query
+      required: false
+      schema:
+        type: number
+        default: 100
+    ViewerPath:
+      name: path
+      in: query
+      required: false
+      schema:
+        type: number
+        default: 100
+    ViewerFilterMode:
+      name: filtermode
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 2
+
+  schemas:
+    DiscoveryStartResponse:
+      type: object
+      properties:
+        discovery_id:
+          type: string
+          format: uuid
+        display_name:
+          type: string
+        status:
+          type: string
+          example: started
+    DiscoveryListItem:
+      type: object
+      required: [discovery_id, display_name]
+      properties:
+        discovery_id:
+          type: string
+          format: uuid
+        display_name:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time

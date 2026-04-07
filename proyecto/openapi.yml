@@ -1,698 +1,503 @@
 openapi: 3.0.3
 info:
-  title: Currícula docs
-  description: |-
-    Especificación de la API de Currícula
-  version: 1.2.0
+  title: Currícula (EM) API
+  description: |
+    Especificación de la API del microservicio EM (`curricula_microservice`).
+
+    ## Seguridad por workspace
+    - Si un workspace **no** tiene contraseña, las operaciones con `uuid` funcionan sin token.
+    - Si un workspace **sí** tiene contraseña, primero se debe obtener un token con `POST /Workspaces/Unlock`
+      y luego enviarlo como `Authorization: Bearer <token>` en los endpoints con `uuid`.
+  version: 2.0.0
 servers:
+  - url: https://tmde-api.fapret.com:8443/curricula_microservice
+    description: Producción
   - url: http://localhost:8080/curricula_microservice
-    description: Server
+    description: Local
+security:
+  - WorkspaceBearerAuth: []
 paths:
-  /Estudiante:
+  /Workspaces:
     get:
-      summary: Crear modelo de estudiante
-      operationId: createStudentModel
-      parameters:
-        - name: name
-          in: query
-          description: Nombre de Estudiante
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: query
-          description: ID de Estudiante
-          required: true
-          schema:
-            type: string
+      summary: Listar workspaces
+      description: Lista IDs de workspace disponibles.
+      security: []
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Estudiante'
-  /Faculty:
-    get:
-      summary: Obtener información de una facultad
-      operationId: getFaculty
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de Facultad
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Facultad'
-        '404':
-          description: Facultad not found
-  /Faculty/ucs:
-    get:
-      summary: Obtener información de una UC
-      operationId: getuc
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: uc
-          in: query
-          description: Id de UC
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/uc'
-        '404':
-          description: uc not found
-  /Faculty/Carrera:
-    get:
-      summary: Obtener información de una carrera
-      operationId: getCarrera
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Carrera'
-        '404':
-          description: Career not found
-  /Faculty/Carrera/Plan:
-    get:
-      summary: Obtener información de un plan
-      operationId: getPlan
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Plan
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Plan'
-        '404':
-          description: Plan not found
-  /Faculty/Carrera/Plan/ucs:
-    get:
-      summary: Obtener información de las UCs de un plan
-      operationId: getUCPlan
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Plan
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
+          description: Lista de UUIDs
           content:
             application/json:
               schema:
                 type: array
                 items:
                   type: string
-                  example: GAL1
-        '404':
-          description: Plan not found
-  /Faculty/Carrera/Plan/Subjects:
+                  format: uuid
+    post:
+      summary: Crear workspace
+      description: Crea un workspace con ID UUID y contraseña opcional.
+      security: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [uuid]
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+                password:
+                  type: string
+                  description: Contraseña opcional para proteger el workspace.
+          application/json:
+            schema:
+              type: object
+              required: [uuid]
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Workspace creado
+
+  /Workspaces/Unlock:
+    post:
+      summary: Obtener token para workspace protegido
+      description: Devuelve token bearer de 1 hora para un workspace protegido con contraseña.
+      security: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [uuid, password]
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+                password:
+                  type: string
+          application/json:
+            schema:
+              type: object
+              required: [uuid, password]
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Token emitido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workspace:
+                    type: string
+                    format: uuid
+                  token:
+                    type: string
+                  iat:
+                    type: integer
+                  exp:
+                    type: integer
+
+  /Faculty:
     get:
-      summary: Obtener información de una materia en un plan
-      operationId: getPlanSubject
+      summary: Obtener facultades o detalle de facultad
       parameters:
+        - $ref: '#/components/parameters/Uuid'
         - name: faculty
           in: query
-          description: Nombre de facultad
+          schema:
+            type: string
+          required: false
+      responses:
+        '200':
+          description: Éxito
+
+  /Faculty/Carrera:
+    get:
+      summary: Obtener carrera
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Faculty'
+        - name: career
+          in: query
           required: true
           schema:
             type: string
+      responses:
+        '200':
+          description: Éxito
+
+  /Faculty/Carrera/Plan:
+    get:
+      summary: Obtener plan
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Faculty'
         - name: career
           in: query
-          description: Nombre de carrera
           required: true
           schema:
             type: string
         - name: plan
           in: query
-          description: Plan
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Éxito
+
+  /Faculty/Carrera/Plan/ucs:
+    get:
+      summary: Obtener UCs de plan
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Faculty'
+        - name: career
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: plan
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: withName
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: valid_flag
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Éxito
+
+  /Faculty/Carrera/Plan/Subjects:
+    get:
+      summary: Obtener materia(s) en plan
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Faculty'
+        - name: career
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: plan
+          in: query
           required: true
           schema:
             type: integer
         - name: subject
           in: query
-          description: Nombre de materia
-          required: true
+          required: false
           schema:
             type: string
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/materia'
-        '404':
-          description: subject not found
-  /Estudiante/AddPlan:
-    post:
-      summary: Agrega una inscripción a plan a un modelo de estudiante
-      operationId: addStudentPlan
+          description: Éxito
+
+  /Faculty/ucs:
+    get:
+      summary: Obtener UC o listado de UCs
       parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Id de plan
-          required: true
-          schema:
-            type: integer
-        - name: date
-          in: query
-          description: Fecha de inscripción
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Modelo .xmi de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/RootEstudiante'
-        '404':
-          description: Plan not found
-  /Estudiante/AddEvaluation:
-    post:
-      summary: Agrega una evaluación a un modelo de estudiante
-      operationId: addStudentEval
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Id de plan
-          required: true
-          schema:
-            type: integer
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Faculty'
         - name: curricularUnit
           in: query
-          description: Id de UC
-          required: true
+          required: false
           schema:
             type: string
-        - name: evaluation
+        - name: withName
           in: query
-          description: Id de evaluación
-          required: true
+          required: false
           schema:
-            type: string
-        - name: nota
-          in: query
-          description: Nota obtenida
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        description: Modelo .xmi de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
+            type: boolean
       responses:
         '200':
-          description: Success
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/RootEstudiante'
-        '404':
-          description: Subject not found
-  /Faculty/ucs/eval:
-    post:
-      summary: Evalúa los requerimientos de un estudiante en una UC en específico en el modelo
-      operationId: eval
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: curricularUnit
-          in: query
-          description: Id de UC
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Modelo .xmi de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: boolean
-                example: true
-        '404':
-          description: Subject not found
+          description: Éxito
+
   /Faculty/Carrera/Plan/eval:
     post:
-      summary: Evalúa qué UCs puede cursar un estudiante
-      operationId: evalPlan
+      summary: Evaluar qué UCs puede cursar un estudiante
       parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Faculty'
         - name: career
           in: query
-          description: Nombre de carrera
           required: true
           schema:
             type: string
         - name: plan
           in: query
-          description: Plan
           required: true
           schema:
             type: integer
-      requestBody:
-        description: Modelo de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: valid_flag
+          in: query
+          required: false
+          schema:
+            type: boolean
       responses:
         '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: string
-                  example: CDIV
-        '400':
-          description: Malformed request
-        '404':
-          description: Plan not found
+          description: Éxito
+
   /Faculty/Carrera/Plan/evaluations:
-    post:
-      summary: Obtiene las evaluaciones de un estudiante (sin fecha)
-      operationId: evaluations
+    get:
+      summary: Obtener evaluaciones de estudiante
       parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Faculty'
         - name: career
           in: query
-          description: Nombre de carrera
           required: true
           schema:
             type: string
         - name: plan
           in: query
-          description: Plan
           required: true
           schema:
             type: integer
-      requestBody:
-        description: Modelo .xmi de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
-          description: Success
+          description: Éxito
+
+  /Faculty/ucs/eval:
+    post:
+      summary: Evaluar requerimientos de una UC para un estudiante
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Faculty'
+        - name: curricularUnit
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Éxito
+
+  /Estudiante:
+    get:
+      summary: Obtener modelo de estudiante
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: Éxito
+    post:
+      summary: Crear/reemplazar estudiante
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Éxito
+
+  /Estudiante/AddPlan:
+    post:
+      summary: Agregar inscripción a plan
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [uuid, faculty, career, plan, date, id]
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+                faculty:
+                  type: string
+                career:
+                  type: string
+                plan:
+                  type: integer
+                date:
+                  type: string
+                id:
+                  type: string
+      responses:
+        '200':
+          description: Éxito
+
+  /Estudiante/AddCourse:
+    post:
+      summary: Agregar inscripción a curso
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [uuid, faculty, career, plan, curricularunit, course, date, id]
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+                faculty:
+                  type: string
+                career:
+                  type: string
+                plan:
+                  type: integer
+                curricularunit:
+                  type: string
+                course:
+                  type: string
+                date:
+                  type: string
+                id:
+                  type: string
+      responses:
+        '200':
+          description: Éxito
+
+  /Estudiante/AddEvaluation:
+    post:
+      summary: Agregar evaluación
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [uuid, faculty, career, plan, curricularunit, evaluation, type, nota, id]
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+                faculty:
+                  type: string
+                career:
+                  type: string
+                plan:
+                  type: integer
+                curricularunit:
+                  type: string
+                evaluation:
+                  type: string
+                type:
+                  type: integer
+                nota:
+                  type: integer
+                id:
+                  type: string
+      responses:
+        '200':
+          description: Éxito
+
+  /EstudianteAddDegree:
+    post:
+      summary: Registrar egreso/título
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [uuid, faculty, career, plan, date, id]
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+                faculty:
+                  type: string
+                career:
+                  type: string
+                plan:
+                  type: integer
+                date:
+                  type: string
+                id:
+                  type: string
+      responses:
+        '200':
+          description: Éxito
+
+  /GetStudentsLog:
+    post:
+      summary: Descargar log de estudiantes del workspace
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [uuid]
+              properties:
+                uuid:
+                  type: string
+                  format: uuid
+      responses:
+        '200':
+          description: CSV generado
           content:
-            application/json:
+            text/csv:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/StudentEvaluation'
-        '404':
-          description: Plan not found
+                type: string
+
 components:
-  schemas:
-    uc:
-      required:
-        - name
-        - id
-      type: object
-      properties:
-        Name:
-          type: string
-          example: CALCULO DIV
-        Id:
-          type: string
-          example: 1061
-        Cred:
-          type: integer
-          example: 13
-        Requirement:
-            $ref: '#/components/schemas/Requerimiento'
-        Course:
-          type: array
-          items:
-            $ref: '#/components/schemas/Course'
-        ExamEvaluation:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExamEvaluation'
-    Course:
-      type: object
-      properties:
-        year:
-          type: integer
-          example: 2023
-        edition:
-          type: integer
-          example: 0
-        courseEvaluations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourseEvaluation'
-    Facultad:
-      required:
-        - name
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Facultad de Ingenieria
-        Careers:
-          type: array
-          items:
-            type: string
-            example: Ing. Computacion
-        FacultyCU:
-          type: array
-          items:
-            type: string
-            example: CDIV
-    Carrera:
-      required:
-        - name
-      type: object
-      properties:
-        Name:
-          type: string
-          example: Ing. En Computacion
-        Plans:
-          type: array
-          items:
-            type: integer
-            example: 1997
-    PlanAbstract:
-      type: object
-      required:
-        - year
-      properties:
-        Year:
-          type: integer
-          example: 1997
-        Career:
-          type: string
-          example: Ing. Computacion
-        Type:
-          type: string
-          example: CreditsPlan
-    Plan:
-      oneOf:
-        - $ref: '#/components/schemas/PlanCreditos'
-        - $ref: '#/components/schemas/Planucs'
-    PlanCreditos:
-      allOf:
-        - $ref: '#/components/schemas/PlanAbstract'
-        - type: object
-          properties:
-            MinCredits:
-              type: integer
-            Subjects:
-              type: array
-              items:
-                type: string
-                example: 4083
-    Planucs:
-      allOf:
-        - $ref: '#/components/schemas/PlanAbstract'
-        - type: object
-          properties:
-            "Curricular Units":
-              type: array
-              items:
-                type: string
-                example: 1061
-    materia:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        Id:
-          type: integer
-          example: 4083
-        Name:
-          type: string
-          example: MATEMATICA
-        MinCredits:
-          type: integer
-          example: 70
-        CurricularUnits:
-          type: array
-          items:
-            type: string
-            example: 1030
-        Subjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/materia'
-    Requerimiento:
-      type: string
-    EvaluationFather:
-      type: object
-      required:
-        - date
-      properties:
-        date:
-          type: string
-          example: "0001-01-01T00:00:00.000-0300"
-    Evaluation:
-      type: object
-      properties:
-        type:
-          type: string
-          example: "asignaturas:CourseEvaluation"
-          xml:
-            attribute: true
-        href:
-          type: string
-          example: "model.xmi#//@Faculty.0/@FacultyCU.0/@Course.0/@CourseEvaluation.0"
-          xml:
-            attribute: true
-    StudentEvaluation:
-      type: object
-      required:
-        - id
-        - type
-        - grade
-      properties:
-        id:
-          type: string
-          example: GAL1
-        type:
-          type: string
-          example: CourseEvaluation
-        grade:
-          type: integer
-          example: 6
-    ExamEvaluation:
-      $ref: '#/components/schemas/EvaluationFather'
-    CourseEvaluation:
-      $ref: '#/components/schemas/EvaluationFather'
-    RootEstudiante:
-      type: object
-      properties:
-        Student:
-          $ref: '#/components/schemas/Estudiante'
-    PlanInscription:
-      type: object
-      required:
-        - date
-      properties:
-        plan:
-          type: object
-          required:
-            - "type"
-            - href
-          properties:
-            "type":
-              type: string
-              example: "asignaturas:CreditsPlan"
-              xml:
-                attribute: true
-            href:
-              type: string
-              example: "model.xmi#//@Faculty.0/@Careers.0/@plan.0"
-              xml:
-                attribute: true
-        date:
-          type: string
-          example: "0001-01-01T00:00:00.000-0300"
-          xml:
-            attribute: true
-        PlanCourseInscription:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanCourseInscription'
-        PlanStudentEvaluation:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanStudentEvaluation'
-    PlanCourseInscription:
-      type: object
-      required:
-        - date
-      properties:
-        CUCourse:
-          type: object
-          required:
-            - href
-          properties:
-            href:
-              type: string
-              example: "model.xmi#//@Faculty.0/@FacultyCU.0/@Course.0"
-              xml:
-                attribute: true
-        date:
-          type: string
-          example: "0001-01-01T00:00:00.000-0300"
-          xml:
-            attribute: true
-    PlanStudentEvaluation:
-      type: object
-      required:
-        - grade
-        - evaluation
-      properties:
-        grade:
-          type: integer
-          example: 6
-          xml:
-            attribute: true
-        evaluation:
-          $ref: '#/components/schemas/Evaluation'
-    Estudiante:
-      type: object
-      required:
-        - id
-        - name
-        - carrera
-      properties:
-        id:
-          type: string
-          example: test
-          xml:
-            attribute: true
-        name:
-          type: string
-          example: fulano
-          xml:
-            attribute: true
-        StudentPlanInscription:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanInscription'
+  securitySchemes:
+    WorkspaceBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token de workspace emitido por `/Workspaces/Unlock`.
+  parameters:
+    Uuid:
+      name: uuid
+      in: query
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: UUID del workspace (scope de datos y autorización).
+    Faculty:
+      name: faculty
+      in: query
+      required: true
+      schema:
+        type: string
