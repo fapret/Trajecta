@@ -27,7 +27,7 @@ function compareDiscovers() {
 
     const resultadoDiv = document.getElementById("resultado");
 
-    const url = `http://127.0.0.1:9005/${uuidA}/${uuidB}`;
+    const url = buildPMWorkspaceUrl(`http://127.0.0.1:9005/${uuidA}/${uuidB}`);
     fetch(url)
     .then(response => response.text())
     .then(text => {

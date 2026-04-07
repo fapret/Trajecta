@@ -40,7 +40,7 @@ function seeDiagram(mode) {
         default:
             return;
     }
-    const url = `http://127.0.0.1:9008/${modestr}/${refuuid}/${uuid}`;
+    const url = buildPMWorkspaceUrl(`http://127.0.0.1:9008/${modestr}/${refuuid}/${uuid}`);
     img.src = url;
     img.classList.remove('hidden');
     diagramsButtons.classList.remove('hidden');

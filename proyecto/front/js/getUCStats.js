@@ -26,7 +26,7 @@ function displayUCStats(){
     const uc = allUCSelect.value;
     const allDiscoveriesSelect = document.getElementById("discoveries");
     const uuid = allDiscoveriesSelect.value;
-    const url = `http://127.0.0.1:9003/${uuid}/${uc}`;
+    const url = buildPMWorkspaceUrl(`http://127.0.0.1:9003/${uuid}/${uc}`);
     fetch(url)
     .then(response => response.json())
     .then(data => {

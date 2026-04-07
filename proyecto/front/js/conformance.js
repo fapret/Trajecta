@@ -24,7 +24,7 @@ function seeConformance(mode) {
     const allReferencesSelect = document.getElementById("references");
     const uuid = allDiscoveriesSelect.value;
     const refuuid = allReferencesSelect.value;
-    const url = `http://127.0.0.1:9007/${mode}/${refuuid}/${uuid}`;
+    const url = buildPMWorkspaceUrl(`http://127.0.0.1:9007/${mode}/${refuuid}/${uuid}`);
     fetch(url)
     .then(response => response.json())
     .then(data => {
