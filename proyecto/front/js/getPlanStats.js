@@ -26,7 +26,7 @@ function displayPlanStats(){
     const plan = allPlansSelect.value;
     const allCareersSelect = document.getElementById("carreras");
     const career = allCareersSelect.value;
-    const url = `http://127.0.0.1:9006/${uuid}/${career}/${plan}`;
+    const url = buildPMWorkspaceUrl(`http://127.0.0.1:9006/${uuid}/${career}/${plan}`);
     fetch(url)
     .then(response => response.json())
     .then(data => {

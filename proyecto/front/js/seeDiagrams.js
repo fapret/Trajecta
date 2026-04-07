@@ -50,7 +50,7 @@ function seeDiagram(mode, type=0, activity=100, paths=100) {
         default:
             return;
     }
-    const url = `http://127.0.0.1:9001/${modestr}/${uuid}/${type}?activity=${activity}&path=${paths}`;
+    const url = buildPMWorkspaceUrl(`http://127.0.0.1:9001/${modestr}/${uuid}/${type}?activity=${activity}&path=${paths}`);
     img.src = url;
     img.classList.remove('hidden');
     diagramsButtons.classList.remove('hidden');

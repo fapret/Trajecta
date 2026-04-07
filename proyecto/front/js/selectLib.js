@@ -22,6 +22,17 @@
 */
 const fetchCacheUC = new Map();
 
+
+function buildPMWorkspaceUrl(baseUrl) {
+  const workspaceID = localStorage.getItem('selectedWorkspace');
+  if (workspaceID == null) {
+    alert("Please select a workspace");
+    throw new Error("selectedWorkspace missing in localStorage");
+  }
+  const separator = baseUrl.includes('?') ? '&' : '?';
+  return `${baseUrl}${separator}workspace_uuid=${encodeURIComponent(workspaceID)}`;
+}
+
 function addToSelect(select, idelement){
   let option = document.createElement('option');
   option.setAttribute('value', idelement);
