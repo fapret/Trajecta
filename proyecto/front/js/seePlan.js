@@ -33,7 +33,7 @@ function consultarPlan() {
       return;
   }
 
-	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=${faculty}&career=${career}&plan=${plan}&valid_flag=true&uuid=${workspaceID}`;
+	const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=${faculty}&career=${career}&plan=${plan}&valid_flag=true&uuid=${workspaceID}`;
     var nodos = [];
     var nodos_0 = [];
     var nodos_process = {};
@@ -83,7 +83,7 @@ function consultarPlan() {
               }
 
               for (let i = 0; i < materias.length; i++) {
-                let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&uuid=${workspaceID}&curricularUnit=` + materias[i];
+                let apiUrl = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${faculty}&uuid=${workspaceID}&curricularUnit=` + materias[i];
                 fetch(apiUrl)
                         .then(async response => {
                           if (!response.ok) {

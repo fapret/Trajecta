@@ -40,7 +40,7 @@ function mostrar_trayectoria() {
     var nodos_final = [];
     var aristas = [];
 
-    const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/eval`;
+    const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera/Plan/eval`;
     var formData = new FormData();
     formData.append('faculty', facultyName);
     formData.append('career', career);
@@ -100,7 +100,7 @@ function mostrar_trayectoria() {
             }
 
             for (let i = 0; i < materias.length; i++) {
-                let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&uuid=${workspaceID}&curricularUnit=` + materias[i];
+                let apiUrl = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${facultyName}&uuid=${workspaceID}&curricularUnit=` + materias[i];
                 fetch(apiUrl)
                     .then(response => {
                         if (!response.ok) {
@@ -152,9 +152,9 @@ function mostrar_trayectoria() {
                             // Realiza la segunda solicitud AJAX con formDataCopy
                             var xhr2 = new XMLHttpRequest();
                             if(document.getElementById("ci").value != undefined){
-                                xhr2.open('GET', `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/evaluations?uuid=${workspaceID}&faculty=${facultyName}&career=${career}&plan=${plan}&id=${document.getElementById("ci").value}`, true);
+                                xhr2.open('GET', `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera/Plan/evaluations?uuid=${workspaceID}&faculty=${facultyName}&career=${career}&plan=${plan}&id=${document.getElementById("ci").value}`, true);
                             } else {
-                                xhr2.open('GET', `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/evaluations?uuid=${workspaceID}&faculty=${facultyName}&career=${career}&plan=${plan}`, true);
+                                xhr2.open('GET', `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera/Plan/evaluations?uuid=${workspaceID}&faculty=${facultyName}&career=${career}&plan=${plan}`, true);
                             }
                             xhr2.onload = async function () {
                                 if (xhr2.status >= 200 && xhr2.status < 300) {
@@ -289,7 +289,7 @@ async function getMaxRequirementLevel(facultyName, cu_id) {
             alert("Invalid workspace");
             return 0;
         }
-        let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}&uuid=${workspaceID}`;
+        let apiUrl = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}&uuid=${workspaceID}`;
         const response = await fetch(apiUrl);
   
         if (!response.ok) {

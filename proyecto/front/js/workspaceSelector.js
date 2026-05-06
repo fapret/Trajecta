@@ -19,8 +19,8 @@
 
     Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
-const WORKSPACES_BASE_URL = 'https://tmde-api.fapret.com:8443/curricula_microservice/Workspaces';
-const API_BASE_PREFIX = 'https://tmde-api.fapret.com:8443/curricula_microservice/';
+const WORKSPACES_BASE_URL = 'http://127.0.0.1:8080/curricula_microservice/Workspaces';
+const API_BASE_PREFIX = 'http://127.0.0.1:8080/curricula_microservice/';
 const WORKSPACE_TOKEN_STORAGE_PREFIX = 'workspaceToken:';
 
 const selector = document.getElementById('workspaceSelector');

@@ -53,7 +53,7 @@ function getFaculties(select) {
     alert("Please select a workspace");
     return;
   }
-  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty?uuid=${workspaceID}`;
+  const url = `http://127.0.0.1:8080/curricula_microservice/Faculty?uuid=${workspaceID}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -72,7 +72,7 @@ function getUCS(select, faculty){
     alert("Please select a workspace");
     return;
   }
-	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&withName=True&uuid=${workspaceID}`;
+	const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${faculty}&withName=True&uuid=${workspaceID}`;
 	fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -99,7 +99,7 @@ function getCareers(select, faculty){
     alert("Please select a workspace");
     return;
   }
-  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty?faculty=${faculty}&uuid=${workspaceID}`;
+  const url = `http://127.0.0.1:8080/curricula_microservice/Faculty?faculty=${faculty}&uuid=${workspaceID}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -118,7 +118,7 @@ function getPlans(select, faculty, career){
     alert("Please select a workspace");
     return;
   }
-  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera?faculty=${faculty}&career=${career}&uuid=${workspaceID}`;
+  const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera?faculty=${faculty}&career=${career}&uuid=${workspaceID}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -137,7 +137,7 @@ function getPlanUCS(select, faculty, career, plan){
     alert("Please select a workspace");
     return;
   }
-	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=${faculty}&career=${career}&plan=${plan}&withName=True&uuid=${workspaceID}`;
+	const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=${faculty}&career=${career}&plan=${plan}&withName=True&uuid=${workspaceID}`;
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -164,7 +164,7 @@ function getEvaluations(select, typeBoolean, UC, faculty){
     alert("Please select a workspace");
     return;
   }
-	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
+	const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -198,7 +198,7 @@ function getCourses(select, UC, faculty){
     alert("Please select a workspace");
     return;
   }
-  const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
+  const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
   fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -218,7 +218,7 @@ function getMaterias(select, faculty, career, plan){
     alert("Please select a workspace");
     return;
   }
-	const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}&uuid=${workspaceID}`;
+	const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}&uuid=${workspaceID}`;
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -286,7 +286,7 @@ async function getMaxRequirementLevel(facultyName, cu_id) {
         alert("Please select a workspace");
         return;
       }
-      let apiUrl = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}&uuid=${workspaceID}`;
+      let apiUrl = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}&uuid=${workspaceID}`;
       const response = await fetch(apiUrl);
 
       if (!response.ok) {

@@ -52,7 +52,7 @@ def run_discovery(file_path, discovery_id, mode):
             "Curricular Unit": str,
             "Course Edition": 'Int64',
             "Course Year": 'Int64',
-            "Grade": 'Int64',
+            "Grade": 'Float64',
             "Credits": 'Int64',
         }
 

@@ -20,7 +20,7 @@
 	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 
-const EM_STUDENTS_LOG_URL = 'https://tmde-api.fapret.com:8443/curricula_microservice/GetStudentsLog';
+const EM_STUDENTS_LOG_URL = 'http://127.0.0.1:8080/curricula_microservice/GetStudentsLog';
 
 function getDiscoverSourceMode() {
     const source = document.querySelector('input[name="discoverSource"]:checked');
