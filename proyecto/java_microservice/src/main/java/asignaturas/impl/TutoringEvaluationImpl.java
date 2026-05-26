@@ -3,8 +3,8 @@
 package asignaturas.impl;
 
 import asignaturas.AsignaturasPackage;
-import asignaturas.CurricularUnit;
-import asignaturas.ExamEvaluation;
+import asignaturas.Course;
+import asignaturas.TutoringEvaluation;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -18,24 +18,24 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Exam Evaluation</b></em>'.
+ * An implementation of the model object '<em><b>Tutoring Evaluation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link asignaturas.impl.ExamEvaluationImpl#getCurricularunit <em>Curricularunit</em>}</li>
+ *   <li>{@link asignaturas.impl.TutoringEvaluationImpl#getCourse <em>Course</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation {
+public class TutoringEvaluationImpl extends EvaluationImpl implements TutoringEvaluation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExamEvaluationImpl() {
+	protected TutoringEvaluationImpl() {
 		super();
 	}
 
@@ -46,7 +46,7 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return AsignaturasPackage.Literals.EXAM_EVALUATION;
+		return AsignaturasPackage.Literals.TUTORING_EVALUATION;
 	}
 
 	/**
@@ -54,10 +54,10 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CurricularUnit getCurricularunit() {
-		if (eContainerFeatureID() != AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT)
+	public Course getCourse() {
+		if (eContainerFeatureID() != AsignaturasPackage.TUTORING_EVALUATION__COURSE)
 			return null;
-		return (CurricularUnit) eInternalContainer();
+		return (Course) eInternalContainer();
 	}
 
 	/**
@@ -65,9 +65,8 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCurricularunit(CurricularUnit newCurricularunit, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newCurricularunit,
-				AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT, msgs);
+	public NotificationChain basicSetCourse(Course newCourse, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newCourse, AsignaturasPackage.TUTORING_EVALUATION__COURSE, msgs);
 		return msgs;
 	}
 
@@ -76,24 +75,23 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCurricularunit(CurricularUnit newCurricularunit) {
-		if (newCurricularunit != eInternalContainer()
-				|| (eContainerFeatureID() != AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT
-						&& newCurricularunit != null)) {
-			if (EcoreUtil.isAncestor(this, newCurricularunit))
+	public void setCourse(Course newCourse) {
+		if (newCourse != eInternalContainer()
+				|| (eContainerFeatureID() != AsignaturasPackage.TUTORING_EVALUATION__COURSE && newCourse != null)) {
+			if (EcoreUtil.isAncestor(this, newCourse))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newCurricularunit != null)
-				msgs = ((InternalEObject) newCurricularunit).eInverseAdd(this,
-						AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION, CurricularUnit.class, msgs);
-			msgs = basicSetCurricularunit(newCurricularunit, msgs);
+			if (newCourse != null)
+				msgs = ((InternalEObject) newCourse).eInverseAdd(this, AsignaturasPackage.COURSE__TUTORINGEVALUATION,
+						Course.class, msgs);
+			msgs = basicSetCourse(newCourse, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT,
-					newCurricularunit, newCurricularunit));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.TUTORING_EVALUATION__COURSE,
+					newCourse, newCourse));
 	}
 
 	/**
@@ -104,10 +102,10 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
+		case AsignaturasPackage.TUTORING_EVALUATION__COURSE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetCurricularunit((CurricularUnit) otherEnd, msgs);
+			return basicSetCourse((Course) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -120,8 +118,8 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			return basicSetCurricularunit(null, msgs);
+		case AsignaturasPackage.TUTORING_EVALUATION__COURSE:
+			return basicSetCourse(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -134,9 +132,9 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			return eInternalContainer().eInverseRemove(this, AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION,
-					CurricularUnit.class, msgs);
+		case AsignaturasPackage.TUTORING_EVALUATION__COURSE:
+			return eInternalContainer().eInverseRemove(this, AsignaturasPackage.COURSE__TUTORINGEVALUATION,
+					Course.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -149,8 +147,8 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			return getCurricularunit();
+		case AsignaturasPackage.TUTORING_EVALUATION__COURSE:
+			return getCourse();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -163,8 +161,8 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			setCurricularunit((CurricularUnit) newValue);
+		case AsignaturasPackage.TUTORING_EVALUATION__COURSE:
+			setCourse((Course) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -178,8 +176,8 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			setCurricularunit((CurricularUnit) null);
+		case AsignaturasPackage.TUTORING_EVALUATION__COURSE:
+			setCourse((Course) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -193,10 +191,10 @@ public class ExamEvaluationImpl extends EvaluationImpl implements ExamEvaluation
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AsignaturasPackage.EXAM_EVALUATION__CURRICULARUNIT:
-			return getCurricularunit() != null;
+		case AsignaturasPackage.TUTORING_EVALUATION__COURSE:
+			return getCourse() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ExamEvaluationImpl
+} //TutoringEvaluationImpl

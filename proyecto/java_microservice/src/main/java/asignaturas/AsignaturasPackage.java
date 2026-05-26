@@ -177,13 +177,22 @@ public interface AsignaturasPackage extends EPackage {
 	int PLAN__CAREER_PARENT = 2;
 
 	/**
+	 * The feature id for the '<em><b>Gradescale</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLAN__GRADESCALE = 3;
+
+	/**
 	 * The number of structural features of the '<em>Plan</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLAN_FEATURE_COUNT = 3;
+	int PLAN_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Plan</em>' class.
@@ -230,6 +239,15 @@ public interface AsignaturasPackage extends EPackage {
 	 * @ordered
 	 */
 	int CREDITS_PLAN__CAREER_PARENT = PLAN__CAREER_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Gradescale</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CREDITS_PLAN__GRADESCALE = PLAN__GRADESCALE;
 
 	/**
 	 * The feature id for the '<em><b>Min Credits</b></em>' attribute.
@@ -305,13 +323,22 @@ public interface AsignaturasPackage extends EPackage {
 	int FACULTY__FACULTY_CU = 2;
 
 	/**
+	 * The feature id for the '<em><b>Gradescale</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACULTY__GRADESCALE = 3;
+
+	/**
 	 * The number of structural features of the '<em>Faculty</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FACULTY_FEATURE_COUNT = 3;
+	int FACULTY_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Faculty</em>' class.
@@ -478,13 +505,22 @@ public interface AsignaturasPackage extends EPackage {
 	int CURRICULAR_UNIT__EXAM_EVALUATION = 6;
 
 	/**
+	 * The feature id for the '<em><b>Gradescale</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CURRICULAR_UNIT__GRADESCALE = 7;
+
+	/**
 	 * The number of structural features of the '<em>Curricular Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CURRICULAR_UNIT_FEATURE_COUNT = 7;
+	int CURRICULAR_UNIT_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>Curricular Unit</em>' class.
@@ -810,6 +846,15 @@ public interface AsignaturasPackage extends EPackage {
 	int SUBJECT_PLAN__CAREER_PARENT = PLAN__CAREER_PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Gradescale</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBJECT_PLAN__GRADESCALE = PLAN__GRADESCALE;
+
+	/**
 	 * The feature id for the '<em><b>Curricular Unit</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -929,13 +974,22 @@ public interface AsignaturasPackage extends EPackage {
 	int COURSE__PARTIALEVALUATION = 4;
 
 	/**
+	 * The feature id for the '<em><b>Tutoringevaluation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COURSE__TUTORINGEVALUATION = 5;
+
+	/**
 	 * The number of structural features of the '<em>Course</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COURSE_FEATURE_COUNT = 5;
+	int COURSE_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Course</em>' class.
@@ -1158,6 +1212,133 @@ public interface AsignaturasPackage extends EPackage {
 	 */
 	int PARTIAL_EVALUATION_OPERATION_COUNT = EVALUATION_OPERATION_COUNT + 0;
 
+	/**
+	 * The meta object id for the '{@link asignaturas.impl.TutoringEvaluationImpl <em>Tutoring Evaluation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see asignaturas.impl.TutoringEvaluationImpl
+	 * @see asignaturas.impl.AsignaturasPackageImpl#getTutoringEvaluation()
+	 * @generated
+	 */
+	int TUTORING_EVALUATION = 22;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUTORING_EVALUATION__DATE = EVALUATION__DATE;
+
+	/**
+	 * The feature id for the '<em><b>Course</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUTORING_EVALUATION__COURSE = EVALUATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Tutoring Evaluation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUTORING_EVALUATION_FEATURE_COUNT = EVALUATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Tutoring Evaluation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUTORING_EVALUATION_OPERATION_COUNT = EVALUATION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link asignaturas.impl.GradeScaleImpl <em>Grade Scale</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see asignaturas.impl.GradeScaleImpl
+	 * @see asignaturas.impl.AsignaturasPackageImpl#getGradeScale()
+	 * @generated
+	 */
+	int GRADE_SCALE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Exam Approval Grade</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRADE_SCALE__EXAM_APPROVAL_GRADE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Tutoring Approval Grade</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRADE_SCALE__TUTORING_APPROVAL_GRADE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Course Approval Grade</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRADE_SCALE__COURSE_APPROVAL_GRADE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Course Partial Approval Grade</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRADE_SCALE__COURSE_PARTIAL_APPROVAL_GRADE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Partial Approval Grade</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRADE_SCALE__PARTIAL_APPROVAL_GRADE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRADE_SCALE__NAME = 5;
+
+	/**
+	 * The number of structural features of the '<em>Grade Scale</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRADE_SCALE_FEATURE_COUNT = 6;
+
+	/**
+	 * The number of operations of the '<em>Grade Scale</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRADE_SCALE_OPERATION_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link asignaturas.Root <em>Root</em>}'.
@@ -1288,6 +1469,17 @@ public interface AsignaturasPackage extends EPackage {
 	EReference getFaculty_FacultyCU();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link asignaturas.Faculty#getGradescale <em>Gradescale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Gradescale</em>'.
+	 * @see asignaturas.Faculty#getGradescale()
+	 * @see #getFaculty()
+	 * @generated
+	 */
+	EReference getFaculty_Gradescale();
+
+	/**
 	 * Returns the meta object for class '{@link asignaturas.Plan <em>Plan</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1329,6 +1521,17 @@ public interface AsignaturasPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPlan_Career_parent();
+
+	/**
+	 * Returns the meta object for the reference '{@link asignaturas.Plan#getGradescale <em>Gradescale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Gradescale</em>'.
+	 * @see asignaturas.Plan#getGradescale()
+	 * @see #getPlan()
+	 * @generated
+	 */
+	EReference getPlan_Gradescale();
 
 	/**
 	 * Returns the meta object for class '{@link asignaturas.Subject <em>Subject</em>}'.
@@ -1492,6 +1695,17 @@ public interface AsignaturasPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCurricularUnit_ExamEvaluation();
+
+	/**
+	 * Returns the meta object for the reference '{@link asignaturas.CurricularUnit#getGradescale <em>Gradescale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Gradescale</em>'.
+	 * @see asignaturas.CurricularUnit#getGradescale()
+	 * @see #getCurricularUnit()
+	 * @generated
+	 */
+	EReference getCurricularUnit_Gradescale();
 
 	/**
 	 * Returns the meta object for class '{@link asignaturas.SomeOf <em>Some Of</em>}'.
@@ -1770,6 +1984,17 @@ public interface AsignaturasPackage extends EPackage {
 	EReference getCourse_Partialevaluation();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link asignaturas.Course#getTutoringevaluation <em>Tutoringevaluation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Tutoringevaluation</em>'.
+	 * @see asignaturas.Course#getTutoringevaluation()
+	 * @see #getCourse()
+	 * @generated
+	 */
+	EReference getCourse_Tutoringevaluation();
+
+	/**
 	 * Returns the meta object for class '{@link asignaturas.Evaluation <em>Evaluation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1862,6 +2087,103 @@ public interface AsignaturasPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPartialEvaluation_Course();
+
+	/**
+	 * Returns the meta object for class '{@link asignaturas.TutoringEvaluation <em>Tutoring Evaluation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tutoring Evaluation</em>'.
+	 * @see asignaturas.TutoringEvaluation
+	 * @generated
+	 */
+	EClass getTutoringEvaluation();
+
+	/**
+	 * Returns the meta object for the container reference '{@link asignaturas.TutoringEvaluation#getCourse <em>Course</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Course</em>'.
+	 * @see asignaturas.TutoringEvaluation#getCourse()
+	 * @see #getTutoringEvaluation()
+	 * @generated
+	 */
+	EReference getTutoringEvaluation_Course();
+
+	/**
+	 * Returns the meta object for class '{@link asignaturas.GradeScale <em>Grade Scale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Grade Scale</em>'.
+	 * @see asignaturas.GradeScale
+	 * @generated
+	 */
+	EClass getGradeScale();
+
+	/**
+	 * Returns the meta object for the attribute '{@link asignaturas.GradeScale#getExamApprovalGrade <em>Exam Approval Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exam Approval Grade</em>'.
+	 * @see asignaturas.GradeScale#getExamApprovalGrade()
+	 * @see #getGradeScale()
+	 * @generated
+	 */
+	EAttribute getGradeScale_ExamApprovalGrade();
+
+	/**
+	 * Returns the meta object for the attribute '{@link asignaturas.GradeScale#getTutoringApprovalGrade <em>Tutoring Approval Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tutoring Approval Grade</em>'.
+	 * @see asignaturas.GradeScale#getTutoringApprovalGrade()
+	 * @see #getGradeScale()
+	 * @generated
+	 */
+	EAttribute getGradeScale_TutoringApprovalGrade();
+
+	/**
+	 * Returns the meta object for the attribute '{@link asignaturas.GradeScale#getCourseApprovalGrade <em>Course Approval Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Course Approval Grade</em>'.
+	 * @see asignaturas.GradeScale#getCourseApprovalGrade()
+	 * @see #getGradeScale()
+	 * @generated
+	 */
+	EAttribute getGradeScale_CourseApprovalGrade();
+
+	/**
+	 * Returns the meta object for the attribute '{@link asignaturas.GradeScale#getCoursePartialApprovalGrade <em>Course Partial Approval Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Course Partial Approval Grade</em>'.
+	 * @see asignaturas.GradeScale#getCoursePartialApprovalGrade()
+	 * @see #getGradeScale()
+	 * @generated
+	 */
+	EAttribute getGradeScale_CoursePartialApprovalGrade();
+
+	/**
+	 * Returns the meta object for the attribute '{@link asignaturas.GradeScale#getPartialApprovalGrade <em>Partial Approval Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Partial Approval Grade</em>'.
+	 * @see asignaturas.GradeScale#getPartialApprovalGrade()
+	 * @see #getGradeScale()
+	 * @generated
+	 */
+	EAttribute getGradeScale_PartialApprovalGrade();
+
+	/**
+	 * Returns the meta object for the attribute '{@link asignaturas.GradeScale#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see asignaturas.GradeScale#getName()
+	 * @see #getGradeScale()
+	 * @generated
+	 */
+	EAttribute getGradeScale_Name();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1991,6 +2313,14 @@ public interface AsignaturasPackage extends EPackage {
 		EReference FACULTY__FACULTY_CU = eINSTANCE.getFaculty_FacultyCU();
 
 		/**
+		 * The meta object literal for the '<em><b>Gradescale</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FACULTY__GRADESCALE = eINSTANCE.getFaculty_Gradescale();
+
+		/**
 		 * The meta object literal for the '{@link asignaturas.impl.PlanImpl <em>Plan</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2023,6 +2353,14 @@ public interface AsignaturasPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PLAN__CAREER_PARENT = eINSTANCE.getPlan_Career_parent();
+
+		/**
+		 * The meta object literal for the '<em><b>Gradescale</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PLAN__GRADESCALE = eINSTANCE.getPlan_Gradescale();
 
 		/**
 		 * The meta object literal for the '{@link asignaturas.impl.SubjectImpl <em>Subject</em>}' class.
@@ -2147,6 +2485,14 @@ public interface AsignaturasPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CURRICULAR_UNIT__EXAM_EVALUATION = eINSTANCE.getCurricularUnit_ExamEvaluation();
+
+		/**
+		 * The meta object literal for the '<em><b>Gradescale</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CURRICULAR_UNIT__GRADESCALE = eINSTANCE.getCurricularUnit_Gradescale();
 
 		/**
 		 * The meta object literal for the '{@link asignaturas.impl.SomeOfImpl <em>Some Of</em>}' class.
@@ -2377,6 +2723,14 @@ public interface AsignaturasPackage extends EPackage {
 		EReference COURSE__PARTIALEVALUATION = eINSTANCE.getCourse_Partialevaluation();
 
 		/**
+		 * The meta object literal for the '<em><b>Tutoringevaluation</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COURSE__TUTORINGEVALUATION = eINSTANCE.getCourse_Tutoringevaluation();
+
+		/**
 		 * The meta object literal for the '{@link asignaturas.impl.EvaluationImpl <em>Evaluation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2457,6 +2811,82 @@ public interface AsignaturasPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARTIAL_EVALUATION__COURSE = eINSTANCE.getPartialEvaluation_Course();
+
+		/**
+		 * The meta object literal for the '{@link asignaturas.impl.TutoringEvaluationImpl <em>Tutoring Evaluation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see asignaturas.impl.TutoringEvaluationImpl
+		 * @see asignaturas.impl.AsignaturasPackageImpl#getTutoringEvaluation()
+		 * @generated
+		 */
+		EClass TUTORING_EVALUATION = eINSTANCE.getTutoringEvaluation();
+
+		/**
+		 * The meta object literal for the '<em><b>Course</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TUTORING_EVALUATION__COURSE = eINSTANCE.getTutoringEvaluation_Course();
+
+		/**
+		 * The meta object literal for the '{@link asignaturas.impl.GradeScaleImpl <em>Grade Scale</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see asignaturas.impl.GradeScaleImpl
+		 * @see asignaturas.impl.AsignaturasPackageImpl#getGradeScale()
+		 * @generated
+		 */
+		EClass GRADE_SCALE = eINSTANCE.getGradeScale();
+
+		/**
+		 * The meta object literal for the '<em><b>Exam Approval Grade</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRADE_SCALE__EXAM_APPROVAL_GRADE = eINSTANCE.getGradeScale_ExamApprovalGrade();
+
+		/**
+		 * The meta object literal for the '<em><b>Tutoring Approval Grade</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRADE_SCALE__TUTORING_APPROVAL_GRADE = eINSTANCE.getGradeScale_TutoringApprovalGrade();
+
+		/**
+		 * The meta object literal for the '<em><b>Course Approval Grade</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRADE_SCALE__COURSE_APPROVAL_GRADE = eINSTANCE.getGradeScale_CourseApprovalGrade();
+
+		/**
+		 * The meta object literal for the '<em><b>Course Partial Approval Grade</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRADE_SCALE__COURSE_PARTIAL_APPROVAL_GRADE = eINSTANCE.getGradeScale_CoursePartialApprovalGrade();
+
+		/**
+		 * The meta object literal for the '<em><b>Partial Approval Grade</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRADE_SCALE__PARTIAL_APPROVAL_GRADE = eINSTANCE.getGradeScale_PartialApprovalGrade();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRADE_SCALE__NAME = eINSTANCE.getGradeScale_Name();
 
 	}
 

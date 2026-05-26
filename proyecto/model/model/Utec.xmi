@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asignaturas:Root
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:asignaturas="asignaturasURI">
+  <Faculty Name="utec">
+    <Careers
+        Name="ILOG">
+      <plan
+          xsi:type="asignaturas:CreditsPlan"
+          Year="2017"
+          Valid="true"
+          MinCredits="449">
+        <GroupOfSubjects
+            Name="Troncal Academica"
+            MinCredits="129"/>
+        <GroupOfSubjects
+            Id="1"
+            Name="Troncal Logistica"
+            MinCredits="196"/>
+        <GroupOfSubjects
+            Id="2"
+            Name="Optativas"
+            MinCredits="12"/>
+        <GroupOfSubjects
+            Id="3"
+            Name="Espacio de Integracion profesionalizacion"
+            MinCredits="72"/>
+        <GroupOfSubjects
+            Id="4"
+            Name="Formacion Linguistica"
+            MinCredits="40"/>
+      </plan>
+    </Careers>
+    <FacultyCU
+        Id="&quot;Energías Combustibles"
+        Name="&quot;Energías Combustibles"
+        Cred="4"
+        Valid="true"/>
+    <FacultyCU
+        Id="&quot;Integracion de la Logística Multimodal"
+        Name="&quot;Integracion de la Logística Multimodal"
+        Valid="true"/>
+    <FacultyCU
+        Id="Abastecimiento"
+        Name="Abastecimiento"
+        Valid="true"/>
+    <FacultyCU
+        Id="Administración de Empresas"
+        Name="Administración de Empresas"
+        Valid="true"/>
+    <FacultyCU
+        Id="Análisis de Riesgos y Optimización"
+        Name="Análisis de Riesgos y Optimización"
+        Valid="true"/>
+    <FacultyCU
+        Id="Automatización en la Industria Logística"
+        Name="Automatización en la Industria Logística"
+        Valid="true"/>
+    <FacultyCU
+        Id="Ciencias I"
+        Name="Ciencias I"
+        Valid="true"/>
+    <FacultyCU
+        Id="Comex y Transporte de Entrada"
+        Name="Comex y Transporte de Entrada"
+        Valid="true"/>
+    <FacultyCU
+        Id="Comex y Transporte de Salida"
+        Name="Comex y Transporte de Salida"
+        Valid="true"/>
+    <FacultyCU
+        Id="Desarrollo de habilidades hacia la industria 4.0"
+        Name="Desarrollo de habilidades hacia la industria 4.0"
+        Valid="true"/>
+    <FacultyCU
+        Id="Dibujo Técnico"
+        Name="Dibujo Técnico"
+        Valid="true"/>
+    <FacultyCU
+        Id="Diseño de Cadenas de Suministro"
+        Name="Diseño de Cadenas de Suministro"
+        Valid="true"/>
+    <FacultyCU
+        Id="Diseño de Terminales Logísticas Multimodal"
+        Name="Diseño de Terminales Logísticas Multimodal"
+        Valid="true"/>
+    <FacultyCU
+        Id="Diseño y Construcción de Centros Logísticos"
+        Name="Diseño y Construcción de Centros Logísticos"
+        Valid="true"/>
+    <FacultyCU
+        Id="Economía (Micro y Macro)"
+        Name="Economía (Micro y Macro)"
+        Valid="true"/>
+    <FacultyCU
+        Id="Electrónica"
+        Name="Electrónica"
+        Valid="true"/>
+    <FacultyCU
+        Id="Estadística Descriptiva"
+        Name="Estadística Descriptiva"
+        Valid="true"/>
+    <FacultyCU
+        Id="Estadística Inferencial"
+        Name="Estadística Inferencial"
+        Valid="true"/>
+    <FacultyCU
+        Id="Física I"
+        Name="Física I"
+        Valid="true"/>
+    <FacultyCU
+        Id="Física II"
+        Name="Física II"
+        Valid="true"/>
+    <FacultyCU
+        Id="Gestión Logística Aduanera"
+        Name="Gestión Logística Aduanera"
+        Valid="true"/>
+    <FacultyCU
+        Id="Gestión Logística Portuaria"
+        Name="Gestión Logística Portuaria"
+        Valid="true"/>
+    <FacultyCU
+        Id="Gestión de Procesos"
+        Name="Gestión de Procesos"
+        Valid="true"/>
+    <FacultyCU
+        Id="Gestión de Stocks"
+        Name="Gestión de Stocks"
+        Valid="true"/>
+    <FacultyCU
+        Id="Gestión de la Cadena de Suministros"
+        Name="Gestión de la Cadena de Suministros"
+        Valid="true"/>
+    <FacultyCU
+        Id="Gestión de la Recepción y Preparación de Pedidos"
+        Name="Gestión de la Recepción y Preparación de Pedidos"
+        Valid="true"/>
+    <FacultyCU
+        Id="Herramientas Operativas I"
+        Name="Herramientas Operativas I"
+        Valid="true"/>
+    <FacultyCU
+        Id="Herramientas Operativas II"
+        Name="Herramientas Operativas II"
+        Valid="true"/>
+    <FacultyCU
+        Id="Hábitos Laborales y Negociación"
+        Name="Hábitos Laborales y Negociación"
+        Valid="true"/>
+    <FacultyCU
+        Id="Informática I"
+        Name="Informática I"
+        Valid="true"/>
+    <FacultyCU
+        Id="Informática II"
+        Name="Informática II"
+        Valid="true">
+      <Requirement
+          xsi:type="asignaturas:Exam"
+          CurricularUnit="Informática I"/>
+    </FacultyCU>
+    <FacultyCU
+        Id="Inglés IV"
+        Name="Inglés IV"
+        Valid="true"/>
+    <FacultyCU
+        Id="Inglés IX"
+        Name="Inglés IX"
+        Valid="true"/>
+    <FacultyCU
+        Id="Inglés Semestre I"
+        Name="Inglés Semestre I"
+        Valid="true"/>
+    <FacultyCU
+        Id="Inglés Semestre II"
+        Name="Inglés Semestre II"
+        Valid="true"/>
+    <FacultyCU
+        Id="Inglés Semestre III"
+        Name="Inglés Semestre III"
+        Valid="true"/>
+    <FacultyCU
+        Id="Inglés Semestre V"
+        Name="Inglés Semestre V"
+        Valid="true"/>
+    <FacultyCU
+        Id="Inglés Semestre VI"
+        Name="Inglés Semestre VI"
+        Valid="true"/>
+    <FacultyCU
+        Id="Inglés Semestre VII"
+        Name="Inglés Semestre VII"
+        Valid="true"/>
+    <FacultyCU
+        Id="Inglés Semestre VIII"
+        Name="Inglés Semestre VIII"
+        Valid="true"/>
+    <FacultyCU
+        Id="Inglés X"
+        Name="Inglés X"
+        Valid="true"/>
+    <FacultyCU
+        Id="Investigación Operativa"
+        Name="Investigación Operativa"
+        Valid="true"/>
+    <FacultyCU
+        Id="Investigación de Mercado"
+        Name="Investigación de Mercado"
+        Valid="true"/>
+    <FacultyCU
+        Id="Legislación Logística"
+        Name="Legislación Logística"
+        Valid="true"/>
+    <FacultyCU
+        Id="Logismática"
+        Name="Logismática"
+        Valid="true"/>
+    <FacultyCU
+        Id="Logistica Multimodal II"
+        Name="Logistica Multimodal II"
+        Valid="true">
+      <Requirement
+          xsi:type="asignaturas:Exam"
+          CurricularUnit="Logística Multimodal I"/>
+    </FacultyCU>
+    <FacultyCU
+        Id="Logística Empresarial"
+        Name="Logística Empresarial"
+        Valid="true"/>
+    <FacultyCU
+        Id="Logística Especializada y Sectorial"
+        Name="Logística Especializada y Sectorial"
+        Valid="true"/>
+    <FacultyCU
+        Id="Logística Industrial"
+        Name="Logística Industrial"
+        Valid="true"/>
+    <FacultyCU
+        Id="Logística Inversa y Ambiental"
+        Name="Logística Inversa y Ambiental"
+        Valid="true"/>
+    <FacultyCU
+        Id="Logística Multimodal I"
+        Name="Logística Multimodal I"
+        Valid="true"/>
+    <FacultyCU
+        Id="Logística de Entrada"
+        Name="Logística de Entrada"
+        Valid="true">
+      <Requirement
+          xsi:type="asignaturas:Exam"
+          CurricularUnit="Logística Empresarial"/>
+    </FacultyCU>
+    <FacultyCU
+        Id="Logística de Salida"
+        Name="Logística de Salida"
+        Valid="true"/>
+    <FacultyCU
+        Id="Logística de Servicios (Sector Empresas Públicas)"
+        Name="Logística de Servicios (Sector Empresas Públicas)"
+        Valid="true"/>
+    <FacultyCU
+        Id="Logística en Empresas de Servicio"
+        Name="Logística en Empresas de Servicio"
+        Valid="true"/>
+    <FacultyCU
+        Id="Mantenimiento de la Infraestructura Logística"
+        Name="Mantenimiento de la Infraestructura Logística"
+        Valid="true"/>
+    <FacultyCU
+        Id="Matemática I"
+        Name="Matemática I"
+        Valid="true"/>
+    <FacultyCU
+        Id="Matemática II"
+        Name="Matemática II"
+        Valid="true"/>
+    <FacultyCU
+        Id="Matemática III"
+        Name="Matemática III"
+        Valid="true"/>
+    <FacultyCU
+        Id="Mecatrónica"
+        Name="Mecatrónica"
+        Valid="true"/>
+    <FacultyCU
+        Id="Mecánica de Fluidos"
+        Name="Mecánica de Fluidos"
+        Valid="true"/>
+    <FacultyCU
+        Id="Metodología de Diagnóstico Logístico"
+        Name="Metodología de Diagnóstico Logístico"
+        Valid="true"/>
+    <FacultyCU
+        Id="Optativa 3 - Marketing y Metodología de la Investigación"
+        Name="Optativa 3 - Marketing y Metodología de la Investigación"
+        Valid="true"/>
+    <FacultyCU
+        Id="Optativa I. Gestión de Proyectos."
+        Name="Optativa I. Gestión de Proyectos."
+        Valid="true"/>
+    <FacultyCU
+        Id="Outsourcing Logístico"
+        Name="Outsourcing Logístico"
+        Valid="true"/>
+    <FacultyCU
+        Id="Presentación de Proyectos"
+        Name="Presentación de Proyectos"
+        Valid="true"/>
+    <FacultyCU
+        Id="Proyecto Final Integrador - Carrera Ingeniería en Logística - Empresarial/Multimodal"
+        Name="Proyecto Final Integrador - Carrera Ingeniería en Logística - Empresarial/Multimodal"
+        Valid="true"/>
+    <FacultyCU
+        Id="Proyecto II"
+        Name="Proyecto II"
+        Valid="true"/>
+    <FacultyCU
+        Id="Proyecto P1"
+        Name="Proyecto P1"
+        Valid="true"/>
+    <FacultyCU
+        Id="Proyecto P3"
+        Name="Proyecto P3"
+        Valid="true"/>
+    <FacultyCU
+        Id="Proyecto P4"
+        Name="Proyecto P4"
+        Valid="true"/>
+    <FacultyCU
+        Id="Proyecto P5"
+        Name="Proyecto P5"
+        Valid="true"/>
+    <FacultyCU
+        Id="Proyecto P7"
+        Name="Proyecto P7"
+        Valid="true"/>
+    <FacultyCU
+        Id="Proyecto P8"
+        Name="Proyecto P8"
+        Valid="true"/>
+    <FacultyCU
+        Id="Proyecto P9"
+        Name="Proyecto P9"
+        Valid="true"/>
+    <FacultyCU
+        Id="Química Industrial"
+        Name="Química Industrial"
+        Valid="true"/>
+    <FacultyCU
+        Id="Robótica en la Industria Logística"
+        Name="Robótica en la Industria Logística"
+        Valid="true"/>
+    <FacultyCU
+        Id="Seguridad Laboral y Salud Ocupacional"
+        Name="Seguridad Laboral y Salud Ocupacional"
+        Valid="true"/>
+    <FacultyCU
+        Id="Simulación"
+        Name="Simulación"
+        Valid="true"/>
+    <FacultyCU
+        Id="Sistemas de Almacenamiento I"
+        Name="Sistemas de Almacenamiento I"
+        Valid="true"/>
+    <FacultyCU
+        Id="Sistemas de Almacenamiento II"
+        Name="Sistemas de Almacenamiento II"
+        Valid="true"/>
+    <FacultyCU
+        Id="Telemática"
+        Name="Telemática"
+        Valid="true"/>
+    <FacultyCU
+        Id="Transporte Interno y Movimiento de Materiales"
+        Name="Transporte Interno y Movimiento de Materiales"
+        Valid="true"/>
+    <FacultyCU
+        Id="Ética y Conducta Profesional"
+        Name="Ética y Conducta Profesional"
+        Valid="true"/>
+    <gradescale
+        TutoringApprovalGrade="3.0"
+        CourseApprovalGrade="3.0"
+        CoursePartialApprovalGrade="2.0"
+        Name="UTEC"/>
+  </Faculty>
+</asignaturas:Root>

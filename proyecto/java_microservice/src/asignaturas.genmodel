@@ -24,11 +24,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//Faculty/Name"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//Faculty/Careers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference asignaturas.ecore#//Faculty/FacultyCU"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference asignaturas.ecore#//Faculty/gradescale"/>
     </genClasses>
     <genClasses image="false" ecoreClass="asignaturas.ecore#//Plan">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//Plan/Year"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//Plan/Valid"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//Plan/career_parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//Plan/gradescale"/>
     </genClasses>
     <genClasses ecoreClass="asignaturas.ecore#//Subject">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//Subject/Id"/>
@@ -46,6 +48,7 @@
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//CurricularUnit/Requirement"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference asignaturas.ecore#//CurricularUnit/Course"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference asignaturas.ecore#//CurricularUnit/ExamEvaluation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//CurricularUnit/gradescale"/>
     </genClasses>
     <genClasses ecoreClass="asignaturas.ecore#//SomeOf">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//SomeOf/N"/>
@@ -81,6 +84,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference asignaturas.ecore#//Course/CourseEvaluation"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//Course/curricularunit"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//Course/partialevaluation"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//Course/tutoringevaluation"/>
     </genClasses>
     <genClasses ecoreClass="asignaturas.ecore#//Evaluation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//Evaluation/date"/>
@@ -94,6 +98,17 @@
     </genClasses>
     <genClasses ecoreClass="asignaturas.ecore#//PartialEvaluation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//PartialEvaluation/course"/>
+    </genClasses>
+    <genClasses ecoreClass="asignaturas.ecore#//TutoringEvaluation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//TutoringEvaluation/course"/>
+    </genClasses>
+    <genClasses ecoreClass="asignaturas.ecore#//GradeScale">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//GradeScale/ExamApprovalGrade"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//GradeScale/TutoringApprovalGrade"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//GradeScale/CourseApprovalGrade"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//GradeScale/CoursePartialApprovalGrade"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//GradeScale/PartialApprovalGrade"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//GradeScale/Name"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Estudiantes" ecorePackage="estudiante.ecore#/">

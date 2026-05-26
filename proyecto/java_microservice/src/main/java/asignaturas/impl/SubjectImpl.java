@@ -147,7 +147,6 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getId() {
 		return id;
 	}
@@ -157,7 +156,6 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setId(int newId) {
 		int oldId = id;
 		id = newId;
@@ -170,7 +168,6 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -180,7 +177,6 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -193,7 +189,6 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getMinCredits() {
 		return minCredits;
 	}
@@ -203,12 +198,12 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setMinCredits(int newMinCredits) {
 		int oldMinCredits = minCredits;
 		minCredits = newMinCredits;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.SUBJECT__MIN_CREDITS, oldMinCredits, minCredits));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.SUBJECT__MIN_CREDITS,
+					oldMinCredits, minCredits));
 	}
 
 	/**
@@ -216,10 +211,11 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Subject> getGroupOfSubjects() {
 		if (groupOfSubjects == null) {
-			groupOfSubjects = new EObjectContainmentWithInverseEList<Subject>(Subject.class, this, AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS, AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE);
+			groupOfSubjects = new EObjectContainmentWithInverseEList<Subject>(Subject.class, this,
+					AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS,
+					AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE);
 		}
 		return groupOfSubjects;
 	}
@@ -229,10 +225,10 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Subject getGroupOfSubjectsOpposite() {
-		if (eContainerFeatureID() != AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE) return null;
-		return (Subject)eInternalContainer();
+		if (eContainerFeatureID() != AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE)
+			return null;
+		return (Subject) eInternalContainer();
 	}
 
 	/**
@@ -240,8 +236,10 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetGroupOfSubjectsOpposite(Subject newGroupOfSubjectsOpposite, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newGroupOfSubjectsOpposite, AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE, msgs);
+	public NotificationChain basicSetGroupOfSubjectsOpposite(Subject newGroupOfSubjectsOpposite,
+			NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newGroupOfSubjectsOpposite,
+				AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE, msgs);
 		return msgs;
 	}
 
@@ -250,21 +248,25 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setGroupOfSubjectsOpposite(Subject newGroupOfSubjectsOpposite) {
-		if (newGroupOfSubjectsOpposite != eInternalContainer() || (eContainerFeatureID() != AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE && newGroupOfSubjectsOpposite != null)) {
+		if (newGroupOfSubjectsOpposite != eInternalContainer()
+				|| (eContainerFeatureID() != AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE
+						&& newGroupOfSubjectsOpposite != null)) {
 			if (EcoreUtil.isAncestor(this, newGroupOfSubjectsOpposite))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newGroupOfSubjectsOpposite != null)
-				msgs = ((InternalEObject)newGroupOfSubjectsOpposite).eInverseAdd(this, AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS, Subject.class, msgs);
+				msgs = ((InternalEObject) newGroupOfSubjectsOpposite).eInverseAdd(this,
+						AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS, Subject.class, msgs);
 			msgs = basicSetGroupOfSubjectsOpposite(newGroupOfSubjectsOpposite, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE, newGroupOfSubjectsOpposite, newGroupOfSubjectsOpposite));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE, newGroupOfSubjectsOpposite,
+					newGroupOfSubjectsOpposite));
 	}
 
 	/**
@@ -272,10 +274,10 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<CurricularUnit> getSubjectCurricularUnit() {
 		if (subjectCurricularUnit == null) {
-			subjectCurricularUnit = new EObjectResolvingEList<CurricularUnit>(CurricularUnit.class, this, AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT);
+			subjectCurricularUnit = new EObjectResolvingEList<CurricularUnit>(CurricularUnit.class, this,
+					AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT);
 		}
 		return subjectCurricularUnit;
 	}
@@ -289,12 +291,12 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGroupOfSubjects()).basicAdd(otherEnd, msgs);
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetGroupOfSubjectsOpposite((Subject)otherEnd, msgs);
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getGroupOfSubjects()).basicAdd(otherEnd, msgs);
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetGroupOfSubjectsOpposite((Subject) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -307,10 +309,10 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
-				return ((InternalEList<?>)getGroupOfSubjects()).basicRemove(otherEnd, msgs);
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
-				return basicSetGroupOfSubjectsOpposite(null, msgs);
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
+			return ((InternalEList<?>) getGroupOfSubjects()).basicRemove(otherEnd, msgs);
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
+			return basicSetGroupOfSubjectsOpposite(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -323,8 +325,9 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
-				return eInternalContainer().eInverseRemove(this, AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS, Subject.class, msgs);
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
+			return eInternalContainer().eInverseRemove(this, AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS,
+					Subject.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -337,18 +340,18 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AsignaturasPackage.SUBJECT__ID:
-				return getId();
-			case AsignaturasPackage.SUBJECT__NAME:
-				return getName();
-			case AsignaturasPackage.SUBJECT__MIN_CREDITS:
-				return getMinCredits();
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
-				return getGroupOfSubjects();
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
-				return getGroupOfSubjectsOpposite();
-			case AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT:
-				return getSubjectCurricularUnit();
+		case AsignaturasPackage.SUBJECT__ID:
+			return getId();
+		case AsignaturasPackage.SUBJECT__NAME:
+			return getName();
+		case AsignaturasPackage.SUBJECT__MIN_CREDITS:
+			return getMinCredits();
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
+			return getGroupOfSubjects();
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
+			return getGroupOfSubjectsOpposite();
+		case AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT:
+			return getSubjectCurricularUnit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -362,26 +365,26 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AsignaturasPackage.SUBJECT__ID:
-				setId((Integer)newValue);
-				return;
-			case AsignaturasPackage.SUBJECT__NAME:
-				setName((String)newValue);
-				return;
-			case AsignaturasPackage.SUBJECT__MIN_CREDITS:
-				setMinCredits((Integer)newValue);
-				return;
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
-				getGroupOfSubjects().clear();
-				getGroupOfSubjects().addAll((Collection<? extends Subject>)newValue);
-				return;
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
-				setGroupOfSubjectsOpposite((Subject)newValue);
-				return;
-			case AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT:
-				getSubjectCurricularUnit().clear();
-				getSubjectCurricularUnit().addAll((Collection<? extends CurricularUnit>)newValue);
-				return;
+		case AsignaturasPackage.SUBJECT__ID:
+			setId((Integer) newValue);
+			return;
+		case AsignaturasPackage.SUBJECT__NAME:
+			setName((String) newValue);
+			return;
+		case AsignaturasPackage.SUBJECT__MIN_CREDITS:
+			setMinCredits((Integer) newValue);
+			return;
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
+			getGroupOfSubjects().clear();
+			getGroupOfSubjects().addAll((Collection<? extends Subject>) newValue);
+			return;
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
+			setGroupOfSubjectsOpposite((Subject) newValue);
+			return;
+		case AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT:
+			getSubjectCurricularUnit().clear();
+			getSubjectCurricularUnit().addAll((Collection<? extends CurricularUnit>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -394,24 +397,24 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.SUBJECT__ID:
-				setId(ID_EDEFAULT);
-				return;
-			case AsignaturasPackage.SUBJECT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case AsignaturasPackage.SUBJECT__MIN_CREDITS:
-				setMinCredits(MIN_CREDITS_EDEFAULT);
-				return;
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
-				getGroupOfSubjects().clear();
-				return;
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
-				setGroupOfSubjectsOpposite((Subject)null);
-				return;
-			case AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT:
-				getSubjectCurricularUnit().clear();
-				return;
+		case AsignaturasPackage.SUBJECT__ID:
+			setId(ID_EDEFAULT);
+			return;
+		case AsignaturasPackage.SUBJECT__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case AsignaturasPackage.SUBJECT__MIN_CREDITS:
+			setMinCredits(MIN_CREDITS_EDEFAULT);
+			return;
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
+			getGroupOfSubjects().clear();
+			return;
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
+			setGroupOfSubjectsOpposite((Subject) null);
+			return;
+		case AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT:
+			getSubjectCurricularUnit().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -424,18 +427,18 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.SUBJECT__ID:
-				return id != ID_EDEFAULT;
-			case AsignaturasPackage.SUBJECT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case AsignaturasPackage.SUBJECT__MIN_CREDITS:
-				return minCredits != MIN_CREDITS_EDEFAULT;
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
-				return groupOfSubjects != null && !groupOfSubjects.isEmpty();
-			case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
-				return getGroupOfSubjectsOpposite() != null;
-			case AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT:
-				return subjectCurricularUnit != null && !subjectCurricularUnit.isEmpty();
+		case AsignaturasPackage.SUBJECT__ID:
+			return id != ID_EDEFAULT;
+		case AsignaturasPackage.SUBJECT__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+		case AsignaturasPackage.SUBJECT__MIN_CREDITS:
+			return minCredits != MIN_CREDITS_EDEFAULT;
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS:
+			return groupOfSubjects != null && !groupOfSubjects.isEmpty();
+		case AsignaturasPackage.SUBJECT__GROUP_OF_SUBJECTS_OPPOSITE:
+			return getGroupOfSubjectsOpposite() != null;
+		case AsignaturasPackage.SUBJECT__SUBJECT_CURRICULAR_UNIT:
+			return subjectCurricularUnit != null && !subjectCurricularUnit.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -447,7 +450,8 @@ public class SubjectImpl extends MinimalEObjectImpl.Container implements Subject
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (Id: ");

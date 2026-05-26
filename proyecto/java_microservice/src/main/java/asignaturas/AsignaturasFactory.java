@@ -193,6 +193,24 @@ public interface AsignaturasFactory extends EFactory {
 	PartialEvaluation createPartialEvaluation();
 
 	/**
+	 * Returns a new object of class '<em>Tutoring Evaluation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tutoring Evaluation</em>'.
+	 * @generated
+	 */
+	TutoringEvaluation createTutoringEvaluation();
+
+	/**
+	 * Returns a new object of class '<em>Grade Scale</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Grade Scale</em>'.
+	 * @generated
+	 */
+	GradeScale createGradeScale();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

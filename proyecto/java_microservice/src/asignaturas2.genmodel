@@ -11,11 +11,11 @@
     <genClasses ecoreClass="Workspace.ecore#//RootWorkspaces">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Workspace.ecore#//RootWorkspaces/workspace"/>
     </genClasses>
-    <genClasses ecoreClass="Workspace.ecore#//Workspace">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workspace.ecore#//Workspace/Password"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workspace.ecore#//Workspace/asignaturas"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workspace.ecore#//Workspace/estudiante"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workspace.ecore#//Workspace/ID"/>
+    <genClasses ecoreClass="Workspace.ecore#//WorkspaceElem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workspace.ecore#//WorkspaceElem/Password"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workspace.ecore#//WorkspaceElem/asignaturas"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Workspace.ecore#//WorkspaceElem/estudiante"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Workspace.ecore#//WorkspaceElem/ID"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link asignaturas.CurricularUnit#getRequirement <em>Requirement</em>}</li>
  *   <li>{@link asignaturas.CurricularUnit#getCourse <em>Course</em>}</li>
  *   <li>{@link asignaturas.CurricularUnit#getExamEvaluation <em>Exam Evaluation</em>}</li>
+ *   <li>{@link asignaturas.CurricularUnit#getGradescale <em>Gradescale</em>}</li>
  * </ul>
  *
  * @see asignaturas.AsignaturasPackage#getCurricularUnit()
@@ -166,5 +167,27 @@ public interface CurricularUnit extends EObject {
 	 * @generated
 	 */
 	EList<ExamEvaluation> getExamEvaluation();
+
+	/**
+	 * Returns the value of the '<em><b>Gradescale</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Gradescale</em>' reference.
+	 * @see #setGradescale(GradeScale)
+	 * @see asignaturas.AsignaturasPackage#getCurricularUnit_Gradescale()
+	 * @model
+	 * @generated
+	 */
+	GradeScale getGradescale();
+
+	/**
+	 * Sets the value of the '{@link asignaturas.CurricularUnit#getGradescale <em>Gradescale</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Gradescale</em>' reference.
+	 * @see #getGradescale()
+	 * @generated
+	 */
+	void setGradescale(GradeScale value);
 
 } // CurricularUnit

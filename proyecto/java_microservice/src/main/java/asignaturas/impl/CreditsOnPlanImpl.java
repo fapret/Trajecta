@@ -82,7 +82,6 @@ public class CreditsOnPlanImpl extends RequirementImpl implements CreditsOnPlan 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getCred() {
 		return cred;
 	}
@@ -92,12 +91,12 @@ public class CreditsOnPlanImpl extends RequirementImpl implements CreditsOnPlan 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCred(int newCred) {
 		int oldCred = cred;
 		cred = newCred;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CREDITS_ON_PLAN__CRED, oldCred, cred));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CREDITS_ON_PLAN__CRED, oldCred,
+					cred));
 	}
 
 	/**
@@ -105,14 +104,14 @@ public class CreditsOnPlanImpl extends RequirementImpl implements CreditsOnPlan 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public CreditsPlan getCreditsPlan() {
 		if (creditsPlan != null && creditsPlan.eIsProxy()) {
-			InternalEObject oldCreditsPlan = (InternalEObject)creditsPlan;
-			creditsPlan = (CreditsPlan)eResolveProxy(oldCreditsPlan);
+			InternalEObject oldCreditsPlan = (InternalEObject) creditsPlan;
+			creditsPlan = (CreditsPlan) eResolveProxy(oldCreditsPlan);
 			if (creditsPlan != oldCreditsPlan) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN, oldCreditsPlan, creditsPlan));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN, oldCreditsPlan, creditsPlan));
 			}
 		}
 		return creditsPlan;
@@ -132,12 +131,12 @@ public class CreditsOnPlanImpl extends RequirementImpl implements CreditsOnPlan 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCreditsPlan(CreditsPlan newCreditsPlan) {
 		CreditsPlan oldCreditsPlan = creditsPlan;
 		creditsPlan = newCreditsPlan;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN, oldCreditsPlan, creditsPlan));
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN,
+					oldCreditsPlan, creditsPlan));
 	}
 
 	/**
@@ -148,11 +147,12 @@ public class CreditsOnPlanImpl extends RequirementImpl implements CreditsOnPlan 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AsignaturasPackage.CREDITS_ON_PLAN__CRED:
-				return getCred();
-			case AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN:
-				if (resolve) return getCreditsPlan();
-				return basicGetCreditsPlan();
+		case AsignaturasPackage.CREDITS_ON_PLAN__CRED:
+			return getCred();
+		case AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN:
+			if (resolve)
+				return getCreditsPlan();
+			return basicGetCreditsPlan();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -165,12 +165,12 @@ public class CreditsOnPlanImpl extends RequirementImpl implements CreditsOnPlan 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AsignaturasPackage.CREDITS_ON_PLAN__CRED:
-				setCred((Integer)newValue);
-				return;
-			case AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN:
-				setCreditsPlan((CreditsPlan)newValue);
-				return;
+		case AsignaturasPackage.CREDITS_ON_PLAN__CRED:
+			setCred((Integer) newValue);
+			return;
+		case AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN:
+			setCreditsPlan((CreditsPlan) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -183,12 +183,12 @@ public class CreditsOnPlanImpl extends RequirementImpl implements CreditsOnPlan 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.CREDITS_ON_PLAN__CRED:
-				setCred(CRED_EDEFAULT);
-				return;
-			case AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN:
-				setCreditsPlan((CreditsPlan)null);
-				return;
+		case AsignaturasPackage.CREDITS_ON_PLAN__CRED:
+			setCred(CRED_EDEFAULT);
+			return;
+		case AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN:
+			setCreditsPlan((CreditsPlan) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -201,10 +201,10 @@ public class CreditsOnPlanImpl extends RequirementImpl implements CreditsOnPlan 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.CREDITS_ON_PLAN__CRED:
-				return cred != CRED_EDEFAULT;
-			case AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN:
-				return creditsPlan != null;
+		case AsignaturasPackage.CREDITS_ON_PLAN__CRED:
+			return cred != CRED_EDEFAULT;
+		case AsignaturasPackage.CREDITS_ON_PLAN__CREDITS_PLAN:
+			return creditsPlan != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -216,7 +216,8 @@ public class CreditsOnPlanImpl extends RequirementImpl implements CreditsOnPlan 
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (cred: ");

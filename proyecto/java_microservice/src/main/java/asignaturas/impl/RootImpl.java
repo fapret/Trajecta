@@ -68,7 +68,6 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Faculty> getFaculty() {
 		if (faculty == null) {
 			faculty = new EObjectContainmentEList<Faculty>(Faculty.class, this, AsignaturasPackage.ROOT__FACULTY);
@@ -84,8 +83,8 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AsignaturasPackage.ROOT__FACULTY:
-				return ((InternalEList<?>)getFaculty()).basicRemove(otherEnd, msgs);
+		case AsignaturasPackage.ROOT__FACULTY:
+			return ((InternalEList<?>) getFaculty()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -98,8 +97,8 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AsignaturasPackage.ROOT__FACULTY:
-				return getFaculty();
+		case AsignaturasPackage.ROOT__FACULTY:
+			return getFaculty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,10 +112,10 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AsignaturasPackage.ROOT__FACULTY:
-				getFaculty().clear();
-				getFaculty().addAll((Collection<? extends Faculty>)newValue);
-				return;
+		case AsignaturasPackage.ROOT__FACULTY:
+			getFaculty().clear();
+			getFaculty().addAll((Collection<? extends Faculty>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -129,9 +128,9 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.ROOT__FACULTY:
-				getFaculty().clear();
-				return;
+		case AsignaturasPackage.ROOT__FACULTY:
+			getFaculty().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -144,8 +143,8 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.ROOT__FACULTY:
-				return faculty != null && !faculty.isEmpty();
+		case AsignaturasPackage.ROOT__FACULTY:
+			return faculty != null && !faculty.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

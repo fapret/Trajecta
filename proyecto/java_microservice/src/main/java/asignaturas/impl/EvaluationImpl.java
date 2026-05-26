@@ -72,7 +72,6 @@ public abstract class EvaluationImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getDate() {
 		return date;
 	}
@@ -82,7 +81,6 @@ public abstract class EvaluationImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDate(Date newDate) {
 		Date oldDate = date;
 		date = newDate;
@@ -98,8 +96,8 @@ public abstract class EvaluationImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AsignaturasPackage.EVALUATION__DATE:
-				return getDate();
+		case AsignaturasPackage.EVALUATION__DATE:
+			return getDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,9 +110,9 @@ public abstract class EvaluationImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AsignaturasPackage.EVALUATION__DATE:
-				setDate((Date)newValue);
-				return;
+		case AsignaturasPackage.EVALUATION__DATE:
+			setDate((Date) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -127,9 +125,9 @@ public abstract class EvaluationImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.EVALUATION__DATE:
-				setDate(DATE_EDEFAULT);
-				return;
+		case AsignaturasPackage.EVALUATION__DATE:
+			setDate(DATE_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -142,8 +140,8 @@ public abstract class EvaluationImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.EVALUATION__DATE:
-				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
+		case AsignaturasPackage.EVALUATION__DATE:
+			return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -155,7 +153,8 @@ public abstract class EvaluationImpl extends MinimalEObjectImpl.Container implem
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (date: ");

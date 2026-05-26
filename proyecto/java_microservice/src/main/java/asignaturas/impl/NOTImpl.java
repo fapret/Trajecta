@@ -62,7 +62,6 @@ public class NOTImpl extends RequirementImpl implements NOT {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Requirement getRequirement() {
 		return requirement;
 	}
@@ -76,8 +75,12 @@ public class NOTImpl extends RequirementImpl implements NOT {
 		Requirement oldRequirement = requirement;
 		requirement = newRequirement;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AsignaturasPackage.NOT__REQUIREMENT, oldRequirement, newRequirement);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					AsignaturasPackage.NOT__REQUIREMENT, oldRequirement, newRequirement);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -87,19 +90,21 @@ public class NOTImpl extends RequirementImpl implements NOT {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setRequirement(Requirement newRequirement) {
 		if (newRequirement != requirement) {
 			NotificationChain msgs = null;
 			if (requirement != null)
-				msgs = ((InternalEObject)requirement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AsignaturasPackage.NOT__REQUIREMENT, null, msgs);
+				msgs = ((InternalEObject) requirement).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - AsignaturasPackage.NOT__REQUIREMENT, null, msgs);
 			if (newRequirement != null)
-				msgs = ((InternalEObject)newRequirement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AsignaturasPackage.NOT__REQUIREMENT, null, msgs);
+				msgs = ((InternalEObject) newRequirement).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - AsignaturasPackage.NOT__REQUIREMENT, null, msgs);
 			msgs = basicSetRequirement(newRequirement, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.NOT__REQUIREMENT, newRequirement, newRequirement));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.NOT__REQUIREMENT, newRequirement,
+					newRequirement));
 	}
 
 	/**
@@ -110,8 +115,8 @@ public class NOTImpl extends RequirementImpl implements NOT {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AsignaturasPackage.NOT__REQUIREMENT:
-				return basicSetRequirement(null, msgs);
+		case AsignaturasPackage.NOT__REQUIREMENT:
+			return basicSetRequirement(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -124,8 +129,8 @@ public class NOTImpl extends RequirementImpl implements NOT {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AsignaturasPackage.NOT__REQUIREMENT:
-				return getRequirement();
+		case AsignaturasPackage.NOT__REQUIREMENT:
+			return getRequirement();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -138,9 +143,9 @@ public class NOTImpl extends RequirementImpl implements NOT {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AsignaturasPackage.NOT__REQUIREMENT:
-				setRequirement((Requirement)newValue);
-				return;
+		case AsignaturasPackage.NOT__REQUIREMENT:
+			setRequirement((Requirement) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -153,9 +158,9 @@ public class NOTImpl extends RequirementImpl implements NOT {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.NOT__REQUIREMENT:
-				setRequirement((Requirement)null);
-				return;
+		case AsignaturasPackage.NOT__REQUIREMENT:
+			setRequirement((Requirement) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -168,8 +173,8 @@ public class NOTImpl extends RequirementImpl implements NOT {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.NOT__REQUIREMENT:
-				return requirement != null;
+		case AsignaturasPackage.NOT__REQUIREMENT:
+			return requirement != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -4,6 +4,7 @@ package asignaturas.impl;
 
 import asignaturas.AsignaturasPackage;
 import asignaturas.Career;
+import asignaturas.GradeScale;
 import asignaturas.Plan;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -28,6 +29,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link asignaturas.impl.PlanImpl#getYear <em>Year</em>}</li>
  *   <li>{@link asignaturas.impl.PlanImpl#isValid <em>Valid</em>}</li>
  *   <li>{@link asignaturas.impl.PlanImpl#getCareer_parent <em>Career parent</em>}</li>
+ *   <li>{@link asignaturas.impl.PlanImpl#getGradescale <em>Gradescale</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,6 +76,16 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	protected boolean valid = VALID_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getGradescale() <em>Gradescale</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGradescale()
+	 * @generated
+	 * @ordered
+	 */
+	protected GradeScale gradescale;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -97,7 +109,6 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getYear() {
 		return year;
 	}
@@ -107,7 +118,6 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setYear(int newYear) {
 		int oldYear = year;
 		year = newYear;
@@ -120,7 +130,6 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isValid() {
 		return valid;
 	}
@@ -130,7 +139,6 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setValid(boolean newValid) {
 		boolean oldValid = valid;
 		valid = newValid;
@@ -143,10 +151,10 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Career getCareer_parent() {
-		if (eContainerFeatureID() != AsignaturasPackage.PLAN__CAREER_PARENT) return null;
-		return (Career)eInternalContainer();
+		if (eContainerFeatureID() != AsignaturasPackage.PLAN__CAREER_PARENT)
+			return null;
+		return (Career) eInternalContainer();
 	}
 
 	/**
@@ -155,7 +163,7 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 * @generated
 	 */
 	public NotificationChain basicSetCareer_parent(Career newCareer_parent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newCareer_parent, AsignaturasPackage.PLAN__CAREER_PARENT, msgs);
+		msgs = eBasicSetContainer((InternalEObject) newCareer_parent, AsignaturasPackage.PLAN__CAREER_PARENT, msgs);
 		return msgs;
 	}
 
@@ -164,21 +172,63 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCareer_parent(Career newCareer_parent) {
-		if (newCareer_parent != eInternalContainer() || (eContainerFeatureID() != AsignaturasPackage.PLAN__CAREER_PARENT && newCareer_parent != null)) {
+		if (newCareer_parent != eInternalContainer()
+				|| (eContainerFeatureID() != AsignaturasPackage.PLAN__CAREER_PARENT && newCareer_parent != null)) {
 			if (EcoreUtil.isAncestor(this, newCareer_parent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newCareer_parent != null)
-				msgs = ((InternalEObject)newCareer_parent).eInverseAdd(this, AsignaturasPackage.CAREER__PLAN, Career.class, msgs);
+				msgs = ((InternalEObject) newCareer_parent).eInverseAdd(this, AsignaturasPackage.CAREER__PLAN,
+						Career.class, msgs);
 			msgs = basicSetCareer_parent(newCareer_parent, msgs);
-			if (msgs != null) msgs.dispatch();
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.PLAN__CAREER_PARENT,
+					newCareer_parent, newCareer_parent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GradeScale getGradescale() {
+		if (gradescale != null && gradescale.eIsProxy()) {
+			InternalEObject oldGradescale = (InternalEObject) gradescale;
+			gradescale = (GradeScale) eResolveProxy(oldGradescale);
+			if (gradescale != oldGradescale) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AsignaturasPackage.PLAN__GRADESCALE,
+							oldGradescale, gradescale));
+			}
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.PLAN__CAREER_PARENT, newCareer_parent, newCareer_parent));
+		return gradescale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GradeScale basicGetGradescale() {
+		return gradescale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGradescale(GradeScale newGradescale) {
+		GradeScale oldGradescale = gradescale;
+		gradescale = newGradescale;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.PLAN__GRADESCALE, oldGradescale,
+					gradescale));
 	}
 
 	/**
@@ -189,10 +239,10 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AsignaturasPackage.PLAN__CAREER_PARENT:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetCareer_parent((Career)otherEnd, msgs);
+		case AsignaturasPackage.PLAN__CAREER_PARENT:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetCareer_parent((Career) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -205,8 +255,8 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AsignaturasPackage.PLAN__CAREER_PARENT:
-				return basicSetCareer_parent(null, msgs);
+		case AsignaturasPackage.PLAN__CAREER_PARENT:
+			return basicSetCareer_parent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -219,8 +269,8 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case AsignaturasPackage.PLAN__CAREER_PARENT:
-				return eInternalContainer().eInverseRemove(this, AsignaturasPackage.CAREER__PLAN, Career.class, msgs);
+		case AsignaturasPackage.PLAN__CAREER_PARENT:
+			return eInternalContainer().eInverseRemove(this, AsignaturasPackage.CAREER__PLAN, Career.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -233,12 +283,16 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AsignaturasPackage.PLAN__YEAR:
-				return getYear();
-			case AsignaturasPackage.PLAN__VALID:
-				return isValid();
-			case AsignaturasPackage.PLAN__CAREER_PARENT:
-				return getCareer_parent();
+		case AsignaturasPackage.PLAN__YEAR:
+			return getYear();
+		case AsignaturasPackage.PLAN__VALID:
+			return isValid();
+		case AsignaturasPackage.PLAN__CAREER_PARENT:
+			return getCareer_parent();
+		case AsignaturasPackage.PLAN__GRADESCALE:
+			if (resolve)
+				return getGradescale();
+			return basicGetGradescale();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,15 +305,18 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AsignaturasPackage.PLAN__YEAR:
-				setYear((Integer)newValue);
-				return;
-			case AsignaturasPackage.PLAN__VALID:
-				setValid((Boolean)newValue);
-				return;
-			case AsignaturasPackage.PLAN__CAREER_PARENT:
-				setCareer_parent((Career)newValue);
-				return;
+		case AsignaturasPackage.PLAN__YEAR:
+			setYear((Integer) newValue);
+			return;
+		case AsignaturasPackage.PLAN__VALID:
+			setValid((Boolean) newValue);
+			return;
+		case AsignaturasPackage.PLAN__CAREER_PARENT:
+			setCareer_parent((Career) newValue);
+			return;
+		case AsignaturasPackage.PLAN__GRADESCALE:
+			setGradescale((GradeScale) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -272,15 +329,18 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.PLAN__YEAR:
-				setYear(YEAR_EDEFAULT);
-				return;
-			case AsignaturasPackage.PLAN__VALID:
-				setValid(VALID_EDEFAULT);
-				return;
-			case AsignaturasPackage.PLAN__CAREER_PARENT:
-				setCareer_parent((Career)null);
-				return;
+		case AsignaturasPackage.PLAN__YEAR:
+			setYear(YEAR_EDEFAULT);
+			return;
+		case AsignaturasPackage.PLAN__VALID:
+			setValid(VALID_EDEFAULT);
+			return;
+		case AsignaturasPackage.PLAN__CAREER_PARENT:
+			setCareer_parent((Career) null);
+			return;
+		case AsignaturasPackage.PLAN__GRADESCALE:
+			setGradescale((GradeScale) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -293,12 +353,14 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AsignaturasPackage.PLAN__YEAR:
-				return year != YEAR_EDEFAULT;
-			case AsignaturasPackage.PLAN__VALID:
-				return valid != VALID_EDEFAULT;
-			case AsignaturasPackage.PLAN__CAREER_PARENT:
-				return getCareer_parent() != null;
+		case AsignaturasPackage.PLAN__YEAR:
+			return year != YEAR_EDEFAULT;
+		case AsignaturasPackage.PLAN__VALID:
+			return valid != VALID_EDEFAULT;
+		case AsignaturasPackage.PLAN__CAREER_PARENT:
+			return getCareer_parent() != null;
+		case AsignaturasPackage.PLAN__GRADESCALE:
+			return gradescale != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -310,7 +372,8 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (Year: ");
