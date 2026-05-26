@@ -4,6 +4,7 @@ package Workspace.impl;
 
 import Workspace.RootWorkspaces;
 import Workspace.Workspace;
+import Workspace.WorkspaceElem;
 import Workspace.WorkspacePackage;
 
 import java.util.Collection;
@@ -42,7 +43,7 @@ public class RootWorkspacesImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Workspace> workspace;
+	protected EList<WorkspaceElem> workspace;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,9 +70,9 @@ public class RootWorkspacesImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public EList<Workspace> getWorkspace() {
+	public EList<WorkspaceElem> getWorkspace() {
 		if (workspace == null) {
-			workspace = new EObjectContainmentEList<Workspace>(Workspace.class, this, WorkspacePackage.ROOT_WORKSPACES__WORKSPACE);
+			workspace = new EObjectContainmentEList<WorkspaceElem>(WorkspaceElem.class, this, WorkspacePackage.ROOT_WORKSPACES__WORKSPACE);
 		}
 		return workspace;
 	}
@@ -115,7 +116,7 @@ public class RootWorkspacesImpl extends MinimalEObjectImpl.Container implements 
 		switch (featureID) {
 			case WorkspacePackage.ROOT_WORKSPACES__WORKSPACE:
 				getWorkspace().clear();
-				getWorkspace().addAll((Collection<? extends Workspace>)newValue);
+				getWorkspace().addAll((Collection<? extends WorkspaceElem>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

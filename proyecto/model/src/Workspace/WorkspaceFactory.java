@@ -31,13 +31,13 @@ public interface WorkspaceFactory extends EFactory {
 	RootWorkspaces createRootWorkspaces();
 
 	/**
-	 * Returns a new object of class '<em>Workspace</em>'.
+	 * Returns a new object of class '<em>Elem</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Workspace</em>'.
+	 * @return a new object of class '<em>Elem</em>'.
 	 * @generated
 	 */
-	Workspace createWorkspace();
+	WorkspaceElem createWorkspaceElem();
 
 	/**
 	 * Returns the package supported by this factory.

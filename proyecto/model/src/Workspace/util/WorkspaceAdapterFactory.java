@@ -72,8 +72,8 @@ public class WorkspaceAdapterFactory extends AdapterFactoryImpl {
 				return createRootWorkspacesAdapter();
 			}
 			@Override
-			public Adapter caseWorkspace(Workspace object) {
-				return createWorkspaceAdapter();
+			public Adapter caseWorkspaceElem(WorkspaceElem object) {
+				return createWorkspaceElemAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -110,16 +110,16 @@ public class WorkspaceAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link Workspace.Workspace <em>Workspace</em>}'.
+	 * Creates a new adapter for an object of class '{@link Workspace.WorkspaceElem <em>Elem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see Workspace.Workspace
+	 * @see Workspace.WorkspaceElem
 	 * @generated
 	 */
-	public Adapter createWorkspaceAdapter() {
+	public Adapter createWorkspaceElemAdapter() {
 		return null;
 	}
 

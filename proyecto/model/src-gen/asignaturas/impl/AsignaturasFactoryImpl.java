@@ -94,6 +94,10 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 			return createCourseEvaluation();
 		case AsignaturasPackage.PARTIAL_EVALUATION:
 			return createPartialEvaluation();
+		case AsignaturasPackage.TUTORING_EVALUATION:
+			return createTutoringEvaluation();
+		case AsignaturasPackage.GRADE_SCALE:
+			return createGradeScale();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -287,6 +291,26 @@ public class AsignaturasFactoryImpl extends EFactoryImpl implements AsignaturasF
 	public PartialEvaluation createPartialEvaluation() {
 		PartialEvaluationImpl partialEvaluation = new PartialEvaluationImpl();
 		return partialEvaluation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TutoringEvaluation createTutoringEvaluation() {
+		TutoringEvaluationImpl tutoringEvaluation = new TutoringEvaluationImpl();
+		return tutoringEvaluation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GradeScale createGradeScale() {
+		GradeScaleImpl gradeScale = new GradeScaleImpl();
+		return gradeScale;
 	}
 
 	/**

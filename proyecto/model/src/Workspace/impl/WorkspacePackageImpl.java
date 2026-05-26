@@ -6,6 +6,7 @@ import Estudiantes.EstudiantesPackage;
 
 import Workspace.RootWorkspaces;
 import Workspace.Workspace;
+import Workspace.WorkspaceElem;
 import Workspace.WorkspaceFactory;
 import Workspace.WorkspacePackage;
 
@@ -37,7 +38,7 @@ public class WorkspacePackageImpl extends EPackageImpl implements WorkspacePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass workspaceEClass = null;
+	private EClass workspaceElemEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -129,8 +130,8 @@ public class WorkspacePackageImpl extends EPackageImpl implements WorkspacePacka
 	 * @generated
 	 */
 	@Override
-	public EClass getWorkspace() {
-		return workspaceEClass;
+	public EClass getWorkspaceElem() {
+		return workspaceElemEClass;
 	}
 
 	/**
@@ -139,8 +140,8 @@ public class WorkspacePackageImpl extends EPackageImpl implements WorkspacePacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getWorkspace_Password() {
-		return (EAttribute)workspaceEClass.getEStructuralFeatures().get(0);
+	public EAttribute getWorkspaceElem_Password() {
+		return (EAttribute)workspaceElemEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -149,8 +150,8 @@ public class WorkspacePackageImpl extends EPackageImpl implements WorkspacePacka
 	 * @generated
 	 */
 	@Override
-	public EReference getWorkspace_Asignaturas() {
-		return (EReference)workspaceEClass.getEStructuralFeatures().get(1);
+	public EReference getWorkspaceElem_Asignaturas() {
+		return (EReference)workspaceElemEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -159,8 +160,8 @@ public class WorkspacePackageImpl extends EPackageImpl implements WorkspacePacka
 	 * @generated
 	 */
 	@Override
-	public EReference getWorkspace_Estudiante() {
-		return (EReference)workspaceEClass.getEStructuralFeatures().get(2);
+	public EReference getWorkspaceElem_Estudiante() {
+		return (EReference)workspaceElemEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -169,8 +170,8 @@ public class WorkspacePackageImpl extends EPackageImpl implements WorkspacePacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getWorkspace_ID() {
-		return (EAttribute)workspaceEClass.getEStructuralFeatures().get(3);
+	public EAttribute getWorkspaceElem_ID() {
+		return (EAttribute)workspaceElemEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -205,11 +206,11 @@ public class WorkspacePackageImpl extends EPackageImpl implements WorkspacePacka
 		rootWorkspacesEClass = createEClass(ROOT_WORKSPACES);
 		createEReference(rootWorkspacesEClass, ROOT_WORKSPACES__WORKSPACE);
 
-		workspaceEClass = createEClass(WORKSPACE);
-		createEAttribute(workspaceEClass, WORKSPACE__PASSWORD);
-		createEReference(workspaceEClass, WORKSPACE__ASIGNATURAS);
-		createEReference(workspaceEClass, WORKSPACE__ESTUDIANTE);
-		createEAttribute(workspaceEClass, WORKSPACE__ID);
+		workspaceElemEClass = createEClass(WORKSPACE_ELEM);
+		createEAttribute(workspaceElemEClass, WORKSPACE_ELEM__PASSWORD);
+		createEReference(workspaceElemEClass, WORKSPACE_ELEM__ASIGNATURAS);
+		createEReference(workspaceElemEClass, WORKSPACE_ELEM__ESTUDIANTE);
+		createEAttribute(workspaceElemEClass, WORKSPACE_ELEM__ID);
 	}
 
 	/**
@@ -247,13 +248,13 @@ public class WorkspacePackageImpl extends EPackageImpl implements WorkspacePacka
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(rootWorkspacesEClass, RootWorkspaces.class, "RootWorkspaces", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRootWorkspaces_Workspace(), this.getWorkspace(), null, "workspace", null, 0, -1, RootWorkspaces.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRootWorkspaces_Workspace(), this.getWorkspaceElem(), null, "workspace", null, 0, -1, RootWorkspaces.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(workspaceEClass, Workspace.class, "Workspace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getWorkspace_Password(), ecorePackage.getEString(), "Password", null, 0, 1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getWorkspace_Asignaturas(), theAsignaturasPackage.getRoot(), null, "asignaturas", null, 0, 1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getWorkspace_Estudiante(), theEstudiantesPackage.getRoot(), null, "estudiante", null, 0, 1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getWorkspace_ID(), ecorePackage.getEString(), "ID", null, 1, 1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(workspaceElemEClass, WorkspaceElem.class, "WorkspaceElem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getWorkspaceElem_Password(), ecorePackage.getEString(), "Password", null, 0, 1, WorkspaceElem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWorkspaceElem_Asignaturas(), theAsignaturasPackage.getRoot(), null, "asignaturas", null, 0, 1, WorkspaceElem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWorkspaceElem_Estudiante(), theEstudiantesPackage.getRoot(), null, "estudiante", null, 0, 1, WorkspaceElem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWorkspaceElem_ID(), ecorePackage.getEString(), "ID", null, 1, 1, WorkspaceElem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -61,6 +61,7 @@ public class CurricularUnitItemProvider extends ItemProviderAdapter implements I
 			addCredPropertyDescriptor(object);
 			addValidPropertyDescriptor(object);
 			addRequirementPropertyDescriptor(object);
+			addGradescalePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -142,6 +143,21 @@ public class CurricularUnitItemProvider extends ItemProviderAdapter implements I
 						getString("_UI_PropertyDescriptor_description", "_UI_CurricularUnit_Requirement_feature",
 								"_UI_CurricularUnit_type"),
 						AsignaturasPackage.Literals.CURRICULAR_UNIT__REQUIREMENT, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Gradescale feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGradescalePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_CurricularUnit_gradescale_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_CurricularUnit_gradescale_feature",
+								"_UI_CurricularUnit_type"),
+						AsignaturasPackage.Literals.CURRICULAR_UNIT__GRADESCALE, true, false, true, null, null, null));
 	}
 
 	/**

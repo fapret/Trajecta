@@ -177,6 +177,16 @@ public class AsignaturasAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseTutoringEvaluation(TutoringEvaluation object) {
+			return createTutoringEvaluationAdapter();
+		}
+
+		@Override
+		public Adapter caseGradeScale(GradeScale object) {
+			return createGradeScaleAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
@@ -500,6 +510,34 @@ public class AsignaturasAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPartialEvaluationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link asignaturas.TutoringEvaluation <em>Tutoring Evaluation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see asignaturas.TutoringEvaluation
+	 * @generated
+	 */
+	public Adapter createTutoringEvaluationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link asignaturas.GradeScale <em>Grade Scale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see asignaturas.GradeScale
+	 * @generated
+	 */
+	public Adapter createGradeScaleAdapter() {
 		return null;
 	}
 

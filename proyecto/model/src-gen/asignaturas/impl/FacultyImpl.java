@@ -7,6 +7,7 @@ import asignaturas.Career;
 import asignaturas.CurricularUnit;
 import asignaturas.Faculty;
 
+import asignaturas.GradeScale;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -34,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link asignaturas.impl.FacultyImpl#getName <em>Name</em>}</li>
  *   <li>{@link asignaturas.impl.FacultyImpl#getCareers <em>Careers</em>}</li>
  *   <li>{@link asignaturas.impl.FacultyImpl#getFacultyCU <em>Faculty CU</em>}</li>
+ *   <li>{@link asignaturas.impl.FacultyImpl#getGradescale <em>Gradescale</em>}</li>
  * </ul>
  *
  * @generated
@@ -78,6 +80,16 @@ public class FacultyImpl extends MinimalEObjectImpl.Container implements Faculty
 	 * @ordered
 	 */
 	protected EList<CurricularUnit> facultyCU;
+
+	/**
+	 * The cached value of the '{@link #getGradescale() <em>Gradescale</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGradescale()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<GradeScale> gradescale;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -149,6 +161,19 @@ public class FacultyImpl extends MinimalEObjectImpl.Container implements Faculty
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<GradeScale> getGradescale() {
+		if (gradescale == null) {
+			gradescale = new EObjectContainmentEList<GradeScale>(GradeScale.class, this,
+					AsignaturasPackage.FACULTY__GRADESCALE);
+		}
+		return gradescale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -156,6 +181,8 @@ public class FacultyImpl extends MinimalEObjectImpl.Container implements Faculty
 			return ((InternalEList<?>) getCareers()).basicRemove(otherEnd, msgs);
 		case AsignaturasPackage.FACULTY__FACULTY_CU:
 			return ((InternalEList<?>) getFacultyCU()).basicRemove(otherEnd, msgs);
+		case AsignaturasPackage.FACULTY__GRADESCALE:
+			return ((InternalEList<?>) getGradescale()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -174,6 +201,8 @@ public class FacultyImpl extends MinimalEObjectImpl.Container implements Faculty
 			return getCareers();
 		case AsignaturasPackage.FACULTY__FACULTY_CU:
 			return getFacultyCU();
+		case AsignaturasPackage.FACULTY__GRADESCALE:
+			return getGradescale();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,6 +227,10 @@ public class FacultyImpl extends MinimalEObjectImpl.Container implements Faculty
 			getFacultyCU().clear();
 			getFacultyCU().addAll((Collection<? extends CurricularUnit>) newValue);
 			return;
+		case AsignaturasPackage.FACULTY__GRADESCALE:
+			getGradescale().clear();
+			getGradescale().addAll((Collection<? extends GradeScale>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -219,6 +252,9 @@ public class FacultyImpl extends MinimalEObjectImpl.Container implements Faculty
 		case AsignaturasPackage.FACULTY__FACULTY_CU:
 			getFacultyCU().clear();
 			return;
+		case AsignaturasPackage.FACULTY__GRADESCALE:
+			getGradescale().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -237,6 +273,8 @@ public class FacultyImpl extends MinimalEObjectImpl.Container implements Faculty
 			return careers != null && !careers.isEmpty();
 		case AsignaturasPackage.FACULTY__FACULTY_CU:
 			return facultyCU != null && !facultyCU.isEmpty();
+		case AsignaturasPackage.FACULTY__GRADESCALE:
+			return gradescale != null && !gradescale.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

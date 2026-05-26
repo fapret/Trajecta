@@ -106,6 +106,7 @@ public class FacultyItemProvider extends ItemProviderAdapter implements IEditing
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(AsignaturasPackage.Literals.FACULTY__CAREERS);
 			childrenFeatures.add(AsignaturasPackage.Literals.FACULTY__FACULTY_CU);
+			childrenFeatures.add(AsignaturasPackage.Literals.FACULTY__GRADESCALE);
 		}
 		return childrenFeatures;
 	}
@@ -174,6 +175,7 @@ public class FacultyItemProvider extends ItemProviderAdapter implements IEditing
 			return;
 		case AsignaturasPackage.FACULTY__CAREERS:
 		case AsignaturasPackage.FACULTY__FACULTY_CU:
+		case AsignaturasPackage.FACULTY__GRADESCALE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -196,6 +198,9 @@ public class FacultyItemProvider extends ItemProviderAdapter implements IEditing
 
 		newChildDescriptors.add(createChildParameter(AsignaturasPackage.Literals.FACULTY__FACULTY_CU,
 				AsignaturasFactory.eINSTANCE.createCurricularUnit()));
+
+		newChildDescriptors.add(createChildParameter(AsignaturasPackage.Literals.FACULTY__GRADESCALE,
+				AsignaturasFactory.eINSTANCE.createGradeScale()));
 	}
 
 	/**

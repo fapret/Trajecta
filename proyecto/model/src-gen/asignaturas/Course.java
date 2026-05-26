@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link asignaturas.Course#getCourseEvaluation <em>Course Evaluation</em>}</li>
  *   <li>{@link asignaturas.Course#getCurricularunit <em>Curricularunit</em>}</li>
  *   <li>{@link asignaturas.Course#getPartialevaluation <em>Partialevaluation</em>}</li>
+ *   <li>{@link asignaturas.Course#getTutoringevaluation <em>Tutoringevaluation</em>}</li>
  * </ul>
  *
  * @see asignaturas.AsignaturasPackage#getCourse()
@@ -122,5 +123,19 @@ public interface Course extends EObject {
 	 * @generated
 	 */
 	EList<PartialEvaluation> getPartialevaluation();
+
+	/**
+	 * Returns the value of the '<em><b>Tutoringevaluation</b></em>' containment reference list.
+	 * The list contents are of type {@link asignaturas.TutoringEvaluation}.
+	 * It is bidirectional and its opposite is '{@link asignaturas.TutoringEvaluation#getCourse <em>Course</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tutoringevaluation</em>' containment reference list.
+	 * @see asignaturas.AsignaturasPackage#getCourse_Tutoringevaluation()
+	 * @see asignaturas.TutoringEvaluation#getCourse
+	 * @model opposite="course" containment="true"
+	 * @generated
+	 */
+	EList<TutoringEvaluation> getTutoringevaluation();
 
 } // Course

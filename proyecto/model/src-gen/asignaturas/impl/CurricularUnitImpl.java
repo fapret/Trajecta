@@ -6,6 +6,7 @@ import asignaturas.AsignaturasPackage;
 import asignaturas.Course;
 import asignaturas.CurricularUnit;
 import asignaturas.ExamEvaluation;
+import asignaturas.GradeScale;
 import asignaturas.Requirement;
 
 import java.util.Collection;
@@ -39,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link asignaturas.impl.CurricularUnitImpl#getRequirement <em>Requirement</em>}</li>
  *   <li>{@link asignaturas.impl.CurricularUnitImpl#getCourse <em>Course</em>}</li>
  *   <li>{@link asignaturas.impl.CurricularUnitImpl#getExamEvaluation <em>Exam Evaluation</em>}</li>
+ *   <li>{@link asignaturas.impl.CurricularUnitImpl#getGradescale <em>Gradescale</em>}</li>
  * </ul>
  *
  * @generated
@@ -153,6 +155,16 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected EList<ExamEvaluation> examEvaluation;
+
+	/**
+	 * The cached value of the '{@link #getGradescale() <em>Gradescale</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGradescale()
+	 * @generated
+	 * @ordered
+	 */
+	protected GradeScale gradescale;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -342,6 +354,46 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public GradeScale getGradescale() {
+		if (gradescale != null && gradescale.eIsProxy()) {
+			InternalEObject oldGradescale = (InternalEObject) gradescale;
+			gradescale = (GradeScale) eResolveProxy(oldGradescale);
+			if (gradescale != oldGradescale) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							AsignaturasPackage.CURRICULAR_UNIT__GRADESCALE, oldGradescale, gradescale));
+			}
+		}
+		return gradescale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GradeScale basicGetGradescale() {
+		return gradescale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGradescale(GradeScale newGradescale) {
+		GradeScale oldGradescale = gradescale;
+		gradescale = newGradescale;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__GRADESCALE,
+					oldGradescale, gradescale));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -394,6 +446,10 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 			return getCourse();
 		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
 			return getExamEvaluation();
+		case AsignaturasPackage.CURRICULAR_UNIT__GRADESCALE:
+			if (resolve)
+				return getGradescale();
+			return basicGetGradescale();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -430,6 +486,9 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 			getExamEvaluation().clear();
 			getExamEvaluation().addAll((Collection<? extends ExamEvaluation>) newValue);
 			return;
+		case AsignaturasPackage.CURRICULAR_UNIT__GRADESCALE:
+			setGradescale((GradeScale) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -463,6 +522,9 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
 			getExamEvaluation().clear();
 			return;
+		case AsignaturasPackage.CURRICULAR_UNIT__GRADESCALE:
+			setGradescale((GradeScale) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -489,6 +551,8 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 			return course != null && !course.isEmpty();
 		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_EVALUATION:
 			return examEvaluation != null && !examEvaluation.isEmpty();
+		case AsignaturasPackage.CURRICULAR_UNIT__GRADESCALE:
+			return gradescale != null;
 		}
 		return super.eIsSet(featureID);
 	}

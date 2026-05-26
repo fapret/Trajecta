@@ -151,7 +151,7 @@ public class RootWorkspacesItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(WorkspacePackage.Literals.ROOT_WORKSPACES__WORKSPACE,
-				 WorkspaceFactory.eINSTANCE.createWorkspace()));
+				 WorkspaceFactory.eINSTANCE.createWorkspaceElem()));
 	}
 
 	/**

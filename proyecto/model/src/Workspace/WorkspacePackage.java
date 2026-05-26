@@ -94,14 +94,14 @@ public interface WorkspacePackage extends EPackage {
 	int ROOT_WORKSPACES_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link Workspace.impl.WorkspaceImpl <em>Workspace</em>}' class.
+	 * The meta object id for the '{@link Workspace.impl.WorkspaceElemImpl <em>Elem</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see Workspace.impl.WorkspaceImpl
-	 * @see Workspace.impl.WorkspacePackageImpl#getWorkspace()
+	 * @see Workspace.impl.WorkspaceElemImpl
+	 * @see Workspace.impl.WorkspacePackageImpl#getWorkspaceElem()
 	 * @generated
 	 */
-	int WORKSPACE = 1;
+	int WORKSPACE_ELEM = 1;
 
 	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -110,7 +110,7 @@ public interface WorkspacePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE__PASSWORD = 0;
+	int WORKSPACE_ELEM__PASSWORD = 0;
 
 	/**
 	 * The feature id for the '<em><b>Asignaturas</b></em>' reference.
@@ -119,7 +119,7 @@ public interface WorkspacePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE__ASIGNATURAS = 1;
+	int WORKSPACE_ELEM__ASIGNATURAS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Estudiante</b></em>' reference.
@@ -128,7 +128,7 @@ public interface WorkspacePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE__ESTUDIANTE = 2;
+	int WORKSPACE_ELEM__ESTUDIANTE = 2;
 
 	/**
 	 * The feature id for the '<em><b>ID</b></em>' attribute.
@@ -137,26 +137,25 @@ public interface WorkspacePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE__ID = 3;
+	int WORKSPACE_ELEM__ID = 3;
 
 	/**
-	 * The number of structural features of the '<em>Workspace</em>' class.
+	 * The number of structural features of the '<em>Elem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE_FEATURE_COUNT = 4;
+	int WORKSPACE_ELEM_FEATURE_COUNT = 4;
 
 	/**
-	 * The number of operations of the '<em>Workspace</em>' class.
+	 * The number of operations of the '<em>Elem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE_OPERATION_COUNT = 0;
-
+	int WORKSPACE_ELEM_OPERATION_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link Workspace.RootWorkspaces <em>Root Workspaces</em>}'.
@@ -180,58 +179,58 @@ public interface WorkspacePackage extends EPackage {
 	EReference getRootWorkspaces_Workspace();
 
 	/**
-	 * Returns the meta object for class '{@link Workspace.Workspace <em>Workspace</em>}'.
+	 * Returns the meta object for class '{@link Workspace.WorkspaceElem <em>Elem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Workspace</em>'.
-	 * @see Workspace.Workspace
+	 * @return the meta object for class '<em>Elem</em>'.
+	 * @see Workspace.WorkspaceElem
 	 * @generated
 	 */
-	EClass getWorkspace();
+	EClass getWorkspaceElem();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Workspace.Workspace#getPassword <em>Password</em>}'.
+	 * Returns the meta object for the attribute '{@link Workspace.WorkspaceElem#getPassword <em>Password</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Password</em>'.
-	 * @see Workspace.Workspace#getPassword()
-	 * @see #getWorkspace()
+	 * @see Workspace.WorkspaceElem#getPassword()
+	 * @see #getWorkspaceElem()
 	 * @generated
 	 */
-	EAttribute getWorkspace_Password();
+	EAttribute getWorkspaceElem_Password();
 
 	/**
-	 * Returns the meta object for the reference '{@link Workspace.Workspace#getAsignaturas <em>Asignaturas</em>}'.
+	 * Returns the meta object for the reference '{@link Workspace.WorkspaceElem#getAsignaturas <em>Asignaturas</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Asignaturas</em>'.
-	 * @see Workspace.Workspace#getAsignaturas()
-	 * @see #getWorkspace()
+	 * @see Workspace.WorkspaceElem#getAsignaturas()
+	 * @see #getWorkspaceElem()
 	 * @generated
 	 */
-	EReference getWorkspace_Asignaturas();
+	EReference getWorkspaceElem_Asignaturas();
 
 	/**
-	 * Returns the meta object for the reference '{@link Workspace.Workspace#getEstudiante <em>Estudiante</em>}'.
+	 * Returns the meta object for the reference '{@link Workspace.WorkspaceElem#getEstudiante <em>Estudiante</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Estudiante</em>'.
-	 * @see Workspace.Workspace#getEstudiante()
-	 * @see #getWorkspace()
+	 * @see Workspace.WorkspaceElem#getEstudiante()
+	 * @see #getWorkspaceElem()
 	 * @generated
 	 */
-	EReference getWorkspace_Estudiante();
+	EReference getWorkspaceElem_Estudiante();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Workspace.Workspace#getID <em>ID</em>}'.
+	 * Returns the meta object for the attribute '{@link Workspace.WorkspaceElem#getID <em>ID</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>ID</em>'.
-	 * @see Workspace.Workspace#getID()
-	 * @see #getWorkspace()
+	 * @see Workspace.WorkspaceElem#getID()
+	 * @see #getWorkspaceElem()
 	 * @generated
 	 */
-	EAttribute getWorkspace_ID();
+	EAttribute getWorkspaceElem_ID();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -275,14 +274,14 @@ public interface WorkspacePackage extends EPackage {
 		EReference ROOT_WORKSPACES__WORKSPACE = eINSTANCE.getRootWorkspaces_Workspace();
 
 		/**
-		 * The meta object literal for the '{@link Workspace.impl.WorkspaceImpl <em>Workspace</em>}' class.
+		 * The meta object literal for the '{@link Workspace.impl.WorkspaceElemImpl <em>Elem</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see Workspace.impl.WorkspaceImpl
-		 * @see Workspace.impl.WorkspacePackageImpl#getWorkspace()
+		 * @see Workspace.impl.WorkspaceElemImpl
+		 * @see Workspace.impl.WorkspacePackageImpl#getWorkspaceElem()
 		 * @generated
 		 */
-		EClass WORKSPACE = eINSTANCE.getWorkspace();
+		EClass WORKSPACE_ELEM = eINSTANCE.getWorkspaceElem();
 
 		/**
 		 * The meta object literal for the '<em><b>Password</b></em>' attribute feature.
@@ -290,7 +289,7 @@ public interface WorkspacePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute WORKSPACE__PASSWORD = eINSTANCE.getWorkspace_Password();
+		EAttribute WORKSPACE_ELEM__PASSWORD = eINSTANCE.getWorkspaceElem_Password();
 
 		/**
 		 * The meta object literal for the '<em><b>Asignaturas</b></em>' reference feature.
@@ -298,7 +297,7 @@ public interface WorkspacePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference WORKSPACE__ASIGNATURAS = eINSTANCE.getWorkspace_Asignaturas();
+		EReference WORKSPACE_ELEM__ASIGNATURAS = eINSTANCE.getWorkspaceElem_Asignaturas();
 
 		/**
 		 * The meta object literal for the '<em><b>Estudiante</b></em>' reference feature.
@@ -306,7 +305,7 @@ public interface WorkspacePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference WORKSPACE__ESTUDIANTE = eINSTANCE.getWorkspace_Estudiante();
+		EReference WORKSPACE_ELEM__ESTUDIANTE = eINSTANCE.getWorkspaceElem_Estudiante();
 
 		/**
 		 * The meta object literal for the '<em><b>ID</b></em>' attribute feature.
@@ -314,7 +313,7 @@ public interface WorkspacePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute WORKSPACE__ID = eINSTANCE.getWorkspace_ID();
+		EAttribute WORKSPACE_ELEM__ID = eINSTANCE.getWorkspaceElem_ID();
 
 	}
 

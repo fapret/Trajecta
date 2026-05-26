@@ -26,7 +26,8 @@
       <!-- @generated asignaturas2 -->
       <package
             uri="WorkspaceURI"
-            class="Workspace.WorkspacePackage"/>
+            class="Workspace.WorkspacePackage"
+            genModel="model/asignaturas2.genmodel"/>
    </extension>
 
 </plugin>

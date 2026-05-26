@@ -56,6 +56,7 @@ public class PlanItemProvider extends ItemProviderAdapter implements IEditingDom
 			addYearPropertyDescriptor(object);
 			addValidPropertyDescriptor(object);
 			addCareer_parentPropertyDescriptor(object);
+			addGradescalePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -103,6 +104,20 @@ public class PlanItemProvider extends ItemProviderAdapter implements IEditingDom
 						getString("_UI_PropertyDescriptor_description", "_UI_Plan_career_parent_feature",
 								"_UI_Plan_type"),
 						AsignaturasPackage.Literals.PLAN__CAREER_PARENT, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Gradescale feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGradescalePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Plan_gradescale_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Plan_gradescale_feature", "_UI_Plan_type"),
+						AsignaturasPackage.Literals.PLAN__GRADESCALE, true, false, true, null, null, null));
 	}
 
 	/**

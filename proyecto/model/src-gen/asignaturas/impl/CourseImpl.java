@@ -8,6 +8,7 @@ import asignaturas.CourseEvaluation;
 import asignaturas.CurricularUnit;
 import asignaturas.PartialEvaluation;
 
+import asignaturas.TutoringEvaluation;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -38,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link asignaturas.impl.CourseImpl#getCourseEvaluation <em>Course Evaluation</em>}</li>
  *   <li>{@link asignaturas.impl.CourseImpl#getCurricularunit <em>Curricularunit</em>}</li>
  *   <li>{@link asignaturas.impl.CourseImpl#getPartialevaluation <em>Partialevaluation</em>}</li>
+ *   <li>{@link asignaturas.impl.CourseImpl#getTutoringevaluation <em>Tutoringevaluation</em>}</li>
  * </ul>
  *
  * @generated
@@ -102,6 +104,16 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 	 * @ordered
 	 */
 	protected EList<PartialEvaluation> partialevaluation;
+
+	/**
+	 * The cached value of the '{@link #getTutoringevaluation() <em>Tutoringevaluation</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTutoringevaluation()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TutoringEvaluation> tutoringevaluation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -241,6 +253,20 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TutoringEvaluation> getTutoringevaluation() {
+		if (tutoringevaluation == null) {
+			tutoringevaluation = new EObjectContainmentWithInverseEList<TutoringEvaluation>(TutoringEvaluation.class,
+					this, AsignaturasPackage.COURSE__TUTORINGEVALUATION,
+					AsignaturasPackage.TUTORING_EVALUATION__COURSE);
+		}
+		return tutoringevaluation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -253,6 +279,9 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 			return basicSetCurricularunit((CurricularUnit) otherEnd, msgs);
 		case AsignaturasPackage.COURSE__PARTIALEVALUATION:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getPartialevaluation()).basicAdd(otherEnd,
+					msgs);
+		case AsignaturasPackage.COURSE__TUTORINGEVALUATION:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getTutoringevaluation()).basicAdd(otherEnd,
 					msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -272,6 +301,8 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 			return basicSetCurricularunit(null, msgs);
 		case AsignaturasPackage.COURSE__PARTIALEVALUATION:
 			return ((InternalEList<?>) getPartialevaluation()).basicRemove(otherEnd, msgs);
+		case AsignaturasPackage.COURSE__TUTORINGEVALUATION:
+			return ((InternalEList<?>) getTutoringevaluation()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -309,6 +340,8 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 			return getCurricularunit();
 		case AsignaturasPackage.COURSE__PARTIALEVALUATION:
 			return getPartialevaluation();
+		case AsignaturasPackage.COURSE__TUTORINGEVALUATION:
+			return getTutoringevaluation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -339,6 +372,10 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 			getPartialevaluation().clear();
 			getPartialevaluation().addAll((Collection<? extends PartialEvaluation>) newValue);
 			return;
+		case AsignaturasPackage.COURSE__TUTORINGEVALUATION:
+			getTutoringevaluation().clear();
+			getTutoringevaluation().addAll((Collection<? extends TutoringEvaluation>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -366,6 +403,9 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 		case AsignaturasPackage.COURSE__PARTIALEVALUATION:
 			getPartialevaluation().clear();
 			return;
+		case AsignaturasPackage.COURSE__TUTORINGEVALUATION:
+			getTutoringevaluation().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -388,6 +428,8 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 			return getCurricularunit() != null;
 		case AsignaturasPackage.COURSE__PARTIALEVALUATION:
 			return partialevaluation != null && !partialevaluation.isEmpty();
+		case AsignaturasPackage.COURSE__TUTORINGEVALUATION:
+			return tutoringevaluation != null && !tutoringevaluation.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

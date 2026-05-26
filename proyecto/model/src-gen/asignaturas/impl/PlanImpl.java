@@ -4,6 +4,7 @@ package asignaturas.impl;
 
 import asignaturas.AsignaturasPackage;
 import asignaturas.Career;
+import asignaturas.GradeScale;
 import asignaturas.Plan;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -28,6 +29,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link asignaturas.impl.PlanImpl#getYear <em>Year</em>}</li>
  *   <li>{@link asignaturas.impl.PlanImpl#isValid <em>Valid</em>}</li>
  *   <li>{@link asignaturas.impl.PlanImpl#getCareer_parent <em>Career parent</em>}</li>
+ *   <li>{@link asignaturas.impl.PlanImpl#getGradescale <em>Gradescale</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,6 +74,16 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 * @ordered
 	 */
 	protected boolean valid = VALID_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getGradescale() <em>Gradescale</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGradescale()
+	 * @generated
+	 * @ordered
+	 */
+	protected GradeScale gradescale;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,6 +196,46 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public GradeScale getGradescale() {
+		if (gradescale != null && gradescale.eIsProxy()) {
+			InternalEObject oldGradescale = (InternalEObject) gradescale;
+			gradescale = (GradeScale) eResolveProxy(oldGradescale);
+			if (gradescale != oldGradescale) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AsignaturasPackage.PLAN__GRADESCALE,
+							oldGradescale, gradescale));
+			}
+		}
+		return gradescale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GradeScale basicGetGradescale() {
+		return gradescale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGradescale(GradeScale newGradescale) {
+		GradeScale oldGradescale = gradescale;
+		gradescale = newGradescale;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.PLAN__GRADESCALE, oldGradescale,
+					gradescale));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -237,6 +289,10 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 			return isValid();
 		case AsignaturasPackage.PLAN__CAREER_PARENT:
 			return getCareer_parent();
+		case AsignaturasPackage.PLAN__GRADESCALE:
+			if (resolve)
+				return getGradescale();
+			return basicGetGradescale();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -257,6 +313,9 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 			return;
 		case AsignaturasPackage.PLAN__CAREER_PARENT:
 			setCareer_parent((Career) newValue);
+			return;
+		case AsignaturasPackage.PLAN__GRADESCALE:
+			setGradescale((GradeScale) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -279,6 +338,9 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 		case AsignaturasPackage.PLAN__CAREER_PARENT:
 			setCareer_parent((Career) null);
 			return;
+		case AsignaturasPackage.PLAN__GRADESCALE:
+			setGradescale((GradeScale) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -297,6 +359,8 @@ public abstract class PlanImpl extends MinimalEObjectImpl.Container implements P
 			return valid != VALID_EDEFAULT;
 		case AsignaturasPackage.PLAN__CAREER_PARENT:
 			return getCareer_parent() != null;
+		case AsignaturasPackage.PLAN__GRADESCALE:
+			return gradescale != null;
 		}
 		return super.eIsSet(featureID);
 	}

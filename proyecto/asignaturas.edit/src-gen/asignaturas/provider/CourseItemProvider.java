@@ -60,6 +60,7 @@ public class CourseItemProvider extends ItemProviderAdapter implements IEditingD
 			addEditionPropertyDescriptor(object);
 			addCurricularunitPropertyDescriptor(object);
 			addPartialevaluationPropertyDescriptor(object);
+			addTutoringevaluationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -126,6 +127,21 @@ public class CourseItemProvider extends ItemProviderAdapter implements IEditingD
 	}
 
 	/**
+	 * This adds a property descriptor for the Tutoringevaluation feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTutoringevaluationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Course_tutoringevaluation_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Course_tutoringevaluation_feature",
+								"_UI_Course_type"),
+						AsignaturasPackage.Literals.COURSE__TUTORINGEVALUATION, true, false, true, null, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -139,6 +155,7 @@ public class CourseItemProvider extends ItemProviderAdapter implements IEditingD
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(AsignaturasPackage.Literals.COURSE__COURSE_EVALUATION);
 			childrenFeatures.add(AsignaturasPackage.Literals.COURSE__PARTIALEVALUATION);
+			childrenFeatures.add(AsignaturasPackage.Literals.COURSE__TUTORINGEVALUATION);
 		}
 		return childrenFeatures;
 	}
@@ -207,6 +224,7 @@ public class CourseItemProvider extends ItemProviderAdapter implements IEditingD
 			return;
 		case AsignaturasPackage.COURSE__COURSE_EVALUATION:
 		case AsignaturasPackage.COURSE__PARTIALEVALUATION:
+		case AsignaturasPackage.COURSE__TUTORINGEVALUATION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -229,6 +247,9 @@ public class CourseItemProvider extends ItemProviderAdapter implements IEditingD
 
 		newChildDescriptors.add(createChildParameter(AsignaturasPackage.Literals.COURSE__PARTIALEVALUATION,
 				AsignaturasFactory.eINSTANCE.createPartialEvaluation()));
+
+		newChildDescriptors.add(createChildParameter(AsignaturasPackage.Literals.COURSE__TUTORINGEVALUATION,
+				AsignaturasFactory.eINSTANCE.createTutoringEvaluation()));
 	}
 
 	/**

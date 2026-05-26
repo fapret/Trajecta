@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link asignaturas.Faculty#getName <em>Name</em>}</li>
  *   <li>{@link asignaturas.Faculty#getCareers <em>Careers</em>}</li>
  *   <li>{@link asignaturas.Faculty#getFacultyCU <em>Faculty CU</em>}</li>
+ *   <li>{@link asignaturas.Faculty#getGradescale <em>Gradescale</em>}</li>
  * </ul>
  *
  * @see asignaturas.AsignaturasPackage#getFaculty()
@@ -70,5 +71,17 @@ public interface Faculty extends EObject {
 	 * @generated
 	 */
 	EList<CurricularUnit> getFacultyCU();
+
+	/**
+	 * Returns the value of the '<em><b>Gradescale</b></em>' containment reference list.
+	 * The list contents are of type {@link asignaturas.GradeScale}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Gradescale</em>' containment reference list.
+	 * @see asignaturas.AsignaturasPackage#getFaculty_Gradescale()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<GradeScale> getGradescale();
 
 } // Faculty

@@ -246,6 +246,22 @@ public class AsignaturasSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case AsignaturasPackage.TUTORING_EVALUATION: {
+			TutoringEvaluation tutoringEvaluation = (TutoringEvaluation) theEObject;
+			T result = caseTutoringEvaluation(tutoringEvaluation);
+			if (result == null)
+				result = caseEvaluation(tutoringEvaluation);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case AsignaturasPackage.GRADE_SCALE: {
+			GradeScale gradeScale = (GradeScale) theEObject;
+			T result = caseGradeScale(gradeScale);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -578,6 +594,36 @@ public class AsignaturasSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePartialEvaluation(PartialEvaluation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tutoring Evaluation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tutoring Evaluation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTutoringEvaluation(TutoringEvaluation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Grade Scale</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Grade Scale</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGradeScale(GradeScale object) {
 		return null;
 	}
 

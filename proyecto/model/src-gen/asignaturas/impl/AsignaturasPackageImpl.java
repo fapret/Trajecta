@@ -21,6 +21,7 @@ import asignaturas.Evaluation;
 import asignaturas.Exam;
 import asignaturas.ExamEvaluation;
 import asignaturas.Faculty;
+import asignaturas.GradeScale;
 import asignaturas.PartialEvaluation;
 import asignaturas.Plan;
 import asignaturas.RegisteredTo;
@@ -30,6 +31,7 @@ import asignaturas.SomeOf;
 import asignaturas.Subject;
 import asignaturas.SubjectPlan;
 
+import asignaturas.TutoringEvaluation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -197,6 +199,20 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * @generated
 	 */
 	private EClass partialEvaluationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tutoringEvaluationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass gradeScaleEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -383,6 +399,15 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getFaculty_Gradescale() {
+		return (EReference) facultyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPlan() {
 		return planEClass;
 	}
@@ -412,6 +437,15 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 */
 	public EReference getPlan_Career_parent() {
 		return (EReference) planEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPlan_Gradescale() {
+		return (EReference) planEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -547,6 +581,15 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 */
 	public EReference getCurricularUnit_ExamEvaluation() {
 		return (EReference) curricularUnitEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCurricularUnit_Gradescale() {
+		return (EReference) curricularUnitEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -788,6 +831,15 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCourse_Tutoringevaluation() {
+		return (EReference) courseEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEvaluation() {
 		return evaluationEClass;
 	}
@@ -869,6 +921,87 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTutoringEvaluation() {
+		return tutoringEvaluationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTutoringEvaluation_Course() {
+		return (EReference) tutoringEvaluationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGradeScale() {
+		return gradeScaleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGradeScale_ExamApprovalGrade() {
+		return (EAttribute) gradeScaleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGradeScale_TutoringApprovalGrade() {
+		return (EAttribute) gradeScaleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGradeScale_CourseApprovalGrade() {
+		return (EAttribute) gradeScaleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGradeScale_CoursePartialApprovalGrade() {
+		return (EAttribute) gradeScaleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGradeScale_PartialApprovalGrade() {
+		return (EAttribute) gradeScaleEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGradeScale_Name() {
+		return (EAttribute) gradeScaleEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AsignaturasFactory getAsignaturasFactory() {
 		return (AsignaturasFactory) getEFactoryInstance();
 	}
@@ -908,11 +1041,13 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		createEAttribute(facultyEClass, FACULTY__NAME);
 		createEReference(facultyEClass, FACULTY__CAREERS);
 		createEReference(facultyEClass, FACULTY__FACULTY_CU);
+		createEReference(facultyEClass, FACULTY__GRADESCALE);
 
 		planEClass = createEClass(PLAN);
 		createEAttribute(planEClass, PLAN__YEAR);
 		createEAttribute(planEClass, PLAN__VALID);
 		createEReference(planEClass, PLAN__CAREER_PARENT);
+		createEReference(planEClass, PLAN__GRADESCALE);
 
 		subjectEClass = createEClass(SUBJECT);
 		createEAttribute(subjectEClass, SUBJECT__ID);
@@ -930,6 +1065,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		createEReference(curricularUnitEClass, CURRICULAR_UNIT__REQUIREMENT);
 		createEReference(curricularUnitEClass, CURRICULAR_UNIT__COURSE);
 		createEReference(curricularUnitEClass, CURRICULAR_UNIT__EXAM_EVALUATION);
+		createEReference(curricularUnitEClass, CURRICULAR_UNIT__GRADESCALE);
 
 		someOfEClass = createEClass(SOME_OF);
 		createEAttribute(someOfEClass, SOME_OF__N);
@@ -966,6 +1102,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		createEReference(courseEClass, COURSE__COURSE_EVALUATION);
 		createEReference(courseEClass, COURSE__CURRICULARUNIT);
 		createEReference(courseEClass, COURSE__PARTIALEVALUATION);
+		createEReference(courseEClass, COURSE__TUTORINGEVALUATION);
 
 		evaluationEClass = createEClass(EVALUATION);
 		createEAttribute(evaluationEClass, EVALUATION__DATE);
@@ -980,6 +1117,17 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 
 		partialEvaluationEClass = createEClass(PARTIAL_EVALUATION);
 		createEReference(partialEvaluationEClass, PARTIAL_EVALUATION__COURSE);
+
+		tutoringEvaluationEClass = createEClass(TUTORING_EVALUATION);
+		createEReference(tutoringEvaluationEClass, TUTORING_EVALUATION__COURSE);
+
+		gradeScaleEClass = createEClass(GRADE_SCALE);
+		createEAttribute(gradeScaleEClass, GRADE_SCALE__EXAM_APPROVAL_GRADE);
+		createEAttribute(gradeScaleEClass, GRADE_SCALE__TUTORING_APPROVAL_GRADE);
+		createEAttribute(gradeScaleEClass, GRADE_SCALE__COURSE_APPROVAL_GRADE);
+		createEAttribute(gradeScaleEClass, GRADE_SCALE__COURSE_PARTIAL_APPROVAL_GRADE);
+		createEAttribute(gradeScaleEClass, GRADE_SCALE__PARTIAL_APPROVAL_GRADE);
+		createEAttribute(gradeScaleEClass, GRADE_SCALE__NAME);
 	}
 
 	/**
@@ -1024,6 +1172,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		evaluacionExamenEClass.getESuperTypes().add(this.getEvaluation());
 		courseEvaluationEClass.getESuperTypes().add(this.getEvaluation());
 		partialEvaluationEClass.getESuperTypes().add(this.getEvaluation());
+		tutoringEvaluationEClass.getESuperTypes().add(this.getEvaluation());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1055,6 +1204,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		initEReference(getFaculty_FacultyCU(), this.getCurricularUnit(), null, "FacultyCU", null, 0, -1, Faculty.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFaculty_Gradescale(), this.getGradeScale(), null, "gradescale", null, 0, -1, Faculty.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(planEClass, Plan.class, "Plan", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPlan_Year(), ecorePackage.getEInt(), "Year", null, 0, 1, Plan.class, !IS_TRANSIENT,
@@ -1064,6 +1216,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		initEReference(getPlan_Career_parent(), this.getCareer(), this.getCareer_Plan(), "career_parent", null, 1, 1,
 				Plan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPlan_Gradescale(), this.getGradeScale(), null, "gradescale", null, 1, 1, Plan.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subjectEClass, Subject.class, "Subject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSubject_Id(), ecorePackage.getEInt(), "Id", null, 1, 1, Subject.class, !IS_TRANSIENT,
@@ -1102,6 +1257,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 				this.getExamEvaluation_Curricularunit(), "ExamEvaluation", null, 0, -1, CurricularUnit.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCurricularUnit_Gradescale(), this.getGradeScale(), null, "gradescale", null, 0, 1,
+				CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(someOfEClass, SomeOf.class, "SomeOf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSomeOf_N(), ecorePackage.getEInt(), "N", null, 1, 1, SomeOf.class, !IS_TRANSIENT,
@@ -1170,6 +1328,10 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		initEReference(getCourse_Partialevaluation(), this.getPartialEvaluation(), this.getPartialEvaluation_Course(),
 				"partialevaluation", null, 0, -1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCourse_Tutoringevaluation(), this.getTutoringEvaluation(),
+				this.getTutoringEvaluation_Course(), "tutoringevaluation", null, 0, -1, Course.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
 		initEClass(evaluationEClass, Evaluation.class, "Evaluation", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -1197,6 +1359,32 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		initEReference(getPartialEvaluation_Course(), this.getCourse(), this.getCourse_Partialevaluation(), "course",
 				null, 1, 1, PartialEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tutoringEvaluationEClass, TutoringEvaluation.class, "TutoringEvaluation", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTutoringEvaluation_Course(), this.getCourse(), this.getCourse_Tutoringevaluation(), "course",
+				null, 1, 1, TutoringEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(gradeScaleEClass, GradeScale.class, "GradeScale", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getGradeScale_ExamApprovalGrade(), ecorePackage.getEFloat(), "ExamApprovalGrade", "3", 0, 1,
+				GradeScale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGradeScale_TutoringApprovalGrade(), ecorePackage.getEFloat(), "TutoringApprovalGrade", null,
+				0, 1, GradeScale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGradeScale_CourseApprovalGrade(), ecorePackage.getEFloat(), "CourseApprovalGrade", "6", 0, 1,
+				GradeScale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGradeScale_CoursePartialApprovalGrade(), ecorePackage.getEFloat(),
+				"CoursePartialApprovalGrade", "3", 0, 1, GradeScale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGradeScale_PartialApprovalGrade(), ecorePackage.getEFloat(), "PartialApprovalGrade", "60", 0,
+				1, GradeScale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGradeScale_Name(), ecorePackage.getEString(), "Name", null, 1, 1, GradeScale.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

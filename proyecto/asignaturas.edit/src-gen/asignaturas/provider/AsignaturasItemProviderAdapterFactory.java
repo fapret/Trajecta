@@ -510,6 +510,52 @@ public class AsignaturasItemProviderAdapterFactory extends AsignaturasAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link asignaturas.TutoringEvaluation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TutoringEvaluationItemProvider tutoringEvaluationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link asignaturas.TutoringEvaluation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTutoringEvaluationAdapter() {
+		if (tutoringEvaluationItemProvider == null) {
+			tutoringEvaluationItemProvider = new TutoringEvaluationItemProvider(this);
+		}
+
+		return tutoringEvaluationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link asignaturas.GradeScale} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GradeScaleItemProvider gradeScaleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link asignaturas.GradeScale}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createGradeScaleAdapter() {
+		if (gradeScaleItemProvider == null) {
+			gradeScaleItemProvider = new GradeScaleItemProvider(this);
+		}
+
+		return gradeScaleItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -646,6 +692,10 @@ public class AsignaturasItemProviderAdapterFactory extends AsignaturasAdapterFac
 			courseEvaluationItemProvider.dispose();
 		if (partialEvaluationItemProvider != null)
 			partialEvaluationItemProvider.dispose();
+		if (tutoringEvaluationItemProvider != null)
+			tutoringEvaluationItemProvider.dispose();
+		if (gradeScaleItemProvider != null)
+			gradeScaleItemProvider.dispose();
 	}
 
 }

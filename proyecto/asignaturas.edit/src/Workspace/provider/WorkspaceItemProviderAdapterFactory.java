@@ -95,26 +95,26 @@ public class WorkspaceItemProviderAdapterFactory extends WorkspaceAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link Workspace.Workspace} instances.
+	 * This keeps track of the one adapter used for all {@link Workspace.WorkspaceElem} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected WorkspaceItemProvider workspaceItemProvider;
+	protected WorkspaceElemItemProvider workspaceElemItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link Workspace.Workspace}.
+	 * This creates an adapter for a {@link Workspace.WorkspaceElem}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createWorkspaceAdapter() {
-		if (workspaceItemProvider == null) {
-			workspaceItemProvider = new WorkspaceItemProvider(this);
+	public Adapter createWorkspaceElemAdapter() {
+		if (workspaceElemItemProvider == null) {
+			workspaceElemItemProvider = new WorkspaceElemItemProvider(this);
 		}
 
-		return workspaceItemProvider;
+		return workspaceElemItemProvider;
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class WorkspaceItemProviderAdapterFactory extends WorkspaceAdapterFactory
 	@Override
 	public void dispose() {
 		if (rootWorkspacesItemProvider != null) rootWorkspacesItemProvider.dispose();
-		if (workspaceItemProvider != null) workspaceItemProvider.dispose();
+		if (workspaceElemItemProvider != null) workspaceElemItemProvider.dispose();
 	}
 
 }

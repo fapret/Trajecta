@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface RootWorkspaces extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' containment reference list.
-	 * The list contents are of type {@link Workspace.Workspace}.
+	 * The list contents are of type {@link Workspace.WorkspaceElem}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Workspace</em>' containment reference list.
@@ -33,6 +33,6 @@ public interface RootWorkspaces extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Workspace> getWorkspace();
+	EList<WorkspaceElem> getWorkspace();
 
 } // RootWorkspaces
