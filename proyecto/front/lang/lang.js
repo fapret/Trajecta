@@ -198,6 +198,11 @@ const translations = {
     createCourse: "Create Course",
     Activitieslbl: "Activities:",
     Pathslbl: "Paths:",
-    administration: "ADMINISTRATION"
+    administration: "ADMINISTRATION",
+    "configure-columns-and-activities": "configure columns and activities",
+    cancel: "cancel",
+    "no-auto-mapping-detected": "No activities were detected to map automatically",
+    "activity-mapping": "Activity Mapping:",
+    "column-mapping": "Column Mapping:"
   }
 };

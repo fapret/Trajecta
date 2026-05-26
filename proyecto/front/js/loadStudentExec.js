@@ -35,7 +35,7 @@ function crear_estudiante() {
     };
 
     // Construir la URL con los parámetros
-	var url = "https://tmde-api.fapret.com:8443/curricula_microservice/Estudiante";
+	var url = "http://127.0.0.1:8080/curricula_microservice/Estudiante";
     var url2 = url + "?name=" + encodeURIComponent(nombre) + "&id=" + encodeURIComponent(ci) + "&uuid=" + encodeURIComponent(workspaceID);
 
 	fetch(url2, options)

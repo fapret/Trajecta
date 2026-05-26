@@ -19,10 +19,10 @@ CORS(app)
 @app.route('/<caseid>/<mode>', methods=['GET'])
 def stats(caseid, mode):
     try:
-        if mode == 1:
+        if mode == '1':
             filepath = './reference/' + caseid + '.xes'
         else:
-            if mode == 2:
+            if mode == '2':
                 filepath = './imports2/' + caseid + '.xes'
             else:
                 filepath = './imports/' + caseid + '.xes'

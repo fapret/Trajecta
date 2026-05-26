@@ -19,7 +19,7 @@
 
     Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
  */
-function seeDiagram(mode, type=0, activity=100, paths=100) {
+function seeDiagram(mode, type=0, activity=100, paths=100, filtermode=2) {
     const allDiscoveriesSelect = document.getElementById("discoveries");
     const uuid = allDiscoveriesSelect.value;
     const img = document.getElementById('diagram');
@@ -50,7 +50,7 @@ function seeDiagram(mode, type=0, activity=100, paths=100) {
         default:
             return;
     }
-    const url = `http://127.0.0.1:9001/${modestr}/${uuid}/${type}?activity=${activity}&path=${paths}`;
+    const url = `http://127.0.0.1:9001/${modestr}/${uuid}/${type}?activity=${activity}&path=${paths}&filtermode=${filtermode}`;
     img.src = url;
     img.classList.remove('hidden');
     diagramsButtons.classList.remove('hidden');

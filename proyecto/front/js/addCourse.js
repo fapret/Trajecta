@@ -38,7 +38,7 @@ function agregar_Curso() {
 		return;
 	}
 
-    const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Estudiante/AddCourse`;
+    const url = `http://127.0.0.1:8080/curricula_microservice/Estudiante/AddCourse`;
     var formData = new FormData();
     formData.append('faculty', faculty);
     formData.append('career', career);

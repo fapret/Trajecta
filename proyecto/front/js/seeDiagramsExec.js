@@ -41,7 +41,7 @@ seeDiagramDFG.addEventListener("click", () => {
     result.style.display = "block";
     const loader = document.getElementById("loadingcontent");
     loader.style.display = "flex";
-    seeDiagram(1,0,acts.value,pths.value);
+    seeDiagram(1,0,acts.value,pths.value, 3);
 });
 seeDiagramBPMN.addEventListener("click", () => {
     result.style.display = "block";
@@ -144,4 +144,32 @@ ResetBtn.addEventListener("click", () => {
     scale = 1;
     position = { x: 0, y: 0 };
     updateTransform();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Get references to the display spans
+const activitiesValueLabel = document.getElementById("activitiesValue");
+const pathsValueLabel = document.getElementById("pathsValue");
+
+// Update Activities value display
+acts.addEventListener("input", (e) => {
+    activitiesValueLabel.textContent = `${e.target.value}%`;
+});
+
+// Update Paths value display
+pths.addEventListener("input", (e) => {
+    pathsValueLabel.textContent = `${e.target.value}%`;
 });

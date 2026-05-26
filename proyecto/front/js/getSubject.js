@@ -35,7 +35,7 @@ function consultarMateria() {
         return;
     }
     
-    const url = `https://tmde-api.fapret.com:8443/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}&subject=${materia}&uuid=${workspaceID}`;
+    const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}&subject=${materia}&uuid=${workspaceID}`;
     fetch(url)
 	.then(response => response.json())
 	.then(data => {

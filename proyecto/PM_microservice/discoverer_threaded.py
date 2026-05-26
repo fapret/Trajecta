@@ -12,6 +12,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import traceback
 from pm4py.visualization.powl.variants import net
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -21,18 +22,29 @@ for folder in ['./imports', './imports2', './reference', './dfg', './bpmn', './p
     os.makedirs(folder, exist_ok=True)
 
 
-def run_discovery(file_path, file_uuid, mode):
+def run_discovery(file_path, file_uuid, mode, column_mapping=None, activity_mapping=None):
     try:
         dtype_spec = {
             "Curricular Unit": str,
             "Course Edition": 'Int64',
             "Course Year": 'Int64',
-            "Grade": 'Int64',
+            "Grade": 'Float64',
             "Credits": 'Int64',
         }
 
         # Read CSV
         event_log = pd.read_csv(file_path, sep=',', dtype=dtype_spec)
+        
+        if column_mapping:
+            reverse_mapping = {source: target for target, source in column_mapping.items()}
+            event_log = event_log.rename(columns=reverse_mapping)
+
+        missing_cols = [col for col in ['ID', 'Activity', 'Timestamp', 'Curricular Unit'] if col not in event_log.columns]
+        if missing_cols:
+            raise ValueError(f'Missing required columns after mapping: {missing_cols}')
+
+        if activity_mapping:
+            event_log['Activity'] = event_log['Activity'].astype(str).map(lambda val: activity_mapping.get(val, val))
 
         # Format for pm4py
         event_log = pm4py.format_dataframe(
@@ -49,14 +61,14 @@ def run_discovery(file_path, file_uuid, mode):
         # Update activity names for certain cases
         event_log['Activity'] = event_log.apply(
             lambda row: f"{row['Activity']} - {row['Curricular Unit']}"
-            if row['Activity'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course']
+            if row['Activity'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course', 'Evaluation - Tutoring']
             else row['Activity'],
             axis=1
         )
 
         event_log['concept:name'] = event_log.apply(
             lambda row: f"{row['concept:name']} - {row['Curricular Unit']}"
-            if row['concept:name'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course']
+            if row['concept:name'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course', 'Evaluation - Tutoring']
             else row['concept:name'],
             axis=1
         )
@@ -104,11 +116,11 @@ def run_discovery(file_path, file_uuid, mode):
         
 
         # --- PTML --- Removed, takes too much time
-        process_tree = pm4py.convert_to_process_tree(net3, im3, fm3)
-        pm4py.write_ptml(process_tree, f'./ptml/{file_uuid}.ptml', auto_layout=True)
-        del process_tree
+        #process_tree = pm4py.convert_to_process_tree(net3, im3, fm3)
+        #pm4py.write_ptml(process_tree, f'./ptml/{file_uuid}.ptml', auto_layout=True)
+        #del process_tree
         
-        print(f"[{file_uuid}] Discovery PTML completed successfully.")
+        #print(f"[{file_uuid}] Discovery PTML completed successfully.")
         
         del net3
         del im3
@@ -127,7 +139,8 @@ def discover(mode):
         return jsonify({'error': 'No file'}), 400
 
     file = request.files['file']
-    file_uuid = str(uuid.uuid4())
+    name = request.form.get('name', '')
+    file_uuid = str(uuid.uuid4()).split('-')[0] + '+' + name
 
     try:
         # Save uploaded CSV to disk so thread can access it
@@ -135,7 +148,9 @@ def discover(mode):
         file.save(file_path)
 
         # Start discovery in background thread
-        thread = threading.Thread(target=run_discovery, args=(file_path, file_uuid, mode))
+        column_mapping = json.loads(request.form.get('column_mapping', '{}'))
+        activity_mapping = json.loads(request.form.get('activity_mapping', '{}'))
+        thread = threading.Thread(target=run_discovery, args=(file_path, file_uuid, mode, column_mapping, activity_mapping))
         thread.start()
 
         # Respond immediately with job ID

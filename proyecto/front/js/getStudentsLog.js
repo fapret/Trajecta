@@ -20,7 +20,7 @@
 	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 function get_log() {
-    const url = `https://tmde-api.fapret.com:8443/curricula_microservice/GetStudentsLog`;
+    const url = `http://127.0.0.1:8080/curricula_microservice/GetStudentsLog`;
     var formData = new FormData();
     const workspaceID = localStorage.getItem('selectedWorkspace');
     if (workspaceID == null) {

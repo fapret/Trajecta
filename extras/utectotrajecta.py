@@ -57,6 +57,16 @@ with open(INPUT_CSV, newline="", encoding="utf-8-sig") as infile, \
             "Course Year": str(year),
             "Credits": ""
         }
+        
+        # ---------- Evaluation - Tutoring ----------
+        if row["Tutoria"].strip().lower() == "realizada":
+            d = last_day_of_month(start_date - timedelta(days=90))
+            writer.writerow({
+                **base_row,
+                "Activity": "Evaluation - Tutoring",
+                "Timestamp": format_ts(d),
+                "Grade": row["Nota CURSADA Calculada"]
+            })
 
         # ---------- Evaluation - Exam 1PC ----------
         if row["Nota Evaluacion 1PC"].strip():

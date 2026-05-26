@@ -29,7 +29,7 @@ const choices = new Choices(selector, {
 async function loadWorkspaces() {
     try {
         //const response = await fetch('http://localhost:8080/curricula_microservice/Workspaces');
-        const response = await fetch('https://tmde-api.fapret.com:8443/curricula_microservice/Workspaces');
+        const response = await fetch('http://127.0.0.1:8080/curricula_microservice/Workspaces');
         if (!response.ok) throw new Error('Failed to fetch workspaces');
         const workspaces = await response.json(); // ["uuid1", "uuid2", ...]
 
@@ -83,7 +83,7 @@ selector.addEventListener('change', async (e) => {
             formData.append('uuid', uuid);
 
             //const response = await fetch('http://localhost:8080/curricula_microservice/Workspaces', {
-            const response = await fetch('https://tmde-api.fapret.com:8443/curricula_microservice/Workspaces', {
+            const response = await fetch('http://127.0.0.1:8080/curricula_microservice/Workspaces', {
                 method: 'POST',
                 body: formData
             });
