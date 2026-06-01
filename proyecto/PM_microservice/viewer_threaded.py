@@ -514,8 +514,8 @@ def run_viewer(view, caseid, mode, activity, path, filtermode):
         tb = traceback.format_exc()
         print(tb)
     
-@app.route('/<view>/<caseid>/<mode>', methods=['GET'])
-@app.route('/<view>/<caseid>', methods=['GET'])
+@app.route('/viewer/<view>/<caseid>/<mode>', methods=['GET'])
+@app.route('/viewer/<view>/<caseid>', methods=['GET'])
 def viewer(view, caseid, mode=0):
     try:
         activity = float(request.args.get("activity", 100))

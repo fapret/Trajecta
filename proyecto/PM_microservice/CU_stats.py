@@ -16,7 +16,7 @@ import traceback #for debugging
 app = Flask(__name__)
 CORS(app) #Without cors it gets blocked
 
-@app.route('/<caseid>/<cu>', methods=['GET'])
+@app.route('/custats/<caseid>/<cu>', methods=['GET'])
 def stats(caseid, cu):
     try:
         filepath = './imports/' + caseid + '.xes'

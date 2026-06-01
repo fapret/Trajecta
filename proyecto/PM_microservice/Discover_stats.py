@@ -15,7 +15,7 @@ import traceback #for debugging
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/<mode>/<caseid>', methods=['GET'])
+@app.route('/discoverstats/<mode>/<caseid>', methods=['GET'])
 def stats(mode, caseid):
     try:
         if mode == "1":

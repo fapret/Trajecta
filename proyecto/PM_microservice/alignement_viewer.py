@@ -47,7 +47,7 @@ def run_viewer(mode, reference, caseid):
         tb = traceback.format_exc()
         return jsonify({'error': str(e), 'trace': tb}), 500
     
-@app.route('/<mode>/<reference>/<caseid>', methods=['GET'])
+@app.route('/alignement/<mode>/<reference>/<caseid>', methods=['GET'])
 def TBR(mode, reference, caseid):
     try:
         # If rendering is ongoing, report status

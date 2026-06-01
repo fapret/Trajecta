@@ -21,7 +21,7 @@ CORS(app) #Without cors it gets blocked
 for folder in ['./stats']:
     os.makedirs(folder, exist_ok=True)
 
-@app.route('/<caseid>/<career>/<plan>', methods=['GET'])
+@app.route('/planstats/<caseid>/<career>/<plan>', methods=['GET'])
 def stats(caseid, career, plan):
     try:
         filepath = './imports/' + caseid + '.xes'

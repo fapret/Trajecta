@@ -44,14 +44,14 @@ function seeDiagram(mode) {
 
     if (window.location.protocol === "file:") {
         // Opened directly as file:///...
-        baseUrl = "http://127.0.0.1:9008";
+        baseUrl = "http://127.0.0.1:9008/alignement";
     }
     else if (
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1"
     ) {
         // Running from local web server
-        baseUrl = "http://127.0.0.1:9008";
+        baseUrl = "http://127.0.0.1:9008/alignement";
     }
     else {
         // Running from trajecta-pm.fapret.com or any other web host

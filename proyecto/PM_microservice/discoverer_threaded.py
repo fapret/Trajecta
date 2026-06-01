@@ -140,8 +140,8 @@ def run_discovery(file_path, file_uuid, mode, column_mapping=None, action_mappin
         print(f"[{file_uuid}] ERROR during discovery: {e}")
         traceback.print_exc()
 
-@app.route('/', methods=['POST'])
-@app.route('/<mode>', methods=['POST'])
+@app.route('/discoverer/', methods=['POST'])
+@app.route('/discoverer/<mode>', methods=['POST'])
 def discover(mode):
     if 'file' not in request.files:
         return jsonify({'error': 'No file'}), 400

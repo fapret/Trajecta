@@ -361,14 +361,14 @@ function getDiscoveries(select, mode = 0){
 
     if (window.location.protocol === "file:") {
         // Opened directly as file:///...
-        baseUrl = "http://127.0.0.1:9004";
+        baseUrl = "http://127.0.0.1:9004/listdiscovers";
     }
     else if (
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1"
     ) {
         // Running from local web server
-        baseUrl = "http://127.0.0.1:9004";
+        baseUrl = "http://127.0.0.1:9004/listdiscovers";
     }
     else {
         // Running from trajecta-pm.fapret.com or any other web host

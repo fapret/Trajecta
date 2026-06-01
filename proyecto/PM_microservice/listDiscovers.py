@@ -10,8 +10,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app) #Without cors it gets blocked
 
-@app.route('/', methods=['GET'])
-@app.route('/<mode>', methods=['GET'])
+@app.route('/listdiscovers/', methods=['GET'])
+@app.route('/listdiscovers/<mode>', methods=['GET'])
 def list_files(mode):
     if mode == "1":
         folder_path = './reference' #reference only
