@@ -37,7 +37,7 @@ def run_viewer(mode, reference, caseid):
         os.makedirs('./conformance/' + reference + '/alignements', exist_ok=True)
         
         event_log = pm4py.read_xes(elfilepath)
-        net, im, fm = pm4py.read_pnml(pnfilepath)
+        net, im, fm = pm4py.read_pnml(pnfilepath, auto_guess_final_marking=True)
         
         conformance_alignment = pm4py.conformance.conformance_diagnostics_alignments(event_log, net, im, fm)
         pm4py.save_vis_alignments(event_log, conformance_alignment, imagepath)
