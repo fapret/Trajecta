@@ -39,18 +39,6 @@ seeDiagramPNA.addEventListener("click", () => {
     loader.style.display = "flex";
     seeDiagram(3);
 });
-seeDiagramPNH.addEventListener("click", () => {
-    result.style.display = "block";
-    const loader = document.getElementById("loadingcontent");
-    loader.style.display = "flex";
-    seeDiagram(4);
-});
-seeDiagramPNI.addEventListener("click", () => {
-    result.style.display = "block";
-    const loader = document.getElementById("loadingcontent");
-    loader.style.display = "flex";
-    seeDiagram(7);
-});
 
 
 /////////////////////////////

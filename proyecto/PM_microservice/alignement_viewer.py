@@ -42,7 +42,7 @@ def run_viewer(mode, reference, caseid):
         
         event_log = pm4py.read_xes(elfilepath)
         net, im, fm = pm4py.read_pnml(pnfilepath)
-    
+        
         im = discover_initial_marking(net)
         fm = discover_final_marking(net)
         
