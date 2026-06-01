@@ -22,5 +22,5 @@
 const discoverLogBtn = document.getElementById("discoverLog");
 
 discoverLogBtn.addEventListener("click", (event) => {
-    discover_log(1);
+    discover_log("pnml");
 });
