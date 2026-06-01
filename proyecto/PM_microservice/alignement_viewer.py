@@ -31,7 +31,7 @@ def run_viewer(mode, reference, caseid):
         render_status[(reference, caseid, mode)] = "rendering"   
         pnfilepath = './reference/' + reference + '.pnml'
         elfilepath = './imports2/' + caseid + '.xes'
-        imagepath = './conformance/' + reference + '/alignements/' + caseid + '_' + mode + '.svg'
+        imagepath = './conformance/' + reference + '/alignements/' + caseid + '.svg'
         
         if not os.path.exists(pnfilepath):
             return "Unknown reference id"
@@ -70,7 +70,7 @@ def TBR(mode, reference, caseid):
         #else:
             #pnfilepath = './pnml/' + reference + '_' + mode + '.pnml'
         elfilepath = './imports2/' + caseid + '.xes'
-        imagepath = './conformance/' + reference + '/alignements/' + caseid + '_' + mode + '.svg'
+        imagepath = './conformance/' + reference + '/alignements/' + caseid + '.svg'
         
         if not os.path.exists(pnfilepath):
             return "Unknown reference id"
