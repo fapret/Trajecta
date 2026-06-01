@@ -11,6 +11,11 @@ import threading
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 
+from pm4py.objects.petri_net.utils.initial_marking import discover_initial_marking
+from pm4py.objects.petri_net.utils.final_marking import discover_final_marking
+from pm4py.objects.petri_net.obj import Marking
+from pm4py.analysis.woflan import algorithm as woflan
+
 import traceback #for debugging
 
 app = Flask(__name__)
@@ -37,7 +42,17 @@ def run_viewer(mode, reference, caseid):
         os.makedirs('./conformance/' + reference + '/alignements', exist_ok=True)
         
         event_log = pm4py.read_xes(elfilepath)
-        net, im, fm = pm4py.read_pnml(pnfilepath, auto_guess_final_marking=True)
+        net, im, fm = pm4py.read_pnml(pnfilepath)
+        
+        im = discover_initial_marking(net)
+        fm = discover_final_marking(net)
+        
+        is_sound = woflan.is_sound(net, im, fm)
+        print(f"Is the Petri net a sound workflow net? {is_sound}")
+        
+        woflan_parameters = {woflan.Parameters.RETURN_AS_STRING: True}
+        diagnostics_report = woflan.apply(net, im, fm, parameters=woflan_parameters)
+        print(diagnostics_report)
         
         conformance_alignment = pm4py.conformance.conformance_diagnostics_alignments(event_log, net, im, fm)
         pm4py.save_vis_alignments(event_log, conformance_alignment, imagepath)
@@ -46,7 +61,8 @@ def run_viewer(mode, reference, caseid):
     except Exception as e:
         print(e);
         tb = traceback.format_exc()
-        return jsonify({'error': str(e), 'trace': tb}), 500
+        return
+        //return jsonify({'error': str(e), 'trace': tb}), 500
     
 @app.route('/alignement/<mode>/<reference>/<caseid>', methods=['GET'])
 def TBR(mode, reference, caseid):
