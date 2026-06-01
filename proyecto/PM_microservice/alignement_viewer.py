@@ -62,7 +62,7 @@ def run_viewer(mode, reference, caseid):
         print(e);
         tb = traceback.format_exc()
         return
-        //return jsonify({'error': str(e), 'trace': tb}), 500
+        #return jsonify({'error': str(e), 'trace': tb}), 500
     
 @app.route('/alignement/<mode>/<reference>/<caseid>', methods=['GET'])
 def TBR(mode, reference, caseid):
