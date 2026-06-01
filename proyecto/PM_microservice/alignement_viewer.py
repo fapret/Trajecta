@@ -44,6 +44,7 @@ def run_viewer(mode, reference, caseid):
         
         render_status[(reference, caseid, mode)] = "completed"
     except Exception as e:
+        print(e);
         tb = traceback.format_exc()
         return jsonify({'error': str(e), 'trace': tb}), 500
     
