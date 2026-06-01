@@ -98,7 +98,8 @@ const translations = {
     deviationTable: "Tabla de desviación",
     referenceLog: "Log de Referencia:",
     Activitieslbl: "Actividades:",
-    Pathslbl: "Caminos:"
+    Pathslbl: "Caminos:",
+    viewAlignGraphDesc: "Si la imagen no se muestra, intente nuevamente en unos minutos, el alineamiento estaria procesandose."
   },
   en: {
     welcome: "Welcome to Trajecta!",
@@ -203,6 +204,7 @@ const translations = {
     cancel: "cancel",
     "no-auto-mapping-detected": "No activities were detected to map automatically",
     "activity-mapping": "Activity Mapping:",
-    "column-mapping": "Column Mapping:"
+    "column-mapping": "Column Mapping:",
+    viewAlignGraphDesc: "If the image is not shown, wait some minutes and try again. Thats due to the alignement is processing."
   }
 };
