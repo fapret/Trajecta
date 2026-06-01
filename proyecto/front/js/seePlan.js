@@ -117,7 +117,7 @@ const url = `${baseUrl}/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=
                   // Running from trajecta-pm.fapret.com or any other web host
                   baseUrl = "https://tmde-api.fapret.com";
                 }
-                let apiUrl = `http://${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${faculty}&uuid=${workspaceID}&curricularUnit=` + materias[i];
+                let apiUrl = `${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${faculty}&uuid=${workspaceID}&curricularUnit=` + materias[i];
                 fetch(apiUrl)
                         .then(async response => {
                           if (!response.ok) {

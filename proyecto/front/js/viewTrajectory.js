@@ -134,7 +134,7 @@ const url = `${baseUrl}/curricula_microservice/Faculty/Carrera/Plan/eval`;
             // Running from trajecta-pm.fapret.com or any other web host
             baseUrl = "https://tmde-api.fapret.com";
         }
-let apiUrl = `http://${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${facultyName}&uuid=${workspaceID}&curricularUnit=` + materias[i];
+let apiUrl = `${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${facultyName}&uuid=${workspaceID}&curricularUnit=` + materias[i];
                 fetch(apiUrl)
                     .then(response => {
                         if (!response.ok) {
@@ -340,7 +340,7 @@ async function getMaxRequirementLevel(facultyName, cu_id) {
             // Running from trajecta-pm.fapret.com or any other web host
             baseUrl = "https://tmde-api.fapret.com";
         }
-let apiUrl = `http://${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}&uuid=${workspaceID}`;
+let apiUrl = `${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${facultyName}&curricularUnit=${cu_id}&uuid=${workspaceID}`;
         const response = await fetch(apiUrl);
   
         if (!response.ok) {
