@@ -11,6 +11,10 @@ import threading
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 
+from pm4py.objects.petri_net.utils.initial_marking import discover_initial_marking
+from pm4py.objects.petri_net.utils.final_marking import discover_final_marking
+from pm4py.objects.petri_net.obj import Marking
+
 import traceback #for debugging
 
 app = Flask(__name__)
@@ -39,7 +43,12 @@ def run_viewer(mode, reference, caseid):
         event_log = pm4py.read_xes(elfilepath)
         net, im, fm = pm4py.read_pnml(pnfilepath, auto_guess_final_marking=True)
         
-        conformance_alignment = pm4py.conformance.conformance_diagnostics_alignments(event_log, net, im, fm)
+        im = discover_initial_marking(net)
+        fm = discover_final_marking(net)
+        
+        parameters = {'enable_easy_soundness_check': False}
+        
+        conformance_alignment = pm4py.conformance.conformance_diagnostics_alignments(event_log, net, im, fm, parameters=parameters)
         pm4py.save_vis_alignments(event_log, conformance_alignment, imagepath)
         
         render_status[(reference, caseid, mode)] = "completed"
