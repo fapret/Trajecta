@@ -1,0 +1,30 @@
+services:
+  curricula:
+    build:
+      context: .
+      dockerfile: docker/tomcat/Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: trajecta-curricula
+
+  pm:
+    build:
+      context: .
+      dockerfile: docker/pm/Dockerfile
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+      - "9002:9002"
+      - "9003:9003"
+      - "9004:9004"
+      - "9005:9005"
+      - "9006:9006"
+      - "9007:9007"
+      - "9008:9008"
+      - "9009:9009"
+    volumes:
+      - pm-data:/app
+    container_name: trajecta-pm
+
+volumes:
+  pm-data:
