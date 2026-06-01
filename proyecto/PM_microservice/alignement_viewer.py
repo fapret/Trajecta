@@ -41,8 +41,8 @@ def run_viewer(mode, reference, caseid):
         os.makedirs('./conformance/' + reference + '/alignements', exist_ok=True)
         
         event_log = pm4py.read_xes(elfilepath)
-        net, im, fm = pm4py.read_pnml(pnfilepath, auto_guess_final_marking=True)
-        
+        net, im, fm = pm4py.read_pnml(pnfilepath)
+    
         im = discover_initial_marking(net)
         fm = discover_final_marking(net)
         
@@ -55,7 +55,8 @@ def run_viewer(mode, reference, caseid):
     except Exception as e:
         print(e);
         tb = traceback.format_exc()
-        return jsonify({'error': str(e), 'trace': tb}), 500
+        return
+        #return jsonify({'error': str(e), 'trace': tb}), 500
     
 @app.route('/alignement/<mode>/<reference>/<caseid>', methods=['GET'])
 def TBR(mode, reference, caseid):
