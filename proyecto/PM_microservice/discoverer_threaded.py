@@ -22,10 +22,12 @@ for folder in ['./imports', './imports2', './reference', './dfg', './bpmn', './p
     os.makedirs(folder, exist_ok=True)
 
 
-def run_discovery(file_path, file_uuid, mode, column_mapping=None, activity_mapping=None):
+def run_discovery(file_path, file_uuid, mode, column_mapping=None, action_mapping=None, activity_type_mapping=None):
     try:
         dtype_spec = {
             "Curricular Unit": str,
+            "Unified Curricular Unit": str,
+            "Unified Curricular Unit Name": str,
             "Course Edition": 'Int64',
             "Course Year": 'Int64',
             "Grade": 'Float64',
@@ -39,12 +41,18 @@ def run_discovery(file_path, file_uuid, mode, column_mapping=None, activity_mapp
             reverse_mapping = {source: target for target, source in column_mapping.items()}
             event_log = event_log.rename(columns=reverse_mapping)
 
-        missing_cols = [col for col in ['ID', 'Activity', 'Timestamp', 'Curricular Unit'] if col not in event_log.columns]
+        missing_cols = [col for col in ['ID', 'Timestamp', 'Curricular Unit', 'Unified Curricular Unit', 'Unified Curricular Unit Name'] if col not in event_log.columns]
         if missing_cols:
             raise ValueError(f'Missing required columns after mapping: {missing_cols}')
 
-        if activity_mapping:
-            event_log['Activity'] = event_log['Activity'].astype(str).map(lambda val: activity_mapping.get(val, val))
+        #if activity_mapping:
+        #    event_log['Activity'] = event_log['Activity'].astype(str).map(lambda val: activity_mapping.get(val, val))
+        
+        event_log['Activity'] = (
+            event_log['Action'].astype(str)
+            + ' - '
+            + event_log['Activity Type'].astype(str)
+        )
 
         # Format for pm4py
         event_log = pm4py.format_dataframe(
@@ -60,16 +68,16 @@ def run_discovery(file_path, file_uuid, mode, column_mapping=None, activity_mapp
 
         # Update activity names for certain cases
         event_log['Activity'] = event_log.apply(
-            lambda row: f"{row['Activity']} - {row['Curricular Unit']}"
-            if row['Activity'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course', 'Evaluation - Tutoring']
-            else row['Activity'],
+            lambda row: f"{row['Activity']} - {row['Unified Curricular Unit']} - {row['Unified Curricular Unit Name']}",
+            #if row['Activity'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course', 'Evaluation - Tutoring', 'Evaluation - Partial']
+            #else row['Activity'],
             axis=1
         )
 
         event_log['concept:name'] = event_log.apply(
-            lambda row: f"{row['concept:name']} - {row['Curricular Unit']}"
-            if row['concept:name'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course', 'Evaluation - Tutoring']
-            else row['concept:name'],
+            lambda row: f"{row['concept:name']} - {row['Unified Curricular Unit']} - {row['Unified Curricular Unit Name']}",
+            #if row['concept:name'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course', 'Evaluation - Tutoring', 'Evaluation - Partial']
+            #else row['concept:name'],
             axis=1
         )
 
@@ -149,8 +157,9 @@ def discover(mode):
 
         # Start discovery in background thread
         column_mapping = json.loads(request.form.get('column_mapping', '{}'))
-        activity_mapping = json.loads(request.form.get('activity_mapping', '{}'))
-        thread = threading.Thread(target=run_discovery, args=(file_path, file_uuid, mode, column_mapping, activity_mapping))
+        action_mapping = json.loads(request.form.get('action_mapping', '{}'))
+        activity_type_mapping = json.loads(request.form.get('activity_type_mapping', '{}'))
+        thread = threading.Thread(target=run_discovery, args=(file_path, file_uuid, mode, column_mapping, action_mapping, activity_type_mapping))
         thread.start()
 
         # Respond immediately with job ID

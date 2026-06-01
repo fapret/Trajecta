@@ -36,7 +36,7 @@ seeDiagramPerf.addEventListener("click", () => {
     result.style.display = "block";
     const loader = document.getElementById("loadingcontent");
     loader.style.display = "flex";
-    seeDiagram(6, 2, acts.value, pths.value);
+    seeDiagram(6, 2, acts.value, pths.value, 5);
 });
 /////////////////////////////
 const img = document.getElementById('diagram');

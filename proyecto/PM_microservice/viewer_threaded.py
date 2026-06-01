@@ -354,6 +354,95 @@ def run_viewer(view, caseid, mode, activity, path, filtermode):
                             a: c for a, c in dfg_end_activities.items()
                             if a in kept_acts
                         }
+                    elif filtermode == 5:
+                        filepath = (
+                            './dfg/png/' + caseid +
+                            '_performance_5_a' + str(activity) +
+                            '_p' + str(path) + '.png'
+                        )
+                    
+                        from pm4py.algo.filtering.dfg import dfg_filtering
+                    
+                        dfg, dfg_start_activities, dfg_end_activities = \
+                            pm4py.discover_performance_dfg(event_log)
+                    
+                        # ---------------------------------------
+                        # BUILD ACTIVITY COUNTS FROM FREQ DFG
+                        # ---------------------------------------
+                    
+                        incoming = {}
+                        outgoing = {}
+                    
+                        for (a, b), freq in dfg_freq.items():
+                            outgoing[a] = outgoing.get(a, 0) + freq
+                            incoming[b] = incoming.get(b, 0) + freq
+                    
+                        nodes = set(incoming.keys()) | set(outgoing.keys())
+                    
+                        activities_count = {}
+                    
+                        for n in nodes:
+                            activities_count[n] = max(
+                                incoming.get(n, 0),
+                                outgoing.get(n, 0)
+                            )
+                    
+                        # ---------------------------------------
+                        # FILTER PATHS
+                        # ---------------------------------------
+                    
+                        filtered_freq_dfg, filtered_start, filtered_end, activities_count = \
+                            dfg_filtering.filter_dfg_on_paths_percentage(
+                                dfg_freq,
+                                start_acts_freq,
+                                end_acts_freq,
+                                activities_count,
+                                path / 100.0,
+                                keep_all_activities=False
+                            )
+                    
+                        # ---------------------------------------
+                        # FILTER ACTIVITIES
+                        # ---------------------------------------
+                    
+                        filtered_freq_dfg, filtered_start, filtered_end, activities_count = \
+                            dfg_filtering.filter_dfg_on_activities_percentage(
+                                filtered_freq_dfg,
+                                filtered_start,
+                                filtered_end,
+                                activities_count,
+                                activity / 100.0
+                            )
+                    
+                        # ---------------------------------------
+                        # APPLY SAME FILTER TO PERFORMANCE DFG
+                        # ---------------------------------------
+                    
+                        surviving_edges = set(filtered_freq_dfg.keys())
+                    
+                        surviving_activities = set()
+                    
+                        for a, b in surviving_edges:
+                            surviving_activities.add(a)
+                            surviving_activities.add(b)
+                    
+                        dfg = {
+                            edge: value
+                            for edge, value in dfg.items()
+                            if edge in surviving_edges
+                        }
+                    
+                        dfg_start_activities = {
+                            act: cnt
+                            for act, cnt in dfg_start_activities.items()
+                            if act in surviving_activities
+                        }
+                    
+                        dfg_end_activities = {
+                            act: cnt
+                            for act, cnt in dfg_end_activities.items()
+                            if act in surviving_activities
+                        }
                     else:
                         dfg, dfg_start_activities, dfg_end_activities = pm4py.discover_performance_dfg(event_log);
                         

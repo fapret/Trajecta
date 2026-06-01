@@ -20,13 +20,7 @@
 	Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
 */
 const REQUIRED_COLUMNS = [
-    "ID", "Activity", "Timestamp", "Career", "Plan", "Curricular Unit", "Course Edition", "Course Year", "Grade", "Credits"
-];
-const TARGET_ACTIVITIES = [
-    "Evaluation - Course",
-    "Inscription to Course",
-    "Evaluation - Exam",
-    "Evaluation - Tutoring"
+    "ID", "Action", "Activity Type", "Timestamp", "Career", "Plan", "Curricular Unit", "Course Edition", "Course Year", "Grade", "Credits", "Unified Curricular Unit", "Unified Curricular Unit Name"
 ];
 
 function parseCsv(file) {
@@ -60,24 +54,6 @@ function parseCsv(file) {
         reader.onerror = () => reject(new Error("Cannot read file"));
         reader.readAsText(file);
     });
-}
-
-function getActivitiesFromColumn(headers, rows, selectedActivityColumn) {
-    const activityCandidates = new Set();
-    const activityIndex = headers.findIndex((h) => h === selectedActivityColumn);
-
-    if (activityIndex < 0) {
-        return [];
-    }
-
-    rows.forEach((cols) => {
-        const rawValue = cols[activityIndex];
-        if (rawValue) {
-            activityCandidates.add(rawValue);
-        }
-    });
-
-    return Array.from(activityCandidates).filter(Boolean).sort();
 }
 
 //function renderMappingDialog(headers, activities) {
@@ -117,29 +93,8 @@ function renderMappingDialog(headers, rows) {
         //    : "<p data-lang=\"no-auto-mapping-detected\">No se detectaron actividades para mapear automáticamente.</p>";
 
         //content.innerHTML = `<h3 data-lang="column-mapping">Mapeo de columnas</h3>${columnRows}<h3 data-lang="activity-mapping">Mapeo de actividades</h3>${activityRows}`;
-        content.innerHTML = `<h3 data-lang="column-mapping">Mapeo de columnas</h3>${columnRows}<h3 data-lang="activity-mapping">Mapeo de actividades</h3><div id="activity-mapping-container"></div>`;
-
-        function renderActivityMapping() {
-            const selectedActivityHeader = content.querySelector('select[data-col="Activity"]').value;
-            const activityContainer = content.querySelector("#activity-mapping-container");
-            const activities = getActivitiesFromColumn(headers, rows, selectedActivityHeader);
-
-            if (!activities.length) {
-                activityContainer.innerHTML = "<p>No se detectaron actividades para la columna seleccionada.</p>";
-                return;
-            }
-
-            const activityRows = activities.map((act) => {
-                const opts = TARGET_ACTIVITIES.map((t) => `<option value="${t}">${t}</option>`).join("");
-                return `<label style="display:flex; gap:8px; margin-bottom:6px;"><span style="min-width:260px;">${act}</span><select data-activity="${act}">${opts}</select></label>`;
-            }).join("");
-
-            activityContainer.innerHTML = activityRows;
-        }
-
-        const activityColumnSelect = content.querySelector('select[data-col="Activity"]');
-        activityColumnSelect.addEventListener("change", renderActivityMapping);
-        renderActivityMapping();
+        //content.innerHTML = `<h3 data-lang="column-mapping">Mapeo de columnas</h3>${columnRows}<h3 data-lang="activity-mapping">Mapeo de actividades</h3><div id="activity-mapping-container"></div>`;
+        content.innerHTML = `<h3 data-lang="column-mapping"> Mapeo de columnas </h3> ${columnRows}`;
 
         overlay.querySelector("#mapping-cancel").onclick = () => {
             overlay.style.display = "none";
@@ -149,15 +104,13 @@ function renderMappingDialog(headers, rows) {
 
         overlay.querySelector("#mapping-confirm").onclick = () => {
             const columnMapping = {};
+
             content.querySelectorAll("select[data-col]").forEach((sel) => {
                 columnMapping[sel.getAttribute("data-col")] = sel.value;
             });
-            const activityMapping = {};
-            content.querySelectorAll("select[data-activity]").forEach((sel) => {
-                activityMapping[sel.getAttribute("data-activity")] = sel.value;
-            });
+
             overlay.style.display = "none";
-            resolve({ columnMapping, activityMapping });
+            resolve({ columnMapping });
         };
 
         const savedLang = localStorage.getItem("lang") || "es";
@@ -189,7 +142,6 @@ async function discover_log(mode = 0) {
     formData.append('file', model_file);
     formData.append('name', name);
     formData.append('column_mapping', JSON.stringify(mappings.columnMapping));
-    formData.append('activity_mapping', JSON.stringify(mappings.activityMapping));
 
     // Configurar las opciones de la solicitud
     var options = {
