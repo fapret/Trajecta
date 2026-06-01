@@ -25,7 +25,10 @@ render_status = {}
 def run_viewer(mode, reference, caseid):
     try:
         render_status[(reference, caseid, mode)] = "rendering"   
-        pnfilepath = './pnml/' + reference + '_' + mode + '.pnml'
+        if mode == "manual":
+            pnfilepath = './reference/' + reference + '.pnml'
+        else:
+            pnfilepath = './pnml/' + reference + '_' + mode + '.pnml'
         elfilepath = './imports2/' + caseid + '.xes'
         imagepath = './conformance/' + reference + '/alignements/' + caseid + '_' + mode + '.svg'
         
@@ -53,7 +56,11 @@ def TBR(mode, reference, caseid):
         # If rendering is ongoing, report status
         if render_status.get((reference, caseid, mode)) == "rendering":
             return jsonify({'status': 'rendering'}), 202
-        pnfilepath = './pnml/' + reference + '_' + mode + '.pnml'
+        
+        if mode == "manual":
+            pnfilepath = './reference/' + reference + '.pnml'
+        else:
+            pnfilepath = './pnml/' + reference + '_' + mode + '.pnml'
         elfilepath = './imports2/' + caseid + '.xes'
         imagepath = './conformance/' + reference + '/alignements/' + caseid + '_' + mode + '.svg'
         

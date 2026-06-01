@@ -151,16 +151,21 @@ def discover(mode):
     file_uuid = str(uuid.uuid4()).split('-')[0] + '+' + name
 
     try:
-        # Save uploaded CSV to disk so thread can access it
-        file_path = f'./imports/{file_uuid}.csv'
-        file.save(file_path)
-
-        # Start discovery in background thread
-        column_mapping = json.loads(request.form.get('column_mapping', '{}'))
-        action_mapping = json.loads(request.form.get('action_mapping', '{}'))
-        activity_type_mapping = json.loads(request.form.get('activity_type_mapping', '{}'))
-        thread = threading.Thread(target=run_discovery, args=(file_path, file_uuid, mode, column_mapping, action_mapping, activity_type_mapping))
-        thread.start()
+        if mode == "pnml":
+            file_path = f'./reference/{file_uuid}.pnml'
+            file.save(file_path)
+        else:
+        
+            # Save uploaded CSV to disk so thread can access it
+            file_path = f'./imports/{file_uuid}.csv'
+            file.save(file_path)
+    
+            # Start discovery in background thread
+            column_mapping = json.loads(request.form.get('column_mapping', '{}'))
+            action_mapping = json.loads(request.form.get('action_mapping', '{}'))
+            activity_type_mapping = json.loads(request.form.get('activity_type_mapping', '{}'))
+            thread = threading.Thread(target=run_discovery, args=(file_path, file_uuid, mode, column_mapping, action_mapping, activity_type_mapping))
+            thread.start()
 
         # Respond immediately with job ID
         return jsonify({

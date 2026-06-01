@@ -123,15 +123,17 @@ async function discover_log(mode = 0) {
     const name = document.getElementById("name").value;
 
     let mappings;
-    try {
-        const preview = await parseCsv(model_file);
-        mappings = await renderMappingDialog(preview.headers, preview.rows);
-        if (!mappings) {
+    if (mode !== "pnml") {
+        try {
+            const preview = await parseCsv(model_file);
+            mappings = await renderMappingDialog(preview.headers, preview.rows);
+            if (!mappings) {
+                return;
+            }
+        } catch (error) {
+            alert(error.message);
             return;
         }
-    } catch (error) {
-        alert(error.message);
-        return;
     }
 
     const loader = document.getElementById("loadingcontent");
@@ -158,7 +160,9 @@ async function discover_log(mode = 0) {
     var formData = new FormData();
     formData.append('file', model_file);
     formData.append('name', name);
-    formData.append('column_mapping', JSON.stringify(mappings.columnMapping));
+    if (mode !== "pnml") {
+        formData.append('column_mapping', JSON.stringify(mappings.columnMapping));
+    }
 
     // Configurar las opciones de la solicitud
     var options = {
@@ -171,7 +175,7 @@ async function discover_log(mode = 0) {
         .then(response => response.json())
         .then(data => {
             loader.style.display = "none";
-            alert("Descubierto con id: " + data.uuid);
+            alert("uploaded with name: " + data.uuid);
         })
         .catch(error => {
             loader.style.display = "none";
