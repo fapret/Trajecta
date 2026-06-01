@@ -46,7 +46,7 @@ async function loadWorkspaces() {
             // Running from trajecta-pm.fapret.com or any other web host
             baseUrl = "https://tmde-api.fapret.com";
         }
-        const response = await fetch(`${baseUrl}/curricula_microservice/Workspaces');
+        const response = await fetch(`${baseUrl}/curricula_microservice/Workspaces`);
         if (!response.ok) throw new Error('Failed to fetch workspaces');
         const workspaces = await response.json(); // ["uuid1", "uuid2", ...]
 
