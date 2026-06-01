@@ -81,3 +81,8 @@ proyecto/PM_microservice/conformance
 proyecto/PM_microservice/reference
 extras/entrada.csv
 extras/salida.csv
+extras/salida_utec.csv
+extras/model_converted.xmi
+extras/input.csv
+extras/Fing-2018-a-2021-SinOpt.csv
+extras/entrada_utec.csv

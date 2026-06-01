@@ -26,7 +26,24 @@ function displayUCStats(){
     const uc = allUCSelect.value;
     const allDiscoveriesSelect = document.getElementById("discoveries");
     const uuid = allDiscoveriesSelect.value;
-    const url = `http://127.0.0.1:9003/${uuid}/${uc}`;
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9003";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9003";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/custats";
+    }
+    const url = `${baseUrl}/${uuid}/${uc}`;
     fetch(url)
     .then(response => response.json())
     .then(data => {

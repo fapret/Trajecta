@@ -26,7 +26,24 @@ function displayPlanStats(){
     const plan = allPlansSelect.value;
     const allCareersSelect = document.getElementById("carreras");
     const career = allCareersSelect.value;
-    const url = `http://127.0.0.1:9006/${uuid}/${career}/${plan}`;
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9006";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9006";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/planstats";
+    }
+    const url = `${baseUrl}/${uuid}/${career}/${plan}`;
     fetch(url)
     .then(response => response.json())
     .then(data => {

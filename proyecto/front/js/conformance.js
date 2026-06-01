@@ -24,7 +24,24 @@ function seeConformance(mode) {
     const allReferencesSelect = document.getElementById("references");
     const uuid = allDiscoveriesSelect.value;
     const refuuid = allReferencesSelect.value;
-    const url = `http://127.0.0.1:9007/${mode}/${refuuid}/${uuid}`;
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9007";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9007";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/conformance";
+    }
+    const url = `${baseUrl}/${mode}/${refuuid}/${uuid}`;
     fetch(url)
     .then(response => response.json())
     .then(data => {

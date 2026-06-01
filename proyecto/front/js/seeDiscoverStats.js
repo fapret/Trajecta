@@ -22,7 +22,24 @@
 function seeDiscoverStats(mode=2) {
     const allDiscoveriesSelect = document.getElementById("discoveries");
     const uuid = allDiscoveriesSelect.value;
-    const url = `http://127.0.0.1:9002/${uuid}/${mode}`;
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9002";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9002";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/bstats";
+    }
+    const url = `${baseUrl}/${uuid}/${mode}`;
     fetch(url)
     .then(response => response.json())
     .then(data => {

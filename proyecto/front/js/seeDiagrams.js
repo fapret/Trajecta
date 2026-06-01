@@ -50,7 +50,24 @@ function seeDiagram(mode, type=0, activity=100, paths=100, filtermode=2) {
         default:
             return;
     }
-    const url = `http://127.0.0.1:9001/${modestr}/${uuid}/${type}?activity=${activity}&path=${paths}&filtermode=${filtermode}`;
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9001";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9001";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/viewer";
+    }
+    const url = `${baseUrl}/${modestr}/${uuid}/${type}?activity=${activity}&path=${paths}&filtermode=${filtermode}`;
     img.src = url;
     img.classList.remove('hidden');
     diagramsButtons.classList.remove('hidden');

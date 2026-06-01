@@ -27,7 +27,24 @@ function compareDiscovers() {
 
     const resultadoDiv = document.getElementById("resultado");
 
-    const url = `http://127.0.0.1:9005/${uuidA}/${uuidB}`;
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9005";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9005";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/";
+    }
+    const url = `${baseUrl}/${uuidA}/${uuidB}`;
     fetch(url)
     .then(response => response.text())
     .then(text => {

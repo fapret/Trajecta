@@ -42,7 +42,24 @@ function getFaculties(select) {
     alert("Please select a workspace");
     return;
   }
-  const url = `http://127.0.0.1:8080/curricula_microservice/Faculty?uuid=${workspaceID}`;
+      let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://tmde-api.fapret.com";
+    }
+const url = `${baseUrl}/curricula_microservice/Faculty?uuid=${workspaceID}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -61,7 +78,24 @@ function getUCS(select, faculty){
     alert("Please select a workspace");
     return;
   }
-	const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${faculty}&withName=True&uuid=${workspaceID}`;
+	    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://tmde-api.fapret.com";
+    }
+const url = `${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${faculty}&withName=True&uuid=${workspaceID}`;
 	fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -88,7 +122,24 @@ function getCareers(select, faculty){
     alert("Please select a workspace");
     return;
   }
-  const url = `http://127.0.0.1:8080/curricula_microservice/Faculty?faculty=${faculty}&uuid=${workspaceID}`;
+      let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://tmde-api.fapret.com";
+    }
+const url = `${baseUrl}/curricula_microservice/Faculty?faculty=${faculty}&uuid=${workspaceID}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -107,7 +158,24 @@ function getPlans(select, faculty, career){
     alert("Please select a workspace");
     return;
   }
-  const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera?faculty=${faculty}&career=${career}&uuid=${workspaceID}`;
+      let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://tmde-api.fapret.com";
+    }
+const url = `${baseUrl}/curricula_microservice/Faculty/Carrera?faculty=${faculty}&career=${career}&uuid=${workspaceID}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -126,7 +194,24 @@ function getPlanUCS(select, faculty, career, plan){
     alert("Please select a workspace");
     return;
   }
-	const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=${faculty}&career=${career}&plan=${plan}&withName=True&uuid=${workspaceID}`;
+	    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://tmde-api.fapret.com";
+    }
+const url = `${baseUrl}/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=${faculty}&career=${career}&plan=${plan}&withName=True&uuid=${workspaceID}`;
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -153,7 +238,24 @@ function getEvaluations(select, typeBoolean, UC, faculty){
     alert("Please select a workspace");
     return;
   }
-	const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
+	    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://tmde-api.fapret.com";
+    }
+const url = `${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -187,7 +289,24 @@ function getCourses(select, UC, faculty){
     alert("Please select a workspace");
     return;
   }
-  const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
+      let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://tmde-api.fapret.com";
+    }
+const url = `${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${faculty}&curricularUnit=${UC}&uuid=${workspaceID}`;
   fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -207,7 +326,24 @@ function getMaterias(select, faculty, career, plan){
     alert("Please select a workspace");
     return;
   }
-	const url = `http://127.0.0.1:8080/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}&uuid=${workspaceID}`;
+	    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:8080";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://tmde-api.fapret.com";
+    }
+const url = `${baseUrl}/curricula_microservice/Faculty/Carrera/Plan/Subjects?faculty=${faculty}&career=${career}&plan=${plan}&uuid=${workspaceID}`;
 	fetch(url)
 	.then(response => response.json())
 	.then(data => {
@@ -221,7 +357,24 @@ function getMaterias(select, faculty, career, plan){
 }
 
 function getDiscoveries(select, mode = 0){
-  const url = `http://127.0.0.1:9004/${mode}`;
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9004";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9004";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/listdiscovers";
+    }
+    const url = `${baseUrl}/${mode}`;
   fetch(url)
   .then(response => response.json())
   .then(data => {

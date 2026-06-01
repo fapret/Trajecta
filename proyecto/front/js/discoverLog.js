@@ -137,7 +137,24 @@ async function discover_log(mode = 0) {
     const loader = document.getElementById("loadingcontent");
     loader.style.display = "flex";
 
-    var url = `http://127.0.0.1:9000/${mode}`;
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9000";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9000";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/discoverer";
+    }
+    var url = `${baseUrl}/${mode}`;
     var formData = new FormData();
     formData.append('file', model_file);
     formData.append('name', name);

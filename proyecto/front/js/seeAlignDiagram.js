@@ -40,7 +40,24 @@ function seeDiagram(mode) {
         default:
             return;
     }
-    const url = `http://127.0.0.1:9008/${modestr}/${refuuid}/${uuid}`;
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9008";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9008";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/alignement";
+    }
+    const url = `${baseUrl}/${modestr}/${refuuid}/${uuid}`;
     img.src = url;
     img.classList.remove('hidden');
     diagramsButtons.classList.remove('hidden');
