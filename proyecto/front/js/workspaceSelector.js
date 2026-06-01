@@ -82,8 +82,25 @@ selector.addEventListener('change', async (e) => {
             const formData = new FormData();
             formData.append('uuid', uuid);
 
+            let baseUrl;
+
+            if (window.location.protocol === "file:") {
+                // Opened directly as file:///...
+                baseUrl = "http://127.0.0.1:8080";
+            }
+            else if (
+                window.location.hostname === "localhost" ||
+                window.location.hostname === "127.0.0.1"
+            ) {
+                // Running from local web server
+                baseUrl = "http://127.0.0.1:8080";
+            }
+            else {
+                // Running from trajecta-pm.fapret.com or any other web host
+                baseUrl = "https://tmde-api.fapret.com";
+            }
             //const response = await fetch('http://localhost:8080/curricula_microservice/Workspaces', {
-            const response = await fetch('http://127.0.0.1:8080/curricula_microservice/Workspaces', {
+            const response = await fetch(`${baseUrl}/curricula_microservice/Workspaces`, {
                 method: 'POST',
                 body: formData
             });
