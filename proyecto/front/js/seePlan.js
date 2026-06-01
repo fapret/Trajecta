@@ -100,7 +100,24 @@ const url = `${baseUrl}/curricula_microservice/Faculty/Carrera/Plan/ucs?faculty=
               }
 
               for (let i = 0; i < materias.length; i++) {
-                let apiUrl = `http://127.0.0.1:8080/curricula_microservice/Faculty/ucs?faculty=${faculty}&uuid=${workspaceID}&curricularUnit=` + materias[i];
+                let baseUrl;
+
+                if (window.location.protocol === "file:") {
+                  // Opened directly as file:///...
+                  baseUrl = "http://127.0.0.1:8080";
+                }
+                else if (
+                  window.location.hostname === "localhost" ||
+                  window.location.hostname === "127.0.0.1"
+                ) {
+                  // Running from local web server
+                  baseUrl = "http://127.0.0.1:8080";
+                }
+                else {
+                  // Running from trajecta-pm.fapret.com or any other web host
+                  baseUrl = "https://tmde-api.fapret.com";
+                }
+                let apiUrl = `http://${baseUrl}/curricula_microservice/Faculty/ucs?faculty=${faculty}&uuid=${workspaceID}&curricularUnit=` + materias[i];
                 fetch(apiUrl)
                         .then(async response => {
                           if (!response.ok) {
