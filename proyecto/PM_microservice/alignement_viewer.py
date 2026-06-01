@@ -46,6 +46,12 @@ def run_viewer(mode, reference, caseid):
         im = discover_initial_marking(net)
         fm = discover_final_marking(net)
         
+        print("im es:")
+        print(im)
+        print("fm es:")
+        print(fm)
+        
+        
         parameters = {'enable_easy_soundness_check': False}
         
         conformance_alignment = pm4py.conformance.conformance_diagnostics_alignments(event_log, net, im, fm, parameters=parameters)
