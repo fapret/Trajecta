@@ -24,7 +24,7 @@ for folder in ['./stats']:
 @app.route('/planstats/<caseid>/<career>/<plan>', methods=['GET'])
 def stats(caseid, career, plan):
     try:
-        filepath = './imports/' + caseid + '.xes'
+        filepath = './discovers/' + caseid + '.xes'
         if os.path.exists(filepath):
             filepath2 = './stats/' + caseid + '_plan.json'
             if os.path.exists(filepath2):
@@ -53,20 +53,22 @@ def stats(caseid, career, plan):
                 degree_date = None
                 
                 for event in trace:
-                    if (event["concept:name"] == "Inscription to Plan" and event["Career"] == career and str(event["Plan"]) == plan):
+                    action = event.get("Action")
+                    activity_type = event.get("Activity Type")
+                    if (action == "Inscription" and activity_type == "Plan" and event["Career"] == career and str(event["Plan"]) == plan):
                         inscriptionsCounter += 1
                         inscription_date = event["time:timestamp"]
                     
-                    if (event["concept:name"] == "Degree obtained" and event["Career"] == career and str(event["Plan"]) == plan):
+                    if (action == "Degree obtained" and event["Career"] == career and str(event["Plan"]) == plan):
                         degreeObtainedCounter += 1
                         degree_date = event["time:timestamp"]
                         
-                    if (event["concept:name"] == "Evaluation - Exam" and event["Career"] == career and str(event["Plan"]) == plan):
+                    if (action == "Evaluation" and activity_type == "Exam" and event["Career"] == career and str(event["Plan"]) == plan):
                         examCount += 1
                         if(event["Grade"] >= 3): #Se exonera con 3 o mas
                             credits += event["Credits"]
                         
-                    if (event["concept:name"] == "Evaluation - Course" and event["Career"] == career and str(event["Plan"]) == plan):
+                    if (action == "Evaluation" and activity_type == "Course" and event["Career"] == career and str(event["Plan"]) == plan):
                         courseCount += 1
                         if(event["Grade"] >= 6): #Se exonera con 6 o mas
                             credits += event["Credits"]
