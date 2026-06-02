@@ -18,7 +18,7 @@ app = Flask(__name__)
 CORS(app) #Without cors it gets blocked
 
 # Create required folders if doesnt exists
-for folder in ['./imports', './dfg/png', './bpmn/png', './pnml/png', './ptml/png']:
+for folder in ['./discovers', './dfg/png', './bpmn/png', './pnml/png', './ptml/png']:
     os.makedirs(folder, exist_ok=True)
     
 render_status = {}
@@ -174,10 +174,7 @@ def run_viewer(view, caseid, mode, activity, path, filtermode):
 
                 dfg_freq, start_acts_freq, end_acts_freq = pm4py.read_dfg(freq_dfg_file)
                 
-                if mode == "1":
-                    filepathLog = './reference/' + caseid + '.xes'
-                else:
-                    filepathLog = './imports2/' + caseid + '.xes'
+                filepathLog = './discovers/' + caseid + '.xes'
                 if os.path.exists(filepathLog):
                     event_log = pm4py.read_xes(filepathLog)
                     event_log = pm4py.format_dataframe(event_log, case_id="ID", activity_key="Activity", timestamp_key="Timestamp", timest_format='%a %b %d %H:%M:%S %Z %Y')
@@ -361,7 +358,6 @@ def run_viewer(view, caseid, mode, activity, path, filtermode):
                             '_p' + str(path) + '.png'
                         )
                     
-                        from pm4py.algo.filtering.dfg import dfg_filtering
                     
                         dfg, dfg_start_activities, dfg_end_activities = \
                             pm4py.discover_performance_dfg(event_log)

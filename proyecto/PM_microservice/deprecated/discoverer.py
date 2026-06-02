@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Create required folders if doesnt exists
-for folder in ['./imports', './imports2', './reference', './dfg', './bpmn', './pnml', './ptml']:
+for folder in ['./imports', './discovers', './reference', './dfg', './bpmn', './pnml', './ptml']:
     os.makedirs(folder, exist_ok=True)
     
 @app.route('/', methods=['POST'])
@@ -54,10 +54,8 @@ def discover(mode):
             axis=1
         )
         
-        if mode == 1:
-            pm4py.write_xes(event_log, f'./reference/{file_uuid}.xes')
-        else:
-            pm4py.write_xes(event_log, f'./imports2/{file_uuid}.xes')
+
+        pm4py.write_xes(event_log, f'./discovers/{file_uuid}.xes')
 
         # --- DFG ---
         dfg, dfg_start_activities, dfg_end_activities = pm4py.discover_dfg(event_log)

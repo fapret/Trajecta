@@ -18,7 +18,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Create required folders if they don't exist
-for folder in ['./imports', './imports2', './reference', './dfg', './bpmn', './pnml', './ptml']:
+for folder in ['./imports', './discovers', './reference', './dfg', './bpmn', './pnml', './ptml']:
     os.makedirs(folder, exist_ok=True)
 
 
@@ -64,7 +64,7 @@ def run_discovery(file_path, file_uuid, mode, column_mapping=None, action_mappin
         )
 
         # Save initial XES
-        pm4py.write_xes(event_log, f'./imports/{file_uuid}.xes')
+        #pm4py.write_xes(event_log, f'./imports/{file_uuid}.xes')
 
         # Update activity names for certain cases
         event_log['Activity'] = event_log.apply(
@@ -81,11 +81,7 @@ def run_discovery(file_path, file_uuid, mode, column_mapping=None, action_mappin
             axis=1
         )
 
-        # Save updated XES
-        if mode == "1":
-            pm4py.write_xes(event_log, f'./reference/{file_uuid}.xes')
-        else:
-            pm4py.write_xes(event_log, f'./imports2/{file_uuid}.xes')
+        pm4py.write_xes(event_log, f'./discovers/{file_uuid}.xes')
             
         # --- DFG ---
         dfg, dfg_start_activities, dfg_end_activities = pm4py.discover_dfg(event_log)
@@ -176,7 +172,44 @@ def discover(mode):
     except Exception as e:
         tb = traceback.format_exc()
         return jsonify({'error': str(e), 'trace': tb}), 500
+    
+@app.route('/uploads/<mode>', methods=['POST'])
+def upload(mode):
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file'}), 400
 
+    file = request.files['file']
+    name = request.form.get('name', '')
+    file_uuid = str(uuid.uuid4()).split('-')[0] + '+' + name
+    
+    try:
+        if mode == "reference":
+            file_path = f'./reference/{file_uuid}.pnml'
+            file.save(file_path)
+        elif mode == "event_log":
+            file_path = f'./imports/{file_uuid}.csv'
+            file.save(file_path)
+
+        return jsonify({
+            'uuid': file_uuid,
+            'status': 'uploaded'
+        })
+    except Exception as e:
+        tb = traceback.format_exc()
+        return jsonify({'error': str(e), 'trace': tb}), 500
+
+@app.route('/log-columns/<caseid>', methods=['GET'])
+def get_log_columns(caseid):
+    filepath = './imports/' + caseid + '.csv'
+
+    if not os.path.exists(filepath):
+        return jsonify({'error': 'Unknown event log id'}), 404
+
+    df = pd.read_csv(filepath, nrows=0)
+
+    return jsonify({
+        'columns': list(df.columns)
+    })
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=9000)

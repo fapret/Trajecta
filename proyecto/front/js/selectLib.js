@@ -387,6 +387,37 @@ function getDiscoveries(select, mode = 0){
   });
 }
 
+function getUploads(select, mode = 0){
+    let baseUrl;
+
+    if (window.location.protocol === "file:") {
+        // Opened directly as file:///...
+        baseUrl = "http://127.0.0.1:9004/listuploads";
+    }
+    else if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        // Running from local web server
+        baseUrl = "http://127.0.0.1:9004/listuploads";
+    }
+    else {
+        // Running from trajecta-pm.fapret.com or any other web host
+        baseUrl = "https://trajecta-pm.fapret.com/listuploads";
+    }
+    const url = `${baseUrl}/${mode}`;
+  fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    for(var i = 0; i < data.length; i++){
+      addToSelect(select, data[i]);
+    }
+  })
+  .catch(error => {
+    console.error("Error al consultar la API:", error);
+  });
+}
+
 function findKeyByValue(obj, value) {
     for (let key in obj) {
       if (obj[key]['materia_id'] === value) {

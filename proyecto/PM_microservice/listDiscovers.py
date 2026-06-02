@@ -13,13 +13,21 @@ CORS(app) #Without cors it gets blocked
 @app.route('/listdiscovers/', methods=['GET'])
 @app.route('/listdiscovers/<mode>', methods=['GET'])
 def list_files(mode):
-    if mode == "1":
-        folder_path = './reference' #reference only
+    folder_path = './discovers'
+    try:
+        files = os.listdir(folder_path)
+        # Remove extensions from filenames
+        filenames = [os.path.splitext(f)[0] for f in files if os.path.isfile(os.path.join(folder_path, f))]
+        return jsonify(filenames)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/listuploads/<mode>', methods=['GET'])
+def list_uploads(mode):
+    if mode == "reference":
+        folder_path = './reference'
     else:
-        if mode == "2":
-            folder_path = './imports2' #logs only
-        else:
-            folder_path = './imports' #all
+        folder_path = './imports'
     try:
         files = os.listdir(folder_path)
         # Remove extensions from filenames

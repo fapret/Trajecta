@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/base.css">
-  <link rel="stylesheet" href="./css/consulta.css">
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
-  <script type="text/javascript" src="js/selectLib.js"></script>
   <script src="lang/lang.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <link rel="stylesheet" href="./css/consulta.css">
   <title>Trajecta Project</title>
   <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>    <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/font/remixicon.css"></noscript></noscript>
+  <script type="text/javascript" src="js/uploadFile.js"></script>
 </head>
 <body>
 
@@ -49,8 +49,6 @@
 
 <div class="main" id="main">
   <div class="left-nav" id="leftnav">
-
-
 
     <details open>
 <summary class="left-nav-cat" data-lang="student">ESTUDIANTE</summary>
@@ -367,7 +365,7 @@
     </div>-->
 
 
-      <p style="text-align: center; margin-top: auto; margin-bottom: 0;min-width: 20rem;">
+    <p style="text-align: center; margin-top: auto; margin-bottom: 0;min-width: 20rem;">
       Copyright 2023 Santiago Nicolas Diaz Conde - Santiago Freire López <br> Copyright 2025 Santiago Nicolas Diaz Conde
     </p>
     </div>
@@ -392,59 +390,28 @@
     </div>
     <div class="content">
       <div class="centeredDiv">
-        <h1 data-lang="createSubject"></h1>
-        <h2 data-lang="createSubjectDesc"></h2>
+        <h1 data-lang="uploadLog"></h1>
+        <h2 data-lang="uploadLogDesc"></h2>
       </div>
+        <label data-lang="name">Nombre:</label>
+        <input type="text" id="name" name="name"/>
+        <br><br>
+        <label data-lang="uploadEventLog">Subir Log de Eventos:</label>
+        <input id="file" name="file" type="file" accept=".csv" required/>
 
-      <!-- AGREGAR ACA CONTENIDO-->
-      <label data-lang="faculty">Facultad:</label>
-      <select name="facultades" id="facultades" size="10"></select>
-      <div class="buttons-div">
-        <button type="button" id="markFaculty" data-lang="selectFaculty">
-          Seleccionar Facultad
-        </button>
-      </div>
-      
-      <label data-lang="career">Carrera:</label>
-      <select name="carreras" id="carreras" size="10"></select>
-      <div class="buttons-div">
-        <button type="button" id="markCarrera" disabled data-lang="selectCareer">
-          Seleccionar Carrera
-        </button>
-      </div>
-      
-      <label data-lang="plan">Plan:</label>
-      <select name="planes" id="planes" size="5"></select>
-      <div class="buttons-div">
-        <button type="button" id="markPlan" disabled data-lang="selectPlan">
-          Seleccionar Plan
-        </button>
-      </div>
-      
-      <div class="centeredDiv">
-      <label data-lang="genericID">ID:</label>
-      <input type="text" id="subjectID" name="subjectID" required/>
-      <label data-lang="name">Name:</label>
-      <input type="text" id="subjectName" name="subjectName" required/>
-      <label data-lang="credits">Credits:</label>
-      <input type="number" id="subjectCredits" name="subjectCredits" required/>
-      <label data-lang="parentSubject">Parent Subject(optional):</label>
-      <input type="text" id="subjectParent" name="subjectParent"/>
-      <label data-lang="CUsSubjectCreate">Curricular Units(optional, separated by comma):</label>
-      <input type="text" id="subjectUCS" name="subjectUCS"/>
-      </div>
-      <div class="buttons-div">
-        <button type="button" id="markMateria" disabled data-lang="createSubject">
-          Crear Materia
-        </button>
-      </div>
-      
-      <div class="consulta" id="resultado" style="font-family: 'Roboto', sans-serif;">
-      </div>
+        <div class="buttons-div">
+            <button type="button" id="discoverLog" data-lang="upload-reference">
+              Cargar
+            </button>
+        </div>
+
+        <div class="consulta" id="resultado" style="font-family: 'Roboto', sans-serif;">
+        </div>
 
     </div>
   </div>
 
   <script src="./js/leftnav.js"></script>
   <script src="./js/workspaceSelector.js"></script>
+  <script src="./js/uploadLogExec.js"></script>
 </body>

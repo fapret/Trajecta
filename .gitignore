@@ -71,6 +71,7 @@ lab3/org.eclipse.acceleo.SoaML2JavaWS/bin/modelo/Comprador/Recibirfactura.class
 *.class
 proyecto/PM_microservice/imports
 proyecto/PM_microservice/imports2
+proyecto/PM_microservice/discovers
 proyecto/PM_microservice/bpmn
 proyecto/PM_microservice/dfg
 proyecto/PM_microservice/pnml

@@ -10,6 +10,7 @@
     <semanticResources>UdelaR.xmi</semanticResources>
     <semanticResources>Workspace.ecore</semanticResources>
     <semanticResources>asignaturas2.genmodel</semanticResources>
+    <semanticResources>Utec.xmi</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_ppeXcEmoEe65AZHHsG0-dA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_pp8RgEmoEe65AZHHsG0-dA" name="asignaturas" repPath="#_pp5OMEmoEe65AZHHsG0-dA" changeId="1778075398565">

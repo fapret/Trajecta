@@ -19,27 +19,13 @@
 
     Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
  */
-function seeDiagram(mode) {
+function seeDiagram(mappings) {
     const allDiscoveriesSelect = document.getElementById("discoveries");
     const allReferencesSelect = document.getElementById("references");
     const uuid = allDiscoveriesSelect.value;
     const refuuid = allReferencesSelect.value;
     const img = document.getElementById('diagram');
     const diagramsButtons = document.getElementById('diagramsButtons');
-    let modestr;
-    switch (mode) {
-        case 3:
-            modestr = 'alpha';
-            break;
-        case 4:
-            modestr = 'heuristics';
-            break;
-        case 7:
-            modestr = "inductive";
-            break;
-        default:
-            return;
-    }
     let baseUrl;
 
     if (window.location.protocol === "file:") {
@@ -57,10 +43,140 @@ function seeDiagram(mode) {
         // Running from trajecta-pm.fapret.com or any other web host
         baseUrl = "https://trajecta-pm.fapret.com/alignement";
     }
-    const url = `${baseUrl}/${modestr}/${refuuid}/${uuid}`;
+
+    const query =
+    `?ids=${encodeURIComponent(
+        mappings.caseColumns.join(",")
+    )}` +
+    `&activities=${encodeURIComponent(
+        mappings.activityColumns.join(",")
+    )}` +
+    `&timestamp=${encodeURIComponent(
+        mappings.timestampColumn
+    )}`;
+
+    const url = `${baseUrl}/${refuuid}/${uuid}${query}`;
     img.src = url;
     img.classList.remove('hidden');
     diagramsButtons.classList.remove('hidden');
     let loader = document.getElementById("loadingcontent");
     loader.style.display = "none";
+}
+
+async function getColumns(uuid)
+{
+    let baseUrl;
+
+    if (
+        window.location.protocol === "file:" ||
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        baseUrl = "http://127.0.0.1:9000/log-columns";
+    }
+    else {
+        baseUrl = "https://trajecta-pm.fapret.com/log-columns";
+    }
+
+    const response =
+        await fetch(`${baseUrl}/${uuid}`);
+
+    return await response.json();
+}
+
+function renderAlignmentDialog(headers)
+{
+    return new Promise((resolve) =>
+    {
+        const overlay = document.getElementById("dialog");
+
+        overlay.style.display = "flex";
+
+        const options = headers.map(h =>
+            `<option value="${h}">${h}</option>`
+        ).join("");
+
+        overlay.innerHTML = `
+        <div class="dialog"
+             style="max-width:900px;width:95%;">
+
+            <h2>Alignment Configuration</h2>
+
+            <label>Case ID Columns</label>
+            <select id="caseColumns"
+                    multiple
+                    size="8"
+                    style="width:100%;">
+                ${options}
+            </select>
+
+            <br><br>
+
+            <label>Activity Columns</label>
+            <select id="activityColumns"
+                    multiple
+                    size="8"
+                    style="width:100%;">
+                ${options}
+            </select>
+
+            <br><br>
+
+            <label>Timestamp Column</label>
+            <select id="timestampColumn"
+                    style="width:100%;">
+                ${options}
+            </select>
+
+            <br><br>
+
+            <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <button id="alignCancel"
+                        class="dialog-button-default">
+                    Cancelar
+                </button>
+
+                <button id="alignConfirm"
+                        class="dialog-button-recommended">
+                    Generar
+                </button>
+            </div>
+
+        </div>
+        `;
+
+        document.getElementById("alignCancel")
+            .onclick = () =>
+        {
+            overlay.style.display = "none";
+            resolve(null);
+        };
+
+        document.getElementById("alignConfirm")
+            .onclick = () =>
+        {
+            const caseColumns =
+                Array.from(
+                    document.getElementById("caseColumns")
+                        .selectedOptions
+                ).map(o => o.value);
+
+            const activityColumns =
+                Array.from(
+                    document.getElementById("activityColumns")
+                        .selectedOptions
+                ).map(o => o.value);
+
+            const timestampColumn =
+                document.getElementById("timestampColumn").value;
+
+            overlay.style.display = "none";
+
+            resolve({
+                caseColumns,
+                activityColumns,
+                timestampColumn
+            });
+        };
+    });
 }

@@ -37,8 +37,8 @@ def activity_time_offsets(df):
 @app.route('/<discoverA>/<discoverB>/<completeOnly>', methods=['GET'])
 def compareDiscover(discoverA, discoverB, completeOnly):
     try:
-        filepathA = f'./imports2/{discoverA}.xes'
-        filepathB = f'./imports2/{discoverB}.xes'
+        filepathA = f'./discovers/{discoverA}.xes'
+        filepathB = f'./discovers/{discoverB}.xes'
         
         if os.path.exists(filepathA) and os.path.exists(filepathB):
             event_logA = pm4py.read_xes(filepathA)

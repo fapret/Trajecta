@@ -76,6 +76,7 @@ const translations = {
     studentLog: "Log de estudiantes:",
     studentsCoursedUC: "Estudiantes cursaron la Unidad Curricular",
     discoverUUID: "Log de Eventos:",
+    "upload-reference": "Cargar",
     referenceUUID: "Curricula de Referencia:",
     studentsDidExam: "Estudiantes dieron un examen",
     studentsExonerated: "Estudiantes exoneraron",
@@ -99,7 +100,8 @@ const translations = {
     referenceLog: "Log de Referencia:",
     Activitieslbl: "Actividades:",
     Pathslbl: "Caminos:",
-    viewAlignGraphDesc: "Si la imagen no se muestra, intente nuevamente en unos minutos, el alineamiento estaria procesandose."
+    viewAlignGraphDesc: "Si la imagen no se muestra, intente nuevamente en unos minutos, el alineamiento estaria procesandose.",
+    seeAlignement: "Ver Alineamiento",
   },
   en: {
     welcome: "Welcome to Trajecta!",
@@ -117,7 +119,8 @@ const translations = {
     consultUC: "Consult Curricular Unit",
     viewPlanCurriculum: "View Plan Curriculum",
     discover: "Discover Log",
-    discoverReference: "Discover Reference Model",
+    discoverReference: "Upload Reference Model",
+    "upload-reference": "Upload",
     UCStats: "Statistics of Curricular Unit",
     PlanStats: "Statistics of Plan",
     viewGraph: "See Log Diagrams",
@@ -180,7 +183,7 @@ const translations = {
     obtainedDate: "Obtained Date",
     inscriptionDate: "Date of Inscription:",
     deviationTable: "Deviation Table",
-    referenceLog: "Reference Log:",
+    referenceLog: "Reference Model:",
     SeeReferenceStatistics: "Reference Statistics",
     SeeLogStatistics: "Log Statistics",
     studentsInscriptions: "Students enrolled to plan",
@@ -205,6 +208,9 @@ const translations = {
     "no-auto-mapping-detected": "No activities were detected to map automatically",
     "activity-mapping": "Activity Mapping:",
     "column-mapping": "Column Mapping:",
+    uploadLog: "Upload Log",
+    uploadEventLog: "Event Log:",
+    seeAlignement: "See Alignement",
     viewAlignGraphDesc: "If the image is not shown, wait some minutes and try again. Thats due to the alignement is processing."
   }
 };

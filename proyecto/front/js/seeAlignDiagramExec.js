@@ -24,20 +24,36 @@ const allReferencesSelect = document.getElementById("references");
 const result = document.getElementById("resultado");
 
 const seeDiagramPNA = document.getElementById("seeDiagramPNA");
-const seeDiagramPNH = document.getElementById("seeDiagramPNH");
-const seeDiagramPNI = document.getElementById("seeDiagramPNI");
 
 const zoomIN = document.getElementById("zoomIN");
 const zoomOUT = document.getElementById("zoomOUT");
 const ResetBtn = document.getElementById("ResetBtn");
 
-getDiscoveries(allDiscoveriesSelect, 2);
-getDiscoveries(allReferencesSelect, 1);
-seeDiagramPNA.addEventListener("click", () => {
+getUploads(allDiscoveriesSelect, "event_logs");
+getUploads(allReferencesSelect, "reference");
+seeDiagramPNA.addEventListener("click", async () =>
+{
+    const uuid = allDiscoveriesSelect.value;
+
+    const columnsData =
+        await getColumns(uuid);
+
+    const mappings =
+        await renderAlignmentDialog(
+            columnsData.columns
+        );
+
+    if (!mappings)
+        return;
+
     result.style.display = "block";
-    const loader = document.getElementById("loadingcontent");
+
+    const loader =
+        document.getElementById("loadingcontent");
+
     loader.style.display = "flex";
-    seeDiagram(3);
+
+    seeDiagram(mappings);
 });
 
 

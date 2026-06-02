@@ -51,10 +51,8 @@
 <div class="main" id="main">
   <div class="left-nav" id="leftnav">
 
-    <div class="left-nav-cat">
-      <p data-lang="student"> ESTUDIANTE </p>
-    </div>
-
+    <details open>
+<summary class="left-nav-cat" data-lang="student">ESTUDIANTE</summary>
     <div class="left-nav-div">
       <a class="left-nav-a" href="./cargar-estudiante.html">
         <button id="button" class="levtnav-button">
@@ -95,6 +93,7 @@
       </a>
     </div>
 
+<!--
     <div class="left-nav-div">
       <a class="left-nav-a" href="./agregar-titulo.html">
         <button id="button" class="levtnav-button">
@@ -104,6 +103,7 @@
         <p data-lang="addDegree">Agregar Titulo</p>
       </a>
     </div>
+-->
 
     <div class="left-nav-div">
       <a class="left-nav-a" href="./consulta-estudiante-uc.html">
@@ -134,10 +134,10 @@
         <p data-lang="getLog">Obtener Log de Estudiantes</p>
       </a>
     </div>
+</details>
 
-    <div class="left-nav-cat">
-      <p data-lang="model"> MODELO </p>
-    </div>
+    <details open>
+<summary class="left-nav-cat" data-lang="model"> MODELO</summary>
 
     <div class="left-nav-div">
       <a class="left-nav-a" href="./consulta-facultad.html">
@@ -189,8 +189,21 @@
       </a>
     </div>
 
-    <div class="left-nav-cat">
-      <p data-lang="processMining"> MINERIA DE PROCESOS</p>
+</details>
+
+<details open>
+    <summary class="left-nav-cat" data-lang="processMining">
+      MINERIA DE PROCESOS
+    </summary>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./uploadLog.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/contacts-book-upload-line.svg">
+          </img>
+        </button>
+        <p data-lang="uploadLog">Cargar Log</p>
+      </a>
     </div>
 
     <div class="left-nav-div">
@@ -199,7 +212,7 @@
           <img class="" src="./images/compass-3-fill.svg">
           </img>
         </button>
-        <p data-lang="discover">Cargar Log</p>
+        <p data-lang="discover">Descubrir Log</p>
       </a>
     </div>
 
@@ -318,6 +331,7 @@
         <p data-lang="viewAlignGraph">Ver Diagrama de alineamiento</p>
       </a>
     </div>
+</details>
 
     <!--<div class="left-nav-div">
       <a class="left-nav-a" href="./deviation-analysis.html">
@@ -387,8 +401,8 @@
       <label data-lang="referenceUUID">UUID de Referencia:</label>
       <select name="references" id="references" size="10"></select>
       <div class="buttons-div buttons-div2">
-        <button type="button" id="seeDiagramPNA" data-lang="seeDiagramPNA">
-          Ver Diagrama (PETRINET ALPHA MINER)
+        <button type="button" id="seeDiagramPNA" data-lang="seeAlignement">
+          Ver Alineamiento
         </button>
       </div>
 

@@ -125,6 +125,9 @@ div{
   display: flex;
   align-items:center;
 }
+.start p{
+  margin: 0;
+}
 .nav img{
   height: 100%;
   width: 100%;
@@ -358,4 +361,25 @@ div{
 
 .workspace-label{
   color:#646161;
+}
+
+summary {
+    display: flex;
+    align-items: flex-end;
+    cursor: pointer;
+    list-style: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::before {
+    content: "▶";
+    margin-right: 0.5rem;
+    transition: transform 0.2s;
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
 }

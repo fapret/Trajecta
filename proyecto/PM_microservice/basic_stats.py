@@ -19,13 +19,7 @@ CORS(app)
 @app.route('/bstats/<caseid>/<mode>', methods=['GET'])
 def stats(caseid, mode):
     try:
-        if mode == '1':
-            filepath = './reference/' + caseid + '.xes'
-        else:
-            if mode == '2':
-                filepath = './imports2/' + caseid + '.xes'
-            else:
-                filepath = './imports/' + caseid + '.xes'
+        filepath = './discovers/' + caseid + '.xes'
         if os.path.exists(filepath):
             event_log = pm4py.read_xes(filepath)
             event_log = pm4py.format_dataframe(event_log, case_id="ID", activity_key="Activity", timestamp_key="Timestamp", timest_format='%a %b %d %H:%M:%S %Z %Y')

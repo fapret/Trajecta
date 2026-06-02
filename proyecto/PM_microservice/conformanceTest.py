@@ -37,7 +37,7 @@ def serialize(obj):
 def TBR(mode, reference, caseid):
     try:
         pnfilepath = './pnml/' + reference + '_' + mode + '.pnml'
-        elfilepath = './imports2/' + caseid + '.xes'
+        elfilepath = './imports/' + caseid + '.xes'
         
         if not os.path.exists(pnfilepath):
             return "Unknown reference id"
