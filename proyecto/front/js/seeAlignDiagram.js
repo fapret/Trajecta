@@ -100,9 +100,10 @@ function renderAlignmentDialog(headers)
         <div class="dialog"
              style="max-width:900px;width:95%;">
 
-            <h2>Alignment Configuration</h2>
+            <h2 data-lang="alignConfig">Alignment Configuration</h2>
+            <p data-lang="alignConfigDesc">Es necesario que selecciones que columnas son Case ID, Activity y la columna de timestamp. Puedes seleccionar varias columnas como Case ID y Activity.</p>
 
-            <label>Case ID Columns</label>
+            <label data-lang="alignConfigCaseIDColumns">Case ID Columns</label>
             <select id="caseColumns"
                     multiple
                     size="8"
@@ -112,7 +113,7 @@ function renderAlignmentDialog(headers)
 
             <br><br>
 
-            <label>Activity Columns</label>
+            <label data-lang="alignConfigActivityColumns">Activity Columns</label>
             <select id="activityColumns"
                     multiple
                     size="8"
@@ -122,7 +123,7 @@ function renderAlignmentDialog(headers)
 
             <br><br>
 
-            <label>Timestamp Column</label>
+            <label data-lang="alignConfigTimestampColumn">Timestamp Column</label>
             <select id="timestampColumn"
                     style="width:100%;">
                 ${options}
@@ -137,8 +138,8 @@ function renderAlignmentDialog(headers)
                 </button>
 
                 <button id="alignConfirm"
-                        class="dialog-button-recommended">
-                    Generar
+                        class="dialog-button-recommended" data-lang="alignConfigConfirmBtn">
+                    Ver Tabla de Alineamiento
                 </button>
             </div>
 

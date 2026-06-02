@@ -105,6 +105,7 @@ const translations = {
     "uploadndiscover": "Subir Log y Descubrir",
     "discoverReference": "Subir Modelo de Referencia",
     referenceLog: "Modelo de Referencia:",
+    alignConfigDesc: "Es necesario que selecciones que columnas son Case ID, Activity y la columna de timestamp. Puedes seleccionar varias columnas como Case ID y Activity.",
     viewPerformanceGraphDesc: "Aqui puedes ver los cuellos de botella descubiertos en un log de eventos, entre mas rojo peor es el cuello de botella.",
     viewGraphDesc: "Aqui puedes ver los diagramas de los modelos descubiertos, elige un log de eventos descubierto y luego elige para ver los diferentes modelos."
   },
@@ -216,6 +217,7 @@ const translations = {
     uploadLog: "Upload Log",
     uploadEventLog: "Event Log:",
     seeAlignement: "See Alignement",
+    alignConfigDesc: "You need to select which columns are Case ID, Activity, and the timestamp column. You can select multiple columns as Case ID and Activity.",
     viewAlignGraphDesc: "If the image is not shown, wait some minutes and try again. Thats due to the alignement is processing.",
     "uploadndiscover": "Upload Log and Discover",
     viewPerformanceGraphDesc: "Here you can see the bottlenecks discovered in an event log; the redder it is, the worse the bottleneck.",
