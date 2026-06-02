@@ -55,7 +55,11 @@ def stats(caseid, cu):
                 approved_note_course = 0
                 
                 for event in trace:
-                    if (event["concept:name"] == "Evaluation - Exam" and event["Curricular Unit"] == cu):
+                    action = event.get("Action")
+                    activity_type = event.get("Activity Type")
+                    grade = float(event.get("Grade", 0) or 0)                    
+                    
+                    if (action == "Evaluation" and activity_type == "Exam" and event["Curricular Unit"] == cu):
                         count += 1
                         has_exam = True
                         if(event["Grade"] >= 3): #Se exonera con 3 o mas
@@ -67,7 +71,7 @@ def stats(caseid, cu):
                         else:
                             examRatioNotApproved[event["time:timestamp"]] += 1
                                                             
-                    if (event["concept:name"] == "Evaluation - Course" and event["Curricular Unit"] == cu):
+                    if (action == "Evaluation" and activity_type == "Course" and event["Curricular Unit"] == cu):
                         count2 += 1
                         has_course = True
                         course_year = event["Course Year"]
@@ -86,7 +90,7 @@ def stats(caseid, cu):
                         else:
                             CourseNotApproved[key].add(case_id)
                     
-                    if (event["concept:name"] == "Inscription to Course" and event["Curricular Unit"] == cu):
+                    if (action == "Inscription" and activity_type == "Course" and event["Curricular Unit"] == cu):
                         course_year = event["Course Year"]
                         course_edition = event["Course Edition"]
                         key = (course_year, course_edition)
