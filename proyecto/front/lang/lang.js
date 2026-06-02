@@ -27,7 +27,7 @@ const translations = {
     //Warning: Default language is spanish, due to this, some translations in spanish arent here, as are shown as default, a TO DO work, is add them here
     welcome: "¡Bienvenido a Trajecta!",
     selectOption: "Seleccione una opción del menú de la izquierda para comenzar.",
-    createModel: "Crear/Expandir Modelo",
+    createModel: "Crear Estudiante",
     addPlan: "Agregar Inscripción a plan",
     addCourse: "Agregar Inscripción a curso",
     addEvaluation: "Agregar Evaluación",
@@ -77,7 +77,7 @@ const translations = {
     studentsCoursedUC: "Estudiantes cursaron la Unidad Curricular",
     discoverUUID: "Log de Eventos:",
     "upload-reference": "Cargar",
-    referenceUUID: "Curricula de Referencia:",
+    "referenceUUID": "Curricula de Referencia:",
     studentsDidExam: "Estudiantes dieron un examen",
     studentsExonerated: "Estudiantes exoneraron",
     studentsHaveCourse: "Estudiantes aprobaron el curso o exoneraron",
@@ -102,11 +102,16 @@ const translations = {
     Pathslbl: "Caminos:",
     viewAlignGraphDesc: "Si la imagen no se muestra, intente nuevamente en unos minutos, el alineamiento estaria procesandose.",
     seeAlignement: "Ver Alineamiento",
+    "uploadndiscover": "Subir Log y Descubrir",
+    "discoverReference": "Subir Modelo de Referencia",
+    referenceLog: "Modelo de Referencia:",
+    viewPerformanceGraphDesc: "Aqui puedes ver los cuellos de botella descubiertos en un log de eventos, entre mas rojo peor es el cuello de botella.",
+    viewGraphDesc: "Aqui puedes ver los diagramas de los modelos descubiertos, elige un log de eventos descubierto y luego elige para ver los diferentes modelos."
   },
   en: {
     welcome: "Welcome to Trajecta!",
     selectOption: "Select an option from the left menu to get started.",
-    createModel: "Create/Expand Model",
+    createModel: "Create Student",
     addPlan: "Add Enrollment to Plan",
     addCourse: "Add Enrollment to Course",
     addEvaluation: "Add Evaluation",
@@ -163,7 +168,7 @@ const translations = {
     studentLog: "Students Log:",
     studentsCoursedUC: "Student coursed the Curricular Unit",
     discoverUUID: "Event Log:",
-    referenceUUID: "Reference Curricula:",
+    "referenceUUID": "Reference Curricula:",
     studentsDidExam: "Students made an exam",
     studentsExonerated: "Students exonerated the Curricular Unit",
     studentsHaveCourse: "Students have the course approved or exonerated",
@@ -191,7 +196,7 @@ const translations = {
     seePerformanceDiagramDFG: "See Performance Diagram",
     viewPerformanceGraph: "See Log Performance",
     viewRefPerformanceGraph: "See Reference Performance",
-    logUUID: "Log UUID:",
+    logUUID: "Event Log:",
     createFaculty: "Create Faculty",
     createCareer: "Create Career",
     createPlan: "Create Plan",
@@ -211,6 +216,9 @@ const translations = {
     uploadLog: "Upload Log",
     uploadEventLog: "Event Log:",
     seeAlignement: "See Alignement",
-    viewAlignGraphDesc: "If the image is not shown, wait some minutes and try again. Thats due to the alignement is processing."
+    viewAlignGraphDesc: "If the image is not shown, wait some minutes and try again. Thats due to the alignement is processing.",
+    "uploadndiscover": "Upload Log and Discover",
+    viewPerformanceGraphDesc: "Here you can see the bottlenecks discovered in an event log; the redder it is, the worse the bottleneck.",
+    viewGraphDesc: "Here you can see the diagrams of the discovered models. Select a discovered event log, then choose which model to view."
   }
 };
