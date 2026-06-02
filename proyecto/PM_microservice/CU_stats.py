@@ -19,7 +19,7 @@ CORS(app) #Without cors it gets blocked
 @app.route('/custats/<caseid>/<cu>', methods=['GET'])
 def stats(caseid, cu):
     try:
-        filepath = './imports/' + caseid + '.xes'
+        filepath = './discovers/' + caseid + '.xes'
         if os.path.exists(filepath):
             event_log = pm4py.read_xes(filepath)
             event_log = pm4py.format_dataframe(event_log, case_id="ID", activity_key="Activity", timestamp_key="Timestamp", timest_format='%a %b %d %H:%M:%S %Z %Y')
