@@ -5,10 +5,10 @@ Bundle-SymbolicName: asignaturas.edit;singleton:=true
 Automatic-Module-Name: asignaturas.edit
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: asignaturas.provider.AsignaturasEditPlugin$Implementation
+Bundle-Activator: Workspace.provider.Asignaturas2EditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: Estudiantes.provider,
  asignaturas.provider,
  Workspace.provider

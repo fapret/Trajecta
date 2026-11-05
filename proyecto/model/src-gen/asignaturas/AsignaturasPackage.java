@@ -514,13 +514,31 @@ public interface AsignaturasPackage extends EPackage {
 	int CURRICULAR_UNIT__GRADESCALE = 7;
 
 	/**
+	 * The feature id for the '<em><b>Exam Free</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CURRICULAR_UNIT__EXAM_FREE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CURRICULAR_UNIT__OPTIONAL = 9;
+
+	/**
 	 * The number of structural features of the '<em>Curricular Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CURRICULAR_UNIT_FEATURE_COUNT = 8;
+	int CURRICULAR_UNIT_FEATURE_COUNT = 10;
 
 	/**
 	 * The number of operations of the '<em>Curricular Unit</em>' class.
@@ -1708,6 +1726,28 @@ public interface AsignaturasPackage extends EPackage {
 	EReference getCurricularUnit_Gradescale();
 
 	/**
+	 * Returns the meta object for the attribute '{@link asignaturas.CurricularUnit#isExamFree <em>Exam Free</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exam Free</em>'.
+	 * @see asignaturas.CurricularUnit#isExamFree()
+	 * @see #getCurricularUnit()
+	 * @generated
+	 */
+	EAttribute getCurricularUnit_ExamFree();
+
+	/**
+	 * Returns the meta object for the attribute '{@link asignaturas.CurricularUnit#isOptional <em>Optional</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optional</em>'.
+	 * @see asignaturas.CurricularUnit#isOptional()
+	 * @see #getCurricularUnit()
+	 * @generated
+	 */
+	EAttribute getCurricularUnit_Optional();
+
+	/**
 	 * Returns the meta object for class '{@link asignaturas.SomeOf <em>Some Of</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2493,6 +2533,22 @@ public interface AsignaturasPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CURRICULAR_UNIT__GRADESCALE = eINSTANCE.getCurricularUnit_Gradescale();
+
+		/**
+		 * The meta object literal for the '<em><b>Exam Free</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CURRICULAR_UNIT__EXAM_FREE = eINSTANCE.getCurricularUnit_ExamFree();
+
+		/**
+		 * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CURRICULAR_UNIT__OPTIONAL = eINSTANCE.getCurricularUnit_Optional();
 
 		/**
 		 * The meta object literal for the '{@link asignaturas.impl.SomeOfImpl <em>Some Of</em>}' class.

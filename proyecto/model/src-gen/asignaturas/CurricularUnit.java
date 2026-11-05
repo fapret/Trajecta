@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link asignaturas.CurricularUnit#getCourse <em>Course</em>}</li>
  *   <li>{@link asignaturas.CurricularUnit#getExamEvaluation <em>Exam Evaluation</em>}</li>
  *   <li>{@link asignaturas.CurricularUnit#getGradescale <em>Gradescale</em>}</li>
+ *   <li>{@link asignaturas.CurricularUnit#isExamFree <em>Exam Free</em>}</li>
+ *   <li>{@link asignaturas.CurricularUnit#isOptional <em>Optional</em>}</li>
  * </ul>
  *
  * @see asignaturas.AsignaturasPackage#getCurricularUnit()
@@ -189,5 +191,49 @@ public interface CurricularUnit extends EObject {
 	 * @generated
 	 */
 	void setGradescale(GradeScale value);
+
+	/**
+	 * Returns the value of the '<em><b>Exam Free</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exam Free</em>' attribute.
+	 * @see #setExamFree(boolean)
+	 * @see asignaturas.AsignaturasPackage#getCurricularUnit_ExamFree()
+	 * @model
+	 * @generated
+	 */
+	boolean isExamFree();
+
+	/**
+	 * Sets the value of the '{@link asignaturas.CurricularUnit#isExamFree <em>Exam Free</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exam Free</em>' attribute.
+	 * @see #isExamFree()
+	 * @generated
+	 */
+	void setExamFree(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Optional</em>' attribute.
+	 * @see #setOptional(boolean)
+	 * @see asignaturas.AsignaturasPackage#getCurricularUnit_Optional()
+	 * @model
+	 * @generated
+	 */
+	boolean isOptional();
+
+	/**
+	 * Sets the value of the '{@link asignaturas.CurricularUnit#isOptional <em>Optional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Optional</em>' attribute.
+	 * @see #isOptional()
+	 * @generated
+	 */
+	void setOptional(boolean value);
 
 } // CurricularUnit

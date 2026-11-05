@@ -87,3 +87,4 @@ extras/model_converted.xmi
 extras/input.csv
 extras/Fing-2018-a-2021-SinOpt.csv
 extras/entrada_utec.csv
+proyecto/PM_microservice/test/*.xes

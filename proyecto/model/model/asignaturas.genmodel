@@ -49,6 +49,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference asignaturas.ecore#//CurricularUnit/Course"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference asignaturas.ecore#//CurricularUnit/ExamEvaluation"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference asignaturas.ecore#//CurricularUnit/gradescale"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//CurricularUnit/ExamFree"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//CurricularUnit/Optional"/>
     </genClasses>
     <genClasses ecoreClass="asignaturas.ecore#//SomeOf">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute asignaturas.ecore#//SomeOf/N"/>

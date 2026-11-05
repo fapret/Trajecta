@@ -597,6 +597,24 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCurricularUnit_ExamFree() {
+		return (EAttribute) curricularUnitEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCurricularUnit_Optional() {
+		return (EAttribute) curricularUnitEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSomeOf() {
 		return someOfEClass;
 	}
@@ -1066,6 +1084,8 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		createEReference(curricularUnitEClass, CURRICULAR_UNIT__COURSE);
 		createEReference(curricularUnitEClass, CURRICULAR_UNIT__EXAM_EVALUATION);
 		createEReference(curricularUnitEClass, CURRICULAR_UNIT__GRADESCALE);
+		createEAttribute(curricularUnitEClass, CURRICULAR_UNIT__EXAM_FREE);
+		createEAttribute(curricularUnitEClass, CURRICULAR_UNIT__OPTIONAL);
 
 		someOfEClass = createEClass(SOME_OF);
 		createEAttribute(someOfEClass, SOME_OF__N);
@@ -1260,6 +1280,12 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		initEReference(getCurricularUnit_Gradescale(), this.getGradeScale(), null, "gradescale", null, 0, 1,
 				CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCurricularUnit_ExamFree(), ecorePackage.getEBoolean(), "ExamFree", null, 0, 1,
+				CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCurricularUnit_Optional(), ecorePackage.getEBoolean(), "Optional", null, 0, 1,
+				CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(someOfEClass, SomeOf.class, "SomeOf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSomeOf_N(), ecorePackage.getEInt(), "N", null, 1, 1, SomeOf.class, !IS_TRANSIENT,
