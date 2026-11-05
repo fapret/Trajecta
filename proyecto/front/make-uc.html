@@ -7,14 +7,15 @@
   <link rel="stylesheet" href="./css/consulta.css">
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
-  <script type="text/javascript" src="js/selectLib.js"></script>
-  <script src="lang/lang.js" defer></script>
+<script src="lang/lang.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <title>Trajecta Project</title>
   <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>    <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/font/remixicon.css"></noscript></noscript>
+  <link rel="stylesheet" href="./css/authoring.css">
+  <script src="./js/authoring.js" defer></script>
 </head>
 <body>
 
@@ -390,36 +391,9 @@
       </div>
     </div>
   </div>
-    <div class="content">
-
-      <!-- AGREGAR ACA CONTENIDO-->
-      <div class="centeredDiv">
-        <h1 data-lang="makeUC"></h1>
-        <h2 data-lang="makeUCDesc"></h2>
-      </div>
-
-      <label data-lang="faculty">Facultad:</label>
-      <select name="facultades" id="facultades" size="10"></select>
-
-      <div class="centeredDiv">
-        <label data-lang="genericID">ID:</label>
-      	<input type="text" id="name" name="name" required/>
-      	<label data-lang="name">Nombre:</label>
-      	<input type="text" id="name" name="name" required/>
-        <label data-lang="credits">Credits (optional):</label>
-      	<input type="text" id="credits" name="credits"/>
-        <label data-lang="RequirementJson">RequirementsJson (optional):</label>
-      	<input type="text" id="RequirementJson" name="RequirementJson"/>
-      </div>
-      <div class="buttons-div">
-        <button type="button" id="markUC" data-lang="createUC" onclick="crear_uc()">
-          Crear Unidad Curricular
-        </button>
-      </div>
-
-    </div>
+    <div class="content"><main class="authoring" data-authoring="unit"></main></div>
   </div>
-
   <script src="./js/leftnav.js"></script>
   <script src="./js/workspaceSelector.js"></script>
 </body>
+</html>

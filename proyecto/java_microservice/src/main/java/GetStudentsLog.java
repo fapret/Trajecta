@@ -70,7 +70,9 @@ public class GetStudentsLog extends HttpServlet {
 	        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing uuid parameter");
 	        return;
 	    }
-		Path workspaceDir = baseDir.resolve(uuid);
+		Path workspaceDir;
+        try { workspaceDir = ModelStore.workspace(uuid); }
+        catch (ModelStore.Problem e) { response.sendError(e.status, e.getMessage()); return; }
 	    if (!Files.exists(workspaceDir)) {
 	        response.sendError(HttpServletResponse.SC_NOT_FOUND, "Workspace not found");
 	        return;
@@ -131,7 +133,7 @@ public class GetStudentsLog extends HttpServlet {
 						Activity += "Exam";
 						ExamEvaluation evalExam = (ExamEvaluation) eval;
 						String CurricularUnit = evalExam.getCurricularunit().getId();
-						if(evaluacion.getGrade() >= 3)
+						if(Grading.passed(evaluacion, inscripcionPlan.getPlan(), true))
 							Credits = evalExam.getCurricularunit().getCred();
 						csvBuilder.append(String.format("%s,%s,%s,%s,%d,%s,,,%d,%d\n",
 							    ID, Activity, TimeStamp, Career, Plan, CurricularUnit, Grade, Credits));
@@ -142,16 +144,17 @@ public class GetStudentsLog extends HttpServlet {
 						String CurricularUnit = evalCourse.getCourse().getCurricularunit().getId();
 						int CourseEdition = evalCourse.getCourse().getEdition();
 						int CourseYear = evalCourse.getCourse().getYear();
-						if(evaluacion.getGrade() >= 6)
+						if(Grading.passed(evaluacion, inscripcionPlan.getPlan(), true))
 							Credits = evalCourse.getCourse().getCurricularunit().getCred();
 						csvBuilder.append(String.format("%s,%s,%s,%s,%d,%s,%d,%d,%d,%d\n",
 							    ID, Activity, TimeStamp, Career, Plan, CurricularUnit, CourseEdition, CourseYear, Grade, Credits));
-					} else if (eval instanceof PartialEvaluation) {
-						Activity += "Partial";
-						PartialEvaluation partialCourse = (PartialEvaluation) eval;
-						String CurricularUnit = partialCourse.getCourse().getCurricularunit().getId();
-						int CourseEdition = partialCourse.getCourse().getEdition();
-						int CourseYear = partialCourse.getCourse().getYear();
+					} else if (eval instanceof PartialEvaluation || eval instanceof TutoringEvaluation) {
+                        Activity += eval instanceof PartialEvaluation ? "Partial" : "Tutoring";
+                        asignaturas.Course course = eval instanceof PartialEvaluation
+                            ? ((PartialEvaluation)eval).getCourse() : ((TutoringEvaluation)eval).getCourse();
+						String CurricularUnit = course.getCurricularunit().getId();
+						int CourseEdition = course.getEdition();
+						int CourseYear = course.getYear();
 						csvBuilder.append(String.format("%s,%s,%s,%s,%d,%s,%d,%d,%d,\n",
 							    ID, Activity, TimeStamp, Career, Plan, CurricularUnit, CourseEdition, CourseYear, Grade));
 					}

@@ -1,0 +1,16 @@
+.authoring { max-width: 56rem; margin: 1rem auto; padding: 1rem; }
+.authoring form { display: grid; gap: 1rem; }
+.authoring .field { display: grid; gap: .35rem; }
+.authoring label { margin: 0; font: 600 1rem 'Roboto', sans-serif; }
+.authoring input, .authoring select, .authoring textarea { box-sizing: border-box; width: 100%; min-height: 2.6rem; margin: 0; padding: .6rem; border: 1px solid #216683; border-radius: .4rem; font: 1rem sans-serif; background: white; }
+.authoring select[multiple] { min-height: 10rem; }
+.authoring textarea { min-height: 12rem; font-family: monospace; resize: vertical; }
+.authoring input[type=checkbox] { width: 1.4rem; min-height: 1.4rem; }
+.authoring button, .authoring .action-link { border: 1px solid #216683; border-radius: .4rem; padding: .65rem 1rem; background: #e9f1f7; cursor: pointer; color: #163e50; }
+.authoring button:disabled { opacity: .5; cursor: default; }
+.authoring .hint, .authoring pre { font: .95rem/1.5 sans-serif; white-space: pre-wrap; overflow-wrap: anywhere; }
+.authoring .status { padding: .8rem; border-radius: .4rem; background: #e9f1f7; font: 1rem/1.4 sans-serif; }
+.authoring .status:empty { display: none; }
+.authoring .status.error { background: #fff0ec; color: #8c2717; }
+.authoring .status.success { background: #e8f5e9; color: #20552a; }
+.authoring [hidden] { display: none !important; }

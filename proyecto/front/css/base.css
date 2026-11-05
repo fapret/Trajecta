@@ -118,7 +118,7 @@ div{
   height: 100%;
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
   align-items:center;
 }
 .end{
@@ -231,6 +231,8 @@ div{
 .left-nav-active{
   width: 20rem;
 }
+.left-nav:not(.left-nav-active) .authoring-nav summary { font-size: 0; }
+.left-nav:not(.left-nav-active) .authoring-nav summary::before { font-size: 1rem; }
 .left-nav p{
   overflow: hidden;
   max-width: 0%;

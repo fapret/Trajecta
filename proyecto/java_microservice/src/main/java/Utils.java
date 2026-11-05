@@ -30,7 +30,7 @@ public class Utils {
     /** Returns base directory: ~/workspaces */
     public static Path getBasePath() {
         String userHome = System.getProperty("user.home");
-        Path baseDir = Paths.get(userHome, "workspaces");
+        Path baseDir = Paths.get(System.getProperty("trajecta.workspaces", Paths.get(userHome, "workspaces").toString()));
         try {
             if (!Files.exists(baseDir)) Files.createDirectories(baseDir);
         } catch (IOException e) {

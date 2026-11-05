@@ -2,336 +2,851 @@ openapi: 3.0.3
 info:
   title: Currícula docs
   description: |-
-    Especificación de la API de Currícula
-  version: 1.2.0
+    API de Currícula con almacenamiento EMF/XMI por espacio de trabajo.
+    Las operaciones de modelo requieren uuid y, salvo el listado/creación de facultades, faculty.
+    Los nuevos clientes envían JSON; se conservan parámetros de consulta y formularios para los campos escalares.
+    Los campos escalares del cuerpo JSON tienen precedencia sobre los parámetros del mismo nombre.
+    Los identificadores de unidad y nombres de escala son estables. Los IDs EMF deben ser únicos en model.xmi,
+    incluso entre tipos diferentes de objeto. Las escalas y referencias de requisitos pertenecen a la misma facultad.
+    Las creaciones del servicio de autoría del modelo devuelven 201 y sus actualizaciones 200. Los errores del servicio de autoría usan {error: mensaje}.
+    Las validaciones fallidas no modifican el modelo guardado.
+
+    Para construir un modelo: crear facultad y carrera, crear escala, crear plan, crear materias/unidades,
+    agregar cursos y evaluaciones, y finalmente editar los requisitos que dependan de unidades creadas después.
+    La edición de una escala compartida afecta verificaciones posteriores de notas ya registradas sin reescribirlas.
+    La escala efectiva es la de la unidad, luego la del plan de la inscripción del estudiante, luego los valores heredados.
+    Las notas del estudiante siguen siendo enteras; los umbrales de las escalas admiten decimales finitos.
+  version: 1.3.0
 servers:
-  - url: http://localhost:8080/curricula_microservice
-    description: Server
+- url: http://localhost:8080/curricula_microservice
+  description: Desarrollo local
 paths:
   /Estudiante:
     get:
-      summary: Crear modelo de estudiante
-      operationId: createStudentModel
+      tags:
+      - Estudiantes
+      summary: Listar estudiantes del espacio de trabajo
+      operationId: listStudents
       parameters:
-        - name: name
-          in: query
-          description: Nombre de Estudiante
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: query
-          description: ID de Estudiante
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/Workspace'
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Estudiante'
-  /Faculty:
-    get:
-      summary: Obtener información de una facultad
-      operationId: getFaculty
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de Facultad
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Facultad'
-        '404':
-          description: Facultad not found
-  /Faculty/ucs:
-    get:
-      summary: Obtener información de una UC
-      operationId: getuc
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: uc
-          in: query
-          description: Id de UC
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/uc'
-        '404':
-          description: uc not found
-  /Faculty/Carrera:
-    get:
-      summary: Obtener información de una carrera
-      operationId: getCarrera
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Carrera'
-        '404':
-          description: Career not found
-  /Faculty/Carrera/Plan:
-    get:
-      summary: Obtener información de un plan
-      operationId: getPlan
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Plan
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Plan'
-        '404':
-          description: Plan not found
-  /Faculty/Carrera/Plan/ucs:
-    get:
-      summary: Obtener información de las UCs de un plan
-      operationId: getUCPlan
-      parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Plan
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
+          description: Lista de objetos {id,name} de estudiantes.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  type: string
-                  example: GAL1
+                  $ref: '#/components/schemas/StudentSummary'
+        '400':
+          description: Falta uuid.
+        '404':
+          description: No existe el espacio de trabajo.
+    post:
+      tags:
+      - Estudiantes
+      summary: Crear estudiante en el espacio de trabajo
+      operationId: createStudentModel
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - name: name
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          description: El estudiante se guarda en students.xmi; respuesta de texto.
+          content:
+            text/plain:
+              schema:
+                type: string
+  /Faculty:
+    get:
+      tags:
+      - Modelo
+      summary: Listar facultades o consultar una facultad
+      operationId: getFaculty
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - name: faculty
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+        description: Si se omite, devuelve nombres de facultad; si se proporciona, devuelve sus datos.
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    type: string
+                - $ref: '#/components/schemas/Facultad'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+    post:
+      tags:
+      - Modelo
+      summary: Crear facultad
+      operationId: createFaculty
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - name: name
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/NameRequest/properties/name'
+      responses:
+        '201':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NameRequest'
+            example:
+              name: Engineering
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NameRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NameRequest'
+  /Faculty/ucs:
+    get:
+      tags:
+      - Modelo
+      summary: Listar unidades curriculares o consultar una unidad
+      operationId: getuc
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: curricularUnit
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+        description: ID de la unidad a consultar. Omitir para listar las unidades de la facultad.
+      - name: withName
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        description: En listados, true devuelve objetos {id,name}; false devuelve IDs.
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/NamedUnit'
+                - $ref: '#/components/schemas/uc'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+    post:
+      tags:
+      - Modelo
+      summary: Crear una unidad curricular
+      operationId: createCurricularUnit
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: id
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateUnit/properties/id'
+      - name: name
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateUnit/properties/name'
+      - name: cred
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateUnit/properties/cred'
+      - name: valid
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateUnit/properties/valid'
+      - name: gradeScale
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateUnit/properties/gradeScale'
+      responses:
+        '201':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/uc'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON. También admite un requisito JSON crudo (o null), con id y demás
+          datos escalares en consulta. Al crear, id y name son obligatorios.
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/CreateUnit'
+              - $ref: '#/components/schemas/NullableRequirement'
+            example:
+              id: ALG2
+              name: Algebra II
+              cred: 10
+              requirements: null
+              memberships:
+              - career: Computing
+                plan: 2026
+                subject: 101
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateUnitForm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateUnitForm'
+          text/plain:
+            schema:
+              type: string
+              description: JSON de requisito serializado como texto; los datos escalares de la unidad van en los
+                parámetros de consulta.
+              example: '{"Exam":"ALG1"}'
+    put:
+      tags:
+      - Modelo
+      summary: Editar una unidad curricular sin cambiar su ID
+      operationId: updateCurricularUnit
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: id
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateUnit/properties/id'
+      - name: name
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateUnit/properties/name'
+      - name: cred
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateUnit/properties/cred'
+      - name: valid
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateUnit/properties/valid'
+      - name: gradeScale
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateUnit/properties/gradeScale'
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/uc'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON. También admite un requisito JSON crudo (o null), con id y demás
+          datos escalares en consulta. Al crear, id y name son obligatorios.
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/UpdateUnit'
+              - $ref: '#/components/schemas/NullableRequirement'
+            example:
+              id: ALG2
+              requirements:
+                SomeOf:
+                - 2
+                - Coursed: ALG1
+                - Exam: MAT1
+              gradeScale: null
+              memberships:
+              - career: Computing
+                plan: 2026
+                subject: 101
+              - career: Computing
+                plan: 2027
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateUnitForm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdateUnitForm'
+          text/plain:
+            schema:
+              type: string
+              description: JSON de requisito serializado como texto; los datos escalares de la unidad van en los
+                parámetros de consulta.
+              example: '{"Exam":"ALG1"}'
+  /Faculty/Carrera:
+    get:
+      tags:
+      - Modelo
+      summary: Consultar una carrera
+      operationId: getCarrera
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - $ref: '#/components/parameters/Career'
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carrera'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+    post:
+      tags:
+      - Modelo
+      summary: Crear carrera
+      operationId: createCareer
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: name
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/NameRequest/properties/name'
+      responses:
+        '201':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NameRequest'
+            example:
+              name: Computing
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NameRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NameRequest'
+  /Faculty/Carrera/Plan:
+    get:
+      tags:
+      - Modelo
+      summary: Consultar un plan de créditos o materias
+      operationId: getPlan
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - $ref: '#/components/parameters/Career'
+      - $ref: '#/components/parameters/PlanYear'
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+    post:
+      tags:
+      - Modelo
+      summary: Crear un plan de créditos o materias
+      operationId: createPlan
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: career
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreatePlan/properties/career'
+      - name: plan
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreatePlan/properties/plan'
+      - name: planType
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreatePlan/properties/planType'
+      - name: minCred
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreatePlan/properties/minCred'
+      - name: valid
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreatePlan/properties/valid'
+      - name: gradeScale
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreatePlan/properties/gradeScale'
+      responses:
+        '201':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlan'
+            example:
+              career: Computing
+              plan: 2026
+              planType: 0
+              minCred: 90
+              gradeScale: Standard
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreatePlan'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreatePlan'
+    put:
+      tags:
+      - Modelo
+      summary: Cambiar la escala de un plan
+      operationId: assignPlanGradeScale
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: career
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/AssignPlanScale/properties/career'
+      - name: plan
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/AssignPlanScale/properties/plan'
+      - name: gradeScale
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/AssignPlanScale/properties/gradeScale'
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignPlanScale'
+            example:
+              career: Computing
+              plan: 2026
+              gradeScale: Standard
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AssignPlanScale'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AssignPlanScale'
+  /Faculty/Carrera/Plan/ucs:
+    get:
+      summary: Obtener información de las UCs de un plan
+      operationId: getUCPlan
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - $ref: '#/components/parameters/Career'
+      - $ref: '#/components/parameters/PlanYear'
+      - name: withName
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: true devuelve objetos {id,name}; en otro caso devuelve IDs.
+      - name: valid_flag
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Cualquier valor presente filtra unidades vigentes; omitir para no filtrar.
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: array
+                  items:
+                    type: string
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/NamedUnit'
         '404':
           description: Plan not found
   /Faculty/Carrera/Plan/Subjects:
     get:
-      summary: Obtener información de una materia en un plan
+      tags:
+      - Modelo
+      summary: Listar IDs de materias o consultar una materia
       operationId: getPlanSubject
       parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Plan
-          required: true
-          schema:
-            type: integer
-        - name: subject
-          in: query
-          description: Nombre de materia
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - $ref: '#/components/parameters/Career'
+      - $ref: '#/components/parameters/PlanYear'
+      - name: subject
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+        description: ID de materia. Si se omite, devuelve IDs de todas las materias, incluidas las anidadas.
       responses:
         '200':
-          description: Successful operation
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    type: string
+                - $ref: '#/components/schemas/materia'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+    post:
+      tags:
+      - Modelo
+      summary: Crear una materia, opcionalmente anidada
+      operationId: createSubject
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: career
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateSubject/properties/career'
+      - name: plan
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateSubject/properties/plan'
+      - name: subjectID
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateSubject/properties/subjectID'
+      - name: subjectName
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateSubject/properties/subjectName'
+      - name: subjectCredits
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateSubject/properties/subjectCredits'
+      - name: Parent
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateSubject/properties/Parent'
+      responses:
+        '201':
+          description: Operación realizada correctamente
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/materia'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
         '404':
-          description: subject not found
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubject'
+            example:
+              career: Computing
+              plan: 2026
+              subjectID: 101
+              subjectName: Matemática
+              subjectCredits: 20
+              Parent: 100
+              curricularUnits:
+              - ALG1
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateSubjectForm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateSubjectForm'
   /Estudiante/AddPlan:
     post:
       summary: Agrega una inscripción a plan a un modelo de estudiante
       operationId: addStudentPlan
       parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Id de plan
-          required: true
-          schema:
-            type: integer
-        - name: date
-          in: query
-          description: Fecha de inscripción
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Modelo .xmi de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
+      - $ref: '#/components/parameters/Workspace'
+      - name: faculty
+        in: query
+        description: Nombre de facultad
+        required: true
+        schema:
+          type: string
+      - name: career
+        in: query
+        description: Nombre de carrera
+        required: true
+        schema:
+          type: string
+      - name: plan
+        in: query
+        description: Id de plan
+        required: true
+        schema:
+          type: integer
+      - name: date
+        in: query
+        description: Fecha de inscripción
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Student'
       responses:
         '200':
-          description: Success
+          description: Resultado de la actualización en texto; el servicio heredado también puede devolver mensajes
+            de error de dominio con estado 200.
           content:
-            application/xml:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/RootEstudiante'
-        '404':
-          description: Plan not found
+                type: string
+      description: Lee el modelo y los estudiantes del espacio de trabajo. No recibe ni devuelve archivos XMI en
+        el cuerpo.
+      tags:
+      - Estudiantes
   /Estudiante/AddEvaluation:
     post:
       summary: Agrega una evaluación a un modelo de estudiante
       operationId: addStudentEval
       parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Id de plan
-          required: true
-          schema:
-            type: integer
-        - name: curricularUnit
-          in: query
-          description: Id de UC
-          required: true
-          schema:
-            type: string
-        - name: evaluation
-          in: query
-          description: Id de evaluación
-          required: true
-          schema:
-            type: string
-        - name: nota
-          in: query
-          description: Nota obtenida
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        description: Modelo .xmi de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
+      - $ref: '#/components/parameters/Workspace'
+      - name: faculty
+        in: query
+        description: Nombre de facultad
+        required: true
+        schema:
+          type: string
+      - name: career
+        in: query
+        description: Nombre de carrera
+        required: true
+        schema:
+          type: string
+      - name: plan
+        in: query
+        description: Id de plan
+        required: true
+        schema:
+          type: integer
+      - name: curricularunit
+        in: query
+        description: Id de UC
+        required: true
+        schema:
+          type: string
+      - name: evaluation
+        in: query
+        description: Texto de fecha tal como se obtiene al consultar la unidad (java.util.Date.toString()).
+        required: true
+        schema:
+          type: string
+      - name: nota
+        in: query
+        description: Nota obtenida
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/Student'
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: integer
+          minimum: 0
+          enum:
+          - 0
+          - 1
+          - 3
+        description: 0 = CourseEvaluation, 1 = ExamEvaluation, 3 = PartialEvaluation. Este endpoint heredado no
+          registra tutorías.
       responses:
         '200':
-          description: Success
+          description: Resultado de la actualización en texto; el servicio heredado también puede devolver mensajes
+            de error de dominio con estado 200.
           content:
-            application/xml:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/RootEstudiante'
-        '404':
-          description: Subject not found
+                type: string
+      description: Lee el modelo y los estudiantes del espacio de trabajo. No recibe ni devuelve archivos XMI en
+        el cuerpo.
+      tags:
+      - Estudiantes
   /Faculty/ucs/eval:
     post:
       summary: Evalúa los requerimientos de un estudiante en una UC en específico en el modelo
       operationId: eval
       parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: curricularUnit
-          in: query
-          description: Id de UC
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Modelo .xmi de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
+      - $ref: '#/components/parameters/Workspace'
+      - name: faculty
+        in: query
+        description: Nombre de facultad
+        required: true
+        schema:
+          type: string
+      - name: curricularUnit
+        in: query
+        description: Id de UC
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Student'
       responses:
         '200':
           description: Success
@@ -342,35 +857,42 @@ paths:
                 example: true
         '404':
           description: Subject not found
+      description: Lee el modelo y los estudiantes del espacio de trabajo. No recibe ni devuelve archivos XMI en
+        el cuerpo.
+      tags:
+      - Evaluaciones
   /Faculty/Carrera/Plan/eval:
     post:
       summary: Evalúa qué UCs puede cursar un estudiante
       operationId: evalPlan
       parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Plan
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        description: Modelo de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
+      - $ref: '#/components/parameters/Workspace'
+      - name: faculty
+        in: query
+        description: Nombre de facultad
+        required: true
+        schema:
+          type: string
+      - name: career
+        in: query
+        description: Nombre de carrera
+        required: true
+        schema:
+          type: string
+      - name: plan
+        in: query
+        description: Plan
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/Student'
+      - name: valid_flag
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: La presencia del parámetro (incluso false) restringe el resultado a unidades vigentes. Omitir
+          para incluir todas.
       responses:
         '200':
           description: Success
@@ -385,217 +907,658 @@ paths:
           description: Malformed request
         '404':
           description: Plan not found
+      description: Lee el modelo y los estudiantes del espacio de trabajo. No recibe ni devuelve archivos XMI en
+        el cuerpo.
+      tags:
+      - Evaluaciones
   /Faculty/Carrera/Plan/evaluations:
-    post:
-      summary: Obtiene las evaluaciones de un estudiante (sin fecha)
+    get:
+      tags:
+      - Evaluaciones
+      summary: Obtener evaluaciones aprobadas de un estudiante sin fecha
       operationId: evaluations
+      description: Incluye examen, curso, parcial y tutoría. Utiliza umbrales vigentes de la unidad o del plan.
+        Para cursos usa coursePartialApprovalGrade; esto no implica aprobación completa de la unidad.
       parameters:
-        - name: faculty
-          in: query
-          description: Nombre de facultad
-          required: true
-          schema:
-            type: string
-        - name: career
-          in: query
-          description: Nombre de carrera
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: query
-          description: Plan
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        description: Modelo .xmi de estudiante
-        content:
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RootEstudiante'
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - $ref: '#/components/parameters/Career'
+      - $ref: '#/components/parameters/PlanYear'
+      - $ref: '#/components/parameters/Student'
       responses:
         '200':
-          description: Success
+          description: Operación realizada correctamente
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/StudentEvaluation'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
         '404':
-          description: Plan not found
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+  /Faculty/ucs/course:
+    get:
+      tags:
+      - Modelo
+      summary: Listar ediciones de curso de una unidad
+      operationId: getCurricularUnitCourses
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 1
+        description: ID de la unidad curricular.
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+    post:
+      tags:
+      - Modelo
+      summary: Crear una edición de curso
+      operationId: createCourse
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: id
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateCourse/properties/id'
+      - name: year
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateCourse/properties/year'
+      - name: edition
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateCourse/properties/edition'
+      responses:
+        '201':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCourse'
+            example:
+              id: ALG1
+              year: 2026
+              edition: 1
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateCourse'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateCourse'
+  /Faculty/ucs/evaluation:
+    post:
+      tags:
+      - Evaluaciones
+      summary: Crear evaluación de examen, curso, parcial o tutoría
+      operationId: createModelEvaluation
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+      - name: date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+          description: YYYY-MM-DD, interpretado a medianoche en America/Montevideo.
+      - name: year
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      - name: edition
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      - name: type
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/EvaluationType'
+        description: Alternativa heredada al tipo del cuerpo JSON.
+      responses:
+        '201':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEvaluation'
+            example:
+              id: ALG1
+              type: ExamEvaluation
+              date: '2026-11-05'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateEvaluationForm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateEvaluationForm'
+  /Faculty/grade-scales:
+    get:
+      tags:
+      - Escalas
+      summary: Listar escalas o consultar una escala y sus referencias
+      operationId: getGradeScales
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          description: Nombre estable de una escala perteneciente a la misma facultad.
+        description: Si se omite, lista todas las escalas de la facultad.
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/GradeScale'
+                - $ref: '#/components/schemas/GradeScale'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+    post:
+      tags:
+      - Escalas
+      summary: Crear escala de calificaciones
+      operationId: createGradeScale
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: name
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateGradeScale/properties/name'
+      - name: examApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateGradeScale/properties/examApprovalGrade'
+      - name: courseApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateGradeScale/properties/courseApprovalGrade'
+      - name: coursePartialApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateGradeScale/properties/coursePartialApprovalGrade'
+      - name: partialApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateGradeScale/properties/partialApprovalGrade'
+      - name: tutoringApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateGradeScale/properties/tutoringApprovalGrade'
+      responses:
+        '201':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradeScale'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGradeScale'
+            example:
+              name: Standard
+              examApprovalGrade: 3
+              courseApprovalGrade: 6
+              coursePartialApprovalGrade: 3
+              partialApprovalGrade: 60
+              tutoringApprovalGrade: 0
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateGradeScale'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateGradeScale'
+    put:
+      tags:
+      - Escalas
+      summary: Editar los umbrales de una escala compartida
+      operationId: updateGradeScale
+      parameters:
+      - $ref: '#/components/parameters/Workspace'
+      - $ref: '#/components/parameters/Faculty'
+      - name: name
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateGradeScale/properties/name'
+      - name: examApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateGradeScale/properties/examApprovalGrade'
+      - name: courseApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateGradeScale/properties/courseApprovalGrade'
+      - name: coursePartialApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateGradeScale/properties/coursePartialApprovalGrade'
+      - name: partialApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateGradeScale/properties/partialApprovalGrade'
+      - name: tutoringApprovalGrade
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateGradeScale/properties/tutoringApprovalGrade'
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradeScale'
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ModelFailure'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      requestBody:
+        required: false
+        description: Enviar el cuerpo JSON o los campos escalares mediante consulta/formulario. Los requisitos y
+          pertenencias estructurados requieren JSON.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGradeScale'
+            example:
+              name: Standard
+              examApprovalGrade: 3.5
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateGradeScale'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdateGradeScale'
+  /Workspaces:
+    get:
+      tags:
+      - Espacios de trabajo
+      summary: Listar espacios de trabajo
+      operationId: listWorkspaces
+      responses:
+        '200':
+          description: Operación realizada correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    post:
+      tags:
+      - Espacios de trabajo
+      summary: Crear un espacio de trabajo vacío
+      operationId: createWorkspace
+      parameters:
+      - name: uuid
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 1
+        description: ID nuevo, sin separadores de ruta. También puede enviarse como campo de formulario.
+      responses:
+        '200':
+          description: 'Respuesta heredada: concatena texto de confirmación y un objeto JSON; el cuerpo completo
+            no es JSON válido aunque el servidor declare application/json.'
+          content:
+            application/json:
+              example: Workspace created successfully{"workspace":"demo"}
+        '400':
+          description: ID/ruta inválido.
+        '409':
+          description: El espacio ya existe; no se sobrescribe.
+        '500':
+          description: No se pudo crear o guardar el espacio.
 components:
   schemas:
     uc:
-      required:
-        - name
-        - id
       type: object
+      required:
+      - Id
+      - Name
+      - Cred
+      - Valid
+      - GradeScale
+      - Memberships
+      - Requirement
+      - ExamEvaluation
+      - Course
       properties:
-        Name:
-          type: string
-          example: CALCULO DIV
         Id:
           type: string
-          example: 1061
+        Name:
+          type: string
         Cred:
           type: integer
-          example: 13
+          minimum: 0
+        Valid:
+          type: boolean
+        GradeScale:
+          type: string
+          minLength: 1
+          description: Escala propia de la unidad. null elimina la asignación y utiliza la escala del plan o los
+            valores heredados.
+          nullable: true
+        Memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership'
+          description: Lista completa de pertenencias a planes/materias de la facultad.
         Requirement:
-            $ref: '#/components/schemas/Requerimiento'
+          type: array
+          items:
+            $ref: '#/components/schemas/Requirement'
+          maxItems: 1
+          description: Arreglo vacío cuando la unidad no tiene requisitos; en otro caso contiene una única expresión.
+        ExamEvaluation:
+          type: array
+          items:
+            type: string
+            description: Fecha serializada mediante java.util.Date.toString(); no es una fecha ISO.
+            example: Thu Nov 05 03:00:00 UTC 2026
         Course:
           type: array
           items:
             $ref: '#/components/schemas/Course'
-        ExamEvaluation:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExamEvaluation'
     Course:
       type: object
+      required:
+      - Year
+      - Edition
+      - CourseEvaluation
+      - PartialEvaluation
+      - TutoringEvaluation
       properties:
-        year:
+        Year:
           type: integer
-          example: 2023
-        edition:
+          minimum: 1
+        Edition:
           type: integer
-          example: 0
-        courseEvaluations:
+          minimum: 1
+        CourseEvaluation:
           type: array
           items:
-            $ref: '#/components/schemas/CourseEvaluation'
+            type: string
+            description: Fecha serializada mediante java.util.Date.toString(); no es una fecha ISO.
+            example: Thu Nov 05 03:00:00 UTC 2026
+        PartialEvaluation:
+          type: array
+          items:
+            type: string
+            description: Fecha serializada mediante java.util.Date.toString(); no es una fecha ISO.
+            example: Thu Nov 05 03:00:00 UTC 2026
+        TutoringEvaluation:
+          type: array
+          items:
+            type: string
+            description: Fecha serializada mediante java.util.Date.toString(); no es una fecha ISO.
+            example: Thu Nov 05 03:00:00 UTC 2026
     Facultad:
-      required:
-        - name
       type: object
+      required:
+      - Name
+      - Careers
+      - FacultyCU
       properties:
         Name:
           type: string
-          example: Facultad de Ingenieria
         Careers:
           type: array
           items:
             type: string
-            example: Ing. Computacion
         FacultyCU:
           type: array
           items:
             type: string
-            example: CDIV
     Carrera:
-      required:
-        - name
       type: object
+      required:
+      - Name
+      - Plans
       properties:
         Name:
           type: string
-          example: Ing. En Computacion
         Plans:
           type: array
           items:
             type: integer
-            example: 1997
+            minimum: 1
     PlanAbstract:
       type: object
       required:
-        - year
+      - Year
+      - Career
+      - Type
+      - Valid
+      - GradeScale
       properties:
         Year:
           type: integer
-          example: 1997
+          minimum: 1
         Career:
           type: string
-          example: Ing. Computacion
         Type:
           type: string
-          example: CreditsPlan
+          enum:
+          - CreditsPlan
+          - SubjectPlan
+        Valid:
+          type: boolean
+        GradeScale:
+          type: string
+          minLength: 1
+          description: Nombre estable de una escala perteneciente a la misma facultad.
+          nullable: true
     Plan:
       oneOf:
-        - $ref: '#/components/schemas/PlanCreditos'
-        - $ref: '#/components/schemas/Planucs'
+      - $ref: '#/components/schemas/PlanCreditos'
+      - $ref: '#/components/schemas/Planucs'
     PlanCreditos:
       allOf:
-        - $ref: '#/components/schemas/PlanAbstract'
-        - type: object
-          properties:
-            MinCredits:
-              type: integer
-            Subjects:
-              type: array
-              items:
-                type: string
-                example: 4083
+      - $ref: '#/components/schemas/PlanAbstract'
+      - type: object
+        required:
+        - MinCredits
+        - Subjects
+        properties:
+          Type:
+            type: string
+            enum:
+            - CreditsPlan
+          MinCredits:
+            type: integer
+            minimum: 0
+          Subjects:
+            type: array
+            items:
+              type: string
+              description: ID de materia, incluidas las materias anidadas.
     Planucs:
       allOf:
-        - $ref: '#/components/schemas/PlanAbstract'
-        - type: object
-          properties:
-            "Curricular Units":
-              type: array
-              items:
-                type: string
-                example: 1061
+      - $ref: '#/components/schemas/PlanAbstract'
+      - type: object
+        required:
+        - Curricular Units
+        properties:
+          Type:
+            type: string
+            enum:
+            - SubjectPlan
+          Curricular Units:
+            type: array
+            items:
+              type: string
     materia:
       type: object
       required:
-        - id
-        - name
+      - Id
+      - Name
+      - MinCredits
+      - Subjects
+      - CurricularUnits
       properties:
         Id:
-          type: integer
-          example: 4083
+          type: string
+          description: El ID entero se devuelve como texto.
         Name:
           type: string
-          example: MATEMATICA
         MinCredits:
           type: integer
-          example: 70
+          minimum: 0
+        Subjects:
+          type: array
+          items:
+            type: string
+            description: ID de materia hija inmediata.
         CurricularUnits:
           type: array
           items:
             type: string
-            example: 1030
-        Subjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/materia'
     Requerimiento:
-      type: string
+      $ref: '#/components/schemas/Requirement'
     EvaluationFather:
       type: object
       required:
-        - date
+      - date
       properties:
         date:
           type: string
-          example: "0001-01-01T00:00:00.000-0300"
+          example: 0001-01-01T00:00:00.000-0300
     Evaluation:
       type: object
       properties:
         type:
           type: string
-          example: "asignaturas:CourseEvaluation"
+          example: asignaturas:CourseEvaluation
           xml:
             attribute: true
         href:
           type: string
-          example: "model.xmi#//@Faculty.0/@FacultyCU.0/@Course.0/@CourseEvaluation.0"
+          example: model.xmi#//@Faculty.0/@FacultyCU.0/@Course.0/@CourseEvaluation.0
           xml:
             attribute: true
     StudentEvaluation:
       type: object
       required:
-        - id
-        - type
-        - grade
+      - id
+      - type
+      - grade
       properties:
         id:
           type: string
           example: GAL1
         type:
-          type: string
-          example: CourseEvaluation
+          $ref: '#/components/schemas/EvaluationType'
         grade:
           type: integer
           example: 6
@@ -611,27 +1574,27 @@ components:
     PlanInscription:
       type: object
       required:
-        - date
+      - date
       properties:
         plan:
           type: object
           required:
-            - "type"
-            - href
+          - type
+          - href
           properties:
-            "type":
+            type:
               type: string
-              example: "asignaturas:CreditsPlan"
+              example: asignaturas:CreditsPlan
               xml:
                 attribute: true
             href:
               type: string
-              example: "model.xmi#//@Faculty.0/@Careers.0/@plan.0"
+              example: model.xmi#//@Faculty.0/@Careers.0/@plan.0
               xml:
                 attribute: true
         date:
           type: string
-          example: "0001-01-01T00:00:00.000-0300"
+          example: 0001-01-01T00:00:00.000-0300
           xml:
             attribute: true
         PlanCourseInscription:
@@ -645,28 +1608,28 @@ components:
     PlanCourseInscription:
       type: object
       required:
-        - date
+      - date
       properties:
         CUCourse:
           type: object
           required:
-            - href
+          - href
           properties:
             href:
               type: string
-              example: "model.xmi#//@Faculty.0/@FacultyCU.0/@Course.0"
+              example: model.xmi#//@Faculty.0/@FacultyCU.0/@Course.0
               xml:
                 attribute: true
         date:
           type: string
-          example: "0001-01-01T00:00:00.000-0300"
+          example: 0001-01-01T00:00:00.000-0300
           xml:
             attribute: true
     PlanStudentEvaluation:
       type: object
       required:
-        - grade
-        - evaluation
+      - grade
+      - evaluation
       properties:
         grade:
           type: integer
@@ -678,9 +1641,9 @@ components:
     Estudiante:
       type: object
       required:
-        - id
-        - name
-        - carrera
+      - id
+      - name
+      - carrera
       properties:
         id:
           type: string
@@ -696,3 +1659,727 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PlanInscription'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+    Message:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    NameRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          minLength: 1
+    SubjectPlanMembership:
+      type: object
+      required:
+      - career
+      - plan
+      properties:
+        career:
+          type: string
+          minLength: 1
+        plan:
+          type: integer
+          minimum: 1
+      not:
+        required:
+        - subject
+      description: Pertenencia directa a un plan de materias (SubjectPlan); omitir subject.
+    CreditPlanMembership:
+      type: object
+      required:
+      - career
+      - plan
+      - subject
+      properties:
+        career:
+          type: string
+          minLength: 1
+        plan:
+          type: integer
+          minimum: 1
+        subject:
+          type: integer
+          minimum: 0
+      description: Pertenencia a una materia de un plan de créditos. La materia puede estar anidada.
+    Membership:
+      oneOf:
+      - $ref: '#/components/schemas/SubjectPlanMembership'
+      - $ref: '#/components/schemas/CreditPlanMembership'
+    Requirement:
+      type: object
+      properties:
+        NOT:
+          $ref: '#/components/schemas/Requirement'
+        Coursed:
+          type: string
+          minLength: 1
+          description: ID de una unidad cuyo curso debe estar aprobado.
+        Exam:
+          type: string
+          minLength: 1
+          description: ID de una unidad aprobada por examen o por aprobación completa del curso.
+        RegisteredTo:
+          type: string
+          minLength: 1
+          description: ID de una unidad con inscripción a curso.
+        CreditsOnPlan:
+          type: string
+          description: Texto año,carrera,créditos. Requiere un CreditsPlan existente; créditos >= 0. El nombre de
+            carrera no puede contener comas.
+          example: 2026,Computing,60
+        CreditsOnSubject:
+          type: string
+          description: Texto subjectID,créditos. La materia existente puede estar anidada; créditos >= 0.
+          example: 101,20
+        SomeOf:
+          type: array
+          items:
+            oneOf:
+            - type: integer
+              minimum: 1
+            - $ref: '#/components/schemas/Requirement'
+          minItems: 2
+          description: El primer elemento es el entero N; todos los restantes son requisitos no nulos. 1 <= N <=
+            cantidad de requisitos. OpenAPI 3.0 no permite expresar tipos de posición en este arreglo; el servidor
+            valida el orden.
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties: false
+      anyOf:
+      - required:
+        - NOT
+      - required:
+        - Coursed
+      - required:
+        - Exam
+      - required:
+        - RegisteredTo
+      - required:
+        - CreditsOnPlan
+      - required:
+        - CreditsOnSubject
+      - required:
+        - SomeOf
+      description: Exactamente un operador por objeto. Se permiten expresiones anidadas con menos de 64 niveles;
+        todas las referencias deben existir en la facultad.
+      example:
+        SomeOf:
+        - 2
+        - Coursed: ALG1
+        - Exam: MAT1
+    NullableRequirement:
+      type: object
+      properties:
+        NOT:
+          $ref: '#/components/schemas/Requirement'
+        Coursed:
+          type: string
+          minLength: 1
+          description: ID de una unidad cuyo curso debe estar aprobado.
+        Exam:
+          type: string
+          minLength: 1
+          description: ID de una unidad aprobada por examen o por aprobación completa del curso.
+        RegisteredTo:
+          type: string
+          minLength: 1
+          description: ID de una unidad con inscripción a curso.
+        CreditsOnPlan:
+          type: string
+          description: Texto año,carrera,créditos. Requiere un CreditsPlan existente; créditos >= 0. El nombre de
+            carrera no puede contener comas.
+          example: 2026,Computing,60
+        CreditsOnSubject:
+          type: string
+          description: Texto subjectID,créditos. La materia existente puede estar anidada; créditos >= 0.
+          example: 101,20
+        SomeOf:
+          type: array
+          items:
+            oneOf:
+            - type: integer
+              minimum: 1
+            - $ref: '#/components/schemas/Requirement'
+          minItems: 2
+          description: El primer elemento es el entero N; todos los restantes son requisitos no nulos. 1 <= N <=
+            cantidad de requisitos. OpenAPI 3.0 no permite expresar tipos de posición en este arreglo; el servidor
+            valida el orden.
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties: false
+      anyOf:
+      - required:
+        - NOT
+      - required:
+        - Coursed
+      - required:
+        - Exam
+      - required:
+        - RegisteredTo
+      - required:
+        - CreditsOnPlan
+      - required:
+        - CreditsOnSubject
+      - required:
+        - SomeOf
+      description: Un requisito o null. null elimina los requisitos; al omitir el campo en PUT se conserva la expresión
+        guardada.
+      example:
+        SomeOf:
+        - 2
+        - Coursed: ALG1
+        - Exam: MAT1
+      nullable: true
+    NamedUnit:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    CreatePlan:
+      type: object
+      required:
+      - career
+      - plan
+      - planType
+      - gradeScale
+      properties:
+        career:
+          type: string
+          minLength: 1
+        plan:
+          type: integer
+          minimum: 1
+        planType:
+          type: integer
+          minimum: 0
+          enum:
+          - 0
+          - 1
+          description: 0 = CreditsPlan; 1 = SubjectPlan.
+        minCred:
+          type: integer
+          minimum: 0
+          default: 0
+          description: Créditos mínimos; se utiliza solamente en CreditsPlan.
+        valid:
+          type: boolean
+          default: true
+        gradeScale:
+          type: string
+          minLength: 1
+          description: Nombre estable de una escala perteneciente a la misma facultad.
+    AssignPlanScale:
+      type: object
+      required:
+      - career
+      - plan
+      - gradeScale
+      properties:
+        career:
+          type: string
+          minLength: 1
+        plan:
+          type: integer
+          minimum: 1
+        gradeScale:
+          type: string
+          minLength: 1
+          description: Nombre estable de una escala perteneciente a la misma facultad.
+    CreateSubject:
+      type: object
+      required:
+      - career
+      - plan
+      - subjectID
+      - subjectName
+      properties:
+        career:
+          type: string
+          minLength: 1
+        plan:
+          type: integer
+          minimum: 1
+        subjectID:
+          type: integer
+          minimum: 0
+        subjectName:
+          type: string
+          minLength: 1
+        subjectCredits:
+          type: integer
+          minimum: 0
+          default: 0
+        Parent:
+          type: integer
+          minimum: -1
+          default: -1
+          description: ID de materia superior del mismo plan; -1 significa sin padre.
+        curricularUnits:
+          type: array
+          items:
+            type: string
+          default: []
+    CreateUnit:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        cred:
+          type: integer
+          minimum: 0
+          default: 0
+        valid:
+          type: boolean
+          default: true
+        gradeScale:
+          type: string
+          minLength: 1
+          description: Escala propia de la unidad. null elimina la asignación y utiliza la escala del plan o los
+            valores heredados.
+          nullable: true
+        requirements:
+          $ref: '#/components/schemas/NullableRequirement'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership'
+          description: Lista completa de pertenencias a planes/materias de la facultad.
+      description: Puede crearse sin requisitos; agregarlos mediante PUT cuando existan las unidades referenciadas.
+    UpdateUnit:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        cred:
+          type: integer
+          minimum: 0
+        valid:
+          type: boolean
+        gradeScale:
+          type: string
+          minLength: 1
+          description: Escala propia de la unidad. null elimina la asignación y utiliza la escala del plan o los
+            valores heredados.
+          nullable: true
+        requirements:
+          $ref: '#/components/schemas/NullableRequirement'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership'
+          description: Reemplaza todas las pertenencias. [] elimina todas. Omitir el campo conserva la lista guardada.
+      description: id identifica la unidad y no se renombra. Los campos omitidos se conservan. No se recrean cursos,
+        evaluaciones ni referencias de estudiantes.
+    CreateCourse:
+      type: object
+      required:
+      - id
+      - year
+      properties:
+        id:
+          type: string
+          minLength: 1
+        year:
+          type: integer
+          minimum: 1
+        edition:
+          type: integer
+          minimum: 1
+          default: 1
+    EvaluationType:
+      type: string
+      enum:
+      - ExamEvaluation
+      - CourseEvaluation
+      - PartialEvaluation
+      - TutoringEvaluation
+    CreateExamEvaluation:
+      type: object
+      required:
+      - id
+      - type
+      - date
+      properties:
+        id:
+          type: string
+          minLength: 1
+        type:
+          type: string
+          enum:
+          - ExamEvaluation
+        date:
+          type: string
+          format: date
+          description: YYYY-MM-DD, interpretado a medianoche en America/Montevideo.
+    CreateCourseEvaluation:
+      type: object
+      required:
+      - id
+      - type
+      - date
+      - year
+      - edition
+      properties:
+        id:
+          type: string
+          minLength: 1
+        type:
+          type: string
+          enum:
+          - CourseEvaluation
+          - PartialEvaluation
+          - TutoringEvaluation
+        date:
+          type: string
+          format: date
+          description: YYYY-MM-DD, interpretado a medianoche en America/Montevideo.
+        year:
+          type: integer
+          minimum: 1
+        edition:
+          type: integer
+          minimum: 1
+    CreateEvaluation:
+      oneOf:
+      - $ref: '#/components/schemas/CreateExamEvaluation'
+      - $ref: '#/components/schemas/CreateCourseEvaluation'
+    CreateGradeScale:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Nombre estable de una escala perteneciente a la misma facultad.
+        examApprovalGrade:
+          type: number
+          format: float
+          default: 3
+          description: Umbral de aprobación de examen. Debe ser finito.
+        courseApprovalGrade:
+          type: number
+          format: float
+          default: 6
+          description: Umbral de aprobación completa de la unidad mediante curso. Debe ser finito.
+        coursePartialApprovalGrade:
+          type: number
+          format: float
+          default: 3
+          description: Umbral para obtener el curso y satisfacer Coursed; no implica aprobación completa de la unidad.
+            Debe ser finito.
+        partialApprovalGrade:
+          type: number
+          format: float
+          default: 60
+          description: Umbral de aprobación de parcial; no agrega automáticamente notas para aprobar cursos. Debe
+            ser finito.
+        tutoringApprovalGrade:
+          type: number
+          format: float
+          default: 0
+          description: Umbral de aprobación de tutoría; no otorga por sí solo aprobación completa de la unidad.
+            Debe ser finito.
+    UpdateGradeScale:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Nombre estable de una escala perteneciente a la misma facultad.
+        examApprovalGrade:
+          type: number
+          format: float
+          description: Umbral de aprobación de examen. Debe ser finito.
+        courseApprovalGrade:
+          type: number
+          format: float
+          description: Umbral de aprobación completa de la unidad mediante curso. Debe ser finito.
+        coursePartialApprovalGrade:
+          type: number
+          format: float
+          description: Umbral para obtener el curso y satisfacer Coursed; no implica aprobación completa de la unidad.
+            Debe ser finito.
+        partialApprovalGrade:
+          type: number
+          format: float
+          description: Umbral de aprobación de parcial; no agrega automáticamente notas para aprobar cursos. Debe
+            ser finito.
+        tutoringApprovalGrade:
+          type: number
+          format: float
+          description: Umbral de aprobación de tutoría; no otorga por sí solo aprobación completa de la unidad.
+            Debe ser finito.
+      description: name identifica una escala existente, no la renombra. Umbrales omitidos se conservan. Los cambios
+        afectan verificaciones posteriores de todas las referencias, incluidas notas históricas.
+    GradeScale:
+      type: object
+      required:
+      - name
+      - examApprovalGrade
+      - courseApprovalGrade
+      - coursePartialApprovalGrade
+      - partialApprovalGrade
+      - tutoringApprovalGrade
+      - plans
+      - curricularUnits
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Nombre estable de una escala perteneciente a la misma facultad.
+        examApprovalGrade:
+          type: number
+          format: float
+          description: Umbral de aprobación de examen. Debe ser finito.
+        courseApprovalGrade:
+          type: number
+          format: float
+          description: Umbral de aprobación completa de la unidad mediante curso. Debe ser finito.
+        coursePartialApprovalGrade:
+          type: number
+          format: float
+          description: Umbral para obtener el curso y satisfacer Coursed; no implica aprobación completa de la unidad.
+            Debe ser finito.
+        partialApprovalGrade:
+          type: number
+          format: float
+          description: Umbral de aprobación de parcial; no agrega automáticamente notas para aprobar cursos. Debe
+            ser finito.
+        tutoringApprovalGrade:
+          type: number
+          format: float
+          description: Umbral de aprobación de tutoría; no otorga por sí solo aprobación completa de la unidad.
+            Debe ser finito.
+        plans:
+          type: array
+          items:
+            type: object
+            required:
+            - career
+            - plan
+            properties:
+              career:
+                type: string
+              plan:
+                type: integer
+                minimum: 1
+        curricularUnits:
+          type: array
+          items:
+            type: string
+          description: IDs de unidades con asignación directa de esta escala; no incluye herencia a través del plan.
+    StudentSummary:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    CreateSubjectForm:
+      type: object
+      required:
+      - career
+      - plan
+      - subjectID
+      - subjectName
+      properties:
+        career:
+          type: string
+          minLength: 1
+        plan:
+          type: integer
+          minimum: 1
+        subjectID:
+          type: integer
+          minimum: 0
+        subjectName:
+          type: string
+          minLength: 1
+        subjectCredits:
+          type: integer
+          minimum: 0
+          default: 0
+        Parent:
+          type: integer
+          minimum: -1
+          default: -1
+          description: ID de materia superior del mismo plan; -1 significa sin padre.
+    CreateUnitForm:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        cred:
+          type: integer
+          minimum: 0
+          default: 0
+        valid:
+          type: boolean
+          default: true
+        gradeScale:
+          type: string
+          minLength: 1
+          description: Escala propia de la unidad. null elimina la asignación y utiliza la escala del plan o los
+            valores heredados.
+          nullable: true
+    UpdateUnitForm:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        cred:
+          type: integer
+          minimum: 0
+        valid:
+          type: boolean
+        gradeScale:
+          type: string
+          minLength: 1
+          description: Escala propia de la unidad. null elimina la asignación y utiliza la escala del plan o los
+            valores heredados.
+          nullable: true
+    CreateEvaluationForm:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+        date:
+          type: string
+          format: date
+          description: YYYY-MM-DD, interpretado a medianoche en America/Montevideo.
+        year:
+          type: integer
+          minimum: 1
+        edition:
+          type: integer
+          minimum: 1
+        type:
+          $ref: '#/components/schemas/EvaluationType'
+      required:
+      - id
+      - type
+      - date
+      description: year y edition también son obligatorios cuando type no es ExamEvaluation.
+  parameters:
+    Workspace:
+      name: uuid
+      in: query
+      required: true
+      schema:
+        type: string
+        minLength: 1
+      description: ID del espacio de trabajo existente; no se admiten rutas ni separadores.
+    Faculty:
+      name: faculty
+      in: query
+      required: true
+      schema:
+        type: string
+        minLength: 1
+      description: Nombre de la facultad dentro del espacio de trabajo.
+    Career:
+      name: career
+      in: query
+      required: true
+      schema:
+        type: string
+        minLength: 1
+      description: Nombre de la carrera dentro de la facultad.
+    PlanYear:
+      name: plan
+      in: query
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: Año que identifica al plan dentro de la carrera.
+    Student:
+      name: id
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+      description: ID del estudiante. Si se omite, se utiliza el primer estudiante del espacio de trabajo.
+  responses:
+    InvalidInput:
+      description: JSON, tipo, número, fecha o referencia estructural inválida; no se guarda ningún cambio.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No existe el espacio de trabajo, modelo, facultad u objeto referenciado.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: La identidad ya existe (ID de modelo, carrera, año de plan, curso o tipo/fecha de evaluación).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ModelFailure:
+      description: No se pudo cargar o guardar el modelo del espacio de trabajo.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+tags:
+- name: Espacios de trabajo
+- name: Modelo
+- name: Escalas
+- name: Evaluaciones
+- name: Estudiantes

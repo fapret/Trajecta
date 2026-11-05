@@ -99,7 +99,9 @@ public class PlanUcs extends HttpServlet {
 	        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing uuid parameter");
 	        return;
 	    }
-		Path workspaceDir = baseDir.resolve(uuid);
+		Path workspaceDir;
+        try { workspaceDir = ModelStore.workspace(uuid); }
+        catch (ModelStore.Problem e) { response.sendError(e.status, e.getMessage()); return; }
 	    if (!Files.exists(workspaceDir)) {
 	        response.sendError(HttpServletResponse.SC_NOT_FOUND, "Workspace not found");
 	        return;
@@ -136,7 +138,7 @@ public class PlanUcs extends HttpServlet {
 									else
 										res += getSubjectUCs(g, withName);
 							}
-							else {
+							else if (String.valueOf(p.getYear()).equals(plan) && p instanceof asignaturas.SubjectPlan) {
 								asignaturas.SubjectPlan ps = (asignaturas.SubjectPlan)(p);
 								if (valid_flag) {
 									for (asignaturas.CurricularUnit cu : ps.getCurricularUnit()) {

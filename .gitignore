@@ -88,3 +88,5 @@ extras/input.csv
 extras/Fing-2018-a-2021-SinOpt.csv
 extras/entrada_utec.csv
 proyecto/PM_microservice/test/*.xes
+proyecto/java_microservice/build/authoring-test-*/
+proyecto/java_microservice/dist/

@@ -26,7 +26,7 @@ jobs:
       run: sudo apt-get install -y ant
 
     - name: Compile Classes
-      run: ant -f proyecto/java_microservice/build.xml build-project
+      run: ant -f proyecto/java_microservice/build.xml test
       
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4

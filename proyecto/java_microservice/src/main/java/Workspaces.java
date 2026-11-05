@@ -113,8 +113,17 @@ public class Workspaces extends HttpServlet {
 		Path baseDir = Utils.getBasePath();
 		
 		String uuid = request.getParameter("uuid");
-		Path workspaceDir = baseDir.resolve(uuid);
-		Files.createDirectories(workspaceDir);
+		Path workspaceDir;
+		try { workspaceDir = ModelStore.workspacePath(uuid); }
+		catch (ModelStore.Problem e) { response.sendError(e.status, e.getMessage()); return; }
+		if (Files.exists(workspaceDir)) {
+			response.sendError(HttpServletResponse.SC_CONFLICT, "Workspace already exists");
+			return;
+		}
+		try { Files.createDirectory(workspaceDir); }
+		catch (java.nio.file.FileAlreadyExistsException e) {
+			response.sendError(HttpServletResponse.SC_CONFLICT, "Workspace already exists"); return;
+		}
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()

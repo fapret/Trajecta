@@ -32,3 +32,33 @@ function changeLeftNavState(){
     leftnav.classList.add("left-nav-active");
   }
 }
+
+// Share authoring navigation across existing application pages.
+const authoringNav = document.createElement('details');
+authoringNav.className = 'authoring-nav';
+authoringNav.open = true;
+const authoringSummary = document.createElement('summary');
+authoringSummary.className = 'left-nav-cat';
+authoringSummary.dataset.lang = 'aAdministration';
+authoringSummary.textContent = 'ADMINISTRACIÓN DEL MODELO';
+authoringNav.appendChild(authoringSummary);
+const authoringLinks = [
+  ['make-faculty.html', 'aTitle_faculty', 'Crear facultad', 'add-company-svgrepo-com.svg'],
+  ['make-career.html', 'aTitle_career', 'Crear carrera', 'add-document-note-svgrepo-com.svg'],
+  ['make-plan.html', 'aTitle_plan', 'Crear plan / asignar escala', 'file-multiple-svgrepo-com.svg'],
+  ['make-subject.html', 'aTitle_subject', 'Crear materia', 'add-file-svgrepo-com.svg'],
+  ['make-uc.html', 'aTitle_unit', 'Crear unidad curricular', 'add-file-svgrepo-com_2.svg'],
+  ['edit-uc.html', 'aTitle_edit', 'Editar unidad curricular', 'file-error-svgrepo-com.svg'],
+  ['add-course-uc.html', 'aTitle_course', 'Crear curso', 'education-book-add-svgrepo-com.svg'],
+  ['create-evaluation.html', 'aTitle_evaluation', 'Crear evaluación', 'file-signed-svgrepo-com.svg'],
+  ['grade-scales.html', 'aTitle_scale', 'Escalas de calificaciones', 'add-category-svgrepo-com.svg'],
+];
+for (const [page, key, label, image] of authoringLinks) {
+  const row = document.createElement('div'); row.className = 'left-nav-div';
+  const link = document.createElement('a'); link.className = 'left-nav-a'; link.href = './' + page;
+  const icon = document.createElement('img'); icon.src = './images/' + image; icon.alt = '';
+  const text = document.createElement('p'); text.dataset.lang = key; text.textContent = label;
+  link.appendChild(icon); link.appendChild(text); row.appendChild(link); authoringNav.appendChild(row);
+}
+const sidebarFooter = Array.from(leftnav.children).find(child => child.tagName === 'P' && child.textContent.includes('Copyright'));
+leftnav.insertBefore(authoringNav, sidebarFooter || null);

@@ -88,132 +88,10 @@ public class EvalPlan extends HttpServlet {
     	return uc;
     }
 
-    private int getCredOnSubject(Student e, Subject s) {
-    	int c = 0;
-    	for(PlanInscription p : e.getStudentPlanInscription()) {
-    		for(StudentEvaluation se : p.getPlanStudentEvaluation()) {
-    			if(se.getEvaluation() instanceof ExamEvaluation && se.getGrade() >= 3) {
-    				ExamEvaluation eval = (ExamEvaluation) se.getEvaluation();
-    				if (s.getSubjectCurricularUnit().contains(eval.getCurricularunit())) {
-    					c += eval.getCurricularunit().getCred();
-    				}
-    			}
-    		}
-    	}
-    	for(Subject s2 : s.getGroupOfSubjects()) {
-    		c += getCredOnSubject(e, s2);
-    	}
-		return c;
+    private Boolean evaluateRequirements(Student student, Requirement requirement) {
+        return Grading.requirements(student, requirement);
     }
-    
-    private Boolean evaluateRequirements(Student e, Requirement r) {
-    	if(r instanceof NOT) {
-    		NOT req = (NOT) r;
-    		return !evaluateRequirements(e,req.getRequirement());
-    	}
-    	if(r instanceof Coursed) {
-    		Coursed req = (Coursed) r;
-    		for(PlanInscription p : e.getStudentPlanInscription()) {
-    			for(StudentEvaluation eval : p.getPlanStudentEvaluation()) {
-    				if(eval.getEvaluation() instanceof CourseEvaluation && eval.getGrade() >= 3) {
-    					CourseEvaluation c = (CourseEvaluation) eval.getEvaluation();
-    					if(c.getCourse().getCurricularunit().getId().equals(req.getCurricularUnit().getId())) {
-    						return true;
-    					}
-    				} else if (eval.getEvaluation() instanceof ExamEvaluation && eval.getGrade() >= 3) {
-    					ExamEvaluation c = (ExamEvaluation) eval.getEvaluation();
-    					if(c.getCurricularunit().getId().equals(req.getCurricularUnit().getId())) {
-    						return true;
-    					}
-    				}
-    			}
-    		}
-    		return false;
-    	}
-    	if(r instanceof Exam) {
-    		Exam req = (Exam) r;
-    		for(PlanInscription p : e.getStudentPlanInscription()) {
-    			for(StudentEvaluation eval : p.getPlanStudentEvaluation()) {
-    				if(eval.getEvaluation() instanceof ExamEvaluation && eval.getGrade() >= 3) {
-    					ExamEvaluation c = (ExamEvaluation) eval.getEvaluation();
-    					if(c.getCurricularunit().getId().equals(req.getCurricularUnit().getId())) {
-    						return true;
-    					}
-    				}
-    				
-    				//un curso con nota más de 6 también cuenta como examen
-    				if(eval.getEvaluation() instanceof CourseEvaluation && eval.getGrade() >= 6) {
-    					CourseEvaluation c = (CourseEvaluation) eval.getEvaluation();
-    					if(c.getCourse().getCurricularunit().getId().equals(req.getCurricularUnit().getId())) {
-    						return true;
-    					}
-    				}
-    			}
-    		}
-    		return false;
-    	}
-    	if(r instanceof RegisteredTo) {
-    		RegisteredTo req = (RegisteredTo) r;
-    		for(PlanInscription p : e.getStudentPlanInscription()) {
-    			for(CourseInscription inscription : p.getPlanCourseInscription()) {
-    				if(req.getCurricularUnit().getId().equals(inscription.getCUCourse().getCurricularunit().getId())) {
-    					return true;
-    				}
-    			}
-    		}
-    		return false;
-    	}
-    	if(r instanceof SomeOf) {
-    		SomeOf req = (SomeOf) r;
-    		int numOfTrue = 0;
-    		for(Requirement requer : req.getRequirement()) {
-    			if(evaluateRequirements(e, requer)) {
-    				numOfTrue++;
-    			}
-        		if(numOfTrue >= req.getN()) {
-        			return true;//Corto si ya se que es true
-        		}
-    		}
-    		
-    		if(numOfTrue >= req.getN()) 
-    			return true;
-    		 else 
-    			return false;
-    		
-    	}
-    	if(r instanceof CreditsOnPlan) {
-    		CreditsOnPlan req = (CreditsOnPlan) r;
-    		CreditsPlan plan = req.getCreditsPlan();
-    		int c = 0;
-    		for(PlanInscription p : e.getStudentPlanInscription()) {
-    			if (p.getPlan() instanceof CreditsPlan && p.getPlan().equals(plan)) {
-    				for(StudentEvaluation eval : p.getPlanStudentEvaluation()) {
-    					if(eval.getEvaluation() instanceof ExamEvaluation && eval.getGrade() >= 3) {
-    						ExamEvaluation ev = (ExamEvaluation) eval.getEvaluation();
-    						c += ev.getCurricularunit().getCred();
-    					}
-    					if(c >= req.getCred()) {
-    						return true; //Corto antes si se es true
-    					}
-    				}
-    			}
-    		}
-			if(c >= req.getCred()) {
-				return true;
-			} else {
-				return false;
-			}
-    	}
-    	if(r instanceof CreditsOnSubject) {
-    		CreditsOnSubject req = (CreditsOnSubject) r;
-    		if(getCredOnSubject(e, req.getGroupOfSubjects()) >= req.getCred()) {
-    			return true;
-    		}
-    		return false;
-    	}
-		return true;
-    }
-    
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -223,7 +101,9 @@ public class EvalPlan extends HttpServlet {
     	Path baseDir = Utils.getBasePath();
 		
 		String uuid = request.getParameter("uuid");
-		Path workspaceDir = baseDir.resolve(uuid);
+		Path workspaceDir;
+        try { workspaceDir = ModelStore.workspace(uuid); }
+        catch (ModelStore.Problem e) { response.sendError(e.status, e.getMessage()); return; }
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()

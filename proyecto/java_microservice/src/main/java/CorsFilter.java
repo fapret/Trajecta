@@ -6,6 +6,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
 
@@ -18,6 +19,10 @@ public class CorsFilter implements Filter {
     	httpResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     	httpResponse.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
+        if ("OPTIONS".equals(((HttpServletRequest) request).getMethod())) {
+            httpResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            return;
+        }
         chain.doFilter(request, response);
     }
 

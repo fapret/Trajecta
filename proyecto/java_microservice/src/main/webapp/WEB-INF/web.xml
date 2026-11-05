@@ -177,4 +177,8 @@
   	<servlet-name>EstudianteAddDegree</servlet-name>
   	<url-pattern>/EstudianteAddDegree</url-pattern>
   </servlet-mapping>
+  <servlet><servlet-name>GradeScales</servlet-name><servlet-class>GradeScales</servlet-class></servlet>
+  <servlet-mapping><servlet-name>GradeScales</servlet-name><url-pattern>/Faculty/grade-scales</url-pattern></servlet-mapping>
+  <servlet><servlet-name>CreateEvaluation</servlet-name><servlet-class>CreateEvaluation</servlet-class></servlet>
+  <servlet-mapping><servlet-name>CreateEvaluation</servlet-name><url-pattern>/Faculty/ucs/evaluation</url-pattern></servlet-mapping>
 </web-app>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/consulta.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
+<script src="lang/lang.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <title>Trajecta Project</title>
+  <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>    <link rel="preload" href="/font/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/font/remixicon.css"></noscript></noscript>
+  <link rel="stylesheet" href="./css/authoring.css">
+  <script src="./js/authoring.js" defer></script>
+</head>
+<body>
+
+<div class="nav">
+  <div class="start" id="start">
+    <div class="left-nav-div" id="btnleftnav">
+      <a class="left-nav-a" href="#">
+        <button class="levtnav-button">
+          <img class="" src="./images/menu-svgrepo-com.svg">
+          </img>
+        </button>
+      </a>
+    </div>
+    <a class="start" href="/">
+      <p>Trajecta</p>
+    </a>
+  </div>
+  <div class="center" id="center">
+    <div id="workspace-container">
+      <select id="workspaceSelector" placeholder="Select a workspace..."></select>
+    </div>
+  </div>
+  <div class="end" id="end">
+    <div class="lang-switcher">
+      <select id="languageSelector">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="main" id="main">
+  <div class="left-nav" id="leftnav">
+
+    <details open>
+<summary class="left-nav-cat" data-lang="student">ESTUDIANTE</summary>
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./cargar-estudiante.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/upload-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="createModel">Crear/Expandir Modelo</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./agregar-plan.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/registration-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="addPlan">Agregar Inscripción a plan</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./agregar-inscripcion-curso.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/education-book-add-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="addCourse">Agregar Inscripción a curso</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./agregar-evaluacion.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/exam-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="addEvaluation">Agregar Evaluación</p>
+      </a>
+    </div>
+
+<!--
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./agregar-titulo.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/degree-diploma-certificate-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="addDegree">Agregar Titulo</p>
+      </a>
+    </div>
+-->
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./consulta-estudiante-uc.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/student-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="evalUC">Evaluar Unidad Curricular</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ver-curricula.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/graduation-cap-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="viewCurriculum">Ver Currícula</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./obtener-log.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/csv-file-icon.svg">
+          </img>
+        </button>
+        <p data-lang="getLog">Obtener Log de Estudiantes</p>
+      </a>
+    </div>
+</details>
+
+    <details open>
+<summary class="left-nav-cat" data-lang="model"> MODELO</summary>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./consulta-facultad.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/university-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="consultFaculty">Consultar Facultad</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./consulta-plan.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/plan-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="consultPlan">Consultar Plan</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./consulta-materia.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/library-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="consultSubject">Consultar Materia</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./consulta-uc.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/books-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="consultUC">Consultar Unidad Curricular</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ver-plan.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/path-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="viewPlanCurriculum">Ver Currícula de Plan</p>
+      </a>
+    </div>
+
+</details>
+
+<details open>
+    <summary class="left-nav-cat" data-lang="processMining">
+      MINERIA DE PROCESOS
+    </summary>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./uploadLog.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/contacts-book-upload-line.svg">
+          </img>
+        </button>
+        <p data-lang="uploadLog">Cargar Log</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./discover.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/compass-3-fill.svg">
+          </img>
+        </button>
+        <p data-lang="discover">Descubrir Log</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./discover-reference.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/compass-3-fill.svg">
+          </img>
+        </button>
+        <p data-lang="discoverReference">Subir Modelo referencia</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ver-discover-stats.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/statistics-graph-stats-analytics-business-data-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="SeeLogStatistics">Ver estadisticas Log</p>
+      </a>
+    </div>
+
+<!--
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ver-references-stats.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/statistics-graph-stats-analytics-business-data-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="SeeReferenceStatistics">Ver Estadisticas Referencia</p>
+      </a>
+    </div>
+-->
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ucstats.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/temp-hot-line.svg">
+          </img>
+        </button>
+        <p data-lang="UCStats">Estadisticas de UC</p>
+      </a>
+    </div>
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./planstats.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/stats-report-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="PlanStats">Estadisticas de Plan</p>
+      </a>
+    </div>
+
+    <!--<div class="left-nav-div">
+      <a class="left-nav-a" href="./conformance.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/fitness-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="Conformance">Conformance</p>
+      </a>
+    </div>-->
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ver-diagramas.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/mind-map.svg">
+          </img>
+        </button>
+        <p data-lang="viewGraph">Ver Diagramas del Log</p>
+      </a>
+    </div>
+
+<!--
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ver-diagramas-reference.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/mind-map.svg">
+          </img>
+        </button>
+        <p data-lang="viewReferenceGraph">Ver Diagramas de Referencia</p>
+      </a>
+    </div>
+-->
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ver-performance-diagram.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/fire-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="viewPerformanceGraph">Ver Performance del Log</p>
+      </a>
+    </div>
+
+<!--
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ver-reference-performance-diagram.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/fire-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="viewRefPerformanceGraph">Ver Performance de Referencia</p>
+      </a>
+    </div>
+-->
+
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./ver-alignment-diagram.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/align-center-vertical-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="viewAlignGraph">Ver Diagrama de alineamiento</p>
+      </a>
+    </div>
+</details>
+
+    <!-- START TO DO PM -->
+    <!--
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/ranking-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="seeRankings">Ver Rankings</p>
+      </a>
+    </div>
+    -->
+
+    <!-- END TO DO PM -->
+
+
+
+    <div class="left-nav-cat">
+      <p> API </p>
+    </div>
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./docs.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/documents-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="viewDocsEM">Ver Documentación (EM)</p>
+      </a>
+    </div>
+    <!-- TO DO DOCUMENTATION
+    <div class="left-nav-div">
+      <a class="left-nav-a" href="./docs2.html">
+        <button id="button" class="levtnav-button">
+          <img class="" src="./images/documents-svgrepo-com.svg">
+          </img>
+        </button>
+        <p data-lang="viewDocsPM">Ver Documentación (PM)</p>
+      </a>
+    </div>
+    -->
+
+
+    <p style="text-align: center; margin-top: auto; margin-bottom: 0;min-width: 20rem;">
+      Copyright 2023 Santiago Nicolas Diaz Conde - Santiago Freire López <br> Copyright 2025 Santiago Nicolas Diaz Conde
+    </p>
+    </div>
+    <div class="loadingcontent" id="loadingcontent">
+      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="loadingcontent" id="dialog">
+      <div class="dialog">
+        <p>Dialog</p>
+        <div>
+          Contenido a preguntar
+        </div>
+        <div>
+          <button id="dialogbtnyes" class="dialog-button-recommended">
+            Aceptar
+          </button>
+          <button id="dialogbtnno" class="dialog-button-default">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="content"><main class="authoring" data-authoring="evaluation"></main></div>
+  </div>
+  <script src="./js/leftnav.js"></script>
+  <script src="./js/workspaceSelector.js"></script>
+</body>
+</html>

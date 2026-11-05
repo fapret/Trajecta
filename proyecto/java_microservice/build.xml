@@ -49,10 +49,19 @@
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" encoding="UTF-8" source="${source}" target="${target}">
             <src path="src/main/java"/>
             <classpath refid="curricula_microservice.classpath"/>
         </javac>
+    </target>
+    <target name="test" depends="build-project" description="Run isolated servlet, persistence, and grading integration tests">
+        <mkdir dir="build/test-classes"/>
+        <javac srcdir="tests" destdir="build/test-classes" includeantruntime="false" encoding="UTF-8" source="17" target="17">
+            <classpath refid="curricula_microservice.classpath"/>
+        </javac>
+        <java classname="AuthoringIntegrationTest" fork="true" failonerror="true" dir=".">
+            <classpath><pathelement location="build/test-classes"/><path refid="curricula_microservice.classpath"/></classpath>
+        </java>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
     <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">

@@ -129,6 +129,7 @@ selector.addEventListener('change', async (e) => {
             choices.setChoiceByValue(uuid);
             localStorage.setItem('selectedWorkspace', uuid);
             setSelectedLabel(uuid);
+            document.dispatchEvent(new Event('workspaceChanged'));
         } catch (err) {
             console.error(err);
             alert('Error creating workspace');
@@ -136,7 +137,7 @@ selector.addEventListener('change', async (e) => {
     } else {
         localStorage.setItem('selectedWorkspace', value);
         setSelectedLabel(value);
-        console.log('Selected workspace:', value);
+        document.dispatchEvent(new Event('workspaceChanged'));
     }
 });
 
