@@ -114,6 +114,7 @@ public class Carreras extends HttpServlet {
         		return;
         	}
 		}
+		response.getWriter().append("Error: faculty not found");
     }
     
 	/**
