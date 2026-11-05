@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link asignaturas.CreditsPlan#getMinCredits <em>Min Credits</em>}</li>
  *   <li>{@link asignaturas.CreditsPlan#getGroupOfSubjects <em>Group Of Subjects</em>}</li>
+ *   <li>{@link asignaturas.CreditsPlan#getCurricularunit <em>Curricularunit</em>}</li>
  * </ul>
  *
  * @see asignaturas.AsignaturasPackage#getCreditsPlan()
@@ -55,5 +56,17 @@ public interface CreditsPlan extends Plan {
 	 * @generated
 	 */
 	EList<Subject> getGroupOfSubjects();
+
+	/**
+	 * Returns the value of the '<em><b>Curricularunit</b></em>' reference list.
+	 * The list contents are of type {@link asignaturas.CurricularUnit}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Curricularunit</em>' reference list.
+	 * @see asignaturas.AsignaturasPackage#getCreditsPlan_Curricularunit()
+	 * @model
+	 * @generated
+	 */
+	EList<CurricularUnit> getCurricularunit();
 
 } // CreditsPlan

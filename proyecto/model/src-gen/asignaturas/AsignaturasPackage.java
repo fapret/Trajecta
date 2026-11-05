@@ -268,13 +268,22 @@ public interface AsignaturasPackage extends EPackage {
 	int CREDITS_PLAN__GROUP_OF_SUBJECTS = PLAN_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Curricularunit</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CREDITS_PLAN__CURRICULARUNIT = PLAN_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Credits Plan</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CREDITS_PLAN_FEATURE_COUNT = PLAN_FEATURE_COUNT + 2;
+	int CREDITS_PLAN_FEATURE_COUNT = PLAN_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Credits Plan</em>' class.
@@ -523,22 +532,13 @@ public interface AsignaturasPackage extends EPackage {
 	int CURRICULAR_UNIT__EXAM_FREE = 8;
 
 	/**
-	 * The feature id for the '<em><b>Optional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CURRICULAR_UNIT__OPTIONAL = 9;
-
-	/**
 	 * The number of structural features of the '<em>Curricular Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CURRICULAR_UNIT_FEATURE_COUNT = 10;
+	int CURRICULAR_UNIT_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>Curricular Unit</em>' class.
@@ -1444,6 +1444,17 @@ public interface AsignaturasPackage extends EPackage {
 	EReference getCreditsPlan_GroupOfSubjects();
 
 	/**
+	 * Returns the meta object for the reference list '{@link asignaturas.CreditsPlan#getCurricularunit <em>Curricularunit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Curricularunit</em>'.
+	 * @see asignaturas.CreditsPlan#getCurricularunit()
+	 * @see #getCreditsPlan()
+	 * @generated
+	 */
+	EReference getCreditsPlan_Curricularunit();
+
+	/**
 	 * Returns the meta object for class '{@link asignaturas.Faculty <em>Faculty</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1735,17 +1746,6 @@ public interface AsignaturasPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCurricularUnit_ExamFree();
-
-	/**
-	 * Returns the meta object for the attribute '{@link asignaturas.CurricularUnit#isOptional <em>Optional</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Optional</em>'.
-	 * @see asignaturas.CurricularUnit#isOptional()
-	 * @see #getCurricularUnit()
-	 * @generated
-	 */
-	EAttribute getCurricularUnit_Optional();
 
 	/**
 	 * Returns the meta object for class '{@link asignaturas.SomeOf <em>Some Of</em>}'.
@@ -2319,6 +2319,14 @@ public interface AsignaturasPackage extends EPackage {
 		EReference CREDITS_PLAN__GROUP_OF_SUBJECTS = eINSTANCE.getCreditsPlan_GroupOfSubjects();
 
 		/**
+		 * The meta object literal for the '<em><b>Curricularunit</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CREDITS_PLAN__CURRICULARUNIT = eINSTANCE.getCreditsPlan_Curricularunit();
+
+		/**
 		 * The meta object literal for the '{@link asignaturas.impl.FacultyImpl <em>Faculty</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2541,14 +2549,6 @@ public interface AsignaturasPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CURRICULAR_UNIT__EXAM_FREE = eINSTANCE.getCurricularUnit_ExamFree();
-
-		/**
-		 * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CURRICULAR_UNIT__OPTIONAL = eINSTANCE.getCurricularUnit_Optional();
 
 		/**
 		 * The meta object literal for the '{@link asignaturas.impl.SomeOfImpl <em>Some Of</em>}' class.

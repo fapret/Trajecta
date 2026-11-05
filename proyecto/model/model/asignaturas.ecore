@@ -15,6 +15,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="MinCredits" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="GroupOfSubjects" upperBound="-1"
         eType="#//Subject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="curricularunit" upperBound="-1"
+        eType="#//CurricularUnit"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Faculty">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -60,7 +62,6 @@
         eType="#//ExamEvaluation" containment="true" eOpposite="#//ExamEvaluation/curricularunit"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="gradescale" eType="#//GradeScale"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ExamFree" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SomeOf" eSuperTypes="#//Requirement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="N" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

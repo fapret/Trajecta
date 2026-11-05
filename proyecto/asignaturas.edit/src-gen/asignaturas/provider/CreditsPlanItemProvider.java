@@ -49,6 +49,7 @@ public class CreditsPlanItemProvider extends PlanItemProvider {
 
 			addMinCreditsPropertyDescriptor(object);
 			addGroupOfSubjectsPropertyDescriptor(object);
+			addCurricularunitPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -83,6 +84,21 @@ public class CreditsPlanItemProvider extends PlanItemProvider {
 								"_UI_CreditsPlan_type"),
 						AsignaturasPackage.Literals.CREDITS_PLAN__GROUP_OF_SUBJECTS, true, false, true, null, null,
 						null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Curricularunit feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCurricularunitPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_CreditsPlan_curricularunit_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_CreditsPlan_curricularunit_feature",
+								"_UI_CreditsPlan_type"),
+						AsignaturasPackage.Literals.CREDITS_PLAN__CURRICULARUNIT, true, false, true, null, null, null));
 	}
 
 	/**

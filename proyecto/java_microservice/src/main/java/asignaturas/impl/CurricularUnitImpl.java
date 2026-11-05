@@ -42,7 +42,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link asignaturas.impl.CurricularUnitImpl#getExamEvaluation <em>Exam Evaluation</em>}</li>
  *   <li>{@link asignaturas.impl.CurricularUnitImpl#getGradescale <em>Gradescale</em>}</li>
  *   <li>{@link asignaturas.impl.CurricularUnitImpl#isExamFree <em>Exam Free</em>}</li>
- *   <li>{@link asignaturas.impl.CurricularUnitImpl#isOptional <em>Optional</em>}</li>
  * </ul>
  *
  * @generated
@@ -187,26 +186,6 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected boolean examFree = EXAM_FREE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isOptional() <em>Optional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOptional()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean OPTIONAL_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isOptional() <em>Optional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOptional()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean optional = OPTIONAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -458,28 +437,6 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isOptional() {
-		return optional;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOptional(boolean newOptional) {
-		boolean oldOptional = optional;
-		optional = newOptional;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AsignaturasPackage.CURRICULAR_UNIT__OPTIONAL,
-					oldOptional, optional));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -538,8 +495,6 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 			return basicGetGradescale();
 		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_FREE:
 			return isExamFree();
-		case AsignaturasPackage.CURRICULAR_UNIT__OPTIONAL:
-			return isOptional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -582,9 +537,6 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_FREE:
 			setExamFree((Boolean) newValue);
 			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__OPTIONAL:
-			setOptional((Boolean) newValue);
-			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -624,9 +576,6 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_FREE:
 			setExamFree(EXAM_FREE_EDEFAULT);
 			return;
-		case AsignaturasPackage.CURRICULAR_UNIT__OPTIONAL:
-			setOptional(OPTIONAL_EDEFAULT);
-			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -657,8 +606,6 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 			return gradescale != null;
 		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_FREE:
 			return examFree != EXAM_FREE_EDEFAULT;
-		case AsignaturasPackage.CURRICULAR_UNIT__OPTIONAL:
-			return optional != OPTIONAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -684,8 +631,6 @@ public class CurricularUnitImpl extends MinimalEObjectImpl.Container implements 
 		result.append(valid);
 		result.append(", ExamFree: ");
 		result.append(examFree);
-		result.append(", Optional: ");
-		result.append(optional);
 		result.append(')');
 		return result.toString();
 	}

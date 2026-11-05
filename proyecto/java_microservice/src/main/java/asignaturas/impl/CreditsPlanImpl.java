@@ -4,6 +4,7 @@ package asignaturas.impl;
 
 import asignaturas.AsignaturasPackage;
 import asignaturas.CreditsPlan;
+import asignaturas.CurricularUnit;
 import asignaturas.Subject;
 
 import java.util.Collection;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -31,6 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link asignaturas.impl.CreditsPlanImpl#getMinCredits <em>Min Credits</em>}</li>
  *   <li>{@link asignaturas.impl.CreditsPlanImpl#getGroupOfSubjects <em>Group Of Subjects</em>}</li>
+ *   <li>{@link asignaturas.impl.CreditsPlanImpl#getCurricularunit <em>Curricularunit</em>}</li>
  * </ul>
  *
  * @generated
@@ -65,6 +68,16 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	 * @ordered
 	 */
 	protected EList<Subject> groupOfSubjects;
+
+	/**
+	 * The cached value of the '{@link #getCurricularunit() <em>Curricularunit</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCurricularunit()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CurricularUnit> curricularunit;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,6 +138,19 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<CurricularUnit> getCurricularunit() {
+		if (curricularunit == null) {
+			curricularunit = new EObjectResolvingEList<CurricularUnit>(CurricularUnit.class, this,
+					AsignaturasPackage.CREDITS_PLAN__CURRICULARUNIT);
+		}
+		return curricularunit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -146,6 +172,8 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 			return getMinCredits();
 		case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
 			return getGroupOfSubjects();
+		case AsignaturasPackage.CREDITS_PLAN__CURRICULARUNIT:
+			return getCurricularunit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,6 +194,10 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 			getGroupOfSubjects().clear();
 			getGroupOfSubjects().addAll((Collection<? extends Subject>) newValue);
 			return;
+		case AsignaturasPackage.CREDITS_PLAN__CURRICULARUNIT:
+			getCurricularunit().clear();
+			getCurricularunit().addAll((Collection<? extends CurricularUnit>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -184,6 +216,9 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 		case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
 			getGroupOfSubjects().clear();
 			return;
+		case AsignaturasPackage.CREDITS_PLAN__CURRICULARUNIT:
+			getCurricularunit().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -200,6 +235,8 @@ public class CreditsPlanImpl extends PlanImpl implements CreditsPlan {
 			return minCredits != MIN_CREDITS_EDEFAULT;
 		case AsignaturasPackage.CREDITS_PLAN__GROUP_OF_SUBJECTS:
 			return groupOfSubjects != null && !groupOfSubjects.isEmpty();
+		case AsignaturasPackage.CREDITS_PLAN__CURRICULARUNIT:
+			return curricularunit != null && !curricularunit.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

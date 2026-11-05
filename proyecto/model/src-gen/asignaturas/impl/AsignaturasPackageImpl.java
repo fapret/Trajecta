@@ -363,6 +363,15 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCreditsPlan_Curricularunit() {
+		return (EReference) creditsPlanEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFaculty() {
 		return facultyEClass;
 	}
@@ -599,15 +608,6 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 	 */
 	public EAttribute getCurricularUnit_ExamFree() {
 		return (EAttribute) curricularUnitEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCurricularUnit_Optional() {
-		return (EAttribute) curricularUnitEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1054,6 +1054,7 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		creditsPlanEClass = createEClass(CREDITS_PLAN);
 		createEAttribute(creditsPlanEClass, CREDITS_PLAN__MIN_CREDITS);
 		createEReference(creditsPlanEClass, CREDITS_PLAN__GROUP_OF_SUBJECTS);
+		createEReference(creditsPlanEClass, CREDITS_PLAN__CURRICULARUNIT);
 
 		facultyEClass = createEClass(FACULTY);
 		createEAttribute(facultyEClass, FACULTY__NAME);
@@ -1085,7 +1086,6 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		createEReference(curricularUnitEClass, CURRICULAR_UNIT__EXAM_EVALUATION);
 		createEReference(curricularUnitEClass, CURRICULAR_UNIT__GRADESCALE);
 		createEAttribute(curricularUnitEClass, CURRICULAR_UNIT__EXAM_FREE);
-		createEAttribute(curricularUnitEClass, CURRICULAR_UNIT__OPTIONAL);
 
 		someOfEClass = createEClass(SOME_OF);
 		createEAttribute(someOfEClass, SOME_OF__N);
@@ -1214,6 +1214,9 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 		initEReference(getCreditsPlan_GroupOfSubjects(), this.getSubject(), null, "GroupOfSubjects", null, 0, -1,
 				CreditsPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCreditsPlan_Curricularunit(), this.getCurricularUnit(), null, "curricularunit", null, 0, -1,
+				CreditsPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(facultyEClass, Faculty.class, "Faculty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFaculty_Name(), ecorePackage.getEString(), "Name", null, 1, 1, Faculty.class, !IS_TRANSIENT,
@@ -1281,9 +1284,6 @@ public class AsignaturasPackageImpl extends EPackageImpl implements AsignaturasP
 				CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCurricularUnit_ExamFree(), ecorePackage.getEBoolean(), "ExamFree", null, 0, 1,
-				CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCurricularUnit_Optional(), ecorePackage.getEBoolean(), "Optional", null, 0, 1,
 				CurricularUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 

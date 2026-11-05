@@ -63,7 +63,6 @@ public class CurricularUnitItemProvider extends ItemProviderAdapter implements I
 			addRequirementPropertyDescriptor(object);
 			addGradescalePropertyDescriptor(object);
 			addExamFreePropertyDescriptor(object);
-			addOptionalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -179,22 +178,6 @@ public class CurricularUnitItemProvider extends ItemProviderAdapter implements I
 	}
 
 	/**
-	 * This adds a property descriptor for the Optional feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOptionalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_CurricularUnit_Optional_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_CurricularUnit_Optional_feature",
-								"_UI_CurricularUnit_type"),
-						AsignaturasPackage.Literals.CURRICULAR_UNIT__OPTIONAL, true, false, false,
-						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -277,7 +260,6 @@ public class CurricularUnitItemProvider extends ItemProviderAdapter implements I
 		case AsignaturasPackage.CURRICULAR_UNIT__CRED:
 		case AsignaturasPackage.CURRICULAR_UNIT__VALID:
 		case AsignaturasPackage.CURRICULAR_UNIT__EXAM_FREE:
-		case AsignaturasPackage.CURRICULAR_UNIT__OPTIONAL:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case AsignaturasPackage.CURRICULAR_UNIT__REQUIREMENT:
