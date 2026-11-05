@@ -45,7 +45,11 @@ function displayUCStats(){
     }
     const url = `${baseUrl}/${uuid}/${uc}`;
     fetch(url)
-    .then(response => response.json())
+    .then(async response => {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+        return data;
+    })
     .then(data => {
         loader.style.display = "none";
         const resultadoDiv = document.getElementById("resultado");
@@ -219,6 +223,7 @@ function displayUCStats(){
     .catch(error => {
         console.error("Error al consultar la API:", error);
         const resultadoDiv = document.getElementById("resultado");
-        resultadoDiv.innerHTML = "Error al consultar la API: "+error;
+        resultadoDiv.style.display = "block";
+        resultadoDiv.textContent = "Error al consultar la API: " + error.message;
     });
 }

@@ -1,0 +1,16 @@
+.column-mapping-dialog { box-sizing: border-box; width: min(1000px, 96vw); min-width: 0; max-height: 90vh; overflow: auto; padding: 1.25rem; gap: 1rem; font-family: 'Roboto', sans-serif; }
+.column-mapping-dialog * { margin: 0; }
+.column-mapping-dialog h2 { font-size: 1.35rem; }
+.column-mapping-dialog p { line-height: 1.45; overflow-wrap: anywhere; }
+.column-mapping-dialog > div, .column-mapping-dialog > p { width: 100%; }
+.mapping-table-scroll { overflow-x: auto; }
+.mapping-table { width: 100%; border-collapse: collapse; text-align: left; }
+.mapping-table th, .mapping-table td { padding: .65rem .4rem; border-bottom: 1px solid #21668340; vertical-align: top; }
+.mapping-table th { font-size: .95rem; }
+.mapping-table select { width: 100%; min-width: 15rem; padding: .5rem; font: inherit; border-radius: .3rem; }
+.mapping-table select[aria-invalid=true] { border: 2px solid #a32323; }
+.mapping-samples { max-width: 20rem; overflow-wrap: anywhere; font-size: .85rem; color: #284455; }
+#mapping-error { color: #9a1717; white-space: pre-line; }
+.mapping-controls { display: flex; justify-content: flex-end; gap: .75rem; }
+.mapping-controls button { padding: .6rem 1rem; cursor: pointer; }
+.mapping-controls button:disabled { opacity: .5; cursor: default; }

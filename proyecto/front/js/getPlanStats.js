@@ -45,7 +45,11 @@ function displayPlanStats(){
     }
     const url = `${baseUrl}/${uuid}/${career}/${plan}`;
     fetch(url)
-    .then(response => response.json())
+    .then(async response => {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+        return data;
+    })
     .then(data => {
         const resultadoDiv = document.getElementById("resultado");
         resultadoDiv.innerHTML = `
@@ -109,6 +113,7 @@ function displayPlanStats(){
     .catch(error => {
         console.error("Error al consultar la API:", error);
         const resultadoDiv = document.getElementById("resultado");
-        resultadoDiv.innerHTML = "Error al consultar la API: "+error;
+        resultadoDiv.style.display = "block";
+        resultadoDiv.textContent = "Error al consultar la API: " + error.message;
     });
 }

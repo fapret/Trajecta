@@ -6,55 +6,27 @@ Created on 10 aug. 2025
 import pm4py
 import os
 import uuid
-import pandas as pd
 import threading
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import traceback
-from pm4py.visualization.powl.variants import net
 import json
+from werkzeug.utils import secure_filename
+from log_mapping import (ColumnMappingError, column_types, prepare_event_log,
+                         build_activity, save_mapping, load_mapping, read_headers)
 
 app = Flask(__name__)
 CORS(app)
 
 # Create required folders if they don't exist
-for folder in ['./imports', './discovers', './reference', './dfg', './bpmn', './pnml', './ptml']:
+for folder in ['./imports', './discovers', './reference', './dfg', './bpmn', './pnml', './ptml', './mappings']:
     os.makedirs(folder, exist_ok=True)
 
 
-def run_discovery(file_path, file_uuid, mode, column_mapping=None, action_mapping=None, activity_type_mapping=None):
+def run_discovery(file_path, file_uuid, mode, column_mapping=None, action_mapping=None, activity_type_mapping=None, prepared_log=None):
     try:
-        dtype_spec = {
-            "Curricular Unit": str,
-            "Unified Curricular Unit": str,
-            "Unified Curricular Unit Name": str,
-            "Course Edition": 'Int64',
-            "Course Year": 'Int64',
-            "Grade": 'Float64',
-            "Credits": 'Int64',
-        }
-
-        # Read CSV
-        event_log = pd.read_csv(file_path, sep=',', dtype=dtype_spec)
-        
-        if column_mapping:
-            reverse_mapping = {source: target for target, source in column_mapping.items()}
-            event_log = event_log.rename(columns=reverse_mapping)
-
-        missing_cols = [col for col in ['ID', 'Timestamp', 'Curricular Unit', 'Unified Curricular Unit', 'Unified Curricular Unit Name'] if col not in event_log.columns]
-        if missing_cols:
-            raise ValueError(f'Missing required columns after mapping: {missing_cols}')
-
-        #if activity_mapping:
-        #    event_log['Activity'] = event_log['Activity'].astype(str).map(lambda val: activity_mapping.get(val, val))
-        
-        event_log['Activity'] = (
-            event_log['Action'].astype(str)
-            + ' - '
-            + event_log['Activity Type'].astype(str)
-        )
-
-        # Format for pm4py
+        event_log, metadata = prepared_log if prepared_log is not None else prepare_event_log(file_path, column_mapping)
+        event_log['Activity'] = build_activity(event_log)
         event_log = pm4py.format_dataframe(
             event_log,
             case_id="ID",
@@ -62,24 +34,8 @@ def run_discovery(file_path, file_uuid, mode, column_mapping=None, action_mappin
             timestamp_key="Timestamp",
             timest_format='%a %b %d %H:%M:%S %Z %Y'
         )
-
-        # Save initial XES
-        #pm4py.write_xes(event_log, f'./imports/{file_uuid}.xes')
-
-        # Update activity names for certain cases
-        event_log['Activity'] = event_log.apply(
-            lambda row: f"{row['Activity']} - {row['Unified Curricular Unit']} - {row['Unified Curricular Unit Name']}",
-            #if row['Activity'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course', 'Evaluation - Tutoring', 'Evaluation - Partial']
-            #else row['Activity'],
-            axis=1
-        )
-
-        event_log['concept:name'] = event_log.apply(
-            lambda row: f"{row['concept:name']} - {row['Unified Curricular Unit']} - {row['Unified Curricular Unit Name']}",
-            #if row['concept:name'] in ['Evaluation - Exam', 'Evaluation - Course', 'Inscription to Course', 'Evaluation - Tutoring', 'Evaluation - Partial']
-            #else row['concept:name'],
-            axis=1
-        )
+        if prepared_log is None:
+            save_mapping(file_uuid, metadata)
 
         pm4py.write_xes(event_log, f'./discovers/{file_uuid}.xes')
             
@@ -138,12 +94,12 @@ def run_discovery(file_path, file_uuid, mode, column_mapping=None, action_mappin
 
 @app.route('/discoverer/', methods=['POST'])
 @app.route('/discoverer/<mode>', methods=['POST'])
-def discover(mode):
+def discover(mode=0):
     if 'file' not in request.files:
         return jsonify({'error': 'No file'}), 400
 
     file = request.files['file']
-    name = request.form.get('name', '')
+    name = secure_filename(request.form.get('name', ''))
     file_uuid = str(uuid.uuid4()).split('-')[0] + '+' + name
 
     try:
@@ -156,11 +112,13 @@ def discover(mode):
             file_path = f'./imports/{file_uuid}.csv'
             file.save(file_path)
     
-            # Start discovery in background thread
+            # Reject bad assignments before returning a background job ID.
             column_mapping = json.loads(request.form.get('column_mapping', '{}'))
             action_mapping = json.loads(request.form.get('action_mapping', '{}'))
             activity_type_mapping = json.loads(request.form.get('activity_type_mapping', '{}'))
-            thread = threading.Thread(target=run_discovery, args=(file_path, file_uuid, mode, column_mapping, action_mapping, activity_type_mapping))
+            prepared_log = prepare_event_log(file_path, column_mapping)
+            save_mapping(file_uuid, prepared_log[1])
+            thread = threading.Thread(target=run_discovery, args=(file_path, file_uuid, mode, column_mapping, action_mapping, activity_type_mapping, prepared_log))
             thread.start()
 
         # Respond immediately with job ID
@@ -169,6 +127,10 @@ def discover(mode):
             'status': 'started'
         })
 
+    except (json.JSONDecodeError, ColumnMappingError, UnicodeError) as e:
+        if 'file_path' in locals() and os.path.isfile(file_path):
+            os.remove(file_path)
+        return jsonify({'error': str(e)}), 400
     except Exception as e:
         tb = traceback.format_exc()
         return jsonify({'error': str(e), 'trace': tb}), 500
@@ -179,7 +141,7 @@ def upload(mode):
         return jsonify({'error': 'No file'}), 400
 
     file = request.files['file']
-    name = request.form.get('name', '')
+    name = secure_filename(request.form.get('name', ''))
     file_uuid = str(uuid.uuid4()).split('-')[0] + '+' + name
     
     try:
@@ -205,11 +167,19 @@ def get_log_columns(caseid):
     if not os.path.exists(filepath):
         return jsonify({'error': 'Unknown event log id'}), 404
 
-    df = pd.read_csv(filepath, nrows=0)
+    try:
+        result = {'columns': read_headers(filepath)}
+        metadata = load_mapping(caseid)
+        if metadata is not None:
+            result['mapping'] = metadata
+        return jsonify(result)
+    except ColumnMappingError as error:
+        return jsonify({'error': str(error)}), 400
 
-    return jsonify({
-        'columns': list(df.columns)
-    })
+
+@app.route('/discoverer/column-types', methods=['GET'])
+def get_column_types():
+    return jsonify(column_types())
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=9000)

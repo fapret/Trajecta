@@ -11,6 +11,7 @@ from flask import Flask, request, jsonify, send_file
 from collections import Counter, defaultdict
 from flask_cors import CORS
 
+from log_mapping import ColumnMappingError, require_analysis_columns
 import traceback #for debugging
 
 app = Flask(__name__)
@@ -22,6 +23,7 @@ def stats(caseid, cu):
         filepath = './discovers/' + caseid + '.xes'
         if os.path.exists(filepath):
             event_log = pm4py.read_xes(filepath)
+            require_analysis_columns(event_log, ['Action', 'Activity Type', 'Curricular Unit', 'Grade', 'Course Year', 'Course Edition'])
             event_log = pm4py.format_dataframe(event_log, case_id="ID", activity_key="Activity", timestamp_key="Timestamp", timest_format='%a %b %d %H:%M:%S %Z %Y')
             event_log = pm4py.convert_to_event_log(event_log)
             
@@ -178,6 +180,8 @@ def stats(caseid, cu):
         else:
             return "Unknown case id"
         
+    except ColumnMappingError as e:
+        return jsonify({'error': str(e)}), 400
     except Exception as e:
         tb = traceback.format_exc()
         return jsonify({'error': str(e), 'trace': tb}), 500
