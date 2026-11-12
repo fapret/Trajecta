@@ -200,6 +200,19 @@ public class AuthoringIntegrationTest {
         request(409,"POST","/Faculty/Carrera/Plan",context(),"{\"career\":\"Computing\",\"plan\":0,\"planType\":0,\"gradeScale\":\"Standard\"}");
         request(400,"POST","/Faculty/Carrera/Plan",context(),"{\"career\":\"Computing\",\"plan\":-1,\"planType\":0,\"gradeScale\":\"Standard\"}");
         request(400,"GET","/Faculty/Carrera/Plan",context("career","Computing","plan","-1"),null);
+        JsonObject freeExam=post("/Faculty/ucs","{\"id\":\"FreeExamUnit\",\"name\":\"Free exam unit\",\"valid\":false,\"examFree\":true}").object();
+        check(freeExam.getBoolean("ExamFree") && !freeExam.getBoolean("Valid"),"Exam-free and validity flags are independent");
+        freeExam=request(200,"GET","/Faculty/ucs",context("curricularUnit","FreeExamUnit"),null).object();
+        check(freeExam.getBoolean("ExamFree"),"Exam-free flag survives XMI reload");
+        request(200,"PUT","/Faculty/ucs",context(),"{\"id\":\"FreeExamUnit\",\"name\":\"Renamed free exam unit\"}");
+        check(request(200,"GET","/Faculty/ucs",context("curricularUnit","FreeExamUnit"),null).object().getBoolean("ExamFree"),"Omitted exam-free field is preserved on editing");
+        request(200,"PUT","/Faculty/ucs",context(),"{\"id\":\"FreeExamUnit\",\"examFree\":false}");
+        check(!request(200,"GET","/Faculty/ucs",context("curricularUnit","FreeExamUnit"),null).object().getBoolean("ExamFree"),"Exam-free flag can be disabled");
+        request(200,"PUT","/Faculty/ucs",context("id","FreeExamUnit"),"{\"examFree\":true}");
+        check(request(200,"GET","/Faculty/ucs",context("curricularUnit","FreeExamUnit"),null).object().getBoolean("ExamFree"),"Flag-only body is not parsed as a requirement");
+        check(!request(200,"GET","/Faculty/ucs",context("curricularUnit","A"),null).object().getBoolean("ExamFree"),"Existing/default units do not allow free exams");
+        request(400,"PUT","/Faculty/ucs",context(),"{\"id\":\"FreeExamUnit\",\"examFree\":\"yes\"}");
+        check(request(200,"GET","/Faculty/ucs",context("curricularUnit","FreeExamUnit"),null).object().getBoolean("ExamFree"),"Invalid flag leaves persisted value intact");
         System.out.println("PASS: " + assertions + " authoring / XMI / grading assertions");
     }
     public static void main(String[] args) throws Exception {

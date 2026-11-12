@@ -219,6 +219,11 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/CreateUnit/properties/gradeScale'
+      - name: examFree
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CreateUnit/properties/examFree'
       responses:
         '201':
           description: Operación realizada correctamente
@@ -299,6 +304,11 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/UpdateUnit/properties/gradeScale'
+      - name: examFree
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/UpdateUnit/properties/examFree'
       responses:
         '200':
           description: Operación realizada correctamente
@@ -1333,6 +1343,7 @@ components:
       - Requirement
       - ExamEvaluation
       - Course
+      - ExamFree
       properties:
         Id:
           type: string
@@ -1370,6 +1381,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Course'
+        ExamFree:
+          type: boolean
+          description: Indica si la unidad permite dar examen libre.
     Course:
       type: object
       required:
@@ -1956,6 +1970,11 @@ components:
         valid:
           type: boolean
           default: true
+        examFree:
+          type: boolean
+          description: Permite dar examen libre (atributo ExamFree del modelo). Omitido en PUT conserva el valor
+            guardado.
+          default: false
         gradeScale:
           type: string
           minLength: 1
@@ -1986,6 +2005,10 @@ components:
           minimum: 0
         valid:
           type: boolean
+        examFree:
+          type: boolean
+          description: Permite dar examen libre (atributo ExamFree del modelo). Omitido en PUT conserva el valor
+            guardado.
         gradeScale:
           type: string
           minLength: 1
@@ -2260,6 +2283,11 @@ components:
         valid:
           type: boolean
           default: true
+        examFree:
+          type: boolean
+          description: Permite dar examen libre (atributo ExamFree del modelo). Omitido en PUT conserva el valor
+            guardado.
+          default: false
         gradeScale:
           type: string
           minLength: 1
@@ -2282,6 +2310,10 @@ components:
           minimum: 0
         valid:
           type: boolean
+        examFree:
+          type: boolean
+          description: Permite dar examen libre (atributo ExamFree del modelo). Omitido en PUT conserva el valor
+            guardado.
         gradeScale:
           type: string
           minLength: 1

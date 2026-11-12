@@ -13,6 +13,10 @@ Create units before adding prerequisites that reference them. Use **Edit curricu
 unit** to add those requirements later, adjust memberships, or choose a scale
 override. Unit IDs and scale names are stable identities and cannot be renamed.
 
+The **Allows taking the exam without passing the course** checkbox sets the model's
+existing `ExamFree` flag. The `examFree` request field defaults to `false` on creation;
+omitting it on update preserves its saved value. Unit responses expose `ExamFree`.
+
 ## HTTP contracts
 
 All routes are relative to `/curricula_microservice`. Include `uuid` as a query
@@ -26,7 +30,7 @@ supported; subject creation continues accepting its existing JSON fields.
 | `/Faculty/Carrera` | GET, POST | `name` |
 | `/Faculty/Carrera/Plan` | GET, POST, PUT | `career`, `plan` (year), `planType` (0 credits, 1 subjects), `minCred`, `gradeScale`; PUT changes the selected plan's `gradeScale` |
 | `/Faculty/Carrera/Plan/Subjects` | GET, POST | `career`, `plan`, `subjectID` (integer), `subjectName`, `subjectCredits`, `Parent` (optional parent ID, -1 means none), `curricularUnits` (array of unit IDs) |
-| `/Faculty/ucs` | GET, POST, PUT | `id`, `name`, `cred`, `valid`, `gradeScale`, `requirements`, `memberships` |
+| `/Faculty/ucs` | GET, POST, PUT | `id`, `name`, `cred`, `valid`, `examFree`, `gradeScale`, `requirements`, `memberships` |
 | `/Faculty/ucs/course` | GET, POST | `id` (unit), `year`, `edition` (defaults to 1 on creation) |
 | `/Faculty/ucs/evaluation` | POST | `id` (unit), `type`, `date` (`YYYY-MM-DD`); `year` and `edition` required except for exams |
 | `/Faculty/grade-scales` | GET, POST, PUT | `name`, `examApprovalGrade`, `courseApprovalGrade`, `coursePartialApprovalGrade`, `partialApprovalGrade`, `tutoringApprovalGrade` |

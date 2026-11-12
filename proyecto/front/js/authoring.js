@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (kind === 'subject') markup += select('parent', 'parentSubject') + select('units', 'aUnitsOptional', 'multiple');
   if (['plan', 'unit', 'edit'].includes(kind)) markup += select('gradeScale', 'aGradeScale', kind === 'plan' ? 'required' : '')
     + '<a class="action-link" href="./grade-scales.html" data-lang="aManageScales"></a>';
-  if (['unit', 'edit'].includes(kind)) markup += input('valid', 'aValid', 'checkbox', 'checked') + select('memberships', 'aMemberships', 'multiple')
+  if (['unit', 'edit'].includes(kind)) markup += input('valid', 'aValid', 'checkbox', 'checked') + input('examFree', 'aExamFree', 'checkbox') + select('memberships', 'aMemberships', 'multiple')
     + '<p class="hint" data-lang="aMembershipHelp"></p>' + field('requirements', 'RequirementJson', '<textarea id="requirements" spellcheck="false"></textarea>')
     + '<p class="hint" data-lang="aRequirementsHelp"></p><details><summary data-lang="aExamples"></summary><pre id="examples"></pre></details>'
     + '<button type="button" id="format" data-lang="aFormatJson"></button>';
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetUnit() {
     loadedUnit = null;
     if (kind === 'edit') {
-      ['id', 'name', 'requirements'].forEach(id => $(id).value = ''); $('cred').value = 0; $('valid').checked = true;
+      ['id', 'name', 'requirements'].forEach(id => $(id).value = ''); $('cred').value = 0; $('valid').checked = true; $('examFree').checked = false;
       if ($('memberships')) [...$('memberships').options].forEach(o => o.selected = false);
       if ($('gradeScale')) $('gradeScale').value = '';
     }
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     options('course', courses.map(c => ({value: `${c.Year}/${c.Edition}`, label: `${c.Year} / ${c.Edition}`})), courses.length ? 'aChoose' : 'aNoCourses');
     if (kind === 'edit') {
       loadedUnit = cu; $('id').value = cu.Id; $('name').value = cu.Name; $('cred').value = cu.Cred;
-      $('valid').checked = cu.Valid; $('gradeScale').value = cu.GradeScale || '';
+      $('valid').checked = cu.Valid; $('examFree').checked = cu.ExamFree === true; $('gradeScale').value = cu.GradeScale || '';
       $('requirements').value = cu.Requirement.length ? JSON.stringify(cu.Requirement[0], null, 2) : '';
       const selected = new Set(cu.Memberships.map(m => JSON.stringify(m)));
       [...$('memberships').options].forEach(o => { o.selected = selected.has(o.value); });
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         subjectCredits: Number($('cred').value), Parent: $('parent').value ? Number($('parent').value) : -1, curricularUnits: values('units')};
       if (['unit', 'edit'].includes(kind)) {
         const requirements = $('requirements').value.trim();
-        body = {id: $('id').value, name: $('name').value, cred: Number($('cred').value), valid: $('valid').checked,
+        body = {id: $('id').value, name: $('name').value, cred: Number($('cred').value), valid: $('valid').checked, examFree: $('examFree').checked,
           gradeScale: $('gradeScale').value || null, memberships: values('memberships').map(JSON.parse), requirements: requirements ? JSON.parse(requirements) : null};
         if (kind === 'edit') method = 'PUT';
       }

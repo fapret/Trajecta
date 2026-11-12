@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const translations = {
   es: {
+    aExamFree: "Permite examen libre",
     "mappingActivityRequired": "Asigne Action y Activity Type, o use una columna Activity. Si están las tres, se usa Action + Activity Type.",
     "mappingOptionalUnits": "Unified Curricular Unit es opcional: si falta, se usa Curricular Unit. Unified Curricular Unit Name también es opcional.",
 
@@ -201,6 +202,7 @@ const translations = {
     viewGraphDesc: "Aqui puedes ver los diagramas de los modelos descubiertos, elige un log de eventos descubierto y luego elige para ver los diferentes modelos."
   },
   en: {
+    aExamFree: "Allows taking the exam without passing the course",
     "mappingActivityRequired": "Assign Action and Activity Type, or use an Activity column. If all three are assigned, Action + Activity Type is used.",
     "mappingOptionalUnits": "Unified Curricular Unit is optional: when absent, Curricular Unit is used. Unified Curricular Unit Name is also optional.",
 

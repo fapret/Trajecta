@@ -55,7 +55,7 @@ public abstract class ModelAuthoring extends HttpServlet {
                             !((JsonObject)v).containsKey("id") && !((JsonObject)v).containsKey("name") &&
                             !((JsonObject)v).containsKey("requirements") && !((JsonObject)v).containsKey("memberships") &&
                             !((JsonObject)v).containsKey("gradeScale") && !((JsonObject)v).containsKey("cred") &&
-                            !((JsonObject)v).containsKey("valid"))) raw = v;
+                            !((JsonObject)v).containsKey("valid") && !((JsonObject)v).containsKey("examFree"))) raw = v;
                     else { ModelStore.require(v instanceof JsonObject, "Expected JSON object"); data = (JsonObject)v; }
                 }
             } else if (kind.equals("unit") && q.getContentType() != null && q.getContentType().startsWith("text/plain")) {
@@ -187,6 +187,7 @@ public abstract class ModelAuthoring extends HttpServlet {
         String name = !edit || in.has("name") ? in.required("name") : cu.getName();
         int credits = in.number("cred", 0, edit ? cu.getCred() : 0);
         boolean valid = in.bool("valid", edit ? cu.isValid() : true);
+        boolean examFree = in.bool("examFree", edit ? cu.isExamFree() : false);
         GradeScale scale = in.has("gradeScale") ? (in.get("gradeScale") == null ? null : ModelStore.scale(f, in.required("gradeScale"))) : cu.getGradescale();
         boolean replaceRequirement = in.json.containsKey("requirements") || in.rawRequirement != null;
         Requirement requirement = replaceRequirement ? RequirementJson.parse(in.json.containsKey("requirements") ? in.json.get("requirements") : in.rawRequirement, f) : cu.getRequirement();
@@ -204,7 +205,7 @@ public abstract class ModelAuthoring extends HttpServlet {
                 }
             }
         }
-        cu.setName(name); cu.setCred(credits); cu.setValid(valid); cu.setGradescale(scale);
+        cu.setName(name); cu.setCred(credits); cu.setValid(valid); cu.setExamFree(examFree); cu.setGradescale(scale);
         if (replaceRequirement) cu.setRequirement(requirement);
         if (!edit) f.getFacultyCU().add(cu);
         if (replaceMemberships) {
@@ -306,7 +307,7 @@ public abstract class ModelAuthoring extends HttpServlet {
     static JsonObject unitJson(Faculty f, CurricularUnit cu) {
         JsonArrayBuilder courses = Json.createArrayBuilder(); cu.getCourse().forEach(c -> courses.add(courseJson(c)));
         JsonArrayBuilder requirements = Json.createArrayBuilder(); if (cu.getRequirement() != null) requirements.add(RequirementJson.write(cu.getRequirement()));
-        return Json.createObjectBuilder().add("Id", cu.getId()).add("Name", cu.getName()).add("Cred", cu.getCred()).add("Valid", cu.isValid())
+        return Json.createObjectBuilder().add("Id", cu.getId()).add("Name", cu.getName()).add("Cred", cu.getCred()).add("Valid", cu.isValid()).add("ExamFree", cu.isExamFree())
             .add("Requirement", requirements).add("ExamEvaluation", dates(cu.getExamEvaluation())).add("Course", courses)
             .add("GradeScale", ModelStore.nullable(cu.getGradescale() == null ? null : cu.getGradescale().getName())).add("Memberships", memberships(f, cu)).build();
     }
