@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (['subject', 'unit', 'edit'].includes(kind)) markup += input('id', 'genericID', kind === 'subject' ? 'number' : 'text', `required ${kind === 'subject' ? 'min="0" step="1"' : ''} ${kind === 'edit' ? 'readonly' : ''}`);
     markup += input('name', 'name', 'text', 'required');
   }
-  if (kind === 'plan') markup += number('year', 'year', new Date().getFullYear(), 1) + select('planType', 'aPlanType', 'required') + number('minCred', 'aMinimumCredits');
+  if (kind === 'plan') markup += number('year', 'year', new Date().getFullYear(), 0) + select('planType', 'aPlanType', 'required') + number('minCred', 'aMinimumCredits');
   if (['subject', 'unit', 'edit'].includes(kind)) markup += number('cred', 'credits');
   if (kind === 'subject') markup += select('parent', 'parentSubject') + select('units', 'aUnitsOptional', 'multiple');
   if (['plan', 'unit', 'edit'].includes(kind)) markup += select('gradeScale', 'aGradeScale', kind === 'plan' ? 'required' : '')

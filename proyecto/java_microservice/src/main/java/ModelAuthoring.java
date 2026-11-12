@@ -100,7 +100,7 @@ public abstract class ModelAuthoring extends HttpServlet {
             }
             case "scale": return changeScale(store, f, in, edit);
             case "plan": {
-                Career c = ModelStore.career(f, in.required("career")); int year = in.number("plan", 1);
+                Career c = ModelStore.career(f, in.required("career")); int year = in.number("plan", 0);
                 GradeScale scale = ModelStore.scale(f, in.required("gradeScale"));
                 if (edit) { var p = ModelStore.plan(f, c.getName(), year); p.setGradescale(scale); return planJson(p); }
                 if (c.getPlan().stream().anyMatch(p -> p.getYear() == year)) throw new ModelStore.Problem(409, "Plan already exists");
@@ -111,7 +111,7 @@ public abstract class ModelAuthoring extends HttpServlet {
                 p.setYear(year); p.setValid(in.bool("valid", true)); p.setGradescale(scale); c.getPlan().add(p); return planJson(p);
             }
             case "subject": {
-                var p = ModelStore.plan(f, in.required("career"), in.number("plan", 1));
+                var p = ModelStore.plan(f, in.required("career"), in.number("plan", 0));
                 ModelStore.require(p instanceof CreditsPlan, "Subjects require a credit plan");
                 int id = in.number("subjectID", 0); store.uniqueId(Integer.toString(id));
                 Subject s = factory.createSubject(); s.setId(id); s.setName(in.required("subjectName"));
@@ -229,9 +229,9 @@ public abstract class ModelAuthoring extends HttpServlet {
                 Career c = ModelStore.career(f, in.required("career")); JsonArrayBuilder a = Json.createArrayBuilder(); c.getPlan().forEach(p -> a.add(p.getYear()));
                 return Json.createObjectBuilder().add("Name", c.getName()).add("Plans", a).build();
             }
-            case "plan": return planJson(ModelStore.plan(f, in.required("career"), in.number("plan", 1)));
+            case "plan": return planJson(ModelStore.plan(f, in.required("career"), in.number("plan", 0)));
             case "subject": {
-                var p = ModelStore.plan(f, in.required("career"), in.number("plan", 1));
+                var p = ModelStore.plan(f, in.required("career"), in.number("plan", 0));
                 List<Subject> subjects = ModelStore.subjects(p);
                 if (in.has("subject") && !in.get("subject").isBlank()) {
                     Subject s = ModelStore.subject(f, in.number("subject", 0)); ModelStore.require(subjects.contains(s), "Subject is not in selected plan"); return subjectJson(s);
@@ -249,7 +249,7 @@ public abstract class ModelAuthoring extends HttpServlet {
             }
             case "course": { JsonArrayBuilder a = Json.createArrayBuilder(); ModelStore.unit(f, in.required("id")).getCourse().forEach(c -> a.add(courseJson(c))); return a.build(); }
             case "approved": {
-                var plan = ModelStore.plan(f, in.required("career"), in.number("plan", 1));
+                var plan = ModelStore.plan(f, in.required("career"), in.number("plan", 0));
                 org.eclipse.emf.common.util.URI uri = store.resource.getURI().trimSegments(1).appendSegment("students.xmi");
                 var resource = store.resource.getResourceSet().getResource(uri, true);
                 var students = ((Estudiantes.Root)resource.getContents().get(0)).getStudent();

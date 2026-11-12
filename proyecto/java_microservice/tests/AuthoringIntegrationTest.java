@@ -186,6 +186,20 @@ public class AuthoringIntegrationTest {
         request(200,"PUT","/Faculty/ucs",context(),"{\"id\":\"B\",\"requirements\":null,\"memberships\":[]}");
         b=request(200,"GET","/Faculty/ucs",context("curricularUnit","B"),null).object();
         check(b.getJsonArray("Requirement").isEmpty() && b.getJsonArray("Memberships").isEmpty(),"Explicit clearing");
+        // Zero is a valid plan identifier, including after an XMI save/reload.
+        post("/Faculty/Carrera/Plan", "{\"career\":\"Computing\",\"plan\":0,\"planType\":0,\"gradeScale\":\"Standard\"}");
+        check(request(200,"GET","/Faculty/Carrera/Plan",context("career","Computing","plan","0"),null).object().getInt("Year")==0,"Plan zero survives persistence");
+        request(200,"PUT","/Faculty/Carrera/Plan",context(),"{\"career\":\"Computing\",\"plan\":0,\"gradeScale\":\"Strict\"}");
+        post("/Faculty/Carrera/Plan/Subjects", "{\"career\":\"Computing\",\"plan\":0,\"subjectID\":900,\"subjectName\":\"Plan zero subject\"}");
+        request(200,"GET","/Faculty/Carrera/Plan/Subjects",context("career","Computing","plan","0","subject","900"),null);
+        post("/Faculty/ucs", "{\"id\":\"ZeroPlanUnit\",\"name\":\"Plan zero unit\",\"requirements\":{\"CreditsOnPlan\":\"0,Computing,0\"},\"memberships\":[{\"career\":\"Computing\",\"plan\":0,\"subject\":900}]}");
+        JsonObject zeroUnit=request(200,"GET","/Faculty/ucs",context("curricularUnit","ZeroPlanUnit"),null).object();
+        check(zeroUnit.getJsonArray("Memberships").getJsonObject(0).getInt("plan")==0,"Unit membership references plan zero");
+        check(zeroUnit.getJsonArray("Requirement").getJsonObject(0).getString("CreditsOnPlan").equals("0,Computing,0"),"Requirement references plan zero");
+        request(200,"GET","/Faculty/Carrera/Plan/evaluations",context("career","Computing","plan","0","id","student"),null);
+        request(409,"POST","/Faculty/Carrera/Plan",context(),"{\"career\":\"Computing\",\"plan\":0,\"planType\":0,\"gradeScale\":\"Standard\"}");
+        request(400,"POST","/Faculty/Carrera/Plan",context(),"{\"career\":\"Computing\",\"plan\":-1,\"planType\":0,\"gradeScale\":\"Standard\"}");
+        request(400,"GET","/Faculty/Carrera/Plan",context("career","Computing","plan","-1"),null);
         System.out.println("PASS: " + assertions + " authoring / XMI / grading assertions");
     }
     public static void main(String[] args) throws Exception {

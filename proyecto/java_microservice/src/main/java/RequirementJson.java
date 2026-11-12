@@ -24,7 +24,7 @@ public final class RequirementJson {
             case "CreditsOnPlan": {
                 String[] parts = string(v).split(",", -1);
                 ModelStore.require(parts.length == 3, "CreditsOnPlan expects year,career,credits");
-                asignaturas.Plan p = ModelStore.plan(f, parts[1].trim(), ModelStore.integer(parts[0].trim(), "plan year", 1));
+                asignaturas.Plan p = ModelStore.plan(f, parts[1].trim(), ModelStore.integer(parts[0].trim(), "plan year", 0));
                 ModelStore.require(p instanceof CreditsPlan, "CreditsOnPlan requires a credit plan");
                 CreditsOnPlan r = factory.createCreditsOnPlan(); r.setCreditsPlan((CreditsPlan)p);
                 r.setCred(ModelStore.integer(parts[2].trim(), "credits", 0)); return r;

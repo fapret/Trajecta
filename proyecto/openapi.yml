@@ -1432,7 +1432,7 @@ components:
           type: array
           items:
             type: integer
-            minimum: 1
+            minimum: 0
     PlanAbstract:
       type: object
       required:
@@ -1444,7 +1444,7 @@ components:
       properties:
         Year:
           type: integer
-          minimum: 1
+          minimum: 0
         Career:
           type: string
         Type:
@@ -1692,7 +1692,7 @@ components:
           minLength: 1
         plan:
           type: integer
-          minimum: 1
+          minimum: 0
       not:
         required:
         - subject
@@ -1709,7 +1709,7 @@ components:
           minLength: 1
         plan:
           type: integer
-          minimum: 1
+          minimum: 0
         subject:
           type: integer
           minimum: 0
@@ -1866,7 +1866,7 @@ components:
           minLength: 1
         plan:
           type: integer
-          minimum: 1
+          minimum: 0
         planType:
           type: integer
           minimum: 0
@@ -1898,7 +1898,7 @@ components:
           minLength: 1
         plan:
           type: integer
-          minimum: 1
+          minimum: 0
         gradeScale:
           type: string
           minLength: 1
@@ -1916,7 +1916,7 @@ components:
           minLength: 1
         plan:
           type: integer
-          minimum: 1
+          minimum: 0
         subjectID:
           type: integer
           minimum: 0
@@ -2196,7 +2196,7 @@ components:
                 type: string
               plan:
                 type: integer
-                minimum: 1
+                minimum: 0
         curricularUnits:
           type: array
           items:
@@ -2225,7 +2225,7 @@ components:
           minLength: 1
         plan:
           type: integer
-          minimum: 1
+          minimum: 0
         subjectID:
           type: integer
           minimum: 0
@@ -2342,7 +2342,7 @@ components:
       required: true
       schema:
         type: integer
-        minimum: 1
+        minimum: 0
       description: Año que identifica al plan dentro de la carrera.
     Student:
       name: id

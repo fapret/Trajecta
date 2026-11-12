@@ -6,6 +6,9 @@ Credit plans contain subjects (which may have nested subjects); subject plans
 reference curricular units directly. Units belong to a faculty and can be shared
 by multiple plans/subjects.
 
+Plan identifiers use the model's integer `Year` field and may be zero. Creation,
+lookup, scale assignment, subject/unit memberships, and requirements accept `plan: 0`.
+
 Create units before adding prerequisites that reference them. Use **Edit curricular
 unit** to add those requirements later, adjust memberships, or choose a scale
 override. Unit IDs and scale names are stable identities and cannot be renamed.
