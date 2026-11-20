@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
   <script type="text/javascript" src="js/selectLib.js"></script>
   <script type="text/javascript" src="js/seeDiagrams.js"></script>
+  <script src="js/downloadModel.js"></script>
   <script src="lang/lang.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
@@ -437,7 +438,9 @@
           <button data-lang="zoomIN" id="zoomIN">➕ Zoom In</button>
           <button data-lang="zoomOUT" id="zoomOUT">➖ Zoom Out</button>
           <button data-lang="ResetBtn" id="ResetBtn">🔄 Reset</button>
+          <button type="button" id="downloadDiagramModel" data-lang="downloadDiagramModel" hidden>Descargar modelo original</button>
         </div>
+        <p id="modelDownloadStatus" role="status"></p>
 
       <div class="consulta diagram" id="resultado">
         <img class="hidden" id="diagram" alt="Diagram">

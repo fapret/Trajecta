@@ -93,3 +93,11 @@ proyecto/java_microservice/dist/
 
 proyecto/PM_microservice/mappings/
 __pycache__/
+
+evaluacion/
+extras/curriculum_obligatory.pnml
+extras/generate_curricular_exam_net.py
+extras/intentodegeneradordepnml.py
+extras/pnml_and.pnml
+extras/test.py
+extras/trajecta_curriculum_completo.pnml

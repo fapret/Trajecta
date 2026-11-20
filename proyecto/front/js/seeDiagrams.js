@@ -19,6 +19,15 @@
 
     Santiago Nicolás Díaz Conde Email: sndc.33@gmail.com and contact@fapret.com
  */
+const diagramModelSuffixes = {
+    dfg: ".dfg",
+    bpmn: ".bpmn",
+    pnml_alpha: "_alpha.pnml",
+    pnml_heuristics: "_heuristics.pnml",
+    pnml_inductive: "_inductive.pnml",
+    ptml: ".ptml",
+};
+
 function seeDiagram(mode, type=0, activity=100, paths=100, filtermode=2) {
     const allDiscoveriesSelect = document.getElementById("discoveries");
     const uuid = allDiscoveriesSelect.value;
@@ -68,6 +77,15 @@ function seeDiagram(mode, type=0, activity=100, paths=100, filtermode=2) {
         baseUrl = "https://trajecta-pm.fapret.com/viewer";
     }
     const url = `${baseUrl}/${modestr}/${uuid}/${type}?activity=${activity}&path=${paths}&filtermode=${filtermode}`;
+    const downloadButton = document.getElementById("downloadDiagramModel");
+    if (downloadButton) {
+        const suffix = diagramModelSuffixes[modestr];
+        document.getElementById("modelDownloadStatus").textContent = "";
+        downloadButton.hidden = !suffix || !uuid;
+        downloadButton.onclick = suffix && uuid
+            ? () => downloadModel(modestr, uuid, suffix, downloadButton)
+            : null;
+    }
     img.src = url;
     img.classList.remove('hidden');
     diagramsButtons.classList.remove('hidden');

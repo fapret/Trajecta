@@ -31,6 +31,10 @@ const ResetBtn = document.getElementById("ResetBtn");
 
 getUploads(allDiscoveriesSelect, "event_logs");
 getUploads(allReferencesSelect, "reference");
+const downloadReferenceButton = document.getElementById("downloadReferenceModel");
+downloadReferenceButton.addEventListener("click", () => {
+    downloadModel("pnml_reference", allReferencesSelect.value, ".pnml", downloadReferenceButton);
+});
 seeDiagramPNA.addEventListener("click", async () =>
 {
     const uuid = allDiscoveriesSelect.value;

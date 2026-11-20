@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
   <script type="text/javascript" src="js/selectLib.js"></script>
   <script type="text/javascript" src="js/seeAlignDiagram.js"></script>
+  <script src="js/downloadModel.js"></script>
   <script src="lang/lang.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
@@ -404,7 +405,9 @@
         <button type="button" id="seeDiagramPNA" data-lang="seeAlignement">
           Ver Alineamiento
         </button>
+        <button type="button" id="downloadReferenceModel" data-lang="downloadReferenceModel">Descargar PNML de referencia</button>
       </div>
+      <p id="modelDownloadStatus" role="status"></p>
 
         <div class="controls buttons-div hidden" id="diagramsButtons">
           <button data-lang="zoomIN" id="zoomIN">➕ Zoom In</button>
