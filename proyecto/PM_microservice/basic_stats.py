@@ -31,6 +31,7 @@ def stats(caseid, mode):
             num_variants = len(pm4py.get_variants(event_log))
             start_activities = pm4py.get_start_activities(event_log)
             end_activities = pm4py.get_end_activities(event_log)
+            all_activities = list(pm4py.get_event_attribute_values(event_log, "concept:name"))
             start_activities_dict = dict(start_activities)
             end_activities_dict = dict(end_activities)
             
@@ -40,7 +41,8 @@ def stats(caseid, mode):
                 'events': num_events,
                 'variants': num_variants,
                 "start_activities": start_activities_dict,
-                "end_activities": end_activities_dict
+                "end_activities": end_activities_dict,
+                "all_activities": all_activities
             })            
             
         else:
